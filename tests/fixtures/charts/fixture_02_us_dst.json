@@ -1,7 +1,6 @@
 {
   "chart_id": "fixture_02_us_dst",
-  "status": "PENDING_JHORA",
-  "source": "PENDING: Jagannatha Hora export, settings per docs/reference-settings.png. US birth under daylight saving (EDT, UTC-4) per docs/ephemeris.md section 10 test 3; catches timezone double-conversion.",
+  "source": "Jagannatha Hora, Drik Siddhanta, KP/Krishnamoorthy ayanamsa, JHora house Start/Cusp/End table (unequal cusps), exported 2026-06-11. US birth under daylight saving (EDT, UTC-4) per docs/ephemeris.md section 10 test 3; catches timezone double-conversion.",
   "input": {
     "datetime_local": "1985-07-04T08:30:00",
     "timezone": "America/New_York",
@@ -9,8 +8,31 @@
     "lon": -74.006
   },
   "expected": {
-    "planets": null,
-    "cusps": null,
-    "ascendant_sign": null
+    "planets": {
+      "Sun": 78.916622,
+      "Moon": 284.904583,
+      "Mars": 83.023956,
+      "Mercury": 103.369556,
+      "Jupiter": 292.052197,
+      "Venus": 34.514386,
+      "Saturn": 208.273186,
+      "Rahu": 23.090036,
+      "Ketu": 203.090036
+    },
+    "cusps": {
+      "1": 113.865453,
+      "2": 135.530767,
+      "3": 162.212219,
+      "4": 194.771714,
+      "5": 230.699461,
+      "6": 264.598258,
+      "7": 293.865453,
+      "8": 315.530767,
+      "9": 342.212219,
+      "10": 14.771714,
+      "11": 50.699461,
+      "12": 84.598258
+    },
+    "ascendant_sign": "Cancer"
   }
 }

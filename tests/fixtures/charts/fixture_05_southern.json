@@ -1,7 +1,6 @@
 {
   "chart_id": "fixture_05_southern",
-  "status": "PENDING_JHORA",
-  "source": "PENDING: Jagannatha Hora export, settings per docs/reference-settings.png. Southern-hemisphere birth (Sydney) under southern-summer DST (AEDT, UTC+11); exercises negative latitude in Placidus.",
+  "source": "Jagannatha Hora, Drik Siddhanta, KP/Krishnamoorthy ayanamsa, JHora house Start/Cusp/End table (unequal cusps), re-exported 2026-06-11 with corrected +11:00 East of GMT offset (first export had the timezone sign flipped). Southern-hemisphere birth (Sydney) under southern-summer DST (AEDT, UTC+11); exercises negative latitude in Placidus.",
   "input": {
     "datetime_local": "1990-11-23T17:20:00",
     "timezone": "Australia/Sydney",
@@ -9,8 +8,31 @@
     "lon": 151.2093
   },
   "expected": {
-    "planets": null,
-    "cusps": null,
-    "ascendant_sign": null
+    "planets": {
+      "Sun": 217.065742,
+      "Moon": 280.997386,
+      "Mars": 43.440214,
+      "Mercury": 234.528017,
+      "Jupiter": 109.880972,
+      "Venus": 222.4645,
+      "Saturn": 267.974344,
+      "Rahu": 276.051369,
+      "Ketu": 96.051369
+    },
+    "cusps": {
+      "1": 8.391097,
+      "2": 37.106939,
+      "3": 68.700331,
+      "4": 102.172939,
+      "5": 134.807547,
+      "6": 163.827431,
+      "7": 188.391097,
+      "8": 217.106939,
+      "9": 248.700331,
+      "10": 282.172939,
+      "11": 314.807547,
+      "12": 343.827431
+    },
+    "ascendant_sign": "Aries"
   }
 }

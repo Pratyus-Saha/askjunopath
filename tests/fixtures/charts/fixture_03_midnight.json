@@ -1,7 +1,6 @@
 {
   "chart_id": "fixture_03_midnight",
-  "status": "PENDING_JHORA",
-  "source": "PENDING: Jagannatha Hora export, settings per docs/reference-settings.png. Birth at 00:10 local where the UTC date falls on the PREVIOUS day (2000-12-31T18:40Z), per docs/ephemeris.md section 10 test 4.",
+  "source": "Jagannatha Hora, Drik Siddhanta, KP/Krishnamoorthy ayanamsa, JHora house Start/Cusp/End table (unequal cusps), exported 2026-06-11. Birth at 00:10 local where the UTC date falls on the PREVIOUS day (2000-12-31T18:40Z), per docs/ephemeris.md section 10 test 4.",
   "input": {
     "datetime_local": "2001-01-01T00:10:00",
     "timezone": "Asia/Kolkata",
@@ -9,8 +8,31 @@
     "lon": 72.8777
   },
   "expected": {
-    "planets": null,
-    "cusps": null,
-    "ascendant_sign": null
+    "planets": {
+      "Sun": 256.642703,
+      "Moon": 322.255028,
+      "Mars": 191.043914,
+      "Mercury": 260.154467,
+      "Jupiter": 38.436147,
+      "Venus": 302.956319,
+      "Saturn": 30.828625,
+      "Rahu": 81.746425,
+      "Ketu": 261.746425
+    },
+    "cusps": {
+      "1": 159.418808,
+      "2": 188.888597,
+      "3": 219.136683,
+      "4": 249.317483,
+      "5": 279.622094,
+      "6": 310.049264,
+      "7": 339.418808,
+      "8": 8.888597,
+      "9": 39.136683,
+      "10": 69.317483,
+      "11": 99.622094,
+      "12": 130.049264
+    },
+    "ascendant_sign": "Virgo"
   }
 }

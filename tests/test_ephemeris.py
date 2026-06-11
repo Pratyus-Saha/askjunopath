@@ -160,7 +160,7 @@ def test_rahu_is_true_node_not_mean_node():
     swe.set_sid_mode(swe.SIDM_KRISHNAMURTI, 0.0, 0.0)
     xx, _ = swe.calc_ut(
         jd_ut, swe.TRUE_NODE,
-        swe.FLG_SWIEPH | swe.FLG_SIDEREAL | swe.FLG_SPEED,
+        swe.FLG_SWIEPH | swe.FLG_SIDEREAL | swe.FLG_SPEED | swe.FLG_TRUEPOS,
     )
     rahu = next(p for p in chart["planets"] if p["name"] == "Rahu")
     assert abs(rahu["longitude"] - xx[0] % 360.0) < 1e-9

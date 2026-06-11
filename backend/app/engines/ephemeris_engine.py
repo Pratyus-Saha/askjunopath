@@ -67,7 +67,12 @@ COMBUSTION_ORBS = {
 # Placidus is undefined near the poles (docs/ephemeris.md section 3).
 MAX_SUPPORTED_ABS_LAT = 66.0
 
-_CALC_FLAGS = swe.FLG_SWIEPH | swe.FLG_SIDEREAL | swe.FLG_SPEED
+# FLG_TRUEPOS is mandatory: the JHora reference exports TRUE/geometric
+# (Drik) positions, not apparent ones. Without it every planet sits
+# arc-seconds off the 5 arc-sec gate (Sun ~20" of annual aberration)
+# while the Moon stays nearly exact. Founder ruling 2026-06-11,
+# docs/ephemeris.md section 5.
+_CALC_FLAGS = swe.FLG_SWIEPH | swe.FLG_SIDEREAL | swe.FLG_SPEED | swe.FLG_TRUEPOS
 
 
 # ---------------------------------------------------------------------------

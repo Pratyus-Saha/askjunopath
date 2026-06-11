@@ -1,7 +1,6 @@
 {
   "chart_id": "fixture_01_india",
-  "status": "PENDING_JHORA",
-  "source": "PENDING: Jagannatha Hora export, settings per docs/reference-settings.png. Input chosen per docs/ephemeris.md section 8 example (Gurugram, India).",
+  "source": "Jagannatha Hora, Drik Siddhanta, KP/Krishnamoorthy ayanamsa, JHora house Start/Cusp/End table (unequal cusps), exported 2026-06-11. Input per docs/ephemeris.md section 8 example (Gurugram, India).",
   "input": {
     "datetime_local": "1994-03-21T14:35:00",
     "timezone": "Asia/Kolkata",
@@ -9,8 +8,31 @@
     "lon": 77.0266
   },
   "expected": {
-    "planets": null,
-    "cusps": null,
-    "ascendant_sign": null
+    "planets": {
+      "Sun": 336.844,
+      "Moon": 76.917617,
+      "Mars": 317.26935,
+      "Mercury": 309.305394,
+      "Jupiter": 200.299253,
+      "Venus": 352.200494,
+      "Saturn": 312.465239,
+      "Rahu": 211.70515,
+      "Ketu": 31.70515
+    },
+    "cusps": {
+      "1": 105.873506,
+      "2": 130.056094,
+      "3": 158.275058,
+      "4": 190.509506,
+      "5": 224.165306,
+      "6": 256.275881,
+      "7": 285.873506,
+      "8": 310.056094,
+      "9": 338.275058,
+      "10": 10.509506,
+      "11": 44.165306,
+      "12": 76.275881
+    },
+    "ascendant_sign": "Cancer"
   }
 }

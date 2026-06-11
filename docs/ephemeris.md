@@ -29,6 +29,7 @@ All functions pure where possible. No module imports another engine's internals.
 | Setting | Value | pyswisseph call |
 |---|---|---|
 | Zodiac | Sidereal | `swe.FLG_SIDEREAL` on every position call |
+| Position type | TRUE / geometric (Drik) | `swe.FLG_TRUEPOS` on every position call |
 | Ayanamsa | KP-Newcomb (Krishnamurti) | `swe.set_sid_mode(swe.SIDM_KRISHNAMURTI, 0, 0)` |
 | Nodes | True node only | `swe.TRUE_NODE`. Never `swe.MEAN_NODE` |
 | House system | Placidus | `swe.houses_ex(..., b'P', ...)` |
@@ -86,12 +87,20 @@ Bodies, in this fixed output order:
 For Sun through Saturn:
 
 ```python
-flags = swe.FLG_SWIEPH | swe.FLG_SIDEREAL | swe.FLG_SPEED
+flags = swe.FLG_SWIEPH | swe.FLG_SIDEREAL | swe.FLG_SPEED | swe.FLG_TRUEPOS
 xx, retflag = swe.calc_ut(jd_ut, body_id, flags)
 longitude = xx[0] % 360.0     # normalize to [0, 360)
 speed_deg_per_day = xx[3]
 retrograde = speed_deg_per_day < 0
 ```
+
+**`FLG_TRUEPOS` is mandatory** (founder ruling, 2026-06-11, Option B of the
+Day 1 apparent-vs-true finding). Jagannatha Hora's Drik Siddhanta export is
+TRUE/geometric positions, not apparent positions; the Swiss Ephemeris default
+(apparent, with light-time and annual aberration) sits ~20 arc-sec off on the
+Sun and 7–47 arc-sec off on other planets, far outside the 5 arc-sec gate.
+Dropping this flag reintroduces exactly that signature: every planet off by
+arc-seconds with the Moon nearly exact (its aberration is ~0.7").
 
 For the nodes:
 

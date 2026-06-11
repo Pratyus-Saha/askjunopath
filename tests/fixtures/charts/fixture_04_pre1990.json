@@ -1,7 +1,6 @@
 {
   "chart_id": "fixture_04_pre1990",
-  "status": "PENDING_JHORA",
-  "source": "PENDING: Jagannatha Hora export, settings per docs/reference-settings.png. Pre-1990 birth exercising historical IANA offsets (London 1962) and older .se1 file coverage.",
+  "source": "Jagannatha Hora, Drik Siddhanta, KP/Krishnamoorthy ayanamsa, JHora house Start/Cusp/End table (unequal cusps), exported 2026-06-11. Pre-1990 birth exercising historical IANA offsets (London 1962) and older ephemeris coverage.",
   "input": {
     "datetime_local": "1962-02-04T05:45:00",
     "timezone": "Europe/London",
@@ -9,8 +8,31 @@
     "lon": -0.1278
   },
   "expected": {
-    "planets": null,
-    "cusps": null,
-    "ascendant_sign": null
+    "planets": {
+      "Sun": 291.712522,
+      "Moon": 280.987392,
+      "Mars": 278.550833,
+      "Mercury": 294.594936,
+      "Jupiter": 295.211492,
+      "Venus": 293.596303,
+      "Saturn": 280.494917,
+      "Rahu": 114.803239,
+      "Ketu": 294.803239
+    },
+    "cusps": {
+      "1": 253.46615,
+      "2": 303.797425,
+      "3": 350.083964,
+      "4": 19.250978,
+      "5": 39.415825,
+      "6": 56.198936,
+      "7": 73.46615,
+      "8": 123.797425,
+      "9": 170.083964,
+      "10": 199.250978,
+      "11": 219.415825,
+      "12": 236.198936
+    },
+    "ascendant_sign": "Sagittarius"
   }
 }
