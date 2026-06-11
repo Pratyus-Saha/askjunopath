@@ -1,0 +1,16 @@
+{
+  "chart_id": "fixture_04_pre1990",
+  "status": "PENDING_JHORA",
+  "source": "PENDING: Jagannatha Hora export, settings per docs/reference-settings.png. Pre-1990 birth exercising historical IANA offsets (London 1962) and older .se1 file coverage.",
+  "input": {
+    "datetime_local": "1962-02-04T05:45:00",
+    "timezone": "Europe/London",
+    "lat": 51.5074,
+    "lon": -0.1278
+  },
+  "expected": {
+    "planets": null,
+    "cusps": null,
+    "ascendant_sign": null
+  }
+}

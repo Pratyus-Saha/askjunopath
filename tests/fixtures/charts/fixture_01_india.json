@@ -1,0 +1,16 @@
+{
+  "chart_id": "fixture_01_india",
+  "status": "PENDING_JHORA",
+  "source": "PENDING: Jagannatha Hora export, settings per docs/reference-settings.png. Input chosen per docs/ephemeris.md section 8 example (Gurugram, India).",
+  "input": {
+    "datetime_local": "1994-03-21T14:35:00",
+    "timezone": "Asia/Kolkata",
+    "lat": 28.4595,
+    "lon": 77.0266
+  },
+  "expected": {
+    "planets": null,
+    "cusps": null,
+    "ascendant_sign": null
+  }
+}

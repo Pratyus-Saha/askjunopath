@@ -1,0 +1,16 @@
+{
+  "chart_id": "fixture_03_midnight",
+  "status": "PENDING_JHORA",
+  "source": "PENDING: Jagannatha Hora export, settings per docs/reference-settings.png. Birth at 00:10 local where the UTC date falls on the PREVIOUS day (2000-12-31T18:40Z), per docs/ephemeris.md section 10 test 4.",
+  "input": {
+    "datetime_local": "2001-01-01T00:10:00",
+    "timezone": "Asia/Kolkata",
+    "lat": 19.076,
+    "lon": 72.8777
+  },
+  "expected": {
+    "planets": null,
+    "cusps": null,
+    "ascendant_sign": null
+  }
+}
