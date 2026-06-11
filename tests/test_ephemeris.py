@@ -14,7 +14,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from backend.engines.ephemeris_engine import (  # noqa: E402
+from backend.app.engines.ephemeris_engine import (  # noqa: E402
     COMBUSTION_ORBS,
     PLANET_ORDER,
     SIGNS,
