@@ -1,0 +1,16 @@
+{
+  "chart_id": "fixture_02_us_dst",
+  "status": "PENDING_JHORA",
+  "source": "PENDING: Jagannatha Hora export, settings per docs/reference-settings.png. US birth under daylight saving (EDT, UTC-4) per docs/ephemeris.md section 10 test 3; catches timezone double-conversion.",
+  "input": {
+    "datetime_local": "1985-07-04T08:30:00",
+    "timezone": "America/New_York",
+    "lat": 40.7128,
+    "lon": -74.006
+  },
+  "expected": {
+    "planets": null,
+    "cusps": null,
+    "ascendant_sign": null
+  }
+}
