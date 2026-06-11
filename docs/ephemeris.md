@@ -41,6 +41,8 @@ All functions pure where possible. No module imports another engine's internals.
 
 **Ephemeris file guard.** If the `.se1` files are missing, pyswisseph silently falls back to the built-in Moshier ephemeris and returns slightly different numbers (playbook error trap #4). The engine exposes `ephemeris_files_ok() -> bool` that asserts the required `.se1` files physically exist at `SE_EPHE_PATH` AND that a test position call with `swe.FLG_SWIEPH` succeeds without fallback. `/health` (built by Codex per docs/health.md) calls this function; the Docker test calls `/health` from inside the container.
 
+**Production file packaging.** Do not commit Swiss `.se1` files to git by default. For backend image builds, copy the founder-approved local ephemeris files into `backend/ephe/` before running `docker build` from `backend/`; `.gitignore` keeps that directory out of commits. `backend/Dockerfile` copies `ephe/*.se1` into `/app/ephe` and sets `SE_EPHE_PATH=/app/ephe`, so a production image build fails loudly if the local build context does not include the files.
+
 ---
 
 ## 3. Inputs

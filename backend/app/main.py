@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
-from importlib import import_module
+import os
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -25,33 +26,37 @@ app.include_router(chart_router)
 
 
 def _ephemeris_check() -> dict[str, str]:
-    module_names = (
-        "backend.engines.ephemeris_engine",
-        "app.engines.ephemeris_engine",
-        "backend.app.engines.ephemeris_engine",
-    )
+    ephe_path = os.environ.get("SE_EPHE_PATH")
+    se1_file_count = 0
+    if ephe_path:
+        path = Path(ephe_path)
+        if path.is_dir():
+            se1_file_count = len(list(path.glob("*.se1")))
 
-    last_error: Exception | None = None
-    for module_name in module_names:
-        try:
-            module = import_module(module_name)
-            ephemeris_files_ok = getattr(module, "ephemeris_files_ok")
-            if ephemeris_files_ok():
-                return {
-                    "status": "ok",
-                    "detail": f"{module_name}.ephemeris_files_ok passed",
-                }
+    try:
+        from app.engines.ephemeris_engine import ephemeris_files_ok
+
+        if ephemeris_files_ok():
             return {
-                "status": "degraded",
-                "detail": f"{module_name}.ephemeris_files_ok returned false",
+                "status": "ok",
+                "detail": (
+                    "app.engines.ephemeris_engine.ephemeris_files_ok passed; "
+                    f"{se1_file_count} .se1 file(s) at {ephe_path}"
+                ),
             }
-        except Exception as exc:
-            last_error = exc
 
-    return {
-        "status": "degraded",
-        "detail": f"ephemeris check unavailable: {last_error}",
-    }
+        return {
+            "status": "degraded",
+            "detail": (
+                "app.engines.ephemeris_engine.ephemeris_files_ok returned false; "
+                f"SE_EPHE_PATH={ephe_path!r}; .se1 file count={se1_file_count}"
+            ),
+        }
+    except Exception as exc:
+        return {
+            "status": "degraded",
+            "detail": f"ephemeris check failed: {exc}",
+        }
 
 
 def _database_check() -> dict[str, str]:
