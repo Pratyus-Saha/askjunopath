@@ -1,0 +1,1657 @@
+{
+  "$defs": {
+    "AscendantBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "longitude": {
+          "exclusiveMaximum": 360.0,
+          "minimum": 0.0,
+          "title": "Longitude",
+          "type": "number"
+        },
+        "sign": {
+          "enum": [
+            "Aries",
+            "Taurus",
+            "Gemini",
+            "Cancer",
+            "Leo",
+            "Virgo",
+            "Libra",
+            "Scorpio",
+            "Sagittarius",
+            "Capricorn",
+            "Aquarius",
+            "Pisces"
+          ],
+          "title": "Sign",
+          "type": "string"
+        },
+        "sign_degree": {
+          "exclusiveMaximum": 30.0,
+          "minimum": 0.0,
+          "title": "Sign Degree",
+          "type": "number"
+        }
+      },
+      "required": [
+        "longitude",
+        "sign",
+        "sign_degree"
+      ],
+      "title": "AscendantBlock",
+      "type": "object"
+    },
+    "BirthBalance": {
+      "additionalProperties": false,
+      "properties": {
+        "lord": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Lord",
+          "type": "string"
+        },
+        "years_remaining": {
+          "maximum": 20.0,
+          "minimum": 0.0,
+          "title": "Years Remaining",
+          "type": "number"
+        }
+      },
+      "required": [
+        "lord",
+        "years_remaining"
+      ],
+      "title": "BirthBalance",
+      "type": "object"
+    },
+    "BirthBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "datetime_local": {
+          "minLength": 1,
+          "title": "Datetime Local",
+          "type": "string"
+        },
+        "datetime_utc": {
+          "minLength": 1,
+          "title": "Datetime Utc",
+          "type": "string"
+        },
+        "timezone": {
+          "minLength": 1,
+          "title": "Timezone",
+          "type": "string"
+        },
+        "lat": {
+          "maximum": 66.0,
+          "minimum": -66.0,
+          "title": "Lat",
+          "type": "number"
+        },
+        "lon": {
+          "maximum": 180.0,
+          "minimum": -180.0,
+          "title": "Lon",
+          "type": "number"
+        },
+        "place_label": {
+          "minLength": 1,
+          "title": "Place Label",
+          "type": "string"
+        },
+        "approximate_time": {
+          "title": "Approximate Time",
+          "type": "boolean"
+        },
+        "julian_day_ut": {
+          "exclusiveMinimum": 0.0,
+          "title": "Julian Day Ut",
+          "type": "number"
+        }
+      },
+      "required": [
+        "datetime_local",
+        "datetime_utc",
+        "timezone",
+        "lat",
+        "lon",
+        "place_label",
+        "approximate_time",
+        "julian_day_ut"
+      ],
+      "title": "BirthBlock",
+      "type": "object"
+    },
+    "CurrentDasha": {
+      "additionalProperties": false,
+      "properties": {
+        "mahadasha": {
+          "$ref": "#/$defs/DashaPeriod"
+        },
+        "antardasha": {
+          "$ref": "#/$defs/DashaPeriod"
+        },
+        "pratyantardasha": {
+          "$ref": "#/$defs/DashaPeriod"
+        }
+      },
+      "required": [
+        "mahadasha",
+        "antardasha",
+        "pratyantardasha"
+      ],
+      "title": "CurrentDasha",
+      "type": "object"
+    },
+    "D10Block": {
+      "additionalProperties": false,
+      "properties": {
+        "placements": {
+          "additionalProperties": {
+            "enum": [
+              "Aries",
+              "Taurus",
+              "Gemini",
+              "Cancer",
+              "Leo",
+              "Virgo",
+              "Libra",
+              "Scorpio",
+              "Sagittarius",
+              "Capricorn",
+              "Aquarius",
+              "Pisces"
+            ],
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ]
+          },
+          "title": "Placements",
+          "type": "object"
+        },
+        "flags": {
+          "$ref": "#/$defs/D10Flags"
+        }
+      },
+      "required": [
+        "placements",
+        "flags"
+      ],
+      "title": "D10Block",
+      "type": "object"
+    },
+    "D10Flags": {
+      "additionalProperties": false,
+      "properties": {
+        "tenth_lord_well_placed": {
+          "title": "Tenth Lord Well Placed",
+          "type": "boolean"
+        },
+        "tenth_lord_in_dusthana": {
+          "title": "Tenth Lord In Dusthana",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "tenth_lord_well_placed",
+        "tenth_lord_in_dusthana"
+      ],
+      "title": "D10Flags",
+      "type": "object"
+    },
+    "D9Block": {
+      "additionalProperties": false,
+      "properties": {
+        "placements": {
+          "additionalProperties": {
+            "enum": [
+              "Aries",
+              "Taurus",
+              "Gemini",
+              "Cancer",
+              "Leo",
+              "Virgo",
+              "Libra",
+              "Scorpio",
+              "Sagittarius",
+              "Capricorn",
+              "Aquarius",
+              "Pisces"
+            ],
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ]
+          },
+          "title": "Placements",
+          "type": "object"
+        },
+        "flags": {
+          "$ref": "#/$defs/D9Flags"
+        }
+      },
+      "required": [
+        "placements",
+        "flags"
+      ],
+      "title": "D9Block",
+      "type": "object"
+    },
+    "D9Flags": {
+      "additionalProperties": false,
+      "properties": {
+        "vargottama": {
+          "items": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ],
+            "type": "string"
+          },
+          "title": "Vargottama",
+          "type": "array"
+        },
+        "debilitated_in_d9": {
+          "items": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ],
+            "type": "string"
+          },
+          "title": "Debilitated In D9",
+          "type": "array"
+        }
+      },
+      "title": "D9Flags",
+      "type": "object"
+    },
+    "DashaBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "system": {
+          "const": "VIMSHOTTARI",
+          "title": "System",
+          "type": "string"
+        },
+        "birth_balance": {
+          "$ref": "#/$defs/BirthBalance"
+        },
+        "current": {
+          "$ref": "#/$defs/CurrentDasha"
+        },
+        "upcoming_md_ad": {
+          "items": {
+            "$ref": "#/$defs/MdAdPeriod"
+          },
+          "maxItems": 5,
+          "title": "Upcoming Md Ad",
+          "type": "array"
+        },
+        "upcoming_pd": {
+          "items": {
+            "$ref": "#/$defs/PdPeriod"
+          },
+          "maxItems": 30,
+          "title": "Upcoming Pd",
+          "type": "array"
+        }
+      },
+      "required": [
+        "system",
+        "birth_balance",
+        "current"
+      ],
+      "title": "DashaBlock",
+      "type": "object"
+    },
+    "DashaPeriod": {
+      "additionalProperties": false,
+      "properties": {
+        "lord": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Lord",
+          "type": "string"
+        },
+        "start": {
+          "format": "date",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "format": "date",
+          "title": "End",
+          "type": "string"
+        }
+      },
+      "required": [
+        "lord",
+        "start",
+        "end"
+      ],
+      "title": "DashaPeriod",
+      "type": "object"
+    },
+    "DivisionalBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "d9": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/D9Block"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "d10": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/D10Block"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "DivisionalBlock",
+      "type": "object"
+    },
+    "FeatureTransitWindow": {
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "format": "date",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "format": "date",
+          "title": "End",
+          "type": "string"
+        },
+        "triggers": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Triggers",
+          "type": "array"
+        },
+        "window_score": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Window Score",
+          "type": "number"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "triggers",
+        "window_score"
+      ],
+      "title": "FeatureTransitWindow",
+      "type": "object"
+    },
+    "HouseBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "house": {
+          "maximum": 12,
+          "minimum": 1,
+          "title": "House",
+          "type": "integer"
+        },
+        "cusp_longitude": {
+          "exclusiveMaximum": 360.0,
+          "minimum": 0.0,
+          "title": "Cusp Longitude",
+          "type": "number"
+        },
+        "cusp_sign": {
+          "enum": [
+            "Aries",
+            "Taurus",
+            "Gemini",
+            "Cancer",
+            "Leo",
+            "Virgo",
+            "Libra",
+            "Scorpio",
+            "Sagittarius",
+            "Capricorn",
+            "Aquarius",
+            "Pisces"
+          ],
+          "title": "Cusp Sign",
+          "type": "string"
+        },
+        "cusp_sign_lord": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Cusp Sign Lord",
+          "type": "string"
+        },
+        "cusp_nakshatra": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cusp Nakshatra"
+        },
+        "cusp_star_lord": {
+          "anyOf": [
+            {
+              "enum": [
+                "Sun",
+                "Moon",
+                "Mars",
+                "Mercury",
+                "Jupiter",
+                "Venus",
+                "Saturn",
+                "Rahu",
+                "Ketu"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cusp Star Lord"
+        },
+        "cusp_sub_lord": {
+          "anyOf": [
+            {
+              "enum": [
+                "Sun",
+                "Moon",
+                "Mars",
+                "Mercury",
+                "Jupiter",
+                "Venus",
+                "Saturn",
+                "Rahu",
+                "Ketu"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cusp Sub Lord"
+        },
+        "cusp_sub_sub_lord": {
+          "anyOf": [
+            {
+              "enum": [
+                "Sun",
+                "Moon",
+                "Mars",
+                "Mercury",
+                "Jupiter",
+                "Venus",
+                "Saturn",
+                "Rahu",
+                "Ketu"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cusp Sub Sub Lord"
+        },
+        "occupants": {
+          "items": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ],
+            "type": "string"
+          },
+          "title": "Occupants",
+          "type": "array"
+        },
+        "significators": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SignificatorLadder"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "house",
+        "cusp_longitude",
+        "cusp_sign",
+        "cusp_sign_lord"
+      ],
+      "title": "HouseBlock",
+      "type": "object"
+    },
+    "KpBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "star_lord": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Star Lord",
+          "type": "string"
+        },
+        "sub_lord": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Sub Lord",
+          "type": "string"
+        },
+        "sub_sub_lord": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Sub Sub Lord",
+          "type": "string"
+        }
+      },
+      "required": [
+        "star_lord",
+        "sub_lord",
+        "sub_sub_lord"
+      ],
+      "title": "KpBlock",
+      "type": "object"
+    },
+    "MdAdPeriod": {
+      "additionalProperties": false,
+      "properties": {
+        "md": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Md",
+          "type": "string"
+        },
+        "ad": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Ad",
+          "type": "string"
+        },
+        "start": {
+          "format": "date",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "format": "date",
+          "title": "End",
+          "type": "string"
+        }
+      },
+      "required": [
+        "md",
+        "ad",
+        "start",
+        "end"
+      ],
+      "title": "MdAdPeriod",
+      "type": "object"
+    },
+    "NakshatraBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "index": {
+          "maximum": 27,
+          "minimum": 1,
+          "title": "Index",
+          "type": "integer"
+        },
+        "lord": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Lord",
+          "type": "string"
+        },
+        "degree_in_nakshatra": {
+          "exclusiveMaximum": 13.333334,
+          "minimum": 0.0,
+          "title": "Degree In Nakshatra",
+          "type": "number"
+        },
+        "pada": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Pada",
+          "type": "integer"
+        },
+        "degree_in_pada": {
+          "exclusiveMaximum": 3.333334,
+          "minimum": 0.0,
+          "title": "Degree In Pada",
+          "type": "number"
+        },
+        "navamsa_sign": {
+          "enum": [
+            "Aries",
+            "Taurus",
+            "Gemini",
+            "Cancer",
+            "Leo",
+            "Virgo",
+            "Libra",
+            "Scorpio",
+            "Sagittarius",
+            "Capricorn",
+            "Aquarius",
+            "Pisces"
+          ],
+          "title": "Navamsa Sign",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "index",
+        "lord",
+        "degree_in_nakshatra",
+        "pada",
+        "degree_in_pada",
+        "navamsa_sign"
+      ],
+      "title": "NakshatraBlock",
+      "type": "object"
+    },
+    "PdPeriod": {
+      "additionalProperties": false,
+      "properties": {
+        "md": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Md",
+          "type": "string"
+        },
+        "ad": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Ad",
+          "type": "string"
+        },
+        "pd": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Pd",
+          "type": "string"
+        },
+        "start": {
+          "format": "date",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "format": "date",
+          "title": "End",
+          "type": "string"
+        }
+      },
+      "required": [
+        "md",
+        "ad",
+        "pd",
+        "start",
+        "end"
+      ],
+      "title": "PdPeriod",
+      "type": "object"
+    },
+    "PlanetBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Name",
+          "type": "string"
+        },
+        "longitude": {
+          "exclusiveMaximum": 360.0,
+          "minimum": 0.0,
+          "title": "Longitude",
+          "type": "number"
+        },
+        "sign": {
+          "enum": [
+            "Aries",
+            "Taurus",
+            "Gemini",
+            "Cancer",
+            "Leo",
+            "Virgo",
+            "Libra",
+            "Scorpio",
+            "Sagittarius",
+            "Capricorn",
+            "Aquarius",
+            "Pisces"
+          ],
+          "title": "Sign",
+          "type": "string"
+        },
+        "sign_lord": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Sign Lord",
+          "type": "string"
+        },
+        "sign_degree": {
+          "exclusiveMaximum": 30.0,
+          "minimum": 0.0,
+          "title": "Sign Degree",
+          "type": "number"
+        },
+        "house_occupied": {
+          "anyOf": [
+            {
+              "maximum": 12,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "House Occupied"
+        },
+        "retrograde": {
+          "title": "Retrograde",
+          "type": "boolean"
+        },
+        "combust": {
+          "title": "Combust",
+          "type": "boolean"
+        },
+        "speed_deg_per_day": {
+          "title": "Speed Deg Per Day",
+          "type": "number"
+        },
+        "nakshatra": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NakshatraBlock"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "kp": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/KpBlock"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "significator_of_houses": {
+          "items": {
+            "maximum": 12,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Significator Of Houses",
+          "type": "array"
+        },
+        "significator_levels": {
+          "additionalProperties": {
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "type": "string"
+          },
+          "title": "Significator Levels",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "longitude",
+        "sign",
+        "sign_lord",
+        "sign_degree",
+        "retrograde",
+        "combust",
+        "speed_deg_per_day"
+      ],
+      "title": "PlanetBlock",
+      "type": "object"
+    },
+    "PredictionFeature": {
+      "additionalProperties": false,
+      "properties": {
+        "domain": {
+          "enum": [
+            "career",
+            "finance",
+            "relationship"
+          ],
+          "title": "Domain",
+          "type": "string"
+        },
+        "primary_cusp_sub_lord": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Primary Cusp Sub Lord",
+          "type": "string"
+        },
+        "cusp_sub_lord_signifies": {
+          "items": {
+            "maximum": 12,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Cusp Sub Lord Signifies",
+          "type": "array"
+        },
+        "event_promise": {
+          "title": "Event Promise",
+          "type": "boolean"
+        },
+        "active_dasha_lords": {
+          "items": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ],
+            "type": "string"
+          },
+          "title": "Active Dasha Lords",
+          "type": "array"
+        },
+        "dasha_support": {
+          "additionalProperties": {
+            "items": {
+              "maximum": 12,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "propertyNames": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ]
+          },
+          "title": "Dasha Support",
+          "type": "object"
+        },
+        "supporting_significators": {
+          "items": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ],
+            "type": "string"
+          },
+          "title": "Supporting Significators",
+          "type": "array"
+        },
+        "blocking_significators": {
+          "items": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ],
+            "type": "string"
+          },
+          "title": "Blocking Significators",
+          "type": "array"
+        },
+        "blocking_houses_hit": {
+          "items": {
+            "maximum": 12,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Blocking Houses Hit",
+          "type": "array"
+        },
+        "relevant_strengths": {
+          "additionalProperties": {
+            "maximum": 100,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ]
+          },
+          "title": "Relevant Strengths",
+          "type": "object"
+        },
+        "transit_windows": {
+          "items": {
+            "$ref": "#/$defs/FeatureTransitWindow"
+          },
+          "title": "Transit Windows",
+          "type": "array"
+        },
+        "rag_alignment": {
+          "$ref": "#/$defs/RagAlignment"
+        },
+        "raw_score": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Raw Score",
+          "type": "integer"
+        },
+        "confidence_tier": {
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "SPECULATIVE",
+            "WEAK_SIGNAL"
+          ],
+          "title": "Confidence Tier",
+          "type": "string"
+        },
+        "probability_pct": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Probability Pct",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "domain",
+        "primary_cusp_sub_lord",
+        "event_promise",
+        "rag_alignment",
+        "raw_score",
+        "confidence_tier",
+        "probability_pct"
+      ],
+      "title": "PredictionFeature",
+      "type": "object"
+    },
+    "PredictionFeaturesBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "career": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PredictionFeature"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "finance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PredictionFeature"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "relationship": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PredictionFeature"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "PredictionFeaturesBlock",
+      "type": "object"
+    },
+    "RagAlignment": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "aligned",
+            "partial",
+            "contradicted",
+            "no_data"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "chunk_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Chunk Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "RagAlignment",
+      "type": "object"
+    },
+    "SettingsBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "ayanamsa": {
+          "const": "KP_NEWCOMB",
+          "title": "Ayanamsa",
+          "type": "string"
+        },
+        "ayanamsa_value_deg": {
+          "maximum": 30.0,
+          "minimum": 20.0,
+          "title": "Ayanamsa Value Deg",
+          "type": "number"
+        },
+        "node_type": {
+          "const": "TRUE",
+          "title": "Node Type",
+          "type": "string"
+        },
+        "house_system": {
+          "const": "PLACIDUS",
+          "title": "House System",
+          "type": "string"
+        },
+        "zodiac": {
+          "const": "SIDEREAL",
+          "title": "Zodiac",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ayanamsa",
+        "ayanamsa_value_deg",
+        "node_type",
+        "house_system",
+        "zodiac"
+      ],
+      "title": "SettingsBlock",
+      "type": "object"
+    },
+    "SignificatorLadder": {
+      "additionalProperties": false,
+      "properties": {
+        "A_in_star_of_occupants": {
+          "items": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ],
+            "type": "string"
+          },
+          "title": "A In Star Of Occupants",
+          "type": "array"
+        },
+        "B_occupants": {
+          "items": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ],
+            "type": "string"
+          },
+          "title": "B Occupants",
+          "type": "array"
+        },
+        "C_in_star_of_owner": {
+          "items": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ],
+            "type": "string"
+          },
+          "title": "C In Star Of Owner",
+          "type": "array"
+        },
+        "D_owner": {
+          "items": {
+            "enum": [
+              "Sun",
+              "Moon",
+              "Mars",
+              "Mercury",
+              "Jupiter",
+              "Venus",
+              "Saturn",
+              "Rahu",
+              "Ketu"
+            ],
+            "type": "string"
+          },
+          "title": "D Owner",
+          "type": "array"
+        }
+      },
+      "title": "SignificatorLadder",
+      "type": "object"
+    },
+    "StrengthBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "planet": {
+          "enum": [
+            "Sun",
+            "Moon",
+            "Mars",
+            "Mercury",
+            "Jupiter",
+            "Venus",
+            "Saturn",
+            "Rahu",
+            "Ketu"
+          ],
+          "title": "Planet",
+          "type": "string"
+        },
+        "v1_score": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "V1 Score",
+          "type": "integer"
+        },
+        "components": {
+          "$ref": "#/$defs/StrengthComponents"
+        },
+        "tier": {
+          "enum": [
+            "STRONG",
+            "MODERATE",
+            "WEAK"
+          ],
+          "title": "Tier",
+          "type": "string"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        },
+        "derived": {
+          "default": false,
+          "title": "Derived",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "planet",
+        "v1_score",
+        "components",
+        "tier"
+      ],
+      "title": "StrengthBlock",
+      "type": "object"
+    },
+    "StrengthComponents": {
+      "additionalProperties": false,
+      "properties": {
+        "dignity": {
+          "title": "Dignity",
+          "type": "integer"
+        },
+        "house_placement": {
+          "title": "House Placement",
+          "type": "integer"
+        },
+        "dig_bala": {
+          "title": "Dig Bala",
+          "type": "integer"
+        },
+        "retrograde": {
+          "title": "Retrograde",
+          "type": "integer"
+        },
+        "combustion": {
+          "title": "Combustion",
+          "type": "integer"
+        },
+        "aspects_net": {
+          "title": "Aspects Net",
+          "type": "integer"
+        },
+        "base": {
+          "title": "Base",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "dignity",
+        "house_placement",
+        "dig_bala",
+        "retrograde",
+        "combustion",
+        "aspects_net",
+        "base"
+      ],
+      "title": "StrengthComponents",
+      "type": "object"
+    },
+    "TransitWindow": {
+      "additionalProperties": false,
+      "properties": {
+        "domain": {
+          "enum": [
+            "career",
+            "finance",
+            "relationship"
+          ],
+          "title": "Domain",
+          "type": "string"
+        },
+        "start": {
+          "format": "date",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "format": "date",
+          "title": "End",
+          "type": "string"
+        },
+        "triggers": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Triggers",
+          "type": "array"
+        },
+        "window_score": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Window Score",
+          "type": "number"
+        }
+      },
+      "required": [
+        "domain",
+        "start",
+        "end",
+        "triggers",
+        "window_score"
+      ],
+      "title": "TransitWindow",
+      "type": "object"
+    },
+    "TransitsBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "computed_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Computed At"
+        },
+        "windows": {
+          "items": {
+            "$ref": "#/$defs/TransitWindow"
+          },
+          "title": "Windows",
+          "type": "array"
+        }
+      },
+      "title": "TransitsBlock",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "birth": {
+      "$ref": "#/$defs/BirthBlock"
+    },
+    "settings": {
+      "$ref": "#/$defs/SettingsBlock"
+    },
+    "ascendant": {
+      "$ref": "#/$defs/AscendantBlock"
+    },
+    "planets": {
+      "items": {
+        "$ref": "#/$defs/PlanetBlock"
+      },
+      "maxItems": 9,
+      "minItems": 9,
+      "title": "Planets",
+      "type": "array"
+    },
+    "houses": {
+      "items": {
+        "$ref": "#/$defs/HouseBlock"
+      },
+      "maxItems": 12,
+      "minItems": 12,
+      "title": "Houses",
+      "type": "array"
+    },
+    "dashas": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DashaBlock"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "strengths": {
+      "items": {
+        "$ref": "#/$defs/StrengthBlock"
+      },
+      "title": "Strengths",
+      "type": "array"
+    },
+    "divisional": {
+      "$ref": "#/$defs/DivisionalBlock"
+    },
+    "transits": {
+      "$ref": "#/$defs/TransitsBlock"
+    },
+    "prediction_features": {
+      "$ref": "#/$defs/PredictionFeaturesBlock"
+    }
+  },
+  "required": [
+    "schema_version",
+    "birth",
+    "settings",
+    "ascendant",
+    "planets",
+    "houses"
+  ],
+  "title": "ChartData",
+  "type": "object"
+}
