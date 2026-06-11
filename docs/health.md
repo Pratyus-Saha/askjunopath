@@ -30,15 +30,13 @@ Each check returns:
 
 The ephemeris check safely attempts to import:
 
-`backend.engines.ephemeris_engine.ephemeris_files_ok`
-
-If that import path is unavailable in the current repo layout, it may fall back to:
-
 `app.engines.ephemeris_engine.ephemeris_files_ok`
 
-If no engine module exists yet, or if the check raises, `/health` returns `status: "degraded"` for the ephemeris check and still returns HTTP 200.
+If the engine module is unavailable, `ephemeris_files_ok()` returns false, or the check raises, `/health` returns `status: "degraded"` for the ephemeris check and still returns HTTP 200.
 
 No real `.se1` files are required for unit tests. Missing or invalid `SE_EPHE_PATH` must degrade safely, never return HTTP 500.
+
+Production containers set `SE_EPHE_PATH=/app/ephe`. The Docker build must include real Swiss `.se1` files from the local, git-ignored `backend/ephe/` directory so they land inside the image at `/app/ephe`.
 
 ## Database Check
 

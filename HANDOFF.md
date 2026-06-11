@@ -29,6 +29,29 @@ How this file works:
 
 # Entries
 
+## T1.2-prod-health - agent/codex/day1-ephe-prod-health - 2026-06-11 20:01 - Codex
+**Built:** tightened `/health` to call `app.engines.ephemeris_engine.ephemeris_files_ok`, report the configured `SE_EPHE_PATH` and `.se1` count, and degrade safely when files are absent. Updated Docker packaging so production images copy local build-context Swiss `.se1` files from `backend/ephe/` into `/app/ephe`, with `SE_EPHE_PATH=/app/ephe`.
+**Deployment decision:** do not commit Swiss `.se1` binaries to git. Use a deploy-time local copy: place founder-approved files in git-ignored `backend/ephe/`, then build the backend image from `backend/`; Dockerfile now fails loudly if `ephe/*.se1` is missing.
+**Remaining production command steps:**
+- From repo root: `New-Item -ItemType Directory -Force backend/ephe`
+- Copy local ephemeris files: `Copy-Item C:\Users\assas\swisseph\ephe\*.se1 backend\ephe\`
+- From `backend/`: build/tag/push the backend image using the normal GHCR deploy ritual.
+- After Azure revision update, hit `/health` and confirm `checks.ephemeris.status == "ok"` and the detail shows `.se1 file(s) at /app/ephe`.
+**Files changed:**
+- `.gitignore`
+- `backend/Dockerfile`
+- `backend/app/main.py`
+- `docs/ephemeris.md`
+- `docs/health.md`
+- `tests/test_health.py`
+- `HANDOFF.md`
+**Tests run:**
+- `uv run --with-requirements backend/requirements.txt --with pytest python -m pytest tests/test_health.py -q` -> 5 passed, 2 warnings.
+- `$env:SE_EPHE_PATH='C:\Users\assas\swisseph\ephe'; uv run --with-requirements backend/requirements.txt --with pytest python -m pytest tests/test_schema_roundtrip.py tests/test_health.py tests/test_ephemeris.py -q` -> 111 passed, 2 warnings.
+**Known issues / deferred:** deployment to Azure was intentionally not run. `backend/ephe/` is ignored, so production builds require the explicit local copy step before `docker build`.
+**Next agent should read:** `backend/Dockerfile`, `docs/ephemeris.md`, `docs/health.md`, `backend/app/main.py`, this handoff entry.
+**Tempted but did not:** commit `.se1` files, edit `backend/app/engines/ephemeris_engine.py`, change fixture values, wire the chart route, or touch deployment scripts.
+
 ## T1.3/T1.1 (Option B: TRUEPOS) — agent/claude/day1-jhora-fixtures — 2026-06-11 19:45 — Claude Code
 **Built:** executed the founder's **Option B ruling** on the apparent-vs-true finding (entry below): JHora Drik + KP/Krishnamoorthy stays the judge; the engine now matches its TRUE/geometric output. (1) `docs/ephemeris.md` §2 and §5 amended — `swe.FLG_TRUEPOS` is mandatory on every position call, with the failure signature documented. (2) `_CALC_FLAGS` in `backend/app/engines/ephemeris_engine.py` now includes `swe.FLG_TRUEPOS` (one-line change plus comment). (3) `fixture_05_southern.json` expected values replaced with the founder's corrected re-export (+11:00 East of GMT; the first export had the timezone sign flipped). Fixtures 1–4 values untouched. No fixture carries `PENDING_JHORA` anymore; all have fully populated expectations.
 **Files changed:** `backend/app/engines/ephemeris_engine.py`, `docs/ephemeris.md`, `tests/fixtures/charts/fixture_01..05` (01–04 from the previous entry's working-tree state, 05 re-exported), `HANDOFF.md`. Uncommitted — Rule 9, suite not fully green yet.
