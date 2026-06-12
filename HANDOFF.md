@@ -29,6 +29,23 @@ How this file works:
 
 # Entries
 
+## T1.6-version-metadata - agent/codex/version-metadata-v1-2 - 2026-06-12 12:27 - Codex
+**Built:** moved backend/chart engine version metadata to the existing single source `settings.chart_engine_version`, bumped its default to `1.2.0`, and made `/health.version` plus FastAPI app metadata read from that setting. Added route tests proving chart `metadata.engine_version` is `1.2.0`, route fingerprints are generated with the current engine version, and changing the engine version changes the fingerprint.
+**Files changed:**
+- `backend/app/core/config.py`
+- `backend/app/main.py`
+- `docs/health.md`
+- `tests/test_chart_route.py`
+- `tests/test_health.py`
+- `HANDOFF.md`
+**Tests run:**
+- `$env:SE_EPHE_PATH='C:\Users\assas\swisseph\ephe'; uv run --with-requirements backend/requirements.txt --with pytest python -m pytest tests/test_health.py tests/test_chart_route.py -q` -> 17 passed, 2 warnings.
+- `$env:SE_EPHE_PATH='C:\Users\assas\swisseph\ephe'; uv run --with-requirements backend/requirements.txt --with pytest python -m pytest tests -q` -> 123 passed, 2 warnings.
+- `git diff --name-only` -> approved files only.
+**Known issues / deferred:** no Docker build or Azure deployment performed. After merge, rebuild/redeploy the backend image so production `/health.version` and chart `metadata.engine_version` report `1.2.0`; because fingerprints include `settings.chart_engine_version`, this version bump creates a new cache key for fresh chart generation.
+**Next agent should read:** `backend/app/core/config.py`, `backend/app/main.py`, `backend/app/routers/chart.py`, `tests/test_chart_route.py`, `docs/health.md`.
+**Tempted but did not:** edit `backend/app/core/fingerprint.py` to change its default argument because the route already passes the explicit setting and that file was not approved; touch ephemeris math, fixtures, Dockerfile, env files, or deployment scripts.
+
 ## T1.5-wire — agent/claude/day1-wire-chart-route — 2026-06-11 21:15 — Claude Code
 **Built:** `/chart/generate` now computes exclusively via the trusted `app.engines.ephemeris_engine` (JHora-validated: KP-Newcomb sidereal, TRUE_NODE, FLG_TRUEPOS, Placidus cusps). The deprecated `app.core.chart_engine` is no longer called on any route; a DEPRECATED header documenting its defects (Alcabitius `b'B'` bug, no cusps, no ephe-path guard, apparent positions) was added to it, logic untouched. The route hands the engine naive local time + IANA zone — the single local→UTC conversion stays inside the engine; the route's old `convert_local_to_utc` call is gone (no double conversion possible). Engine structured errors now map to structured HTTP errors: `LAT_UNSUPPORTED` → 400, `INVALID_TIMEZONE`/`INVALID_COORDINATES`/`INVALID_DATETIME` → 422.
 **Route file note:** the task's approved list named `backend/app/main.py`, but the actual `/chart/generate` implementation lives in `backend/app/routers/chart.py` — actual repo layout wins (per the Day 1 path-correction precedent), so that router is the file rewired. `main.py` needed no change.

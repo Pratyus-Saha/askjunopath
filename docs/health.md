@@ -11,7 +11,7 @@
 Required top-level fields:
 
 - `status`: `"ok"` when all checks pass, otherwise `"degraded"`
-- `version`: application or engine version string
+- `version`: current backend/chart engine version from `settings.chart_engine_version`
 - `app_env`: current app environment
 - `timestamp`: UTC ISO 8601 timestamp
 - `checks`: object containing sub-checks
@@ -45,3 +45,7 @@ The database check uses the app's existing database pattern when available. In t
 If no database client exists, credentials are absent, or a probe raises, `/health` returns `status: "skipped"` or `status: "degraded"` for the database check and still returns HTTP 200.
 
 Do not add new Supabase logic outside the approved health file. No real Supabase credentials are required for unit tests.
+
+## Version Metadata
+
+`/health.version`, FastAPI app metadata, chart `metadata.engine_version`, and chart fingerprint generation all use `settings.chart_engine_version` as the single source of truth. Bumping the backend image for a trusted engine change must include bumping this setting so old cached chart fingerprints do not collide with new engine output.

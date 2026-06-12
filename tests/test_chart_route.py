@@ -24,6 +24,8 @@ from fastapi.testclient import TestClient  # noqa: E402
 
 from app import main as app_main  # noqa: E402
 from app.core import chart_engine as old_chart_engine  # noqa: E402
+from app.core.config import settings  # noqa: E402
+from app.core.fingerprint import generate_chart_fingerprint  # noqa: E402
 from app.engines.ephemeris_engine import compute_ephemeris  # noqa: E402
 from app.routers import chart as chart_router  # noqa: E402
 from app.schemas.models import ChartData  # noqa: E402
@@ -63,9 +65,11 @@ def client(monkeypatch, saved_charts):
         return dict(GEO_RESULT)
 
     def fake_get_chart(user_id: str, fingerprint: str):
+        saved_charts["lookup_fingerprint"] = fingerprint
         return None
 
     def fake_save_chart(user_id, chart_fingerprint, birth_data, chart_data):
+        saved_charts["chart_fingerprint"] = chart_fingerprint
         saved_charts["birth_data"] = birth_data
         saved_charts["chart_data"] = chart_data
         return {"id": "route-test-row-id"}
@@ -160,10 +164,49 @@ def test_legacy_metadata_block_for_db_and_scaffold_page(client, saved_charts):
     assert isinstance(metadata["longitude"], float)
     assert isinstance(metadata["ayanamsa"], float)
     assert 20.0 <= metadata["ayanamsa"] <= 30.0
-    assert metadata["engine_version"]
+    assert metadata["engine_version"] == "1.2.0"
+    assert metadata["engine_version"] == settings.chart_engine_version
     assert metadata["timezone"] == FIXTURE_INPUT["timezone"]
     # The stored object is the same payload the response carries.
     assert saved_charts["chart_data"] == response.json()["chart"]
+
+
+def test_chart_fingerprint_uses_current_engine_version(client, saved_charts):
+    response = client.post("/chart/generate", json=REQUEST_BODY, headers=HEADERS)
+    assert response.status_code == 200
+
+    expected = generate_chart_fingerprint(
+        birth_date=REQUEST_BODY["birth_date"],
+        birth_time=REQUEST_BODY["birth_time"],
+        latitude=GEO_RESULT["latitude"],
+        longitude=GEO_RESULT["longitude"],
+        timezone=GEO_RESULT["timezone"],
+        ayanamsa="krishnamurti",
+        house_system="placidus",
+        node_type="true_node",
+        engine_version=settings.chart_engine_version,
+    )
+    assert response.json()["chart_fingerprint"] == expected
+    assert saved_charts["lookup_fingerprint"] == expected
+    assert saved_charts["chart_fingerprint"] == expected
+
+
+def test_chart_fingerprint_changes_when_engine_version_changes():
+    common = {
+        "birth_date": REQUEST_BODY["birth_date"],
+        "birth_time": REQUEST_BODY["birth_time"],
+        "latitude": GEO_RESULT["latitude"],
+        "longitude": GEO_RESULT["longitude"],
+        "timezone": GEO_RESULT["timezone"],
+        "ayanamsa": "krishnamurti",
+        "house_system": "placidus",
+        "node_type": "true_node",
+    }
+
+    current = generate_chart_fingerprint(**common, engine_version="1.2.0")
+    next_version = generate_chart_fingerprint(**common, engine_version="1.2.1")
+
+    assert current != next_version
 
 
 # ---------------------------------------------------------------------------

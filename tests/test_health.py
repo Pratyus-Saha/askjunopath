@@ -13,6 +13,7 @@ os.environ.setdefault("SUPABASE_SERVICE_ROLE_KEY", "test-service-role-key")
 from fastapi.testclient import TestClient  # noqa: E402
 
 from app import main as app_main  # noqa: E402
+from app.core.config import settings  # noqa: E402
 from app.core import db  # noqa: E402
 from app.engines import ephemeris_engine  # noqa: E402
 
@@ -24,7 +25,8 @@ def test_health_returns_200_and_required_keys() -> None:
     payload = response.json()
     assert {"status", "version", "app_env", "timestamp", "checks"}.issubset(payload)
     assert payload["status"] in {"ok", "degraded"}
-    assert payload["version"] == "1.0.0"
+    assert payload["version"] == "1.2.0"
+    assert payload["version"] == settings.chart_engine_version
     assert isinstance(payload["checks"], dict)
 
 
