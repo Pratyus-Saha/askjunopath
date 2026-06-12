@@ -3,44 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 
-interface PlanetData {
-  tropical_longitude: number;
-  sidereal_longitude: number;
-  sign: string;
-  degree_in_sign: number;
-  nakshatra: string;
-  nakshatra_lord: string;
-  is_retrograde: boolean;
-}
+import type { ChartData } from "../../src/types/chart";
+import sampleFixture from "../../src/fixtures/chart.sample.json";
 
-interface AscendantData {
-  tropical_longitude: number;
-  sidereal_longitude: number;
-  sign: string;
-  degree_in_sign: number;
-  nakshatra: string;
-  nakshatra_lord: string;
-}
-
-interface ChartResponse {
+type ChartResponse = {
   cache_status: string;
   chart_id: string;
   chart_fingerprint: string;
-  chart: {
-    metadata: {
-      birth_date: string;
-      birth_time: string;
-      birth_city: string;
-      latitude: number;
-      longitude: number;
-      timezone: string;
-      ayanamsa: number;
-      engine_version: string;
-    };
-    ascendant: AscendantData;
-    planets: Record<string, PlanetData>;
-  };
-}
+  chart: ChartData & { metadata?: unknown };
+};
 
 export default function ChartPage() {
   // Form input states with requested Day 1 defaults
@@ -59,6 +30,30 @@ export default function ChartPage() {
     setError(null);
 
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7860";
+    const useFixture = process.env.NEXT_PUBLIC_USE_FIXTURE === "1";
+
+    if (useFixture) {
+      setTimeout(() => {
+        setChartData({
+          cache_status: "HIT",
+          chart_id: "fixture_01_sample",
+          chart_fingerprint: "static_fixture",
+          chart: {
+            ...(sampleFixture as unknown as ChartData),
+            metadata: {
+              birth_city: birthCity,
+              latitude: 22.5726,
+              longitude: 88.3639,
+              ayanamsa: 23.9,
+              timezone: "Asia/Kolkata",
+              engine_version: "1.3.0"
+            }
+          }
+        });
+        setLoading(false);
+      }, 500);
+      return;
+    }
     
     try {
       const response = await fetch(`${apiUrl}/chart/generate`, {
@@ -212,39 +207,44 @@ export default function ChartPage() {
               </div>
 
               {/* Calculations Metadata Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-950/50 p-4 rounded-xl border border-slate-800/50 text-xs">
-                <div>
-                  <span className="text-slate-500 block mb-1">Birth Location</span>
-                  <span className="text-slate-300 font-semibold truncate block">{chartData.chart.metadata.birth_city}</span>
-                </div>
-                <div>
-                  <span className="text-slate-500 block mb-1">Coordinates</span>
-                  <span className="text-slate-300 font-semibold font-mono block">
-                    {chartData.chart.metadata.latitude.toFixed(4)}°, {chartData.chart.metadata.longitude.toFixed(4)}°
-                  </span>
-                </div>
-                <div>
-                  <span className="text-slate-500 block mb-1">Ayanamsa (KP)</span>
-                  <span className="text-slate-300 font-semibold block">{formatDegrees(chartData.chart.metadata.ayanamsa)}</span>
-                </div>
-                <div>
-                  <span className="text-slate-500 block mb-1">Timezone</span>
-                  <span className="text-slate-300 font-semibold block">{chartData.chart.metadata.timezone}</span>
-                </div>
-              </div>
+              {(() => {
+                const meta = (chartData.chart as any).metadata || {};
+                return (
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-950/50 p-4 rounded-xl border border-slate-800/50 text-xs">
+                    <div>
+                      <span className="text-slate-500 block mb-1">Birth Location</span>
+                      <span className="text-slate-300 font-semibold truncate block">{meta.birth_city || "-"}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-500 block mb-1">Coordinates</span>
+                      <span className="text-slate-300 font-semibold font-mono block">
+                        {meta.latitude?.toFixed(4) || "0.0000"}°, {meta.longitude?.toFixed(4) || "0.0000"}°
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-slate-500 block mb-1">Ayanamsa (KP)</span>
+                      <span className="text-slate-300 font-semibold block">{meta.ayanamsa ? formatDegrees(meta.ayanamsa) : "-"}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-500 block mb-1">Timezone</span>
+                      <span className="text-slate-300 font-semibold block">{meta.timezone || "-"}</span>
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* Ascendant lagna display */}
               <div className="bg-indigo-950/20 border border-indigo-500/20 rounded-xl p-4 flex items-center justify-between">
                 <div>
                   <span className="text-xs text-indigo-300 uppercase tracking-widest block font-medium">Ascendant (Lagna)</span>
                   <span className="text-2xl font-black text-slate-100 mt-1 block">
-                    {chartData.chart.ascendant.sign} <span className="text-indigo-400 text-lg font-normal">({formatDegrees(chartData.chart.ascendant.degree_in_sign)})</span>
+                    {chartData.chart.ascendant.sign} <span className="text-indigo-400 text-lg font-normal">({formatDegrees(chartData.chart.ascendant.sign_degree)})</span>
                   </span>
                 </div>
                 <div className="text-right text-xs">
                   <span className="text-slate-500 block">Nakshatra / Lord</span>
                   <span className="text-indigo-300 font-semibold mt-1 block">
-                    {chartData.chart.ascendant.nakshatra} ({chartData.chart.ascendant.nakshatra_lord})
+                    -
                   </span>
                 </div>
               </div>
@@ -265,19 +265,19 @@ export default function ChartPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-800/50">
-                      {Object.entries(chartData.chart.planets).map(([planetName, planet]) => (
-                        <tr key={planetName} className="hover:bg-slate-800/10 transition-colors">
-                          <td className="py-3.5 px-4 font-bold text-slate-200">{planetName}</td>
+                      {chartData.chart.planets.map((planet) => (
+                        <tr key={planet.name} className="hover:bg-slate-800/10 transition-colors">
+                          <td className="py-3.5 px-4 font-bold text-slate-200">{planet.name}</td>
                           <td className="py-3.5 px-4 font-mono text-slate-300">
-                            {formatDegrees(planet.sidereal_longitude)}
+                            {formatDegrees(planet.longitude)}
                           </td>
                           <td className="py-3.5 px-4 text-slate-300">
-                            {planet.sign} <span className="text-slate-500 text-[10px] ml-1">({formatDegrees(planet.degree_in_sign)})</span>
+                            {planet.sign} <span className="text-slate-500 text-[10px] ml-1">({formatDegrees(planet.sign_degree)})</span>
                           </td>
-                          <td className="py-3.5 px-4 text-slate-300">{planet.nakshatra}</td>
-                          <td className="py-3.5 px-4 text-slate-400 font-medium">{planet.nakshatra_lord}</td>
+                          <td className="py-3.5 px-4 text-slate-300">{planet.nakshatra?.name || "-"}</td>
+                          <td className="py-3.5 px-4 text-slate-400 font-medium">{planet.nakshatra?.lord || "-"}</td>
                           <td className="py-3.5 px-4 text-center">
-                            {planet.is_retrograde ? (
+                            {planet.retrograde ? (
                               <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
                                 RETRO
                               </span>
