@@ -1,3 +1,13 @@
+"""DEPRECATED — do not wire into any route.
+
+Replaced by app.engines.ephemeris_engine (JHora-validated) on 2026-06-11.
+Known defects kept for the record: passes b'B' (Alcabitius, NOT Placidus)
+to swe.houses_ex, returns no cusps, never sets SE_EPHE_PATH (silent
+Moshier fallback), computes apparent rather than TRUE/geometric positions.
+/chart/generate no longer calls this module; tests/test_chart_route.py
+enforces that. Kept only until backend/scripts/test_chart.py is retired.
+"""
+
 import swisseph as swe
 from datetime import datetime
 
