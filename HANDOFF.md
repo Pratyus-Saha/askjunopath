@@ -29,6 +29,26 @@ How this file works:
 
 # Entries
 
+## T2.2/T2.1-nakshatra — agent/codex/nakshatra — 2026-06-12 16:28 — Codex
+**Built:** generated the independent 330-row nakshatra/pada boundary fixture from the frozen `docs/nakshatra.md` rules, then implemented the pure integer-arcsecond nakshatra engine against that fixture. Added fixture-driven tests for all rows, rounding wraparound regressions, the 359°59'59" Revati case, navamsa spot checks, and exact seven-key `NakshatraBlock` shape.
+**Files changed:**
+- `scripts/gen_nakshatra_fixtures.py`
+- `tests/fixtures/nakshatra/boundaries_330.json`
+- `backend/app/engines/nakshatra_engine.py`
+- `tests/test_nakshatra_engine.py`
+- `HANDOFF.md`
+**Tests run:**
+- `python scripts\gen_nakshatra_fixtures.py` -> blocked by local shell: `python` is not on PATH.
+- `pytest tests\test_nakshatra_engine.py -q` -> blocked by local shell: `pytest` is not on PATH.
+- `C:\Users\assas\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe scripts\gen_nakshatra_fixtures.py` -> passed.
+- `uv run --with pytest python -m pytest tests\test_nakshatra_engine.py -q` -> 668 passed.
+- `uv run --with-requirements backend\requirements.txt --with pytest python -m pytest tests\test_nakshatra_engine.py -q` -> 668 passed.
+- `git status --short --branch` -> only approved new paths plus this handoff; branch `agent/codex/nakshatra`.
+- `rg -n "[ \t]+$" scripts\gen_nakshatra_fixtures.py tests\fixtures\nakshatra\boundaries_330.json backend\app\engines\nakshatra_engine.py tests\test_nakshatra_engine.py HANDOFF.md` -> no trailing whitespace matches.
+**Known issues / deferred:** no code issues. `scripts/check_allowed_files.py` is absent in this worktree, so the exact allowed-files guard could not be run without adding an out-of-scope file.
+**Next agent should read:** `docs/nakshatra.md`, `backend/app/engines/nakshatra_engine.py`, `tests/test_nakshatra_engine.py`.
+**Tempted but did not:** wire chart integration, touch `schemas/chart.json`, edit `backend/app/engines/__init__.py`, or add the missing allowed-files guard script.
+
 ## T1.6-version-metadata - agent/codex/version-metadata-v1-2 - 2026-06-12 12:27 - Codex
 **Built:** moved backend/chart engine version metadata to the existing single source `settings.chart_engine_version`, bumped its default to `1.2.0`, and made `/health.version` plus FastAPI app metadata read from that setting. Added route tests proving chart `metadata.engine_version` is `1.2.0`, route fingerprints are generated with the current engine version, and changing the engine version changes the fingerprint.
 **Files changed:**
