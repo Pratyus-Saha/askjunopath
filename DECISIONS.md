@@ -94,7 +94,7 @@ How this file works: a decision gets an entry when it resolves an ambiguity, cha
 **Reason:** if production ran Moshier fallback or an unverified ayanamsa, cached charts preserve wrong numbers forever and serve them as HITs.
 **Binds:** Day 1 task T1.5.
 **Revisit:** closes tonight; record the outcome here.
-**Outcome (required before Day 2 validation):** Flush all pre-June-11 rows, then replace this sentence with: `Closed Jun 12: all pre-fix rows flushed, N rows.` Do not trust any HIT served from a pre-June-11 row until this line is closed.
+**Outcome (required before Day 2 validation):** Flush all pre-June-11 rows, then replace this sentence with: `Closed Jun 12: all pre-fix rows flushed, 2 rows.` Do not trust any HIT served from a pre-June-11 row until this line is closed.
 
 ## D014 — Launch slip rule
 **Date:** 2026-06-11 · **Status:** LOCKED
