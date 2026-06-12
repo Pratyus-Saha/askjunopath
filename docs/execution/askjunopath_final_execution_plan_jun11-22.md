@@ -79,7 +79,7 @@ Worktree mapping (already set up): you in `askjunopath-main`, Claude Code in `as
 | Date | Day | Mission | Antigravity lane | Gate headline |
 |---|---|---|---|---|
 | Jun 11 Thu | 1 | Schema lock + ephemeris truth (retrofit) | none (setup day) | 5/5 charts vs JHora; schema v1.0 tagged; /health honest in prod |
-| Jun 12 Fri | 2 | Nakshatra + pada; KP 249 generator starts | Type-gen pipeline + chart.sample.json + lint | 326 boundary fixtures green |
+| Jun 12 Fri | 2 | Nakshatra + pada; KP 249 generator starts | Type-gen pipeline + chart.sample.json + lint | 330 boundary fixtures green |
 | Jun 13 Sat | 3 | KP planet level | Landing page (static) | 25/25 exact sublord match |
 | Jun 14 Sun | 4 | KP cusp level + significators | Birth input extension (approximate_time, errors) | 12 cusp sublords exact on 10 charts; ladder fixtures green |
 | Jun 15 Mon | 5 | Dasha engine | Chart summary page v1 | 10-chart MD/AD within 1 day |
@@ -109,7 +109,7 @@ The daily rhythm is unchanged from the playbook: 08:30 plan (Claude Pro), 09:00 
 |---|---|
 | PAT revoked | Done before 09:30, confirmed in GitHub settings |
 | `schemas/chart.json` v1.0 + `backend/schemas/models.py` | Pydantic round-trips all 5 example objects per docs/chart-schema.md |
-| `backend/engines/ephemeris_engine.py` (hardened from existing code) | 5-chart fixture test green: planets within 5 arc-sec, cusps within 0.01°, ascendant exact sign |
+| `backend/app/engines/ephemeris_engine.py` (hardened from existing code) | 5-chart fixture test green: planets within 5 arc-sec, cusps within 0.01°, ascendant exact sign |
 | Placidus cusps via `swe.houses_ex` | NEW capability; was absent |
 | `.se1` files baked into image at `/app/ephe`, `SE_EPHE_PATH` set | `/health` asserts file existence from inside the container |
 | `/health` upgraded to Section 20 shape | Reports ephemeris/db sub-checks; degraded not failing when only an optional dep is down |
@@ -126,12 +126,12 @@ The daily rhythm is unchanged from the playbook: 08:30 plan (Claude Pro), 09:00 
 Read AGENTS.md, docs/ephemeris.md, and schemas/chart.json. An earlier working
 version of chart calculation exists in this repo. Your job is to harden it to
 the spec, not extend it politely: refactor it into
-backend/engines/ephemeris_engine.py per docs/ephemeris.md exactly. Where the
+backend/app/engines/ephemeris_engine.py per docs/ephemeris.md exactly. Where the
 existing code conflicts with the spec, the spec wins; where the existing code
 already matches, keep it.
 
-You may edit only: backend/engines/ephemeris_engine.py, tests/test_ephemeris.py,
-tests/fixtures/charts/*.json. Do not touch backend/api/, frontend/, Dockerfile,
+You may edit only: backend/app/engines/ephemeris_engine.py, tests/test_ephemeris.py,
+tests/fixtures/charts/*.json. Do not touch backend/app/routers/, frontend/, Dockerfile,
 or schemas/.
 
 Specific gaps to close (verify each against the current code first):
@@ -153,7 +153,7 @@ until green on everything except PENDING_JHORA, then stop and update HANDOFF.md.
 
 ```
 Read AGENTS.md and docs/chart-schema.md. Produce, editing only these files:
-backend/schemas/models.py, schemas/chart.json, backend/api/health.py,
+backend/schemas/models.py, schemas/chart.json, backend/app/main.py,
 Dockerfile, tests/test_schema_roundtrip.py, tests/test_health.py.
 
 1. Pydantic v2 models per docs/chart-schema.md sections 3 to 11, including
@@ -194,14 +194,14 @@ Run pytest, iterate until green, open a PR, do not merge, update HANDOFF.md.
 
 | Artifact | Acceptance |
 |---|---|
-| `backend/engines/nakshatra_engine.py` | All 326 boundary fixtures green (27 nakshatra edges × padas + 0° Aries + 29°59'59" Pisces) |
+| `backend/app/engines/nakshatra_engine.py` | All 330 boundary fixtures green (27 nakshatra edges × padas + 0° Aries + 29°59'59" Pisces) |
 | Navamsa mapping | `floor(longitude_in_sign × 9 / 30) % 12` verified all 12 signs |
 | Chart JSON carries nakshatra blocks | e2e shows nakshatra, lord, pada, degree-in-pada per planet and cusp |
 | `scripts/generate_sublord_table.py` drafted (Codex, branch) | Structural assertions written; full verification is tomorrow |
 | 10 more reference charts | Running total 15 of 25 |
 | ANTIGRAVITY: `scripts/gen_types.sh` + `frontend/src/types/chart.ts` + `frontend/src/fixtures/chart.sample.json` | Types generated from schemas/chart.json, not hand-written; existing /chart page renders the typed fixture; ESLint passes |
 
-**Schedule.** 09:00 to 13:00: Codex builds nakshatra_engine from the Section 7 prompt in `agent/codex/nakshatra`; you generate the 326-row boundary fixture file with a small script and spot-verify 10 rows against JHora; Antigravity lane runs the type-gen task (prompt pattern below). 13:30: Moon nakshatra/pada for 10 charts vs JHora; 3 boundary charts by hand. 14:30 to 18:30: Claude Code integrates nakshatra into chart assembly; Codex starts the 249 generator per the Section 8 prompt in `agent/codex/kp-table`; merge nakshatra after green. 19:00 e2e. 21:00: review Antigravity PR (30 min cap), nightly notes, draft Day 3 prompts.
+**Schedule.** 09:00 to 13:00: Codex builds nakshatra_engine from the Section 7 prompt in `agent/codex/nakshatra`; you generate the 330-row boundary fixture file with a small script and spot-verify 10 rows against JHora; Antigravity lane runs the type-gen task (prompt pattern below). 13:30: Moon nakshatra/pada for 10 charts vs JHora; 3 boundary charts by hand. 14:30 to 18:30: Claude Code integrates nakshatra into chart assembly; Codex starts the 249 generator per the Section 8 prompt in `agent/codex/kp-table`; merge nakshatra after green. 19:00 e2e. 21:00: review Antigravity PR (30 min cap), nightly notes, draft Day 3 prompts.
 
 **Antigravity prompt (the template every later lane copies):**
 
@@ -220,14 +220,19 @@ DO-NOT-EDIT header; (2) commit the generated types; (3) refactor the existing
 NEXT_PUBLIC_USE_FIXTURE=1; (4) add eslint config and fix violations in files
 you own.
 
+The live API response carries a top-level `metadata` key that is NOT in
+`schemas/chart.json`. Type only schema fields as `ChartData`. Treat metadata
+as a separate untyped passthrough, for example a `metadata?: unknown` field or
+a wrapper type. Do not add metadata to the generated types or the schema.
+
 Do not call the live API in any new code path. Do not edit backend/*.
 Definition of done: npm run lint passes, npm run build passes, npm test
 passes, PR opened, HANDOFF.md updated.
 ```
 
-**Error traps:** float drift at 13°20' multiples (compare with a tolerance of 1e-6 on degree-in-nakshatra, exact on index/pada); the 1-based nakshatra index convention from docs/chart-schema.md (1 = Ashwini), do not let the engine re-decide it; generated types drifting (the DO-NOT-EDIT header plus D009 is the defense).
+**Error traps:** float drift at 13°20' multiples (compare with a tolerance of 1e-6 on degree-in-nakshatra, exact on index/pada); apply `% 1296000` after rounding in the nakshatra engine; regression tests are required at `359.9999`, `359.99999`, `360.0`, and `-0.0001`; the 1-based nakshatra index convention from docs/chart-schema.md (1 = Ashwini), do not let the engine re-decide it; generated types drifting (the DO-NOT-EDIT header plus D009 is the defense).
 
-**Gate:** 326 fixtures green; nakshatra blocks in e2e output; types pipeline merged.
+**Gate:** 330 fixtures green; nakshatra blocks in e2e output; types pipeline merged.
 **16:00 cut:** the KP generator draft slips to tomorrow 09:00 (it was a head start, not a commitment). Antigravity lane pauses if PR review would eat validation time. Never the boundary fixtures.
 
 ---
@@ -241,7 +246,7 @@ passes, PR opened, HANDOFF.md updated.
 | Artifact | Acceptance |
 |---|---|
 | `scripts/generate_sublord_table.py` + committed CSV | Structural assertions: cumulative sub spans sum to 800' per nakshatra; sub sequence starts at the nakshatra lord; 249 rows exactly |
-| `backend/engines/kp_engine.py` planet-level functions | star_lord/sub_lord/sub_sub_lord for any longitude; boundary triplets covered |
+| `backend/app/engines/kp_engine.py` planet-level functions | star_lord/sub_lord/sub_sub_lord for any longitude; boundary triplets covered |
 | Planets' kp blocks wired into chart JSON | e2e shows the full chain per planet |
 | Final 10 reference charts | Total 25 of 25 |
 | ANTIGRAVITY: landing page | Section 17 spec: hero with one static anonymized sample card, three-line how-it-works, CTA to /chart, disclaimer footer; loads under 2s on 4G; CTA above the fold at 360px; design tokens (navy, Cormorant Garamond, DM Sans, gold #C9A96E) |
@@ -265,7 +270,7 @@ passes, PR opened, HANDOFF.md updated.
 | Artifact | Acceptance |
 |---|---|
 | `cusp_kp_block` for all 12 cusps | 12 cusp sublords exact vs JHora on 10 charts |
-| `backend/engines/house_engine.py` (Codex) | Occupant/owner maps via CUSP SPANS, wraparound fixtures green |
+| `backend/app/engines/house_engine.py` (Codex) | Occupant/owner maps via CUSP SPANS, wraparound fixtures green |
 | `significators()` + houses array in chart JSON | 3 hand-built ladder fixtures green; node agency per Section 8 |
 | `planets[].house_occupied`, `houses[].occupants` populated | Cusp-span assignment, never by sign |
 | ANTIGRAVITY: birth input extension | approximate_time toggle persisting to the request; LAT_UNSUPPORTED and 422 errors rendered as friendly messages; loading state with 8s expectation; native pickers on mobile |
@@ -287,7 +292,7 @@ passes, PR opened, HANDOFF.md updated.
 
 | Artifact | Acceptance |
 |---|---|
-| `backend/engines/dasha_engine.py` | Birth balance, MD/AD/PD recursion, current_stack(date), next 5 MD/AD, next 30 PD; year = 365.25 days everywhere |
+| `backend/app/engines/dasha_engine.py` | Birth balance, MD/AD/PD recursion, current_stack(date), next 5 MD/AD, next 30 PD; year = 365.25 days everywhere |
 | 10-chart date validation | MD/AD start dates within 1 day of JHora, PD within 2 |
 | Edge fixtures | Moon at 0°00' and 13°19'59" of a nakshatra; balance under 30 days |
 | Proportion invariant test | Inside any MD, the 9 AD lengths sum to the MD length within seconds |
@@ -310,9 +315,9 @@ passes, PR opened, HANDOFF.md updated.
 
 | Artifact | Acceptance |
 |---|---|
-| `backend/engines/strength_engine.py` | Score, components dict, tier, notes per Section 10; per-component unit tests green |
+| `backend/app/engines/strength_engine.py` | Score, components dict, tier, notes per Section 10; per-component unit tests green |
 | Rank-order assertions | On 10 known charts, the obviously strong planet outranks the obviously weak one, every time |
-| `backend/engines/divisional_engine.py` | D9 reuses the navamsa function; D10 odd/even offset verified on 4 hand cases covering both parities at low and high degrees |
+| `backend/app/engines/divisional_engine.py` | D9 reuses the navamsa function; D10 odd/even offset verified on 4 hand cases covering both parities at low and high degrees |
 | Vargottama + D9-debility flags in chart JSON | Present with weight hooks; scorer consumes tomorrow |
 | ANTIGRAVITY: DashaTimeline component | Consumes real dasha fixture from yesterday; current MD/AD/PD highlighted; next periods listed; this replaces the old plan's Day 12 Lane 2 entirely |
 
@@ -334,7 +339,7 @@ passes, PR opened, HANDOFF.md updated.
 | Artifact | Acceptance |
 |---|---|
 | `rules/career.yaml`, `finance.yaml`, `relationship.yaml` | House groups per Section 12; nothing domain-specific hardcoded in Python |
-| `backend/engines/prediction_scoring.py` | Weights: promise 25, dasha 20, kp 15, coverage 10, strength 10, transit 12, rag 8; promise-false cap 44; zero-transit cap 60; tiers 85+ HIGH, 65-84 MEDIUM, 45-64 SPECULATIVE, <45 weak signal |
+| `backend/app/engines/prediction_scoring.py` | Weights: promise 25, dasha 20, kp 15, coverage 10, strength 10, transit 12, rag 8; promise-false cap 44; zero-transit cap 60; tiers 85+ HIGH, 65-84 MEDIUM, 45-64 SPECULATIVE, <45 weak signal |
 | 6 hand-scored golden fixtures | Engine within ±8 of your hand score, always the same tier |
 | Monotonicity + boundary tests | hypothesis property test; 44/45, 64/65, 84/85 both sides |
 | Feature builder + weak-signal path | All-blocking chart produces the weak-signal object, never a forced prediction |
@@ -358,7 +363,7 @@ passes, PR opened, HANDOFF.md updated.
 
 | Artifact | Acceptance |
 |---|---|
-| `backend/engines/transit_engine.py` | 90-day scan, slow planets 3-day steps with refinement, Moon daily; trigger catalog per Section 14; ≥2-trigger rule; ≤30-day windows via orb tightening (1° → 0.75° → 0.5° then split); top-3 separated ≥7 days; PD-overlap ×1.3 |
+| `backend/app/engines/transit_engine.py` | 90-day scan, slow planets 3-day steps with refinement, Moon daily; trigger catalog per Section 14; ≥2-trigger rule; ≤30-day windows via orb tightening (1° → 0.75° → 0.5° then split); top-3 separated ≥7 days; PD-overlap ×1.3 |
 | Property tests across 50 random charts | Every window ≥2 triggers, ≤30 days, top-3 separation; do not shrink to 5 charts for runtime |
 | 3 hand-computed Jun-Aug 2026 contacts | Detected within 1 day |
 | Scorer integration | Transit component consumes real windows; stubs removed |
@@ -429,7 +434,7 @@ passes, PR opened, HANDOFF.md updated.
 
 | Artifact | Acceptance |
 |---|---|
-| `backend/engines/gemini_synthesizer.py` | Section 16 complete: response_mime_type JSON with schema; validators IN ORDER (pydantic parse → allowed-entities → tier/probability echo → banned-phrase scan → length caps); one retry with errors appended; then templates/prediction_fallback.j2 with synthesis_mode=template |
+| `backend/app/engines/gemini_synthesizer.py` | Section 16 complete: response_mime_type JSON with schema; validators IN ORDER (pydantic parse → allowed-entities → tier/probability echo → banned-phrase scan → length caps); one retry with errors appended; then templates/prediction_fallback.j2 with synthesis_mode=template |
 | Mocked-Gemini test suite | Five paths green: valid, invalid JSON, invented entity, banned phrase, double failure → template |
 | `/predict/{domain}`, `/feedback` endpoints | Caching by (chart_id, domain) until valid_until; cached call < 300ms; tier-locked payloads (full text ABSENT from free finance/relationship JSON, not CSS-hidden); cost logging to engine_logs |
 | Auth swap | Supabase Auth magic-link on the frontend; JWT verification on every authed route; RLS on user_charts and predictions; X-User-Id path deleted; hitting another user's chart_id returns 404 |
@@ -507,7 +512,7 @@ Why this is safe where "Antigravity everywhere" is not: nothing here touches eng
 The sprint's discipline does not retire at launch; it becomes the operating system. Five permanent mechanisms keep everything in sync and regression-free as you add features:
 
 1. **One contract, generated consumers.** chart.json owns truth. Backend validates with pydantic (extra=forbid); frontend types are GENERATED from the schema (D009). Adding a field = bump schema version, regenerate types, run the full fixture suite. A field can never exist in one layer and not another.
-2. **The fixture suite is the permanent regression harness.** The 25 JHora charts, 326 boundary rows, 249-table assertions, golden scoring fixtures, transit property tests, and mocked-synthesis paths run in CI on every push forever. Any future "improvement" to an engine that shifts a sublord goes red before a user sees it.
+2. **The fixture suite is the permanent regression harness.** The 25 JHora charts, 330 boundary rows, 249-table assertions, golden scoring fixtures, transit property tests, and mocked-synthesis paths run in CI on every push forever. Any future "improvement" to an engine that shifts a sublord goes red before a user sees it.
 3. **engine_logs + weekly calibration.** Synthesis fallback rate, cost per prediction, validation failures, and the prediction_feedback verdicts feed a weekly calibration report (the feedback_engine built Day 7). Strength V2 and scoring changes happen only when feedback data shows which signals correlate with "felt accurate". This is the rule that prevents unfalsifiable polish.
 4. **Staged deploys.** Backend: new image tag → Container Apps revision → /health → traffic shift, previous revision pinned for instant rollback. Frontend: `vercel` (preview URL) → check → `vercel --prod`. Post-launch, connect the Vercel project to Git properly so every PR gets a preview deployment; that was not worth fighting mid-sprint, it is worth an hour in week 1.
 5. **The worktree workflow continues.** One writer per file, spec before code, agents in lanes, you on main. New features enter as docs/<feature>.md first, exactly like engines did.

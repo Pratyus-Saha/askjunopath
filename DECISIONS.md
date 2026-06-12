@@ -58,6 +58,7 @@ How this file works: a decision gets an entry when it resolves an ambiguity, cha
 **Decision:** backend deploy = `scripts/deploy_backend.sh` (build image → tag `vX.Y.Z` → push GHCR → update Container App → hit `/health`). Frontend deploy = `scripts/deploy_frontend.sh` (`vercel --prod`, then load `/chart` on a phone). Image tags are semantic and monotonic; rollback = previous Container Apps revision / previous Vercel deployment, each tested once before launch day.
 **Reason:** a deploy performed from memory under launch pressure is where outages come from.
 **Binds:** Codex task T3.5, the Day 12 checklist.
+**Revisit:** see D019 for the tag-reuse ban added June 12.
 
 ## D009 — Frontend types are generated from the schema, never hand-written
 **Date:** 2026-06-11 · **Status:** LOCKED, permanent
@@ -85,7 +86,7 @@ How this file works: a decision gets an entry when it resolves an ambiguity, cha
 **Decision:** (a) nakshatra index is 1-based, 1 = Ashwini, 27 = Revati; (b) `rag_alignment.status` ∈ `aligned | partial | contradicted | no_data`; (c) pydantic models use `extra="forbid"` everywhere; (d) schema backstops lat to ±66°; (e) ambiguous DST local times resolve with `fold=0` (earlier offset); (f) node retrograde flag derives from speed sign like every body; (g) longitudes serialize to 4 decimals.
 **Reason:** each of these was silent in the master plan; left unpinned, every engine and every agent re-decides them differently.
 **Binds:** chart-schema.md, ephemeris.md, nakshatra/kp/rag engines, generated types.
-**Revisit:** changing any of these is a schema version bump by definition.
+**Revisit:** changing any of these is a schema version bump by definition. The nakshatra conventions in (a) are extended, not changed, by D020.
 
 ## D013 — Pre-validation cached charts are untrusted
 **Date:** 2026-06-11 · **Status:** ACTIVE until executed
@@ -93,6 +94,7 @@ How this file works: a decision gets an entry when it resolves an ambiguity, cha
 **Reason:** if production ran Moshier fallback or an unverified ayanamsa, cached charts preserve wrong numbers forever and serve them as HITs.
 **Binds:** Day 1 task T1.5.
 **Revisit:** closes tonight; record the outcome here.
+**Outcome (required before Day 2 validation):** Flush all pre-June-11 rows, then replace this sentence with: `Closed Jun 12: all pre-fix rows flushed, N rows.` Do not trust any HIT served from a pre-June-11 row until this line is closed.
 
 ## D014 — Launch slip rule
 **Date:** 2026-06-11 · **Status:** LOCKED
@@ -113,3 +115,39 @@ How this file works: a decision gets an entry when it resolves an ambiguity, cha
 **Reason:** the June 10 `DENIED` pull failures cost hours; the public-package fix is stable and the secret-hygiene rule makes it safe.
 **Binds:** Dockerfile, AGENTS.md §5, the Day 12 checklist.
 **Revisit:** week 2 post-launch — move to a private package with managed identity, at leisure, not under deadline.
+
+## D017 — Canonical engine path is `backend/app/engines/`; the old chart engine is deprecated
+**Date:** 2026-06-12 · **Status:** LOCKED
+**Decision:** the repo's real layout includes the `app/` segment. `backend/engines/` is never created. Where plan docs, specs, or pasted prompts reference `backend/engines/` or `backend/api/`, agents translate to `backend/app/engines/` and `backend/app/routers/` and note the translation in the PR description (AGENTS.md Rule 14). `backend/app/core/chart_engine.py` is DEPRECATED: read-only history, never imported, extended, or used as a reference for new astrology math. The trusted ephemeris engine is `backend/app/engines/ephemeris_engine.py`.
+**Reason:** Day 1 work landed in the real repo layout; documents written before Day 1 assumed a flatter one. The repo wins. Without a standing translation rule, every pasted "Section N" prompt re-creates the wrong directory and splits the engine codebase in two.
+**Binds:** AGENTS.md Rule 14 and §2.1/§2.2, TASKBOARD.md file-ownership column, every engine task prompt for the rest of the sprint.
+**Revisit:** never for the path; delete `backend/app/core/chart_engine.py` entirely in week 1 post-launch once nothing references it.
+
+## D018 — `.env` never enters Docker images (operationalizes D016's secret-hygiene rule)
+**Date:** 2026-06-11 (decided under fire) · documented 2026-06-12 · **Status:** LOCKED
+**Decision:** `backend/.dockerignore` excludes `.env` and `.env.*`, and those exclusions are never weakened. Production environment variables come from Azure Container App secrets/runtime env only. Local Docker testing may pass `--env-file backend\.env` at runtime only. The Swiss Ephemeris `.se1` files are the deliberate exception in the other direction: not committed to git, but baked into the image at `/app/ephe` with `ENV SE_EPHE_PATH=/app/ephe`, and `/health` asserts their presence.
+**Reason:** on June 11, `.env` baked into the image caused Pydantic BaseSettings to load stale values, so production reported version 1.0.0 after the code said 1.2.0. The asymmetry (.env out, .se1 in) is stated explicitly so a future "tighten the dockerignore" pass cannot strip the ephemeris files and silently degrade every chart to Moshier fallback.
+**Binds:** Dockerfile, `backend/.dockerignore`, AGENTS.md §2.2 Docker rules, D016's image-content review before launch.
+**Revisit:** never for the .env rule; the .se1 exception is re-examined only if ephemeris files move to a mounted volume post-launch.
+
+## D019 — Image tags are never reused; tag and app version diverge intentionally (extends D008)
+**Date:** 2026-06-11 (decided under fire) · documented 2026-06-12 · **Status:** LOCKED
+**Decision:** every deploy gets a unique, new, monotonic tag. Re-pushing to an existing tag is banned. The Docker image tag bumps per deploy; the app/chart engine version bumps per code or contract change. They will usually differ, and seeing them differ is correct, not a bug. Current state at time of writing: production image `v1.2.1`, app/chart engine version `1.2.0`.
+**Reason:** on June 11, Azure continued serving old behavior from the reused `v1.2.0-meta` tag; the fix was pushing the unique tag `v1.2.1` to force a fresh revision pull. Separately, recording the tag-vs-version divergence here prevents a future agent from filing "image says v1.2.1 but /health says 1.2.0" as a phantom bug.
+**Binds:** D008's deploy ritual, `scripts/deploy_backend.sh` (the script must generate or demand a fresh tag and refuse a reused one), the Day 12 checklist.
+**Revisit:** never.
+
+## D020 — Nakshatra convention frozen (extends D012(a))
+**Date:** 2026-06-12 · **Status:** LOCKED
+**Decision:** the full convention lives in `docs/nakshatra.md`, the source of truth for all nakshatra, pada, navamsa, KP, and dasha boundary logic. The load-bearing points: (a) API index 1-based per D012(a); internal code may be 0-based, schema wins at the boundary. (b) Boundary rule: lower bound inclusive, upper exclusive; an exact boundary belongs to the NEXT segment (exactly 13°20'00" is Bharani pada 1). (c) All boundary math in integer arc-seconds, converted once at engine entry via `arcsec = round((L % 360) * 3600) % 1296000`; floats only at the output layer. (d) `planets[].nakshatra` is a `NakshatraBlock` with exactly seven keys (name, index, lord, degree_in_nakshatra, pada, degree_in_pada, navamsa_sign) or null; `houses[].cusp_nakshatra` is a name STRING or null, never an object. (e) Navamsa: `floor(L × 9 / 30) % 12` from normalized sidereal absolute longitude, signs from Aries. (f) The founder-supplied 330-row fixture file (`tests/fixtures/nakshatra/boundaries_330.json`) is the judge; code conforms to it, never the reverse.
+**Amended Jun 12, same day:** wrap-around modulo added after a rounding overflow edge case was found in review.
+**Reason:** the KP 249 table (Day 3), house work (Day 4), and the dasha engine (Day 5) all inherit this convention. Changing it after today means regenerating every downstream fixture, which is why it freezes now and not later.
+**Binds:** `docs/nakshatra.md`, `backend/app/engines/nakshatra_engine.py`, the KP generator, dasha_engine, TASKBOARD.md T2.1/T2.2/T2.4.
+**Revisit:** never for the boundary rule and shapes; the `round` vs `floor` arc-second conversion may be revisited only if a JHora comparison surfaces a sub-arc-second classification mismatch, and any change is a schema-adjacent event requiring full fixture regeneration.
+
+## D021 — The metadata key gets legalized or removed by June 13
+**Date:** 2026-06-12 · **Status:** ACTIVE, deadline Jun 13
+**Decision:** chart responses currently carry a top-level `chart.metadata` key outside the frozen v1.0 schema. It exists as a temporary bridge for legacy persistence/frontend code, including engine/version and birth-location related fields. By end of Day 3 either (a) schema bumps to v1.1 adding an optional metadata object, types regenerated per D009 in the same PR, or (b) the legacy dependency in `app.core.db` and the frontend is removed. Until resolved, no new code should add new metadata dependencies, and generated `ChartData` types must exclude metadata.
+**Reason:** a field consumed in production but absent from the contract is the exact failure D001 and D009 exist to prevent.
+**Binds:** `schemas/chart.json`, `scripts/gen_types.sh`, `backend/app/routers/chart.py`, `backend/app/core/db.py`, `frontend/app/chart/page.tsx`.
+**Revisit:** closes Jun 13; record (a) or (b) here.

@@ -1,3 +1,11 @@
+> **OUTDATED — DO NOT RUN ANY COMMAND IN THIS FILE.**
+> The app is `askjunopath-backend` (NOT `askjunopath-api`), port `8000` (NOT
+> `7860`), current image `v1.2.1+`, tags never reused (D019). Deploys happen
+> only via `scripts/deploy_backend.sh` / `deploy_frontend.sh` (D008, built
+> Jun 13). Until then: no deploys.
+
+---
+
 # Deployment Notes - AskJunoPath Backend
 
 This guide outlines the steps to build, publish, and deploy the AskJunoPath FastAPI backend using GitHub Container Registry (GHCR) and Azure Container Apps.

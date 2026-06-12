@@ -1,5 +1,5 @@
 # Ephemeris Engine Specification
-**File:** `backend/engines/ephemeris_engine.py`
+**File:** `backend/app/engines/ephemeris_engine.py`
 **Spec version:** 1.0 (frozen with chart.json v1.0; changes after Day 1 are additive only)
 **Owner tool:** Claude Code only. No other agent edits this file.
 **Source:** Master plan Sections 5, 6, 10, 20, 21; playbook Day 1.
@@ -279,4 +279,4 @@ Definition of done: `pytest` green on all of the above except fixtures still mar
 
 ## 12. Non-Goals
 
-No nakshatra/pada math. No sublords. No house occupancy. No dashas. No strength. No divisional charts. No transits. No caching layer. No async. No API routes (orchestration lives in `backend/api/`). Anything not listed in Section 1's OWNS list is out of scope for this file.
+No nakshatra/pada math. No sublords. No house occupancy. No dashas. No strength. No divisional charts. No transits. No caching layer. No async. No API routes (orchestration lives in `backend/app/routers/`). Anything not listed in Section 1's OWNS list is out of scope for this file.
