@@ -164,7 +164,7 @@ def test_legacy_metadata_block_for_db_and_scaffold_page(client, saved_charts):
     assert isinstance(metadata["longitude"], float)
     assert isinstance(metadata["ayanamsa"], float)
     assert 20.0 <= metadata["ayanamsa"] <= 30.0
-    assert metadata["engine_version"] == "1.2.0"
+    assert metadata["engine_version"] == "1.3.0"
     assert metadata["engine_version"] == settings.chart_engine_version
     assert metadata["timezone"] == FIXTURE_INPUT["timezone"]
     # The stored object is the same payload the response carries.
@@ -203,7 +203,7 @@ def test_chart_fingerprint_changes_when_engine_version_changes():
         "node_type": "true_node",
     }
 
-    current = generate_chart_fingerprint(**common, engine_version="1.2.0")
+    current = generate_chart_fingerprint(**common, engine_version="1.3.0")
     next_version = generate_chart_fingerprint(**common, engine_version="1.2.1")
 
     assert current != next_version
