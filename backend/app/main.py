@@ -9,7 +9,7 @@ from app.routers.chart import router as chart_router
 
 app = FastAPI(
     title="AskJunoPath API",
-    version="1.0.0"
+    version=settings.chart_engine_version,
 )
 
 # Configure CORS (Allow all for Day 1 MVP)
@@ -99,7 +99,7 @@ def health_check():
 
     return {
         "status": overall_status,
-        "version": "1.0.0",
+        "version": settings.chart_engine_version,
         "app_env": settings.environment,
         "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "service": "askjunopath-api",
