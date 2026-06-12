@@ -1,0 +1,280 @@
+"""Integration tests: /chart/generate carries Day 2 nakshatra output (T2.3).
+
+Every planet must carry a non-null 7-key NakshatraBlock computed from its
+own longitude; every house cusp must carry the nakshatra NAME STRING in
+cusp_nakshatra (never an object). Everything later engines own (KP, house
+occupancy, significators, dasha, strength, divisional, transits,
+prediction features) must remain at its Day 1 null/empty default.
+
+Geocoding and Supabase are mocked; ephemeris and nakshatra math are real.
+Moon nakshatra/pada expectations below are hand-derived from each Day 1
+fixture's JHora-expected Moon longitude using the docs/nakshatra.md
+integer arc-second convention — independently of the engine under test.
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "backend"))
+
+os.environ.setdefault("SUPABASE_URL", "https://example.supabase.co")
+os.environ.setdefault("SUPABASE_SERVICE_ROLE_KEY", "test-service-role-key")
+
+import pytest  # noqa: E402
+from fastapi.testclient import TestClient  # noqa: E402
+
+from app import main as app_main  # noqa: E402
+from app.engines.nakshatra_engine import (  # noqa: E402
+    NAKSHATRAS,
+    nakshatra_block,
+    nakshatra_name,
+)
+from app.routers import chart as chart_router  # noqa: E402
+from app.schemas.models import ChartData  # noqa: E402
+
+FIXTURES_DIR = ROOT / "tests" / "fixtures" / "charts"
+
+APPROVED_NAKSHATRA_BLOCK_KEYS = {
+    "name",
+    "index",
+    "lord",
+    "degree_in_nakshatra",
+    "pada",
+    "degree_in_pada",
+    "navamsa_sign",
+}
+
+NAKSHATRA_NAMES = {name for name, _lord in NAKSHATRAS}
+
+PLANET_ORDER = [
+    "Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn",
+    "Rahu", "Ketu",
+]
+
+# Hand-derived per docs/nakshatra.md from expected.planets.Moon:
+#   arcsec = round(L * 3600); index0 = arcsec // 48000;
+#   pada = (arcsec % 48000) // 12000 + 1; lord from the frozen table.
+# fixture_01: 76.917617  -> 276903"  -> Ardra (6), pada 4, Rahu
+# fixture_02: 284.904583 -> 1025656" -> Shravana (22), pada 2, Moon
+# fixture_03: 322.255028 -> 1160118" -> Purva Bhadrapada (25), pada 1, Jupiter
+# fixture_04: 280.987392 -> 1011555" -> Shravana (22), pada 1, Moon
+# fixture_05: 280.997386 -> 1011591" -> Shravana (22), pada 1, Moon
+# Every value sits >900 arc-sec from the nearest pada boundary, so the
+# engine's 5 arc-sec JHora tolerance cannot flip any expectation.
+MOON_EXPECTATIONS = {
+    "fixture_01_india": {"name": "Ardra", "pada": 4, "lord": "Rahu"},
+    "fixture_02_us_dst": {"name": "Shravana", "pada": 2, "lord": "Moon"},
+    "fixture_03_midnight": {
+        "name": "Purva Bhadrapada", "pada": 1, "lord": "Jupiter",
+    },
+    "fixture_04_pre1990": {"name": "Shravana", "pada": 1, "lord": "Moon"},
+    "fixture_05_southern": {"name": "Shravana", "pada": 1, "lord": "Moon"},
+}
+
+FIXTURES = [
+    json.loads(path.read_text(encoding="utf-8"))
+    for path in sorted(FIXTURES_DIR.glob("fixture_*.json"))
+]
+
+HEADERS = {"X-User-Id": "integration-test-user"}
+
+
+def request_body_for(fixture_input: dict) -> dict:
+    """Split fixture datetime_local into the route's date/time fields.
+
+    The route reconstructs datetime_local as f"{date}T{time}:00", so the
+    fixture's seconds must be :00 for the engine input to match exactly.
+    """
+    date_part, time_part = fixture_input["datetime_local"].split("T")
+    assert time_part.endswith(":00"), fixture_input["datetime_local"]
+    return {
+        "birth_date": date_part,
+        "birth_time": time_part[:5],
+        "birth_city": "Fixture City",
+    }
+
+
+def generate_chart(monkeypatch, fixture: dict) -> tuple[dict, dict]:
+    """POST /chart/generate on the MISS path for a Day 1 fixture input.
+
+    Returns (response chart, chart_data passed to save_chart) so tests can
+    assert the persisted object carries the same nakshatra fill as the
+    response.
+    """
+    fixture_input = fixture["input"]
+    geo_result = {
+        "latitude": fixture_input["lat"],
+        "longitude": fixture_input["lon"],
+        "timezone": fixture_input["timezone"],
+        "display_name": "Fixture Place",
+        "country": "Fixtureland",
+    }
+    saved = {}
+
+    async def fake_geocode(self, city_name: str) -> dict:
+        return dict(geo_result)
+
+    def fake_get_chart(user_id: str, fingerprint: str):
+        return None
+
+    def fake_save_chart(user_id, chart_fingerprint, birth_data, chart_data):
+        saved["chart_data"] = chart_data
+        return {"id": "integration-test-row-id"}
+
+    monkeypatch.setattr(chart_router.GeocodingService, "geocode", fake_geocode)
+    monkeypatch.setattr(chart_router, "get_chart_by_fingerprint", fake_get_chart)
+    monkeypatch.setattr(chart_router, "save_chart", fake_save_chart)
+
+    client = TestClient(app_main.app)
+    response = client.post(
+        "/chart/generate", json=request_body_for(fixture_input), headers=HEADERS
+    )
+    assert response.status_code == 200, response.text
+    return response.json()["chart"], saved["chart_data"]
+
+
+@pytest.fixture
+def chart(monkeypatch):
+    """Generated chart for fixture_01 (the canonical route-test input)."""
+    return generate_chart(monkeypatch, FIXTURES[0])[0]
+
+
+# ---------------------------------------------------------------------------
+# Planet nakshatra blocks
+# ---------------------------------------------------------------------------
+
+def test_chart_has_nine_planets(chart):
+    assert len(chart["planets"]) == 9
+    assert [p["name"] for p in chart["planets"]] == PLANET_ORDER
+
+
+def test_every_planet_has_a_non_null_nakshatra_block(chart):
+    for planet in chart["planets"]:
+        assert planet["nakshatra"] is not None, planet["name"]
+        assert isinstance(planet["nakshatra"], dict), planet["name"]
+
+
+def test_every_planet_nakshatra_block_has_exactly_the_seven_approved_keys(chart):
+    for planet in chart["planets"]:
+        assert (
+            set(planet["nakshatra"].keys()) == APPROVED_NAKSHATRA_BLOCK_KEYS
+        ), planet["name"]
+
+
+def test_planet_nakshatra_block_values_are_well_formed(chart):
+    for planet in chart["planets"]:
+        block = planet["nakshatra"]
+        assert block["name"] in NAKSHATRA_NAMES, planet["name"]
+        assert 1 <= block["index"] <= 27, planet["name"]
+        assert 1 <= block["pada"] <= 4, planet["name"]
+        assert 0.0 <= block["degree_in_nakshatra"] < 13.333334, planet["name"]
+        assert 0.0 <= block["degree_in_pada"] < 3.333334, planet["name"]
+
+
+def test_planet_nakshatra_block_derives_from_that_planets_longitude(chart):
+    # Wiring check: the block in the output is exactly the trusted engine's
+    # block for the longitude in the same planet object. Boundary truth
+    # itself is fixture-judged in tests/test_nakshatra_engine.py.
+    for planet in chart["planets"]:
+        assert planet["nakshatra"] == nakshatra_block(planet["longitude"]), (
+            planet["name"]
+        )
+
+
+# ---------------------------------------------------------------------------
+# House cusp nakshatra names
+# ---------------------------------------------------------------------------
+
+def test_chart_has_twelve_houses(chart):
+    assert len(chart["houses"]) == 12
+    assert [h["house"] for h in chart["houses"]] == list(range(1, 13))
+
+
+def test_every_cusp_nakshatra_is_a_name_string_never_an_object(chart):
+    for house in chart["houses"]:
+        cusp_nakshatra = house["cusp_nakshatra"]
+        assert isinstance(cusp_nakshatra, str), house["house"]
+        assert not isinstance(cusp_nakshatra, dict)
+        assert cusp_nakshatra in NAKSHATRA_NAMES, house["house"]
+
+
+def test_cusp_nakshatra_derives_from_that_houses_cusp_longitude(chart):
+    for house in chart["houses"]:
+        assert house["cusp_nakshatra"] == nakshatra_name(
+            house["cusp_longitude"]
+        ), house["house"]
+
+
+# ---------------------------------------------------------------------------
+# Later-engine fields stay untouched (task requirement 5)
+# ---------------------------------------------------------------------------
+
+def test_later_engine_fields_remain_at_day1_defaults(chart):
+    for planet in chart["planets"]:
+        assert planet["kp"] is None, planet["name"]
+        assert planet["house_occupied"] is None, planet["name"]
+        assert planet["significator_of_houses"] == [], planet["name"]
+        assert planet["significator_levels"] == {}, planet["name"]
+    for house in chart["houses"]:
+        assert house["cusp_star_lord"] is None, house["house"]
+        assert house["cusp_sub_lord"] is None, house["house"]
+        assert house["cusp_sub_sub_lord"] is None, house["house"]
+        assert house["occupants"] == [], house["house"]
+        assert house["significators"] is None, house["house"]
+    assert chart["dashas"] is None
+    assert chart["strengths"] == []
+    assert chart["divisional"] == {"d9": None, "d10": None}
+    assert chart["transits"]["windows"] == []
+    assert chart["prediction_features"] == {
+        "career": None, "finance": None, "relationship": None,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Schema contract
+# ---------------------------------------------------------------------------
+
+def test_chart_minus_metadata_validates_through_chartdata(chart):
+    payload = dict(chart)
+    payload.pop("metadata")  # the one documented non-schema key (D021)
+    parsed = ChartData.model_validate(payload)
+    assert parsed.schema_version == "1.0"
+    for planet in parsed.planets:
+        assert planet.nakshatra is not None, planet.name
+    for house in parsed.houses:
+        assert isinstance(house.cusp_nakshatra, str), house.house
+
+
+def test_saved_chart_carries_the_same_nakshatra_fill(monkeypatch):
+    chart, saved_chart = generate_chart(monkeypatch, FIXTURES[0])
+    assert saved_chart == chart
+    for planet in saved_chart["planets"]:
+        assert set(planet["nakshatra"].keys()) == APPROVED_NAKSHATRA_BLOCK_KEYS
+    for house in saved_chart["houses"]:
+        assert isinstance(house["cusp_nakshatra"], str)
+
+
+# ---------------------------------------------------------------------------
+# Moon truth on the Day 1 fixture charts
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize(
+    "fixture", FIXTURES, ids=[f["chart_id"] for f in FIXTURES]
+)
+def test_moon_nakshatra_and_pada_match_hand_derived_fixture_values(
+    monkeypatch, fixture
+):
+    expected = MOON_EXPECTATIONS[fixture["chart_id"]]
+    assert fixture["expected"]["planets"]["Moon"] is not None
+
+    chart, _saved = generate_chart(monkeypatch, fixture)
+    moon = next(p for p in chart["planets"] if p["name"] == "Moon")
+    block = moon["nakshatra"]
+    assert block["name"] == expected["name"], fixture["chart_id"]
+    assert block["pada"] == expected["pada"], fixture["chart_id"]
+    assert block["lord"] == expected["lord"], fixture["chart_id"]
