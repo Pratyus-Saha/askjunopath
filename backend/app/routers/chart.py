@@ -12,6 +12,7 @@ from app.engines.ephemeris_engine import (
     LatUnsupportedError,
     compute_ephemeris,
 )
+from app.engines.nakshatra_engine import nakshatra_block, nakshatra_name
 
 router = APIRouter(prefix="/chart", tags=["chart"])
 
@@ -40,13 +41,24 @@ def _build_chart_payload(
         # Birth-input toggle ships Day 4 (T4.4); false per docs/chart-schema.md.
         "approximate_time": False,
     }
+    # Day 2 (T2.3): nakshatra fill per docs/nakshatra.md. Planets get the
+    # full 7-key NakshatraBlock; cusps get the name STRING only — cusp KP
+    # fields (cusp_star_lord/sub/sub_sub) are Day 4's, left null here.
+    planets = [
+        {**planet, "nakshatra": nakshatra_block(planet["longitude"])}
+        for planet in ephemeris["planets"]
+    ]
+    houses = [
+        {**house, "cusp_nakshatra": nakshatra_name(house["cusp_longitude"])}
+        for house in ephemeris["houses"]
+    ]
     chart_model = ChartData(
         schema_version="1.0",
         birth=birth,
         settings=ephemeris["settings"],
         ascendant=ephemeris["ascendant"],
-        planets=ephemeris["planets"],
-        houses=ephemeris["houses"],
+        planets=planets,
+        houses=houses,
     )
     payload = chart_model.model_dump(mode="json")
     payload["metadata"] = {
@@ -70,10 +82,12 @@ async def generate_chart(
     """
     Generate an astrological chart with fingerprint caching.
 
-    Chart math comes exclusively from app.engines.ephemeris_engine (the
-    JHora-validated trusted engine: sidereal KP-Newcomb, TRUE_NODE,
-    FLG_TRUEPOS, Placidus cusps). The deprecated app.core.chart_engine is
-    no longer called on any path.
+    Chart math comes exclusively from the trusted engines under
+    app.engines: ephemeris_engine (JHora-validated: sidereal KP-Newcomb,
+    TRUE_NODE, FLG_TRUEPOS, Placidus cusps) plus nakshatra_engine
+    (boundaries_330-validated) for planets[].nakshatra and
+    houses[].cusp_nakshatra. The deprecated app.core.chart_engine is no
+    longer called on any path.
     """
     if not x_user_id:
         raise HTTPException(

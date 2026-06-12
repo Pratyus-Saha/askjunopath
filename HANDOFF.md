@@ -29,6 +29,20 @@ How this file works:
 
 # Entries
 
+## T2.3 — agent/claude/nakshatra-integration — 2026-06-12 — Claude Code
+**Built:** wired the merged nakshatra engine into chart output. `_build_chart_payload` in the chart router now fills `planets[].nakshatra` with `nakshatra_block(planet.longitude)` (exactly the seven approved keys: name, index, lord, degree_in_nakshatra, pada, degree_in_pada, navamsa_sign) and `houses[].cusp_nakshatra` with `nakshatra_name(cusp_longitude)` — a name STRING, never an object — before `ChartData` validation, so the frozen v1.0 contract (`extra="forbid"`) guards the shape on every response. New integration tests prove the e2e shape on all five Day 1 fixture inputs, including Moon nakshatra name/pada/lord hand-derived from each fixture's JHora-expected Moon longitude via the docs/nakshatra.md arc-second convention (independent of the engine; every Moon sits >900 arc-sec from the nearest pada boundary, so the 5 arc-sec ephemeris tolerance cannot flip an expectation). No ephemeris glue was needed: `backend/app/engines/ephemeris_engine.py` is untouched. KP, house occupancy, significators, dasha, strength, divisional, transit, and prediction fields remain at their Day 1 null/empty defaults, asserted by test. Cache behavior unchanged (HIT path still returns the stored chart untouched; only the MISS computation path gained the fill). The temporary `metadata` key (D021) was neither removed, extended, nor newly depended on.
+**Files changed:**
+- `backend/app/routers/chart.py` (nakshatra fill in `_build_chart_payload` + docstring accuracy)
+- `tests/test_chart_integration.py` (new, 16 tests)
+- `HANDOFF.md`
+**Tests run:**
+- `$env:SE_EPHE_PATH='C:\Users\assas\swisseph\ephe'; uv run --with-requirements backend/requirements.txt --with pytest python -m pytest tests/test_nakshatra_engine.py tests/test_chart_route.py tests/test_chart_integration.py -q` -> **696 passed**.
+- `$env:SE_EPHE_PATH='C:\Users\assas\swisseph\ephe'; uv run --with-requirements backend/requirements.txt --with pytest python -m pytest tests -q` -> **807 passed** (full suite, no pre-existing failures; was 791 before this task, +16 new).
+- `git status --short` / `git diff --name-only` -> only the three files above; `scripts/check_allowed_files.py` is still absent in this worktree, so the git check stands in (same as every prior entry).
+**Known issues / deferred:** (1) `settings.chart_engine_version` stays `1.2.0` — `backend/app/core/config.py` is outside this task's allowed list. Consequence: `user_charts` rows cached under fingerprint version 1.2.0 since the Day 1 deploy carry null nakshatra fields and will keep serving as HITs without them. Founder call at merge/deploy time: flush those rows or bump the engine version (which rotates every fingerprint), mirroring the D013/T1.5 precedent. (2) Branch pushed to origin, but the `gh` CLI is not installed in this environment, so the PR could not be opened from here — create it at https://github.com/Pratyus-Saha/askjunopath/pull/new/agent/claude/nakshatra-integration (base `main`).
+**Next agent should read:** `backend/app/routers/chart.py` (`_build_chart_payload`), `tests/test_chart_integration.py`, `docs/nakshatra.md`. T2.4 (KP table merge) is gated on this task being green plus Moon validation.
+**Tempted but did not:** bump `chart_engine_version` in `backend/app/core/config.py` (outside allowed list; founder owns the flush-vs-bump call); fill `cusp_star_lord` even though it is trivially `nakshatra_lord(cusp_longitude)` (Day 4 / T4.2 owns the cusp KP fields); touch `backend/app/engines/ephemeris_engine.py` (no assembly glue required); fold `metadata` into the schema (D021, closes Jun 13).
+
 ## T2.2/T2.1-nakshatra — agent/codex/nakshatra — 2026-06-12 16:28 — Codex
 **Built:** generated the independent 330-row nakshatra/pada boundary fixture from the frozen `docs/nakshatra.md` rules, then implemented the pure integer-arcsecond nakshatra engine against that fixture. Added fixture-driven tests for all rows, rounding wraparound regressions, the 359°59'59" Revati case, navamsa spot checks, and exact seven-key `NakshatraBlock` shape.
 **Files changed:**
