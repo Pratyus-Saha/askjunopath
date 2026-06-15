@@ -171,7 +171,7 @@ A consistent few-arc-minute offset on every planet means the ayanamsa is wrong. 
 | Engine | File | Status | Validated by |
 |---|---|---|---|
 | Ephemeris | `backend/app/engines/ephemeris_engine.py` | **DONE Jun 11** | 5 JHora charts green (target grows to 25 by Jun 13) |
-| Nakshatra/pada | `backend/app/engines/nakshatra_engine.py` | builds Jun 12 | 326 boundary fixtures |
+| Nakshatra/pada | `backend/app/engines/nakshatra_engine.py` | builds Jun 12 | 330 boundary fixtures |
 | KP planet level | `backend/app/engines/kp_engine.py` | Jun 13 | 249-table assertions + 25-chart exact match |
 | KP cusp + significators | `kp_engine.py` + `house_engine.py` | Jun 14 | 10-chart cusp match + hand-worked ladders |
 | Dasha | `backend/app/engines/dasha_engine.py` | Jun 15 | 10-chart dates ±1 day |
@@ -241,7 +241,7 @@ with founder approval and a version bump.
 Do not use backend/app/core/chart_engine.py for new math.
 Do not create backend/engines/.
 Do not bake .env into Docker images.
-Do not implement KP, dasha, predictions, or significators until all 326
+Do not implement KP, dasha, predictions, or significators until all 330
 nakshatra boundary fixtures are green (docs/nakshatra.md, Day 2 gate).
 ```
 

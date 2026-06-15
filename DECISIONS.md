@@ -145,9 +145,11 @@ How this file works: a decision gets an entry when it resolves an ambiguity, cha
 **Binds:** `docs/nakshatra.md`, `backend/app/engines/nakshatra_engine.py`, the KP generator, dasha_engine, TASKBOARD.md T2.1/T2.2/T2.4.
 **Revisit:** never for the boundary rule and shapes; the `round` vs `floor` arc-second conversion may be revisited only if a JHora comparison surfaces a sub-arc-second classification mismatch, and any change is a schema-adjacent event requiring full fixture regeneration.
 
-## D021 — The metadata key gets legalized or removed by June 13
-**Date:** 2026-06-12 · **Status:** ACTIVE, deadline Jun 13
-**Decision:** chart responses currently carry a top-level `chart.metadata` key outside the frozen v1.0 schema. It exists as a temporary bridge for legacy persistence/frontend code, including engine/version and birth-location related fields. By end of Day 3 either (a) schema bumps to v1.1 adding an optional metadata object, types regenerated per D009 in the same PR, or (b) the legacy dependency in `app.core.db` and the frontend is removed. Until resolved, no new code should add new metadata dependencies, and generated `ChartData` types must exclude metadata.
-**Reason:** a field consumed in production but absent from the contract is the exact failure D001 and D009 exist to prevent.
-**Binds:** `schemas/chart.json`, `scripts/gen_types.sh`, `backend/app/routers/chart.py`, `backend/app/core/db.py`, `frontend/app/chart/page.tsx`.
-**Revisit:** closes Jun 13; record (a) or (b) here.
+## D021 — Metadata contract: legalize in schema v1.1
+**Date:** 2026-06-15 · **Status:** DECIDED, implementation pending
+**Decision:** add an optional `metadata` object to schemas/chart.json, bump schema to
+v1.1, regenerate frontend ChartData per D009 in the same PR. Keep metadata optional for
+backward safety. Execute BEFORE any KP schema expansion.
+**Reason:** chart_engine_version, cache_status, and calculation_mode are trust signals
+that belong in the contract, not in a temporary frontend wrapper.
+**Revisit:** closes when schema v1.1 ships.

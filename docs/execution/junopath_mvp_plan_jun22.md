@@ -285,7 +285,7 @@ Convention: exact boundary belongs to the next segment.
 Constants: 27 nakshatra names in order; lord order
 [Ketu,Venus,Sun,Moon,Mars,Rahu,Jupiter,Saturn,Mercury] repeating.
 navamsa_sign_index = floor(L*9/30) % 12, signs from Aries.
-Also create tests/test_nakshatra_engine.py with the 326 boundary fixtures
+Also create tests/test_nakshatra_engine.py with the 330 boundary fixtures
 described above, parametrized with pytest.
 ```
 
@@ -859,11 +859,11 @@ The extra day versus the old 12-day plan goes to KP (now two days) and RAG (now 
 
 **Day 2 — Thu Jun 11: Nakshatra + pada engine**
 - Goal: Section 7 complete.
-- Tasks: nakshatra_engine.py, navamsa mapping, 326 boundary fixtures, wire into chart JSON, planetary-details API fields.
+- Tasks: nakshatra_engine.py, navamsa mapping, 330 boundary fixtures, wire into chart JSON, planetary-details API fields.
 - Tools: Codex (build from Section 7 prompt), Claude Pro (boundary-convention review), Claude Code (integration).
 - Prompt: Section 7 Codex prompt.
 - Manual validation: Moon nakshatra/pada for 10 charts vs reference; 3 boundary charts by hand.
-- Done: 326 fixtures green; chart JSON carries full nakshatra blocks.
+- Done: 330 fixtures green; chart JSON carries full nakshatra blocks.
 - Risk: float drift at boundaries. Cut: nothing; this day is small by design, spillover buffer for Day 1.
 
 **Day 3 — Fri Jun 12: KP engine, planet level**
@@ -966,7 +966,7 @@ The extra day versus the old 12-day plan goes to KP (now two days) and RAG (now 
 
 **Calculation tests:** per-engine pytest suites built the same day as each engine (Days 1-8), run on every commit. Coverage target is meaningless here; fixture correctness is the target.
 
-**Boundary tests:** the 326 nakshatra/pada fixtures; sub-boundary triplets; cusp-edge planet placement; Moon at nakshatra extremes for dasha balance; 0° Aries and 29°59'59" Pisces everywhere.
+**Boundary tests:** the 330 nakshatra/pada fixtures; sub-boundary triplets; cusp-edge planet placement; Moon at nakshatra extremes for dasha balance; 0° Aries and 29°59'59" Pisces everywhere.
 
 **Reference software comparison (the astrology gate, run Days 1, 3, 4, 5 and re-run Day 13 AM):**
 - Planet longitudes: 25 charts vs Jagannatha Hora (KP settings), within 5 arc-seconds.

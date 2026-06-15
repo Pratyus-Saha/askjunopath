@@ -29,6 +29,14 @@ How this file works:
 
 # Entries
 
+## Day 2 final closeout
+Completed: T2.1 nakshatra engine, T2.2 boundaries_330.json generator, T2.3 chart
+integration, T2.5 frontend ChartData typegen — all merged. chart_engine_version 1.3.0.
+Gate suite 696 passed, 2 warnings. Moon 10/10. Frontend lint/build passed. Local
+/chart/generate and browser fetch verified. V10 Siliguri Moon = Uttara Ashadha pada 3.
+Non-blockers: Rahu tolerance = BUG-001; D021 pending implementation; production may lag local main.
+Next: implement D021 (optional metadata in schema v1.1) and regenerate ChartData; then KP generator; Rahu diagnosis on a separate branch, not inside KP.
+
 ## T2.5 — agent/antigravity/typegen — 2026-06-12 13:15 — Antigravity
 **Built:** Generated frontend TypeScript types (ChartData) from schemas/chart.json using a new scripts/gen_types.sh script invoking json-schema-to-typescript. Updated rontend/app/chart/page.tsx to strictly consume these generated types instead of ad-hoc interfaces. The temporary metadata key is wrapped as unknown in a local ChartResponse type, ensuring compilation without polluting the core contract. Added a fully populated fixture matching the new schema at rontend/src/fixtures/chart.sample.json, which renders under NEXT_PUBLIC_USE_FIXTURE=1.
 **Files changed:**
