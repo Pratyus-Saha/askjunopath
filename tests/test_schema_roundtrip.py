@@ -82,7 +82,7 @@ def _house(house: int, offset: float = 0.0) -> dict:
 
 def valid_chart(offset: float = 0.0) -> dict:
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "birth": {
             "datetime_local": "1994-03-21T14:35:00",
             "datetime_utc": "1994-03-21T09:05:00Z",
@@ -133,10 +133,27 @@ def test_five_valid_chart_examples_round_trip(offset: float) -> None:
 
 def test_progressive_optional_fields_can_be_absent() -> None:
     chart = valid_chart()
+    assert "metadata" not in chart
     for planet in chart["planets"]:
         assert "nakshatra" not in planet
         assert "kp" not in planet
         assert "house_occupied" not in planet
+    assert_round_trip(chart)
+
+
+def test_optional_metadata_round_trips_when_present() -> None:
+    chart = valid_chart()
+    chart["metadata"] = {
+        "birth_date": "1994-03-21",
+        "birth_time": "14:35",
+        "birth_city": "Gurugram",
+        "latitude": 28.4595,
+        "longitude": 77.0266,
+        "timezone": "Asia/Kolkata",
+        "ayanamsa": 23.7261,
+        "engine_version": "1.3.0",
+    }
+
     assert_round_trip(chart)
 
 
@@ -278,6 +295,24 @@ def test_populated_later_engine_blocks_round_trip() -> None:
         (lambda c: c["birth"].update({"lon": 181.0}), "lon"),
         (lambda c: c["planets"][0].update({"longitude_deg": 12.3}), "longitude_deg"),
         (
+            lambda c: c.update(
+                {
+                    "metadata": {
+                        "birth_date": "1994-03-21",
+                        "birth_time": "14:35",
+                        "birth_city": "Gurugram",
+                        "latitude": 28.4595,
+                        "longitude": 77.0266,
+                        "timezone": "Asia/Kolkata",
+                        "ayanamsa": 23.7261,
+                        "engine_version": "1.3.0",
+                        "unexpected": True,
+                    }
+                }
+            ),
+            "unexpected",
+        ),
+        (
             lambda c: c["planets"][0].update(
                 {
                     "nakshatra": {
@@ -316,4 +351,10 @@ def test_schema_file_was_generated_from_chart_model() -> None:
     schema = json.loads((ROOT / "schemas" / "chart.json").read_text())
     assert schema["title"] == "ChartData"
     assert schema["additionalProperties"] is False
+    assert schema["properties"]["schema_version"]["const"] == "1.1"
+    assert "metadata" not in schema["required"]
+    metadata_ref = schema["properties"]["metadata"]["anyOf"][0]["$ref"]
+    assert schema["$defs"][metadata_ref.rsplit("/", 1)[-1]][
+        "additionalProperties"
+    ] is False
     assert "schema_version" in schema["required"]

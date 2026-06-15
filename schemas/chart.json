@@ -132,6 +132,67 @@
       "title": "BirthBlock",
       "type": "object"
     },
+    "ChartMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "birth_date": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "title": "Birth Date",
+          "type": "string"
+        },
+        "birth_time": {
+          "pattern": "^\\d{2}:\\d{2}$",
+          "title": "Birth Time",
+          "type": "string"
+        },
+        "birth_city": {
+          "maxLength": 100,
+          "minLength": 2,
+          "title": "Birth City",
+          "type": "string"
+        },
+        "latitude": {
+          "maximum": 66.0,
+          "minimum": -66.0,
+          "title": "Latitude",
+          "type": "number"
+        },
+        "longitude": {
+          "maximum": 180.0,
+          "minimum": -180.0,
+          "title": "Longitude",
+          "type": "number"
+        },
+        "timezone": {
+          "minLength": 1,
+          "title": "Timezone",
+          "type": "string"
+        },
+        "ayanamsa": {
+          "maximum": 30.0,
+          "minimum": 20.0,
+          "title": "Ayanamsa",
+          "type": "number"
+        },
+        "engine_version": {
+          "minLength": 1,
+          "title": "Engine Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "birth_date",
+        "birth_time",
+        "birth_city",
+        "latitude",
+        "longitude",
+        "timezone",
+        "ayanamsa",
+        "engine_version"
+      ],
+      "title": "ChartMetadata",
+      "type": "object"
+    },
     "CurrentDasha": {
       "additionalProperties": false,
       "properties": {
@@ -1585,9 +1646,20 @@
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "1.0",
+      "const": "1.1",
       "title": "Schema Version",
       "type": "string"
+    },
+    "metadata": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ChartMetadata"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     },
     "birth": {
       "$ref": "#/$defs/BirthBlock"

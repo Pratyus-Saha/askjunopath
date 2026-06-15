@@ -10,7 +10,7 @@ type ChartResponse = {
   cache_status: string;
   chart_id: string;
   chart_fingerprint: string;
-  chart: ChartData & { metadata?: unknown };
+  chart: ChartData;
 };
 
 export default function ChartPage() {
@@ -38,17 +38,7 @@ export default function ChartPage() {
           cache_status: "HIT",
           chart_id: "fixture_01_sample",
           chart_fingerprint: "static_fixture",
-          chart: {
-            ...(sampleFixture as unknown as ChartData),
-            metadata: {
-              birth_city: birthCity,
-              latitude: 22.5726,
-              longitude: 88.3639,
-              ayanamsa: 23.9,
-              timezone: "Asia/Kolkata",
-              engine_version: "1.3.0"
-            }
-          }
+          chart: sampleFixture as ChartData
         });
         setLoading(false);
       }, 500);
@@ -208,26 +198,26 @@ export default function ChartPage() {
 
               {/* Calculations Metadata Grid */}
               {(() => {
-                const meta = (chartData.chart as any).metadata || {};
+                const meta = chartData.chart.metadata;
                 return (
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-950/50 p-4 rounded-xl border border-slate-800/50 text-xs">
                     <div>
                       <span className="text-slate-500 block mb-1">Birth Location</span>
-                      <span className="text-slate-300 font-semibold truncate block">{meta.birth_city || "-"}</span>
+                      <span className="text-slate-300 font-semibold truncate block">{meta?.birth_city || "-"}</span>
                     </div>
                     <div>
                       <span className="text-slate-500 block mb-1">Coordinates</span>
                       <span className="text-slate-300 font-semibold font-mono block">
-                        {meta.latitude?.toFixed(4) || "0.0000"}°, {meta.longitude?.toFixed(4) || "0.0000"}°
+                        {meta?.latitude?.toFixed(4) || "0.0000"}°, {meta?.longitude?.toFixed(4) || "0.0000"}°
                       </span>
                     </div>
                     <div>
                       <span className="text-slate-500 block mb-1">Ayanamsa (KP)</span>
-                      <span className="text-slate-300 font-semibold block">{meta.ayanamsa ? formatDegrees(meta.ayanamsa) : "-"}</span>
+                      <span className="text-slate-300 font-semibold block">{meta?.ayanamsa ? formatDegrees(meta.ayanamsa) : "-"}</span>
                     </div>
                     <div>
                       <span className="text-slate-500 block mb-1">Timezone</span>
-                      <span className="text-slate-300 font-semibold block">{meta.timezone || "-"}</span>
+                      <span className="text-slate-300 font-semibold block">{meta?.timezone || "-"}</span>
                     </div>
                   </div>
                 );

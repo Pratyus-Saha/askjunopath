@@ -146,10 +146,11 @@ How this file works: a decision gets an entry when it resolves an ambiguity, cha
 **Revisit:** never for the boundary rule and shapes; the `round` vs `floor` arc-second conversion may be revisited only if a JHora comparison surfaces a sub-arc-second classification mismatch, and any change is a schema-adjacent event requiring full fixture regeneration.
 
 ## D021 — Metadata contract: legalize in schema v1.1
-**Date:** 2026-06-15 · **Status:** DECIDED, implementation pending
+**Date:** 2026-06-15 · **Status:** CLOSED
 **Decision:** add an optional `metadata` object to schemas/chart.json, bump schema to
 v1.1, regenerate frontend ChartData per D009 in the same PR. Keep metadata optional for
 backward safety. Execute BEFORE any KP schema expansion.
 **Reason:** chart_engine_version, cache_status, and calculation_mode are trust signals
 that belong in the contract, not in a temporary frontend wrapper.
-**Revisit:** closes when schema v1.1 ships.
+**Outcome:** Closed 2026-06-15 on `agent/codex/schema-metadata-v1-1`. Schema v1.1 legalizes optional strict chart metadata with birth input, geocode, ayanamsa, and engine version fields; frontend ChartData was regenerated from the schema.
+**Revisit:** next additive metadata field or KP schema expansion.

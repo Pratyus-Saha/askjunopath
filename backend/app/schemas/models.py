@@ -139,6 +139,27 @@ class AscendantBlock(StrictModel):
     sign_degree: SignDegree
 
 
+class ChartMetadata(StrictModel):
+    birth_date: str = Field(..., pattern=r"^\d{4}-\d{2}-\d{2}$")
+    birth_time: str = Field(..., pattern=r"^\d{2}:\d{2}$")
+    birth_city: str = Field(..., min_length=2, max_length=100)
+    latitude: BirthLatitude
+    longitude: BirthLongitude
+    timezone: str = Field(..., min_length=1)
+    ayanamsa: float = Field(..., ge=20.0, le=30.0)
+    engine_version: str = Field(..., min_length=1)
+
+    @field_validator("birth_date")
+    @classmethod
+    def validate_birth_date(cls, value: str) -> str:
+        return BirthDataRequest.validate_birth_date(value)
+
+    @field_validator("birth_time")
+    @classmethod
+    def validate_birth_time(cls, value: str) -> str:
+        return BirthDataRequest.validate_birth_time(value)
+
+
 class NakshatraBlock(StrictModel):
     name: str = Field(..., min_length=1)
     index: NakshatraIndex
@@ -417,7 +438,8 @@ class PredictionFeaturesBlock(StrictModel):
 
 
 class ChartData(StrictModel):
-    schema_version: Literal["1.0"]
+    schema_version: Literal["1.1"]
+    metadata: ChartMetadata | None = None
     birth: BirthBlock
     settings: SettingsBlock
     ascendant: AscendantBlock

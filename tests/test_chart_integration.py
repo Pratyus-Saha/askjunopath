@@ -239,11 +239,11 @@ def test_later_engine_fields_remain_at_day1_defaults(chart):
 # Schema contract
 # ---------------------------------------------------------------------------
 
-def test_chart_minus_metadata_validates_through_chartdata(chart):
-    payload = dict(chart)
-    payload.pop("metadata")  # the one documented non-schema key (D021)
-    parsed = ChartData.model_validate(payload)
-    assert parsed.schema_version == "1.0"
+def test_chart_with_metadata_validates_through_chartdata(chart):
+    parsed = ChartData.model_validate(chart)
+    assert parsed.schema_version == "1.1"
+    assert parsed.metadata is not None
+    assert parsed.metadata.engine_version == "1.3.0"
     for planet in parsed.planets:
         assert planet.nakshatra is not None, planet.name
     for house in parsed.houses:

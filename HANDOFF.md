@@ -29,6 +29,32 @@ How this file works:
 
 # Entries
 
+## D021 — agent/codex/schema-metadata-v1-1 — 2026-06-15 20:01 — Codex
+**Built:** Legalized optional chart response metadata in schema v1.1, keeping the object strict and extra-forbidden. Regenerated frontend ChartData and removed the temporary metadata wrapper in the chart page while preserving the live response envelope.
+**Files changed:**
+- `schemas/chart.json`
+- `backend/app/schemas/models.py`
+- `backend/app/routers/chart.py`
+- `tests/test_schema_roundtrip.py`
+- `tests/test_chart_route.py`
+- `tests/test_chart_integration.py`
+- `frontend/src/types/chart.ts`
+- `frontend/src/fixtures/chart.sample.json`
+- `frontend/app/chart/page.tsx`
+- `DECISIONS.md`
+- `TASKBOARD.md`
+- `HANDOFF.md`
+**Tests run:**
+- `& 'C:\Program Files\Git\bin\bash.exe' -lc './scripts/gen_types.sh'` -> Type generation complete. Earlier `bash scripts/gen_types.sh` hit the WSL stub, direct Git Bash lacked `mkdir` until run as a login shell, and the first sandboxed `npx` attempt hit npm cache/registry permissions.
+- `$env:SE_EPHE_PATH='C:\Users\assas\swisseph\ephe'; uv run --with-requirements backend\requirements.txt --with pytest python -m pytest tests\test_chart_route.py tests\test_chart_integration.py tests\test_health.py -q` -> 33 passed, 2 warnings.
+- `uv run --with-requirements backend\requirements.txt --with pytest python -m pytest tests\test_schema_roundtrip.py -q` -> 20 passed.
+- `npm.cmd run lint` -> no ESLint warnings or errors.
+- `npm.cmd run build` -> compiled successfully.
+- `git diff --name-only` -> relevant schema/router/frontend/docs/test files only. `scripts/check_allowed_files.py` is absent in this worktree.
+**Known issues / deferred:** BUG-001 Rahu-only tolerance remains open and untouched.
+**Next agent should read:** `schemas/chart.json`, `backend/app/schemas/models.py`, `frontend/src/types/chart.ts`, `tests/test_schema_roundtrip.py`.
+**Tempted but did not:** touch ephemeris math, nakshatra engine, KP, prediction fields, deployment config, `.env` files, or frontend dependency versions.
+
 ## Day 2 final closeout
 Completed: T2.1 nakshatra engine, T2.2 boundaries_330.json generator, T2.3 chart
 integration, T2.5 frontend ChartData typegen — all merged. chart_engine_version 1.3.0.
