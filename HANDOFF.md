@@ -29,6 +29,25 @@ How this file works:
 
 # Entries
 
+## T3.1 — agent/codex/kp-table — 2026-06-16 11:53 — Codex
+**Built:** Added a deterministic KP 249 sub-lord table generator and committed CSV data. The base 243 Vimshottari sub-lord intervals are split at the six 30-degree sign boundaries that fall strictly inside a sub-lord span, producing 249 rows without changing sub-lord lengths.
+**Files changed:**
+- `scripts/gen_kp_table.py`
+- `data/kp_249.csv`
+- `tests/test_kp_table.py`
+- `docs/nakshatra.md`
+- `TASKBOARD.md`
+- `HANDOFF.md`
+**Tests run:**
+- `uv run --with-requirements backend\requirements.txt --with pytest python -m pytest tests\test_kp_table.py -q` -> 7 passed.
+- `uv run --with-requirements backend\requirements.txt python scripts\gen_kp_table.py --check` -> passed.
+- `git diff --check` -> passed; Git printed CRLF normalization warnings for `HANDOFF.md`, `TASKBOARD.md`, and `docs/nakshatra.md`.
+- `git status --short --branch` -> branch `agent/codex/kp-table`, expected modified/new KP files only before commit.
+- `Test-Path scripts\check_allowed_files.py` -> False; allowed-files guard script is absent in this worktree.
+**Known issues / deferred:** no schema, chart integration, KP lookup engine, prediction logic, significators, ruling planets, or frontend work was added.
+**Next agent should read:** `scripts/gen_kp_table.py`, `data/kp_249.csv`, `tests/test_kp_table.py`, `docs/nakshatra.md`.
+**Tempted but did not:** add `planets[].kp`/`houses[].kp` integration, change the existing schema KP shape, build a lookup engine, or touch ephemeris/nakshatra math.
+
 ## BUG-001 — agent/codex/jhora-gate-ephe-guard — 2026-06-16 11:26 — Codex
 **Built:** Hardened the strict JHora parity tests so they first require active Swiss `.se1` files via `ephemeris_files_ok()` and skip loudly with `SWISS_EPHE_REQUIRED` when the run may be Moshier fallback. Updated BUG-001 and the ephemeris spec to record the diagnosed cause: unset `SE_EPHE_PATH`, no math fix, fixture edit, or tolerance loosening required.
 **Files changed:**
