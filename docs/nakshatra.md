@@ -163,6 +163,14 @@ The lord sequence is the Vimshottari cycle (Ketu, Venus, Sun, Moon, Mars, Rahu, 
 
 This table also drives the KP 249 sub-lord generator and the Vimshottari dasha engine. It is defined here once. No other file re-declares it.
 
+## KP 249 Table Note
+
+The generated KP table lives at `data/kp_249.csv` and is produced by `scripts/gen_kp_table.py`.
+
+The underlying sub-lord math is the standard Vimshottari proportion inside each nakshatra: 27 nakshatras x 9 sub-lords = 243 base intervals. The committed CSV has 249 rows because sub-lord intervals are split when a 30-degree zodiac sign boundary falls strictly inside the interval. Six such sign-boundary splits exist across the zodiac. The split does not change the sub-lord, sub_index, or total length of the underlying Vimshottari interval; it only creates a separate CSV row on each side of the sign boundary.
+
+This table is data for future KP lookup work only. It does not add public chart response fields and does not change schema version.
+
 ## Navamsa Sign Rule
 
 Navamsa is calculated from normalized sidereal absolute longitude.
