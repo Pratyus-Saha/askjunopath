@@ -157,7 +157,7 @@ that belong in the contract, not in a temporary frontend wrapper.
 
 ## D022 — KP output shape for MVP
 
-**Status:** Decided
+**Status:** IMPLEMENTED in schema v1.2
 **Date:** 2026-06-16
 
 ### Decision
@@ -208,4 +208,8 @@ Therefore:
 ### Guardrail
 
 Agents must not invent additional public KP fields during table generation or lookup work. Schema v1.2 should happen only when KP is integrated into chart output.
+
+### Outcome
+
+Implemented 2026-06-16 on `agent/codex/kp-chart-integration`: schema v1.2 adds required strict `kp` blocks to `planets[]` and `houses[]`, with only `star_lord` and `sub_lord`. Public chart assembly copies only those two fields from the internal lookup result, and chart/cache version `1.4.0` plus route schema validation prevent stale pre-v1.2 cached charts from being returned.
 

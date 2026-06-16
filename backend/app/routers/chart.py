@@ -12,9 +12,28 @@ from app.engines.ephemeris_engine import (
     LatUnsupportedError,
     compute_ephemeris,
 )
+from app.engines.kp_engine import get_kp_sub_lord
 from app.engines.nakshatra_engine import nakshatra_block, nakshatra_name
 
 router = APIRouter(prefix="/chart", tags=["chart"])
+
+
+def _public_kp_block(longitude: float) -> dict[str, str]:
+    lookup = get_kp_sub_lord(longitude)
+    return {
+        "star_lord": lookup["star_lord"],
+        "sub_lord": lookup["sub_lord"],
+    }
+
+
+def _cached_chart_is_current(chart_json: object) -> bool:
+    if not isinstance(chart_json, dict):
+        return False
+    try:
+        ChartData.model_validate(chart_json)
+    except Exception:
+        return False
+    return chart_json.get("schema_version") == "1.2"
 
 
 def _build_chart_payload(
@@ -27,7 +46,7 @@ def _build_chart_payload(
 ) -> dict:
     """Assemble the stored/returned chart payload from trusted engine output.
 
-    The canonical payload is validated through chart.json v1.1 (ChartData).
+    The canonical payload is validated through chart.json v1.2 (ChartData).
     Its optional metadata block carries response trust signals used by
     save_chart() and the scaffold chart page while remaining narrow and
     extra-forbidden.
@@ -38,15 +57,23 @@ def _build_chart_payload(
         # Birth-input toggle ships Day 4 (T4.4); false per docs/chart-schema.md.
         "approximate_time": False,
     }
-    # Day 2 (T2.3): nakshatra fill per docs/nakshatra.md. Planets get the
-    # full 7-key NakshatraBlock; cusps get the name STRING only — cusp KP
-    # fields (cusp_star_lord/sub/sub_sub) are Day 4's, left null here.
+    # Nakshatra fill follows docs/nakshatra.md. KP fill follows D022: expose
+    # only star_lord/sub_lord, even though the internal lookup returns more.
+    # The legacy cusp_star_lord/sub/sub_sub fields remain null here.
     planets = [
-        {**planet, "nakshatra": nakshatra_block(planet["longitude"])}
+        {
+            **planet,
+            "nakshatra": nakshatra_block(planet["longitude"]),
+            "kp": _public_kp_block(planet["longitude"]),
+        }
         for planet in ephemeris["planets"]
     ]
     houses = [
-        {**house, "cusp_nakshatra": nakshatra_name(house["cusp_longitude"])}
+        {
+            **house,
+            "cusp_nakshatra": nakshatra_name(house["cusp_longitude"]),
+            "kp": _public_kp_block(house["cusp_longitude"]),
+        }
         for house in ephemeris["houses"]
     ]
     metadata = {
@@ -60,7 +87,7 @@ def _build_chart_payload(
         "engine_version": settings.chart_engine_version,
     }
     chart_model = ChartData(
-        schema_version="1.1",
+        schema_version="1.2",
         metadata=metadata,
         birth=birth,
         settings=ephemeris["settings"],
@@ -122,7 +149,7 @@ async def generate_chart(
 
     # 3. Lookup cache in Supabase user_charts table
     cached_record = get_chart_by_fingerprint(x_user_id, fingerprint)
-    if cached_record:
+    if cached_record and _cached_chart_is_current(cached_record.get("chart_json")):
         return ChartGenerateResponse(
             cache_status="HIT",
             chart_id=str(cached_record.get("id")),

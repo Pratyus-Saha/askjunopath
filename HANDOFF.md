@@ -29,6 +29,37 @@ How this file works:
 
 # Entries
 
+## KP-chart-integration — agent/codex/kp-chart-integration — 2026-06-16 13:12 — Codex
+**Built:** Integrated the internal KP sub-lord lookup into public chart output with the D022 MVP shape. Schema v1.2 now requires strict `kp` blocks on `planets[]` and `houses[]`, `/chart/generate` copies only `star_lord` and `sub_lord` from the internal lookup result, chart/cache version bumped to `1.4.0`, and stale cached charts that fail current v1.2 validation are recomputed instead of returned.
+**Files changed:**
+- `backend/app/core/config.py`
+- `backend/app/routers/chart.py`
+- `backend/app/schemas/models.py`
+- `schemas/chart.json`
+- `tests/test_chart_route.py`
+- `tests/test_chart_integration.py`
+- `tests/test_schema_roundtrip.py`
+- `tests/test_health.py`
+- `frontend/src/fixtures/chart.sample.json`
+- `frontend/src/types/chart.ts`
+- `frontend/app/chart/page.tsx`
+- `DECISIONS.md`
+- `TASKBOARD.md`
+- `HANDOFF.md`
+**Tests run:**
+- `uv run --with-requirements backend\requirements.txt python -c "import json; from pathlib import Path; import sys; sys.path.insert(0, 'backend'); from app.schemas.models import ChartData; Path('schemas/chart.json').write_text(json.dumps(ChartData.model_json_schema(), indent=2) + '\n', encoding='utf-8')"` -> passed after escalation for uv cache access.
+- `uv run --with-requirements backend\requirements.txt python -c "import json, sys; from pathlib import Path; sys.path.insert(0, 'backend'); from app.engines.kp_engine import get_kp_sub_lord; data=json.loads(Path('frontend/src/fixtures/chart.sample.json').read_text(encoding='utf-8')); rows=[]; [rows.append(('planet', p['name'], p['longitude'], {k: get_kp_sub_lord(p['longitude'])[k] for k in ('star_lord','sub_lord')})) for p in data['planets']]; [rows.append(('house', h['house'], h['cusp_longitude'], {k: get_kp_sub_lord(h['cusp_longitude'])[k] for k in ('star_lord','sub_lord')})) for h in data['houses']]; print(json.dumps(rows, indent=2))"` -> passed after escalation; used only to derive sample fixture `kp` values.
+- `& 'C:\Program Files\Git\bin\bash.exe' -lc './scripts/gen_types.sh'` -> Type generation complete after escalation for npm cache/registry access.
+- `$env:SE_EPHE_PATH='C:\Users\assas\swisseph\ephe'; uv run --with-requirements backend\requirements.txt --with pytest python -m pytest tests\test_kp_engine.py tests\test_kp_table.py tests\test_chart_route.py tests\test_chart_integration.py tests\test_schema_roundtrip.py tests\test_health.py -q` -> 81 passed, 2 warnings.
+- `npm.cmd run lint` in `frontend/` -> no ESLint warnings or errors. Plain `npm run lint` was blocked by the local PowerShell execution policy for `npm.ps1`, so `npm.cmd` was used.
+- `npm.cmd run build` in `frontend/` -> compiled successfully.
+- `git diff --check` -> passed; Git printed CRLF normalization warnings only.
+- `Test-Path scripts/check_allowed_files.py` -> False; allowed-files guard script is absent in this worktree.
+- `git status --short --branch` -> branch `agent/codex/kp-chart-integration`, modified files listed above, no untracked files.
+**Known issues / deferred:** none for this integration. KP values are mechanically from the internal table and still need external KP JHora validation.
+**Next agent should read:** `backend/app/routers/chart.py`, `backend/app/schemas/models.py`, `schemas/chart.json`, `tests/test_chart_route.py`, `tests/test_chart_integration.py`, D022. Next step: KP JHora validation.
+**Tempted but did not:** add KP significators, ruling planets, prediction/event logic, interpretation text, sub-sub lord to the public block, modify `data/kp_249.csv`, or change ephemeris/nakshatra math.
+
 ## KP-lookup — agent/claude/kp-lookup-engine — 2026-06-16 — Claude Code
 **Built:** the internal KP sub-lord lookup engine `backend/app/engines/kp_engine.py`, reading the committed `data/kp_249.csv`. `get_kp_sub_lord(longitude_deg)` normalises the longitude into `[0, 360)`, converts once to integer arc-seconds with the same discipline as the nakshatra engine (`arcsec = round((L % 360) * 3600) % 1_296_000`), then resolves the containing CSV row via `bisect` over the contiguous start bounds. Returns `star_lord` (nakshatra/star lord), `sub_lord`, `sub_index`, `sub_start_longitude`, `sub_end_longitude`, `degree_in_sub`, plus internal extras (`nakshatra_index`, `nakshatra_name`, `row_index`, `longitude`, `arcsec`). No public schema, no `planets[].kp`/`houses[].kp`, no chart integration, no prediction/significator/ruling-planet logic, no ephemeris or table changes.
 **Boundary rule:** each row covers the half-open interval `[start_arcsec, end_arcsec)` — lower bound inclusive, upper exclusive. A longitude exactly on a boundary belongs to the row that STARTS at that boundary. Because the arc-second conversion takes `% 1_296_000`, the max reachable value is `1_295_999` and `360°` (and tiny negatives) wrap to `0` → row 1; nothing ever maps to the final row's exclusive end `1_296_000`, so there is no off-by-one at the table end.

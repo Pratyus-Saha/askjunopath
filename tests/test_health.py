@@ -25,7 +25,7 @@ def test_health_returns_200_and_required_keys() -> None:
     payload = response.json()
     assert {"status", "version", "app_env", "timestamp", "checks"}.issubset(payload)
     assert payload["status"] in {"ok", "degraded"}
-    assert payload["version"] == "1.3.0"
+    assert payload["version"] == "1.4.0"
     assert payload["version"] == settings.chart_engine_version
     assert isinstance(payload["checks"], dict)
 

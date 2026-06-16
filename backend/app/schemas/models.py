@@ -173,7 +173,6 @@ class NakshatraBlock(StrictModel):
 class KpBlock(StrictModel):
     star_lord: PlanetName
     sub_lord: PlanetName
-    sub_sub_lord: PlanetName
 
 
 class PlanetBlock(StrictModel):
@@ -187,7 +186,7 @@ class PlanetBlock(StrictModel):
     combust: bool
     speed_deg_per_day: float
     nakshatra: NakshatraBlock | None = None
-    kp: KpBlock | None = None
+    kp: KpBlock
     significator_of_houses: list[HouseNumber] = Field(default_factory=list)
     significator_levels: dict[str, Literal["A", "B", "C", "D"]] = Field(
         default_factory=dict
@@ -229,6 +228,7 @@ class HouseBlock(StrictModel):
     cusp_sign: SignName
     cusp_sign_lord: PlanetName
     cusp_nakshatra: str | None = None
+    kp: KpBlock
     cusp_star_lord: PlanetName | None = None
     cusp_sub_lord: PlanetName | None = None
     cusp_sub_sub_lord: PlanetName | None = None
@@ -438,7 +438,7 @@ class PredictionFeaturesBlock(StrictModel):
 
 
 class ChartData(StrictModel):
-    schema_version: Literal["1.1"]
+    schema_version: Literal["1.2"]
     metadata: ChartMetadata | None = None
     birth: BirthBlock
     settings: SettingsBlock

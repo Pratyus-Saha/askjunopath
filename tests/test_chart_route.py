@@ -27,8 +27,9 @@ from app.core import chart_engine as old_chart_engine  # noqa: E402
 from app.core.config import settings  # noqa: E402
 from app.core.fingerprint import generate_chart_fingerprint  # noqa: E402
 from app.engines.ephemeris_engine import compute_ephemeris  # noqa: E402
+from app.engines.kp_engine import get_kp_sub_lord  # noqa: E402
 from app.routers import chart as chart_router  # noqa: E402
-from app.schemas.models import ChartData  # noqa: E402
+from app.schemas.models import BirthDataRequest, ChartData  # noqa: E402
 
 # Route test input reuses the JHora-validated fixture_01 chart: the request
 # carries date/time/city; the mocked geocoder pins the exact fixture
@@ -42,6 +43,19 @@ REQUEST_BODY = {
     "birth_city": "Gurugram",
 }
 HEADERS = {"X-User-Id": "route-test-user"}
+APPROVED_KP_KEYS = {"star_lord", "sub_lord"}
+INTERNAL_KP_KEYS = {
+    "sub_index",
+    "sub_start_longitude",
+    "sub_end_longitude",
+    "degree_in_sub",
+    "sub_sub_lord",
+    "nakshatra_index",
+    "nakshatra_name",
+    "row_index",
+    "longitude",
+    "arcsec",
+}
 
 GEO_RESULT = {
     "latitude": FIXTURE_INPUT["lat"],
@@ -82,6 +96,17 @@ def client(monkeypatch, saved_charts):
 
 def trusted_engine_output() -> dict:
     return compute_ephemeris(**FIXTURE_INPUT)
+
+
+def current_chart_payload() -> dict:
+    return chart_router._build_chart_payload(
+        ephemeris=trusted_engine_output(),
+        place_label=GEO_RESULT["display_name"],
+        request_data=BirthDataRequest(**REQUEST_BODY),
+        geo_lat=GEO_RESULT["latitude"],
+        geo_lon=GEO_RESULT["longitude"],
+        timezone_str=GEO_RESULT["timezone"],
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -126,6 +151,32 @@ def test_route_returns_trusted_placidus_cusps_and_ascendant(client):
     assert chart["settings"]["house_system"] == "PLACIDUS"
 
 
+def test_route_adds_public_kp_blocks_only(client):
+    response = client.post("/chart/generate", json=REQUEST_BODY, headers=HEADERS)
+    assert response.status_code == 200
+    chart = response.json()["chart"]
+
+    for planet in chart["planets"]:
+        kp = planet["kp"]
+        lookup = get_kp_sub_lord(planet["longitude"])
+        assert set(kp) == APPROVED_KP_KEYS, planet["name"]
+        assert set(kp).isdisjoint(INTERNAL_KP_KEYS), planet["name"]
+        assert kp == {
+            "star_lord": lookup["star_lord"],
+            "sub_lord": lookup["sub_lord"],
+        }
+
+    for house in chart["houses"]:
+        kp = house["kp"]
+        lookup = get_kp_sub_lord(house["cusp_longitude"])
+        assert set(kp) == APPROVED_KP_KEYS, house["house"]
+        assert set(kp).isdisjoint(INTERNAL_KP_KEYS), house["house"]
+        assert kp == {
+            "star_lord": lookup["star_lord"],
+            "sub_lord": lookup["sub_lord"],
+        }
+
+
 def test_route_never_calls_old_chart_engine(client, monkeypatch):
     def boom(*args, **kwargs):
         raise AssertionError(
@@ -147,7 +198,7 @@ def test_chart_payload_is_schema_valid_chart_json_with_metadata(client):
     assert response.status_code == 200
     chart = response.json()["chart"]
     parsed = ChartData.model_validate(chart)
-    assert parsed.schema_version == "1.1"
+    assert parsed.schema_version == "1.2"
     assert parsed.metadata is not None
     assert parsed.birth.timezone == FIXTURE_INPUT["timezone"]
     assert parsed.birth.approximate_time is False
@@ -177,7 +228,7 @@ def test_metadata_block_for_db_and_scaffold_page(client, saved_charts):
     assert isinstance(metadata["longitude"], float)
     assert isinstance(metadata["ayanamsa"], float)
     assert 20.0 <= metadata["ayanamsa"] <= 30.0
-    assert metadata["engine_version"] == "1.3.0"
+    assert metadata["engine_version"] == "1.4.0"
     assert metadata["engine_version"] == settings.chart_engine_version
     assert metadata["timezone"] == FIXTURE_INPUT["timezone"]
     # The stored object is the same payload the response carries.
@@ -216,8 +267,8 @@ def test_chart_fingerprint_changes_when_engine_version_changes():
         "node_type": "true_node",
     }
 
-    current = generate_chart_fingerprint(**common, engine_version="1.3.0")
-    next_version = generate_chart_fingerprint(**common, engine_version="1.2.1")
+    current = generate_chart_fingerprint(**common, engine_version="1.4.0")
+    next_version = generate_chart_fingerprint(**common, engine_version="1.3.0")
 
     assert current != next_version
 
@@ -242,19 +293,43 @@ def test_missing_user_header_still_401(client):
     assert response.status_code == 401
 
 
-def test_cache_hit_returns_stored_chart_untouched(client, monkeypatch, saved_charts):
-    sentinel = {"sentinel": True}
+def test_current_cache_hit_returns_stored_chart_untouched(
+    client, monkeypatch, saved_charts
+):
+    cached_chart = current_chart_payload()
 
     def fake_hit(user_id, fingerprint):
-        return {"id": "cached-row", "chart_json": sentinel}
+        return {"id": "cached-row", "chart_json": cached_chart}
 
     monkeypatch.setattr(chart_router, "get_chart_by_fingerprint", fake_hit)
     response = client.post("/chart/generate", json=REQUEST_BODY, headers=HEADERS)
     assert response.status_code == 200
     body = response.json()
     assert body["cache_status"] == "HIT"
-    assert body["chart"] == sentinel
+    assert body["chart"] == cached_chart
     assert "chart_data" not in saved_charts  # save path not reached
+
+
+def test_stale_cache_hit_is_recomputed_instead_of_returned(
+    client, monkeypatch, saved_charts
+):
+    stale_chart = {"schema_version": "1.1", "planets": [], "houses": []}
+
+    def fake_hit(user_id, fingerprint):
+        return {"id": "stale-row", "chart_json": stale_chart}
+
+    monkeypatch.setattr(chart_router, "get_chart_by_fingerprint", fake_hit)
+    response = client.post("/chart/generate", json=REQUEST_BODY, headers=HEADERS)
+    assert response.status_code == 200
+    body = response.json()
+    assert body["cache_status"] == "MISS"
+    assert body["chart_id"] == "route-test-row-id"
+    assert body["chart"]["schema_version"] == "1.2"
+    assert saved_charts["chart_data"] == body["chart"]
+    for planet in body["chart"]["planets"]:
+        assert set(planet["kp"]) == APPROVED_KP_KEYS
+    for house in body["chart"]["houses"]:
+        assert set(house["kp"]) == APPROVED_KP_KEYS
 
 
 # ---------------------------------------------------------------------------
