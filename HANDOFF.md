@@ -29,6 +29,22 @@ How this file works:
 
 # Entries
 
+## T4.3 — agent/codex/house-engine — 2026-06-16 16:57 — Codex
+**Built:** Added `house_engine` cusp-span occupation helpers and wired `/chart/generate` so every public planet gets `house_occupied` and every house gets the inverse `occupants` list. Significator placeholders remain unpopulated, and KP/nakshatra/ephemeris math was left untouched.
+**Files changed:**
+- `backend/app/engines/house_engine.py`
+- `backend/app/routers/chart.py`
+- `tests/test_house_engine.py`
+- `tests/test_chart_integration.py`
+- `HANDOFF.md`
+**Tests run:**
+- `$env:SE_EPHE_PATH='C:\Users\assas\swisseph\ephe'; uv run --with-requirements backend\requirements.txt --with pytest python -m pytest tests\test_house_engine.py tests\test_chart_integration.py tests\test_chart_route.py tests\test_kp_jhora_validation.py tests\test_kp_engine.py tests\test_kp_table.py tests\test_schema_roundtrip.py tests\test_health.py -q` -> 108 passed, 2 warnings.
+- `git diff --check` -> passed; Git printed CRLF normalization warnings only.
+- `Test-Path scripts\check_allowed_files.py` -> False; allowed-files guard script is absent in this worktree.
+**Known issues / deferred:** allowed-files guard script is absent; `git status --short` and `git diff --stat` were used to verify only allowed files changed. No push performed per prompt.
+**Next agent should read:** `backend/app/engines/house_engine.py`, `backend/app/routers/chart.py`, `tests/test_house_engine.py`, `tests/test_chart_integration.py`, `docs/houses.md`, D023.
+**Tempted but did not:** populate significators, add owners or KP ladder logic, change KP public shape, touch schemas/model files, bump schema/version, adjust ephemeris/nakshatra math, or add prediction logic.
+
 ## docs-contract-sync — docs/house-significator-contract-sync — 2026-06-16 — Claude Code
 **Built:** Documentation-only contract sync so the next agent reads one consistent source of truth. No product/engine/schema code touched.
 **Current state (authoritative as of this entry):**

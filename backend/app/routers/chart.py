@@ -14,6 +14,7 @@ from app.engines.ephemeris_engine import (
 )
 from app.engines.kp_engine import get_kp_sub_lord
 from app.engines.nakshatra_engine import nakshatra_block, nakshatra_name
+from app.engines.house_engine import occupants as house_occupants
 
 router = APIRouter(prefix="/chart", tags=["chart"])
 
@@ -59,9 +60,19 @@ def _build_chart_payload(
     }
     # Nakshatra fill follows docs/nakshatra.md. KP fill follows D022: expose
     # only star_lord/sub_lord, even though the internal lookup returns more.
+    # House occupation follows docs/houses.md cusp spans; significators stay
+    # reserved and unpopulated per D023.
+    cusps = [house["cusp_longitude"] for house in ephemeris["houses"]]
+    occupants_by_house = house_occupants(ephemeris["planets"], cusps)
+    house_by_planet = {
+        planet_name: house
+        for house, planet_names in occupants_by_house.items()
+        for planet_name in planet_names
+    }
     planets = [
         {
             **planet,
+            "house_occupied": house_by_planet[planet["name"]],
             "nakshatra": nakshatra_block(planet["longitude"]),
             "kp": _public_kp_block(planet["longitude"]),
         }
@@ -72,6 +83,7 @@ def _build_chart_payload(
             **house,
             "cusp_nakshatra": nakshatra_name(house["cusp_longitude"]),
             "kp": _public_kp_block(house["cusp_longitude"]),
+            "occupants": occupants_by_house[house["house"]],
         }
         for house in ephemeris["houses"]
     ]
