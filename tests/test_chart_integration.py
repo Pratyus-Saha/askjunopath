@@ -4,8 +4,9 @@ Every planet must carry a non-null 7-key NakshatraBlock computed from its
 own longitude; every house cusp must carry the nakshatra NAME STRING in
 cusp_nakshatra (never an object). Every planet and house must also carry the
 D022 public KP block with only star_lord/sub_lord. House occupation is filled
-by cusp spans, while significators, dasha, strength, divisional, transits, and
-prediction features remain at their null/empty defaults.
+by JHora bhava midpoint spans (D024), while significators, dasha, strength,
+divisional, transits, and prediction features remain at their null/empty
+defaults.
 
 Geocoding and Supabase are mocked; ephemeris and nakshatra math are real.
 Moon nakshatra/pada expectations below are hand-derived from each Day 1
@@ -30,6 +31,7 @@ import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
 
 from app import main as app_main  # noqa: E402
+from app.engines.ephemeris_engine import compute_ephemeris  # noqa: E402
 from app.engines.house_engine import house_of, occupants as house_occupants  # noqa: E402
 from app.engines.kp_engine import get_kp_sub_lord  # noqa: E402
 from app.engines.nakshatra_engine import (  # noqa: E402
@@ -38,7 +40,7 @@ from app.engines.nakshatra_engine import (  # noqa: E402
     nakshatra_name,
 )
 from app.routers import chart as chart_router  # noqa: E402
-from app.schemas.models import ChartData  # noqa: E402
+from app.schemas.models import BirthDataRequest, ChartData  # noqa: E402
 
 FIXTURES_DIR = ROOT / "tests" / "fixtures" / "charts"
 
@@ -285,7 +287,7 @@ def test_every_house_has_occupants_list(chart):
         assert isinstance(house["occupants"], list), house["house"]
 
 
-def test_planet_house_occupied_derives_from_cusp_spans(chart):
+def test_planet_house_occupied_derives_from_bhava_spans(chart):
     cusps = [house["cusp_longitude"] for house in chart["houses"]]
 
     for planet in chart["planets"]:
@@ -316,6 +318,74 @@ def test_house_occupant_round_trip_matches_house_engine(chart):
     assert {
         house["house"]: house["occupants"] for house in chart["houses"]
     } == expected
+
+
+# ---------------------------------------------------------------------------
+# User 1 Kolkata regression: JHora "Planets in it" parity (D024)
+# ---------------------------------------------------------------------------
+
+# Birth: 1998-08-14 06:45, Kolkata, India. The expected house numbers below
+# are transcribed from JHora's "House Start / Cusp / End / Planets in it"
+# table for this chart and are the source of truth (AGENTS.md Rule 8). Only
+# the 9 classical planets are asserted; JHora's outer-planet rows (Pluto H4,
+# Uranus/Neptune H6) are intentionally not part of our public output.
+USER1_KOLKATA = {
+    "birth_date": "1998-08-14",
+    "birth_time": "06:45",
+    "datetime_local": "1998-08-14T06:45:00",
+    "timezone": "Asia/Kolkata",
+    "lat": 22.5725,
+    "lon": 88.363889,
+    "place": "Kolkata, India",
+}
+USER1_KOLKATA_JHORA_OCCUPATION = {
+    "Rahu": 1,
+    "Ketu": 7,
+    "Jupiter": 8,
+    "Moon": 9,
+    "Saturn": 9,
+    "Mars": 11,
+    "Sun": 12,
+    "Mercury": 12,
+    "Venus": 12,
+}
+
+
+def _user1_kolkata_chart() -> dict:
+    request_data = BirthDataRequest(
+        birth_date=USER1_KOLKATA["birth_date"],
+        birth_time=USER1_KOLKATA["birth_time"],
+        birth_city=USER1_KOLKATA["place"],
+    )
+    ephemeris = compute_ephemeris(
+        datetime_local=USER1_KOLKATA["datetime_local"],
+        timezone=USER1_KOLKATA["timezone"],
+        lat=USER1_KOLKATA["lat"],
+        lon=USER1_KOLKATA["lon"],
+    )
+    return chart_router._build_chart_payload(
+        ephemeris=ephemeris,
+        place_label=USER1_KOLKATA["place"],
+        request_data=request_data,
+        geo_lat=USER1_KOLKATA["lat"],
+        geo_lon=USER1_KOLKATA["lon"],
+        timezone_str=USER1_KOLKATA["timezone"],
+    )
+
+
+def test_user1_kolkata_house_occupation_matches_jhora_planets_in_it():
+    chart = _user1_kolkata_chart()
+
+    occupied = {planet["name"]: planet["house_occupied"] for planet in chart["planets"]}
+    for planet_name, house in USER1_KOLKATA_JHORA_OCCUPATION.items():
+        assert occupied[planet_name] == house, planet_name
+
+    # occupants[] round-trips with the JHora "Planets in it" placement.
+    occupants_by_house = {
+        house["house"]: set(house["occupants"]) for house in chart["houses"]
+    }
+    for planet_name, house in USER1_KOLKATA_JHORA_OCCUPATION.items():
+        assert planet_name in occupants_by_house[house], planet_name
 
 
 # ---------------------------------------------------------------------------

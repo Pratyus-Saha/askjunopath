@@ -29,41 +29,56 @@ def equal_cusps() -> list[float]:
     return [house * 30.0 for house in range(12)]
 
 
-def test_house_of_assigns_normal_interior_cases_by_span() -> None:
+# With equal 30-deg cusps the bhava boundaries fall at 15, 45, ... 345, so
+# house H spans [30H - 45, 30H - 15) and its cusp 30(H-1) sits at the centre.
+# House 1 = [345, 15) wraps 0 Aries; house 4 = [75, 105) with cusp 90.
+
+
+def test_house_of_assigns_normal_interior_cases_by_bhava_span() -> None:
     cusps = equal_cusps()
 
-    assert house_of(15.0, cusps) == 1
-    assert house_of(45.0, cusps) == 2
-    assert house_of(315.0, cusps) == 11
+    # Each cusp sits inside (at the centre of) its own house.
+    assert house_of(0.0, cusps) == 1
+    assert house_of(30.0, cusps) == 2
+    assert house_of(120.0, cusps) == 5
+    assert house_of(300.0, cusps) == 11
 
 
 def test_house_of_handles_wraparound_across_zero_aries() -> None:
-    cusps = [350.0, 10.0, 40.0, 70.0, 100.0, 130.0, 160.0, 190.0, 220.0, 250.0, 280.0, 310.0]
+    # cusp_12 = 340, cusp_1 = 0, cusp_2 = 20 -> house 1 = [350, 10): it
+    # straddles 0 Aries and must contain longitudes on both sides of it.
+    cusps = [0.0, 20.0, 50.0, 80.0, 110.0, 140.0, 170.0, 200.0, 230.0, 260.0, 290.0, 340.0]
 
     assert house_of(355.0, cusps) == 1
     assert house_of(5.0, cusps) == 1
     assert house_of(349.9999, cusps) == 12
+    assert house_of(10.0, cusps) == 2
 
 
-def test_planet_exactly_on_cusp_belongs_to_house_starting_at_that_cusp() -> None:
+def test_cusp_is_inside_the_house_not_its_start_boundary() -> None:
+    # The JHora insight (and the User 1 Kolkata Rahu case): a planet BEFORE
+    # the cusp but after the bhava start still belongs to that house, because
+    # the cusp is the interior reference point, not the start boundary.
     cusps = equal_cusps()
 
-    assert house_of(90.0, cusps) == 4
+    assert house_of(80.0, cusps) == 4  # before cusp_4 (90), after start (75)
+    assert house_of(90.0, cusps) == 4  # the cusp itself is interior
+    assert house_of(100.0, cusps) == 4  # after the cusp, before end (105)
 
 
-def test_planets_within_one_hundredth_degree_of_cusp_obey_half_open_span() -> None:
+def test_bhava_span_start_boundary_is_inclusive() -> None:
     cusps = equal_cusps()
 
-    assert house_of(90.0099, cusps) == 4
-    assert house_of(89.9901, cusps) == 3
+    # 75 is the start of house 4 (midpoint of cusp_3 and cusp_4): inclusive.
+    assert house_of(75.0, cusps) == 4
 
 
-def test_assignment_is_not_sign_based_when_sign_and_cusp_span_disagree() -> None:
-    # House 10 starts at 28 Virgo and ends at 5 Libra. A planet at 0 Libra is
-    # two degrees after the 10th cusp, so it belongs to house 10 despite sign.
-    cusps = [260.0, 290.0, 320.0, 350.0, 20.0, 50.0, 80.0, 110.0, 140.0, 178.0, 185.0, 220.0]
+def test_bhava_span_end_boundary_is_exclusive() -> None:
+    cusps = equal_cusps()
 
-    assert house_of(180.0, cusps) == 10
+    # 105 is the end of house 4 == start of house 5: exclusive -> house 5.
+    assert house_of(105.0, cusps) == 5
+    assert house_of(104.9999, cusps) == 4
 
 
 def test_occupants_assigns_every_planet_exactly_once_and_returns_all_houses() -> None:

@@ -1,7 +1,25 @@
-"""House occupation helpers using Placidus cusp spans.
+"""House occupation helpers using JHora bhava midpoint spans.
 
-House membership is half-open: house H spans [cusp_H, cusp_{H+1}),
-with house 12 wrapping to cusp 1. Zodiac sign is intentionally ignored.
+Public house occupation (``planets[].house_occupied`` and
+``houses[].occupants``) follows JHora's "House Start / Cusp / End /
+Planets in it" table (D024). A house is the bhava span around its cusp:
+
+    start_H = midpoint(prev_cusp, cusp_H)
+    end_H   = midpoint(cusp_H, next_cusp)
+    House H = [start_H, end_H)          (lower inclusive, upper exclusive)
+
+The cusp sits INSIDE the house, not at its start boundary, so a planet
+that lies before the cusp but after the bhava start still belongs to that
+house (this is why Rahu lands in house 1 for User 1 Kolkata even though it
+sits before the 1st cusp). Consecutive houses share a boundary exactly
+(end_H == start_{H+1} == midpoint(cusp_H, cusp_{H+1})), so the twelve spans
+tile the circle with no gap or overlap and every planet maps to exactly one
+house. All math is modular across 360deg / 0deg Aries; zodiac sign is
+intentionally ignored.
+
+This supersedes the prior cusp-to-next-cusp membership rule for public
+occupation. Cusp longitude is still used by the KP engine for cusp
+star/sub-lord lookup; that lookup is unchanged and not computed here.
 """
 
 from __future__ import annotations
@@ -31,20 +49,40 @@ def _validated_cusps(cusps: list[float]) -> list[float]:
     return normalized
 
 
+def _bhava_boundaries(cusps: list[float]) -> list[float]:
+    """Return the 12 bhava boundaries (midpoints between adjacent cusps).
+
+    ``boundaries[i]`` is the midpoint between ``cusp_{i+1}`` and the next
+    cusp; it is simultaneously the END of house ``i + 1`` and the START of
+    house ``i + 2``. Computing each boundary once guarantees adjacent houses
+    share the identical float, so the spans tile the circle exactly.
+    """
+
+    boundaries: list[float] = []
+    for index in range(HOUSE_COUNT):
+        cusp = cusps[index]
+        next_cusp = cusps[(index + 1) % HOUSE_COUNT]
+        midpoint = (cusp + ((next_cusp - cusp) % FULL_CIRCLE) / 2) % FULL_CIRCLE
+        boundaries.append(midpoint)
+    return boundaries
+
+
 def house_of(planet_long: float, cusps: list[float]) -> int:
-    """Return the 1-based house containing planet_long by cusp spans only."""
+    """Return the 1-based house containing planet_long by bhava spans."""
 
     normalized_planet = _normalize_longitude(planet_long)
     normalized_cusps = _validated_cusps(cusps)
+    boundaries = _bhava_boundaries(normalized_cusps)
 
-    for index, cusp in enumerate(normalized_cusps):
-        next_cusp = normalized_cusps[(index + 1) % HOUSE_COUNT]
-        distance_from_cusp = (normalized_planet - cusp) % FULL_CIRCLE
-        span = (next_cusp - cusp) % FULL_CIRCLE
-        if distance_from_cusp < span:
+    for index in range(HOUSE_COUNT):
+        start = boundaries[(index - 1) % HOUSE_COUNT]
+        end = boundaries[index]
+        offset = (normalized_planet - start) % FULL_CIRCLE
+        span = (end - start) % FULL_CIRCLE
+        if offset < span:
             return index + 1
 
-    raise ValueError("planet longitude did not fall within any cusp span")
+    raise ValueError("planet longitude did not fall within any bhava span")
 
 
 def _planet_field(planet: Mapping[str, Any] | Any, field: str) -> Any:
