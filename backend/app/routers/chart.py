@@ -60,8 +60,8 @@ def _build_chart_payload(
     }
     # Nakshatra fill follows docs/nakshatra.md. KP fill follows D022: expose
     # only star_lord/sub_lord, even though the internal lookup returns more.
-    # House occupation follows docs/houses.md cusp spans; significators stay
-    # reserved and unpopulated per D023.
+    # House occupation follows docs/houses.md JHora bhava spans (D024);
+    # significators stay reserved and unpopulated per D023.
     cusps = [house["cusp_longitude"] for house in ephemeris["houses"]]
     occupants_by_house = house_occupants(ephemeris["planets"], cusps)
     house_by_planet = {

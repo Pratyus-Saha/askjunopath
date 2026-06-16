@@ -249,3 +249,42 @@ Significator public-output conflict resolution for v1.2.
 
 When the founder explicitly authorizes public significator population, after T4.1 hand-worked ladders exist and validate. That entry will supersede this deferral, not the A/B/C/D shape.
 
+## D024 — House occupation uses JHora bhava spans for public occupants
+
+**Date:** 2026-06-16 · **Status:** LOCKED
+
+### Decision
+
+* **Supersede the previous cusp-to-next-cusp house-membership rule** for `planets[].house_occupied` and `houses[].occupants`. The earlier rule (`House H = [cusp_H, cusp_{H+1})`, cusp as the start boundary) passed deterministic tests but failed JHora house-occupation parity.
+* Public house occupation must match JHora's "House Start / Cusp / End / Planets in it" table.
+* New rule:
+  * House H starts at `midpoint(prev_cusp, cusp_H)`.
+  * House H ends at `midpoint(cusp_H, next_cusp)`.
+  * `cusp_H` is **inside** the house, not the start boundary.
+  * Start boundary is **inclusive**; end boundary is **exclusive**.
+  * Modular arithmetic across 360° / 0° Aries throughout.
+* Boundary formula:
+  * `start_H = (cusp_H - ((cusp_H - prev_cusp) % 360) / 2) % 360`
+  * `end_H   = (cusp_H + ((next_cusp - cusp_H) % 360) / 2) % 360`
+  * Adjacent houses share a boundary exactly (`end_H == start_{H+1}`), so the twelve spans tile the circle with no gap or overlap.
+
+### Evidence
+
+* User 1 Kolkata (1998-08-14 06:45, Kolkata): JHora's 1st house is Start = 2 Leo 50′ 37.27″, Cusp = 17 Leo 25′ 31.92″, End = 1 Virgo 28′ 40.60″, **Planets in it = As, Rahu**. Rahu lies between the 1st-house start and end but before the 1st cusp, so JHora places it in house 1. The old cusp-to-next-cusp rule put Rahu in house 12 — wrong for the public fields.
+* Full expected 9-planet occupation for this chart: Rahu→1, Ketu→7, Jupiter→8, Moon→9, Saturn→9, Mars→11, Sun→12, Mercury→12, Venus→12. (JHora also lists Pluto→4 and Uranus/Neptune→6, but public output carries only the 9 classical planets.)
+
+### Scope boundary
+
+* This change affects **only** `house_occupied` and `occupants`.
+* **KP cusp star/sub-lord lookup is unchanged.** `houses[].kp.star_lord` / `houses[].kp.sub_lord` are still computed from the **cusp longitude** itself; the cusp-to-next-cusp arc and the cusp point lookup remain valid for KP and must not be changed.
+* **No schema bump** — `house_occupied` / `occupants` already exist in v1.2.
+* **No significator population** — D023 deferral stands.
+
+### Binds
+
+`backend/app/engines/house_engine.py`, `backend/app/routers/chart.py` (assembly wiring), `docs/houses.md`, TASKBOARD.md T4.3, the User 1 Kolkata regression in `tests/test_chart_integration.py`.
+
+### Revisit
+
+Never for the bhava-span rule itself; the midpoint formula is JHora's definition. Re-examine only if a JHora comparison surfaces an occupancy mismatch on a validated chart.
+

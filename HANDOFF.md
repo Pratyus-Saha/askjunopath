@@ -29,6 +29,21 @@ How this file works:
 
 # Entries
 
+## T4.3-correction — agent/claude/house-bhava-rule — 2026-06-16 — Claude Code
+**Built:** Corrected public house occupation to match JHora's "House Start / Cusp / End / Planets in it" table (D024). Replaced the cusp-to-next-cusp membership rule (`House H = [cusp_H, cusp_{H+1})`) in `house_engine` with JHora **bhava midpoint spans**: `start_H = midpoint(prev_cusp, cusp_H)`, `end_H = midpoint(cusp_H, next_cusp)`, start inclusive / end exclusive, cusp interior, modular across 0° Aries. Affects only `planets[].house_occupied` and `houses[].occupants`; the KP cusp star/sub-lord lookup (from cusp longitude) is untouched.
+**Why / evidence:** The old rule put Rahu in house 12 for User 1 Kolkata (1998-08-14 06:45, Kolkata). JHora's table shows the 1st house as Start 2 Leo 50′, Cusp 17 Leo 25′, End 1 Virgo 28′, **Planets in it = As, Rahu** — Rahu lies after the 1st-house start but before the 1st cusp, so it belongs to house 1. The bhava-span rule reproduces JHora's column exactly.
+**Final User 1 Kolkata occupation (verified, matches JHora "Planets in it"):** Rahu→1, Ketu→7, Jupiter→8, Moon→9, Saturn→9, Mars→11, Sun→12, Mercury→12, Venus→12. (JHora also lists Pluto→4, Uranus/Neptune→6; our public output carries only the 9 classical planets, so those are not asserted.)
+**Files changed:**
+- `backend/app/engines/house_engine.py` (bhava-span membership; `chart.py` needed no change — it already calls the engine helpers)
+- `tests/test_house_engine.py` (unit tests rewritten for bhava spans: interior, wraparound across 0°, start inclusive, end exclusive, cusp-interior, all-9-once, consistency)
+- `tests/test_chart_integration.py` (renamed derivation test to bhava spans; added live User 1 Kolkata regression)
+- `docs/houses.md`, `DECISIONS.md` (D024), `TASKBOARD.md`, `HANDOFF.md`
+**Tests run:**
+- `set SE_EPHE_PATH=C:\Users\assas\swisseph\ephe` then `uv run --with-requirements backend\requirements.txt --with pytest python -m pytest tests\test_house_engine.py tests\test_chart_integration.py tests\test_chart_route.py tests\test_kp_jhora_validation.py tests\test_kp_engine.py tests\test_kp_table.py tests\test_schema_roundtrip.py tests\test_health.py -q` → **109 passed, 2 warnings**.
+**Known issues / deferred:** Significators stay RESERVED/unpopulated (D023). No legacy cusp KP fields re-added. No schema/version bump. This correction blocks T4.1/T4.2 until merged (significators read occupation). No push performed per prompt.
+**Next agent should read:** `docs/houses.md`, `DECISIONS.md` D024, `backend/app/engines/house_engine.py`, `tests/test_chart_integration.py`.
+**Tempted but did not:** change the KP cusp star/sub-lord lookup, populate significators, add owner logic, touch schema/model files, bump schema or engine version, or alter ephemeris/nakshatra/KP math.
+
 ## T4.3 — agent/codex/house-engine — 2026-06-16 16:57 — Codex
 **Built:** Added `house_engine` cusp-span occupation helpers and wired `/chart/generate` so every public planet gets `house_occupied` and every house gets the inverse `occupants` list. Significator placeholders remain unpopulated, and KP/nakshatra/ephemeris math was left untouched.
 **Files changed:**
