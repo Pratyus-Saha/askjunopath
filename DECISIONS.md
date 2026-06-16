@@ -154,3 +154,58 @@ backward safety. Execute BEFORE any KP schema expansion.
 that belong in the contract, not in a temporary frontend wrapper.
 **Outcome:** Closed 2026-06-15 on `agent/codex/schema-metadata-v1-1`. Schema v1.1 legalizes optional strict chart metadata with birth input, geocode, ayanamsa, and engine version fields; frontend ChartData was regenerated from the schema.
 **Revisit:** next additive metadata field or KP schema expansion.
+
+## D022 — KP output shape for MVP
+
+**Status:** Decided
+**Date:** 2026-06-16
+
+### Decision
+
+For the MVP, KP output will use a minimal self-contained `kp` object on both planets and houses:
+
+```json
+"kp": {
+  "star_lord": "Sun",
+  "sub_lord": "Venus"
+}
+```
+
+This shape will be used later during chart integration for:
+
+* `planets[].kp`
+* `houses[].kp`
+
+### Reasoning
+
+The MVP needs KP star-lord and sub-lord visibility without over-expanding the schema too early. A two-field object is enough to support meaningful KP-based chart reading while keeping the response shape easy to validate, easy to render, and easy to extend later.
+
+Although `planets[].nakshatra.lord` already represents the star lord, the `kp` object will repeat `star_lord` intentionally so the KP block remains self-contained and readable.
+
+### Deferred fields
+
+The following fields may exist internally inside the lookup engine or tests, but will not be added to the public chart schema yet:
+
+* `sub_index`
+* `sub_start_longitude`
+* `sub_end_longitude`
+* `degree_in_sub`
+* `sub_sub_lord`
+* KP significators
+* KP ruling planets
+* KP prediction fields
+
+### Schema versioning
+
+The KP table generator and lookup engine do not change the public chart response shape.
+
+Therefore:
+
+* KP table generator: no schema bump.
+* KP lookup engine: no schema bump if it remains internal.
+* KP chart integration: bump schema from `1.1` to `1.2`.
+
+### Guardrail
+
+Agents must not invent additional public KP fields during table generation or lookup work. Schema v1.2 should happen only when KP is integrated into chart output.
+
