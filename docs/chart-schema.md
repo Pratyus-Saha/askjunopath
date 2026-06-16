@@ -1,8 +1,15 @@
-# Chart Schema Specification: chart.json v1.0
-**Files:** `schemas/chart.json` (the contract) + `backend/schemas/models.py` (pydantic v2 enforcement)
-**Spec version:** 1.0. FREEZES tonight (Day 1). After the freeze, changes are additive only and bump the version (Rule 5).
-**Owner tool:** Codex, branch `codex/schemas` only. Never touches main directly. Claude Pro attacks this spec before the freeze; you patch, then tag v1.0.
+# Chart Schema Specification: chart.json (current: v1.2)
+**Files:** `schemas/chart.json` (the contract) + `backend/app/schemas/models.py` (pydantic v2 enforcement)
+**Spec version history:** v1.0 froze Day 1 (D001); v1.1 added optional `metadata` (D021); **v1.2 is current** — adds required `kp` blocks on `planets[]`/`houses[]` and removes the legacy `houses[].cusp_*` KP fields (D022). After each freeze, changes are additive only and bump the version (Rule 5).
+**Owner tool:** Codex, branch `codex/schemas` only. Never touches main directly. Claude Pro attacks this spec before each freeze; you patch, then tag.
 **Source:** Master plan Sections 5, 11, 13, 14, 19, 20; playbook Day 1 and Rule 5.
+
+> **v1.2 CONTRACT SYNC (2026-06-16).** This doc was reconciled with the shipped schema v1.2. The body below still carries the original v1.0 narrative for history; where it conflicts with the points here, **these points win**:
+> - `schema_version` is `"1.2"`. Engine/cache output carries `metadata.engine_version = "1.4.0"`.
+> - Public KP shape is exactly `planets[].kp.{star_lord, sub_lord}` and `houses[].kp.{star_lord, sub_lord}`. There is **no** `sub_sub_lord` in public output.
+> - The legacy public house fields `houses[].cusp_star_lord`, `houses[].cusp_sub_lord`, `houses[].cusp_sub_sub_lord` are **REMOVED** from the contract (deleted in schema v1.2; see HANDOFF `remove-legacy-cusp-kp-fields`). Where they still appear below they are marked REMOVED and kept only as historical context — they are NOT the current public contract.
+> - `planets[].house_occupied` and `houses[].occupants` already exist in v1.2 (present since v1.0) and are filled by the house_engine via CUSP SPANS (`docs/houses.md`). Populating them is NOT a schema bump.
+> - Significator fields (`houses[].significators`, `planets[].significator_of_houses`, `planets[].significator_levels`) exist in the model/schema but are **RESERVED / NOT POPULATED in v1.2**, pending decision D023. No agent populates them in public output yet.
 
 ---
 
@@ -30,11 +37,11 @@ This table prevents agents from filling fields they do not own. Fields owned by 
 | `birth.*`, `settings.*` | ephemeris_engine | 1 |
 | `planets[].name/longitude/sign/sign_lord/sign_degree/retrograde/combust/speed_deg_per_day` | ephemeris_engine | 1 |
 | `houses[].cusp_longitude/cusp_sign/cusp_sign_lord` + ascendant | ephemeris_engine | 1 |
-| `planets[].nakshatra`, `houses[].cusp_nakshatra/cusp_star_lord` | nakshatra_engine | 2 |
-| `planets[].kp` | kp_engine | 3 |
-| `houses[].cusp_sub_lord/cusp_sub_sub_lord` | kp_engine | 4 |
-| `planets[].house_occupied`, `houses[].occupants` | house_engine (cusp spans, never by sign) | 4 |
-| `houses[].significators`, `planets[].significator_of_houses/significator_levels` | kp_engine + house_engine | 4 |
+| `planets[].nakshatra`, `houses[].cusp_nakshatra` | nakshatra_engine | 2 |
+| `planets[].kp` (`star_lord`, `sub_lord`), `houses[].kp` (`star_lord`, `sub_lord`) | kp_engine | 3 — integrated into chart output in v1.2 (D022) |
+| ~~`houses[].cusp_star_lord`, `houses[].cusp_sub_lord`, `houses[].cusp_sub_sub_lord`~~ | **REMOVED in v1.2** — replaced by `houses[].kp` | — |
+| `planets[].house_occupied`, `houses[].occupants` | house_engine (CUSP SPANS, never by sign; `docs/houses.md`) | 4 — already in schema since v1.0, no bump to populate |
+| `houses[].significators`, `planets[].significator_of_houses/significator_levels` | **RESERVED — not populated in v1.2 (D023)**; future owner kp_engine + house_engine | deferred |
 | `dashas` | dasha_engine | 5 |
 | `strengths` | strength_engine | 6 |
 | `divisional` | divisional_engine | 6 |
@@ -47,7 +54,7 @@ This table prevents agents from filling fields they do not own. Fields owned by 
 
 ```json
 {
-  "schema_version": "1.0",
+  "schema_version": "1.2",
   "birth": {
     "datetime_local": "1994-03-21T14:35:00",
     "datetime_utc": "1994-03-21T09:05:00Z",
@@ -79,7 +86,7 @@ Field constraints:
 
 | Field | Type / constraint |
 |---|---|
-| `schema_version` | `Literal["1.0"]` |
+| `schema_version` | `Literal["1.2"]` (current; v1.0/v1.1 are superseded) |
 | `birth.datetime_local` | ISO 8601 naive local datetime string |
 | `birth.datetime_utc` | ISO 8601 UTC with `Z` suffix |
 | `birth.timezone` | IANA zone string, required and non-empty. The API resolves it server-side from lat/lon when the client omits it (Section 20); by the time a chart object exists, timezone is always present. A chart with a missing timezone is invalid. |
@@ -120,7 +127,7 @@ Shared scalar conventions, used everywhere below:
   "nakshatra": { "name": "Purva Bhadrapada", "index": 25, "lord": "Jupiter",
                  "degree_in_nakshatra": 8.7184, "pada": 3,
                  "degree_in_pada": 2.0517, "navamsa_sign": "Libra" },
-  "kp": { "star_lord": "Jupiter", "sub_lord": "Venus", "sub_sub_lord": "Saturn" },
+  "kp": { "star_lord": "Jupiter", "sub_lord": "Venus" },
   "significator_of_houses": [3, 6, 10, 11],
   "significator_levels": { "10": "A", "6": "B", "3": "C", "11": "D" }
 }
@@ -136,9 +143,9 @@ Constraints beyond the shared conventions:
   - `degree_in_nakshatra`: `float, ge=0, lt=13.333334` (13°20')
   - `degree_in_pada`: `float, ge=0, lt=3.333334` (3°20')
   - `lord`: `PlanetName`; `navamsa_sign`: `SignName`
-- `kp`: `Optional[KpBlock] = None` until Day 3. All three lords are `PlanetName`.
-- `significator_of_houses`: `list[int 1..12]`, default `[]`, sorted ascending, no duplicates (validator).
-- `significator_levels`: `dict[str, Literal["A","B","C","D"]]`, default `{}`. Keys are stringified house numbers and must be a subset of `significator_of_houses` (validator).
+- `kp`: `KpBlock`, **required in v1.2**. Exactly two keys, `star_lord` and `sub_lord`, both `PlanetName`. (Earlier v1.0 drafts showed a third `sub_sub_lord`; it is NOT in the public contract — sub-sub lord stays internal to the lookup engine per D022.)
+- `significator_of_houses`: `list[int 1..12]`, default `[]`, sorted ascending, no duplicates (validator). **RESERVED — not populated in public output in v1.2 (D023).**
+- `significator_levels`: `dict[str, Literal["A","B","C","D"]]`, default `{}`. Keys are stringified house numbers and must be a subset of `significator_of_houses` (validator). **RESERVED — not populated in public output in v1.2 (D023).**
 
 ---
 
@@ -149,8 +156,8 @@ Constraints beyond the shared conventions:
   "house": 10,
   "cusp_longitude": 158.2342,
   "cusp_sign": "Virgo", "cusp_sign_lord": "Mercury",
-  "cusp_nakshatra": "Hasta", "cusp_star_lord": "Moon",
-  "cusp_sub_lord": "Venus", "cusp_sub_sub_lord": "Mercury",
+  "cusp_nakshatra": "Hasta",
+  "kp": { "star_lord": "Moon", "sub_lord": "Venus" },
   "occupants": ["Saturn"],
   "significators": {
     "A_in_star_of_occupants": ["Mercury", "Ketu"],
@@ -161,10 +168,11 @@ Constraints beyond the shared conventions:
 }
 ```
 
-- `cusp_nakshatra`, `cusp_star_lord`: `Optional` until Day 2.
-- `cusp_sub_lord`, `cusp_sub_sub_lord`: `Optional[PlanetName]` until Day 4.
-- `occupants`: `list[PlanetName]`, default `[]`, filled Day 4 via cusp spans.
-- `significators`: `Optional[SignificatorLadder] = None` until Day 4. All four levels are `list[PlanetName]` with default `[]`. The A/B/C/D level names are part of the contract; the scorer and the synthesis payload both read them.
+- `cusp_nakshatra`: name STRING or null. (`cusp_star_lord` was **REMOVED in v1.2**; the cusp star lord is now exposed as `houses[].kp.star_lord`.)
+- ~~`cusp_sub_lord`, `cusp_sub_sub_lord`~~: **REMOVED in v1.2.** Public cusp KP is now `houses[].kp.{star_lord, sub_lord}`. The internal lookup engine may still compute a sub-sub lord, but it is not in the public contract (D022).
+- `kp`: `KpBlock`, **required in v1.2**. Exactly `star_lord` and `sub_lord`, both `PlanetName`, copied from the internal KP lookup at the cusp longitude.
+- `occupants`: `list[PlanetName]`, default `[]`, filled Day 4 via CUSP SPANS only (`docs/houses.md`). Already in the schema since v1.0; populating it is not a schema bump.
+- `significators`: `Optional[SignificatorLadder] = None`. All four levels are `list[PlanetName]` with default `[]`. The A/B/C/D level names are part of the contract; the scorer and synthesis payload will read them once populated. **RESERVED — not populated in public output in v1.2 (D023).**
 
 ---
 

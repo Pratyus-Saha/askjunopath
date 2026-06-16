@@ -2,6 +2,13 @@
 **Read this first in every agent session. Then read AGENTS.md, then your task's spec doc.**
 **Last updated: June 12, 2026 (Day 2 morning, post-Day-1 verification). Maintainer: founder. Agents never edit this file.**
 
+> **CONTRACT SYNC ADDENDUM (2026-06-16).** Some point-in-time figures in the body below predate the KP work. Current truth, which wins where it conflicts:
+> - Canonical chart object is **schema v1.2** (v1.0 froze D001, v1.1 added metadata D021, v1.2 added KP blocks + removed legacy cusp KP fields D022).
+> - **Engine/cache version is `1.4.0`** (`metadata.engine_version`); the v1.2.0 figures in §4/§8 are the Day-1 snapshot.
+> - **KP JHora validation is complete and merged** (5 charts × 21 objects; 94 passed, 2 warnings on the relevant slice). Public KP is `planets[].kp.{star_lord, sub_lord}` and `houses[].kp.{star_lord, sub_lord}`.
+> - **Next task: `house_engine`** (T4.3, `agent/codex/house-engine`) — occupancy via cusp spans (`docs/houses.md`).
+> - **Significators are RESERVED / not populated in v1.2** pending D023.
+
 ---
 
 ## 1. What AskJunoPath Is
@@ -38,7 +45,7 @@ birth input (date, time, city, approximate_time flag)
   → frontend              prediction card with all logic expandable
 ```
 
-Everything above the synthesizer is deterministic and fixture-tested. One canonical `chart.json` object (schema v1.0, frozen) is computed once per birth input, stored in Supabase, and read by every downstream stage. Engines never recompute each other's outputs.
+Everything above the synthesizer is deterministic and fixture-tested. One canonical `chart.json` object (schema **v1.2**; v1.0 froze the contract and additive bumps followed) is computed once per birth input, stored in Supabase, and read by every downstream stage. Engines never recompute each other's outputs.
 
 Domains in scope: **career, finance, relationship**. Health is excluded from interpretation scope entirely, permanently.
 
@@ -203,9 +210,9 @@ Three frontend laws:
 
 ## 10. Data Conventions
 
-- Canonical chart object: `chart.json` v1.0, embedded `schema_version`, stored in `user_charts.chart_json` (the column is named `chart_json`, not `chart`; this bit once). Caching key: `chart_fingerprint` per user. Cache rows predating June 11 validation are untrusted and flushed if the Day 1 diff shows drift.
+- Canonical chart object: `chart.json` **v1.2** (current; v1.0 was the original freeze), embedded `schema_version`, stored in `user_charts.chart_json` (the column is named `chart_json`, not `chart`; this bit once). Caching key: `chart_fingerprint` per user. Cache rows predating June 11 validation are untrusted and flushed if the Day 1 diff shows drift.
 - Nakshatra index is **1-based in API output** (1 = Ashwini, 27 = Revati). Internal code may be 0-based; the schema wins at the boundary. Pada 1-4. Longitudes `[0, 360)`, 4-decimal serialization. Full convention, boundary rule (lower inclusive, upper exclusive; exact 13°20'00" belongs to the next nakshatra), integer arc-second math, and the lord table: `docs/nakshatra.md`.
-- **Nakshatra schema shapes, frozen:** `planets[].nakshatra` is a `NakshatraBlock` or null, with exactly these keys and nothing else (`additionalProperties: false`): `name, index, lord, degree_in_nakshatra, pada, degree_in_pada, navamsa_sign`. `houses[].cusp_nakshatra` is a **name string** or null, never an object. Cusp KP data lives in separate fields (`cusp_star_lord`, `cusp_sub_lord`, `cusp_sub_sub_lord`), filled June 14.
+- **Nakshatra schema shapes, frozen:** `planets[].nakshatra` is a `NakshatraBlock` or null, with exactly these keys and nothing else (`additionalProperties: false`): `name, index, lord, degree_in_nakshatra, pada, degree_in_pada, navamsa_sign`. `houses[].cusp_nakshatra` is a **name string** or null, never an object. Public cusp KP data now lives in `houses[].kp.{star_lord, sub_lord}` (schema v1.2, D022); the legacy separate fields `cusp_star_lord` / `cusp_sub_lord` / `cusp_sub_sub_lord` were **REMOVED in v1.2** and must not be re-added.
 - Confidence tiers: 85-100 HIGH, 65-84 MEDIUM, 45-64 SPECULATIVE, <45 weak signal (no forced prediction).
 - Strength tiers: 70+ STRONG, 45-69 MODERATE, <45 WEAK.
 - Significator levels: A (in star of occupants), B (occupants), C (in star of owner), D (owner).

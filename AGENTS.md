@@ -34,8 +34,11 @@ One writer per file. The TASKBOARD.md row for your task is the authority on what
 
 ### 2.1 Claude Code — precision backend
 
+**Lane in one line:** astrology logic — KP significator ladder (the A/B/C/D ladder, when D023 is lifted), node-agency reasoning, dasha/strength/transit/scoring math, and interpretation logic.
+
 Owns:
 - `backend/app/engines/**`
+- the KP **significator ladder** and node-agency logic (T4.2, Claude's lane — not Codex's), once T4.1 hand-worked ladders exist and the founder lifts the D023 deferral
 - `tests/test_*.py` for engines
 - `tests/fixtures/**` (loading harnesses and structure; expectation VALUES come from the founder)
 - API wiring in `backend/app/routers/**` when a task explicitly assigns it (e.g., nakshatra integration on Day 2, `/predict` endpoints on Day 11)
@@ -48,13 +51,15 @@ Never:
 
 ### 2.2 Codex — boilerplate and plumbing
 
+**Lane in one line:** deterministic engines, schema-safe wiring, and tests — including `house_engine` (occupancy via cusp spans). NOT KP significators, NOT prediction/interpretation logic.
+
 Owns:
 - `backend/schemas/**`, `schemas/chart.json`
 - database migrations, table DDL per master plan Section 19
 - generators (`scripts/generate_sublord_table.py`, `scripts/ingest.py`)
 - CRUD endpoints, `/health`
 - `Dockerfile`, `backend/.dockerignore`, CI workflows, test scaffolds
-- `backend/app/engines/` files ONLY when a task explicitly assigns one (e.g., nakshatra_engine, strength_engine per the plan's day pages)
+- `backend/app/engines/` files ONLY when a task explicitly assigns one (e.g., nakshatra_engine, strength_engine, and **house_engine** — occupancy/owners via CUSP SPANS only, `docs/houses.md` — per the plan's day pages). The authoritative engine path is `backend/app/engines/`, never `backend/engines/` (D017 / Rule 14).
 
 Docker rules specific to this lane (born from the June 11 version bug):
 - **Never copy `.env` into a Docker image.** `backend/.dockerignore` excludes `.env` and `.env.*`; do not weaken those exclusions for any reason. Production env vars come from Azure Container App secrets/runtime only.
@@ -62,6 +67,7 @@ Docker rules specific to this lane (born from the June 11 version bug):
 
 Never:
 - KP sublord logic, dasha math, scoring, or transit logic unless the spec is fully explicit and the task assigns it
+- **KP significators or prediction/interpretation logic** — these are Claude Code's lane (D023). Codex may implement `house_engine` occupancy, but never the significator ladder.
 - `backend/app/core/chart_engine.py` (deprecated)
 - frontend anything
 - merging its own PRs
@@ -114,8 +120,9 @@ Claude Pro (review, spec attacks, quality checklists), Gemini Pro (tagging, form
 - Longitudes `[0, 360)`, 4-decimal serialization. Sign degrees `[0, 30)`.
 - Nakshatra index 1-based in API output (1 = Ashwini, 27 = Revati). Internal code may be 0-based; the schema wins at the boundary. Pada 1-4.
 - Nakshatra boundary rule: lower bound inclusive, upper exclusive; an exact boundary belongs to the NEXT segment (exactly 13°20'00" is Bharani pada 1). All boundary math in integer arc-seconds; floats only at the output layer. Full convention: `docs/nakshatra.md`.
-- `planets[].nakshatra` is a `NakshatraBlock` (exactly seven keys: name, index, lord, degree_in_nakshatra, pada, degree_in_pada, navamsa_sign) or null. `houses[].cusp_nakshatra` is a name STRING or null, never an object. Cusp KP fields (`cusp_star_lord`, `cusp_sub_lord`, `cusp_sub_sub_lord`) are separate and arrive June 14.
-- House membership = cusp spans. Never assign a planet to a house by its sign.
+- `planets[].nakshatra` is a `NakshatraBlock` (exactly seven keys: name, index, lord, degree_in_nakshatra, pada, degree_in_pada, navamsa_sign) or null. `houses[].cusp_nakshatra` is a name STRING or null, never an object. Public KP (schema v1.2, D022) is exactly `planets[].kp.{star_lord, sub_lord}` and `houses[].kp.{star_lord, sub_lord}`. The legacy `cusp_star_lord` / `cusp_sub_lord` / `cusp_sub_sub_lord` house fields were REMOVED in v1.2 — do not re-add them.
+- House membership = **cusp spans** (House H = `[cusp_H, cusp_{H+1})`, modular wraparound, planet-on-cusp belongs to the house starting there). **Never assign a planet to a house by its sign / whole-sign.** Full rule: `docs/houses.md`.
+- Significators (`houses[].significators`, `planets[].significator_of_houses`, `planets[].significator_levels`) are RESERVED and NOT populated in public output in v1.2 (D023).
 - Dasha dates to the day, never the month. Year = 365.25 days.
 - Confidence tiers: HIGH 85-100, MEDIUM 65-84, SPECULATIVE 45-64, weak signal below 45.
 - Backend port 8000. Schema version embedded in every stored chart.

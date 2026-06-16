@@ -29,6 +29,23 @@ How this file works:
 
 # Entries
 
+## docs-contract-sync — docs/house-significator-contract-sync — 2026-06-16 — Claude Code
+**Built:** Documentation-only contract sync so the next agent reads one consistent source of truth. No product/engine/schema code touched.
+**Current state (authoritative as of this entry):**
+- **KP JHora validation is merged.** 5 JHora charts × (9 planets + 12 houses) = 21 objects each, 105 object validations; relevant slice passed 94, 2 warnings.
+- **Public KP contract validated and frozen** at `planets[].kp.{star_lord, sub_lord}` and `houses[].kp.{star_lord, sub_lord}` (schema v1.2, D022). No `sub_sub_lord` in public output.
+- **Legacy public cusp KP fields removed:** `houses[].cusp_star_lord` / `cusp_sub_lord` / `cusp_sub_sub_lord` are gone from model + schema + generated frontend type.
+- Schema is **v1.2**; engine/cache version is **1.4.0**. `chart-schema.md` has been synced to v1.2 (banner + inline fixes).
+- `docs/houses.md` created with the **cusp-span** house-boundary rule (House H = `[cusp_H, cusp_{H+1})`, modular wraparound, planet-on-cusp belongs to the house starting there, never by sign).
+- Significators are **RESERVED / NOT POPULATED in v1.2** pending **D023** (added this pass): D022 still governs, no agent invents public significator fields, the existing A/B/C/D ladder is the only future-compatible shape, T4.2 (significators) is Claude's lane, T4.3 (`house_engine`) is Codex's lane.
+**Next task:** `agent/codex/house-engine` (T4.3) — fill `planets[].house_occupied` + `houses[].occupants` via cusp spans, wired into chart output; no schema bump, no significators, no KP changes, no prediction logic. Acceptance is spelled out in TASKBOARD.md under Day 4.
+**Before significators:** complete T4.1 manual hand-worked ladders and obtain an explicit founder decision lifting D023.
+**Files changed:** `docs/chart-schema.md`, `docs/houses.md` (new), `TASKBOARD.md`, `DECISIONS.md` (D023), `AGENTS.md`, `docs/PROJECT_CONTEXT.md`, `HANDOFF.md`.
+**Tests run:** none — docs only. Verified with `git grep` that legacy cusp fields appear only as REMOVED notes in the edited docs, no midpoint-to-midpoint house language exists, T4.3 branch is `agent/codex/house-engine` and includes `chart.py` + `test_chart_integration.py`, and D023 blocks public significator population.
+**Known issues / deferred:** out-of-scope docs still carry legacy/planned cusp KP references and were NOT edited (not in this task's allowed-files list): `docs/nakshatra.md` (lines ~123-125), `docs/ephemeris.md` (line ~21, lists `cusp_sub_lord` as a later-engine field), `docs/execution/junopath_mvp_plan_jun22.md` (house example). Recommend a follow-up sync task for those.
+**Next agent should read:** `DECISIONS.md` D022 + D023, `docs/chart-schema.md` (v1.2 banner), `docs/houses.md`, TASKBOARD.md T4.3 acceptance.
+**Tempted but did not:** edit schema/model/router/tests/frontend (verified schema and model already agree at v1.2, so no change needed); edit the out-of-scope docs listed above; touch T4.2's scope beyond marking the removed legacy cusp fields.
+
 ## remove-legacy-cusp-kp-fields — agent/codex/remove-legacy-cusp-kp-fields — 2026-06-16 14:05 — Codex
 **Built:** Removed the stale public `houses[]` legacy cusp KP placeholder fields (`cusp_star_lord`, `cusp_sub_lord`, `cusp_sub_sub_lord`) from the Pydantic model, JSON schema, and generated frontend chart type. Public house KP remains only at `houses[].kp.star_lord` and `houses[].kp.sub_lord`, per D022/schema v1.2.
 **Files changed:**
