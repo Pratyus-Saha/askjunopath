@@ -213,3 +213,39 @@ Agents must not invent additional public KP fields during table generation or lo
 
 Implemented 2026-06-16 on `agent/codex/kp-chart-integration`: schema v1.2 adds required strict `kp` blocks to `planets[]` and `houses[]`, with only `star_lord` and `sub_lord`. Public chart assembly copies only those two fields from the internal lookup result, and chart/cache version `1.4.0` plus route schema validation prevent stale pre-v1.2 cached charts from being returned.
 
+## D023 — Significator public-output conflict resolution for v1.2
+
+**Date:** 2026-06-16 · **Status:** LOCKED
+
+### Title
+
+Significator public-output conflict resolution for v1.2.
+
+### Decision
+
+* **D022 remains governing for now.** It deferred public KP significators; that deferral stands.
+* Significators are **reserved** in the current model/schema but **must not be populated in public chart output in v1.2**.
+* **No agent may invent new public significator fields.**
+* The existing fields `houses[].significators`, `planets[].significator_of_houses`, and `planets[].significator_levels` — which are present in `backend/app/schemas/models.py` and `schemas/chart.json` — are **reserved placeholders** until a later founder decision explicitly permits population.
+* The only future-compatible public shape under consideration is the existing **A/B/C/D ladder** already in the schema:
+  * `houses[].significators.A_in_star_of_occupants`
+  * `houses[].significators.B_occupants`
+  * `houses[].significators.C_in_star_of_owner`
+  * `houses[].significators.D_owner`
+  * `planets[].significator_of_houses`
+  * `planets[].significator_levels` as a house → `"A" | "B" | "C" | "D"` map
+* Do **not** implement the alternative traceable shape (`star_lord_occupies` / `planet_occupies` / `star_lord_owns` / `planet_owns`): it would collide with the existing contract and require schema changes.
+* **T4.1** (manual, hand-worked ladders) must happen before any significator engine.
+* **T4.2** significator implementation is **Claude Code's lane, not Codex.**
+* **Codex may implement `house_engine` only** (T4.3: occupancy via cusp spans, no significators).
+
+### Rationale
+
+* D022 deferred public KP significators, while the schema/model currently contain reserved significator fields — a governance conflict that had to be pinned before anyone implements significators.
+* This decision prevents public API drift while preserving forward compatibility (the A/B/C/D ladder already exists, so adopting it later is not a breaking rename).
+* It blocks accidental population of significators before manual validation (T4.1) and a future founder go-ahead.
+
+### Revisit
+
+When the founder explicitly authorizes public significator population, after T4.1 hand-worked ladders exist and validate. That entry will supersede this deferral, not the A/B/C/D shape.
+

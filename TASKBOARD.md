@@ -95,12 +95,22 @@ Midday cut: sub-sub lord DISPLAY (computation stays); landing polish beyond acce
 | ID | Owner | Branch | Files owned | Depends on | Test / acceptance | Status |
 |---|---|---|---|---|---|---|
 | T4.1 | Founder | — | tests/fixtures/significators/*.json (3 hand-worked ladders) | morning, BEFORE T4.2/T4.3 run | ladders worked on paper from raw chart data | NOT STARTED |
-| T4.2 | Claude Code | agent/claude/kp-cusp | backend/app/engines/kp_engine.py (cusp functions), tests/test_kp_cusp.py, tests/test_significators.py | T3.2 MERGED; T4.1 | 12 cusp sublords exact on 10 charts; 3 ladder fixtures green; node agency per Section 8; fills cusp_star_lord / cusp_sub_lord / cusp_sub_sub_lord | NOT STARTED |
-| T4.3 | Codex | agent/codex/house-engine | backend/app/engines/house_engine.py, tests/test_house_engine.py | docs spec (founder, morning) | occupants/owners via CUSP SPANS; planets[].house_occupied + houses[].occupants filled; wraparound fixtures; planet-within-0.01°-of-cusp fixture | NOT STARTED |
+| T4.2 | Claude Code | agent/claude/kp-cusp | backend/app/engines/kp_engine.py (cusp functions), tests/test_kp_cusp.py, tests/test_significators.py | T3.2 MERGED; T4.1 | 12 cusp sublords exact on 10 charts; 3 ladder fixtures green; node agency per Section 8. NOTE: public cusp KP is now `houses[].kp.{star_lord, sub_lord}` (v1.2/D022); the legacy `cusp_star_lord` / `cusp_sub_lord` / `cusp_sub_sub_lord` fields were REMOVED and must not be re-added. Significators stay RESERVED (D023). | NOT STARTED |
+| T4.3 | Codex | agent/codex/house-engine | backend/app/engines/house_engine.py, tests/test_house_engine.py, backend/app/routers/chart.py (assembly wiring ONLY), tests/test_chart_integration.py | docs/houses.md (founder spec) | See **T4.3 acceptance (explicit)** below. Occupants via CUSP SPANS only; planets[].house_occupied + houses[].occupants filled and wired into chart output; wraparound + planet-within-0.01°-of-cusp fixtures. | NOT STARTED |
 | T4.4 | Antigravity | agent/antigravity/birth-input | frontend/app/chart/page.tsx (form section), frontend/src/components/birth/** | none (form logic) | approximate_time toggle (default false) persists to request; LAT_UNSUPPORTED + 422 rendered friendly; loading state with wait expectation | NOT STARTED |
 | T4.5 | Founder | — | KP GATE | T4.2, T4.3 MERGED | 25/25 planet + 10/10 cusp sets + ladders green → gate recorded in scorecard | NOT STARTED |
 
 Midday cut: significator strength tiers default flat (restore Day 7); Antigravity error-state polish. The gate itself is uncuttable; if it fails, Day 5 morning continues Day 4.
+
+**T4.3 acceptance (explicit).** The task is DONE only when all hold:
+- `planets[].house_occupied` is filled (integer `1..12` for every planet).
+- `houses[].occupants` is filled (the inverse of `house_occupied`).
+- Assignment is by **cusp spans only**: House H = `[cusp_H, cusp_{H+1})`, modular wraparound across 0° Aries, a planet exactly on a cusp belongs to the house starting at that cusp, never assigned by sign / whole-sign. Per `docs/houses.md`.
+- **No schema bump** — `house_occupied` and `occupants` already exist in v1.2.
+- **No significator population** — `significators` / `significator_of_houses` / `significator_levels` stay RESERVED (D023).
+- **No KP block changes** — `planets[].kp` / `houses[].kp` untouched.
+- **No prediction logic.**
+- **Chart wiring is included** because acceptance requires the public fields to be filled: `backend/app/routers/chart.py` (assembly wiring only) plus `tests/test_chart_integration.py` are in T4.3's row so the populated fields reach chart output. (chart.py is wired sequentially across tasks; T4.3 owns it for this change.)
 
 ---
 
