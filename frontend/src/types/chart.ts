@@ -140,15 +140,6 @@ export type CuspSign =
   | "Pisces";
 export type CuspSignLord = "Sun" | "Moon" | "Mars" | "Mercury" | "Jupiter" | "Venus" | "Saturn" | "Rahu" | "Ketu";
 export type CuspNakshatra = string | null;
-export type CuspStarLord =
-  | ("Sun" | "Moon" | "Mars" | "Mercury" | "Jupiter" | "Venus" | "Saturn" | "Rahu" | "Ketu")
-  | null;
-export type CuspSubLord =
-  | ("Sun" | "Moon" | "Mars" | "Mercury" | "Jupiter" | "Venus" | "Saturn" | "Rahu" | "Ketu")
-  | null;
-export type CuspSubSubLord =
-  | ("Sun" | "Moon" | "Mars" | "Mercury" | "Jupiter" | "Venus" | "Saturn" | "Rahu" | "Ketu")
-  | null;
 export type Occupants = ("Sun" | "Moon" | "Mars" | "Mercury" | "Jupiter" | "Venus" | "Saturn" | "Rahu" | "Ketu")[];
 export type AInStarOfOccupants = (
   | "Sun"
@@ -366,9 +357,6 @@ export interface HouseBlock {
   cusp_sign_lord: CuspSignLord;
   cusp_nakshatra?: CuspNakshatra;
   kp: KpBlock;
-  cusp_star_lord?: CuspStarLord;
-  cusp_sub_lord?: CuspSubLord;
-  cusp_sub_sub_lord?: CuspSubSubLord;
   occupants?: Occupants;
   significators?: SignificatorLadder | null;
 }

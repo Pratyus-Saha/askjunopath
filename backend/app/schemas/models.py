@@ -229,9 +229,6 @@ class HouseBlock(StrictModel):
     cusp_sign_lord: PlanetName
     cusp_nakshatra: str | None = None
     kp: KpBlock
-    cusp_star_lord: PlanetName | None = None
-    cusp_sub_lord: PlanetName | None = None
-    cusp_sub_sub_lord: PlanetName | None = None
     occupants: list[PlanetName] = Field(default_factory=list)
     significators: SignificatorLadder | None = None
 

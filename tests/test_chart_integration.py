@@ -63,6 +63,11 @@ INTERNAL_KP_KEYS = {
     "longitude",
     "arcsec",
 }
+LEGACY_CUSP_KP_FIELDS = {
+    "cusp_star_lord",
+    "cusp_sub_lord",
+    "cusp_sub_sub_lord",
+}
 
 NAKSHATRA_NAMES = {name for name, _lord in NAKSHATRAS}
 
@@ -252,6 +257,7 @@ def test_every_house_has_public_kp_block_only(chart):
         assert isinstance(kp, dict), house["house"]
         assert set(kp) == APPROVED_KP_BLOCK_KEYS, house["house"]
         assert set(kp).isdisjoint(INTERNAL_KP_KEYS), house["house"]
+        assert set(house).isdisjoint(LEGACY_CUSP_KP_FIELDS), house["house"]
 
 
 def test_house_kp_block_derives_from_that_houses_cusp_longitude(chart):
@@ -273,9 +279,6 @@ def test_later_engine_fields_remain_at_day1_defaults(chart):
         assert planet["significator_of_houses"] == [], planet["name"]
         assert planet["significator_levels"] == {}, planet["name"]
     for house in chart["houses"]:
-        assert house["cusp_star_lord"] is None, house["house"]
-        assert house["cusp_sub_lord"] is None, house["house"]
-        assert house["cusp_sub_sub_lord"] is None, house["house"]
         assert house["occupants"] == [], house["house"]
         assert house["significators"] is None, house["house"]
     assert chart["dashas"] is None
@@ -313,6 +316,7 @@ def test_saved_chart_carries_the_same_nakshatra_fill(monkeypatch):
     for house in saved_chart["houses"]:
         assert isinstance(house["cusp_nakshatra"], str)
         assert set(house["kp"].keys()) == APPROVED_KP_BLOCK_KEYS
+        assert set(house).isdisjoint(LEGACY_CUSP_KP_FIELDS)
 
 
 # ---------------------------------------------------------------------------
