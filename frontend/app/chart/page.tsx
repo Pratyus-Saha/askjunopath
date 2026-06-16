@@ -251,6 +251,7 @@ export default function ChartPage() {
                         <th className="py-3.5 px-4 font-medium">Zodiac Sign</th>
                         <th className="py-3.5 px-4 font-medium">Nakshatra</th>
                         <th className="py-3.5 px-4 font-medium">Lord</th>
+                        <th className="py-3.5 px-4 font-medium">KP Star/Sub</th>
                         <th className="py-3.5 px-4 font-medium text-center">Retro</th>
                       </tr>
                     </thead>
@@ -266,6 +267,9 @@ export default function ChartPage() {
                           </td>
                           <td className="py-3.5 px-4 text-slate-300">{planet.nakshatra?.name || "-"}</td>
                           <td className="py-3.5 px-4 text-slate-400 font-medium">{planet.nakshatra?.lord || "-"}</td>
+                          <td className="py-3.5 px-4 text-slate-400 font-medium">
+                            {planet.kp ? `${planet.kp.star_lord} / ${planet.kp.sub_lord}` : "-"}
+                          </td>
                           <td className="py-3.5 px-4 text-center">
                             {planet.retrograde ? (
                               <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">

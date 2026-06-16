@@ -574,6 +574,9 @@
           "default": null,
           "title": "Cusp Nakshatra"
         },
+        "kp": {
+          "$ref": "#/$defs/KpBlock"
+        },
         "cusp_star_lord": {
           "anyOf": [
             {
@@ -677,7 +680,8 @@
         "house",
         "cusp_longitude",
         "cusp_sign",
-        "cusp_sign_lord"
+        "cusp_sign_lord",
+        "kp"
       ],
       "title": "HouseBlock",
       "type": "object"
@@ -714,27 +718,11 @@
           ],
           "title": "Sub Lord",
           "type": "string"
-        },
-        "sub_sub_lord": {
-          "enum": [
-            "Sun",
-            "Moon",
-            "Mars",
-            "Mercury",
-            "Jupiter",
-            "Venus",
-            "Saturn",
-            "Rahu",
-            "Ketu"
-          ],
-          "title": "Sub Sub Lord",
-          "type": "string"
         }
       },
       "required": [
         "star_lord",
-        "sub_lord",
-        "sub_sub_lord"
+        "sub_lord"
       ],
       "title": "KpBlock",
       "type": "object"
@@ -1040,15 +1028,7 @@
           "default": null
         },
         "kp": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/KpBlock"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
+          "$ref": "#/$defs/KpBlock"
         },
         "significator_of_houses": {
           "items": {
@@ -1081,7 +1061,8 @@
         "sign_degree",
         "retrograde",
         "combust",
-        "speed_deg_per_day"
+        "speed_deg_per_day",
+        "kp"
       ],
       "title": "PlanetBlock",
       "type": "object"
@@ -1646,7 +1627,7 @@
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "1.1",
+      "const": "1.2",
       "title": "Schema Version",
       "type": "string"
     },

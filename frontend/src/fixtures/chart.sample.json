@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "metadata": {
     "birth_date": "1994-03-21",
     "birth_time": "14:35",
@@ -8,7 +8,7 @@
     "longitude": 77.0266,
     "timezone": "Asia/Kolkata",
     "ayanamsa": 23.65,
-    "engine_version": "1.3.0"
+    "engine_version": "1.4.0"
   },
   "birth": {
     "datetime_local": "1994-03-21T14:35:00",
@@ -50,6 +50,10 @@
         "pada": 2,
         "degree_in_pada": 0.176,
         "navamsa_sign": "Virgo"
+      },
+      "kp": {
+        "star_lord": "Saturn",
+        "sub_lord": "Mercury"
       }
     },
     {
@@ -69,6 +73,10 @@
         "pada": 4,
         "degree_in_pada": 0.25,
         "navamsa_sign": "Pisces"
+      },
+      "kp": {
+        "star_lord": "Rahu",
+        "sub_lord": "Venus"
       }
     },
     {
@@ -88,6 +96,10 @@
         "pada": 4,
         "degree_in_pada": 0.6,
         "navamsa_sign": "Pisces"
+      },
+      "kp": {
+        "star_lord": "Rahu",
+        "sub_lord": "Venus"
       }
     },
     {
@@ -107,6 +119,10 @@
         "pada": 1,
         "degree_in_pada": 2.63,
         "navamsa_sign": "Sagittarius"
+      },
+      "kp": {
+        "star_lord": "Rahu",
+        "sub_lord": "Jupiter"
       }
     },
     {
@@ -126,6 +142,10 @@
         "pada": 1,
         "degree_in_pada": 0.299,
         "navamsa_sign": "Aries"
+      },
+      "kp": {
+        "star_lord": "Jupiter",
+        "sub_lord": "Jupiter"
       }
     },
     {
@@ -145,6 +165,10 @@
         "pada": 2,
         "degree_in_pada": 2.2,
         "navamsa_sign": "Capricorn"
+      },
+      "kp": {
+        "star_lord": "Mercury",
+        "sub_lord": "Sun"
       }
     },
     {
@@ -164,6 +188,10 @@
         "pada": 2,
         "degree_in_pada": 2.46,
         "navamsa_sign": "Capricorn"
+      },
+      "kp": {
+        "star_lord": "Rahu",
+        "sub_lord": "Saturn"
       }
     },
     {
@@ -183,6 +211,10 @@
         "pada": 4,
         "degree_in_pada": 1.7,
         "navamsa_sign": "Cancer"
+      },
+      "kp": {
+        "star_lord": "Jupiter",
+        "sub_lord": "Rahu"
       }
     },
     {
@@ -202,21 +234,25 @@
         "pada": 2,
         "degree_in_pada": 1.7,
         "navamsa_sign": "Capricorn"
+      },
+      "kp": {
+        "star_lord": "Sun",
+        "sub_lord": "Jupiter"
       }
     }
   ],
   "houses": [
-    { "house": 1, "cusp_longitude": 105.8735, "cusp_sign": "Cancer", "cusp_sign_lord": "Moon", "cusp_nakshatra": "Pushya" },
-    { "house": 2, "cusp_longitude": 130.056, "cusp_sign": "Leo", "cusp_sign_lord": "Sun", "cusp_nakshatra": "Magha" },
-    { "house": 3, "cusp_longitude": 158.275, "cusp_sign": "Virgo", "cusp_sign_lord": "Mercury", "cusp_nakshatra": "Uttara Phalguni" },
-    { "house": 4, "cusp_longitude": 190.509, "cusp_sign": "Libra", "cusp_sign_lord": "Venus", "cusp_nakshatra": "Swati" },
-    { "house": 5, "cusp_longitude": 224.165, "cusp_sign": "Scorpio", "cusp_sign_lord": "Mars", "cusp_nakshatra": "Anuradha" },
-    { "house": 6, "cusp_longitude": 256.275, "cusp_sign": "Sagittarius", "cusp_sign_lord": "Jupiter", "cusp_nakshatra": "Purva Ashadha" },
-    { "house": 7, "cusp_longitude": 285.873, "cusp_sign": "Capricorn", "cusp_sign_lord": "Saturn", "cusp_nakshatra": "Shravana" },
-    { "house": 8, "cusp_longitude": 310.056, "cusp_sign": "Aquarius", "cusp_sign_lord": "Saturn", "cusp_nakshatra": "Shatabhisha" },
-    { "house": 9, "cusp_longitude": 338.275, "cusp_sign": "Pisces", "cusp_sign_lord": "Jupiter", "cusp_nakshatra": "Uttara Bhadrapada" },
-    { "house": 10, "cusp_longitude": 10.509, "cusp_sign": "Aries", "cusp_sign_lord": "Mars", "cusp_nakshatra": "Ashwini" },
-    { "house": 11, "cusp_longitude": 44.165, "cusp_sign": "Taurus", "cusp_sign_lord": "Venus", "cusp_nakshatra": "Rohini" },
-    { "house": 12, "cusp_longitude": 76.275, "cusp_sign": "Gemini", "cusp_sign_lord": "Mercury", "cusp_nakshatra": "Ardra" }
+    { "house": 1, "cusp_longitude": 105.8735, "cusp_sign": "Cancer", "cusp_sign_lord": "Moon", "cusp_nakshatra": "Pushya", "kp": { "star_lord": "Saturn", "sub_lord": "Jupiter" } },
+    { "house": 2, "cusp_longitude": 130.056, "cusp_sign": "Leo", "cusp_sign_lord": "Sun", "cusp_nakshatra": "Magha", "kp": { "star_lord": "Ketu", "sub_lord": "Saturn" } },
+    { "house": 3, "cusp_longitude": 158.275, "cusp_sign": "Virgo", "cusp_sign_lord": "Mercury", "cusp_nakshatra": "Uttara Phalguni", "kp": { "star_lord": "Sun", "sub_lord": "Venus" } },
+    { "house": 4, "cusp_longitude": 190.509, "cusp_sign": "Libra", "cusp_sign_lord": "Venus", "cusp_nakshatra": "Swati", "kp": { "star_lord": "Rahu", "sub_lord": "Saturn" } },
+    { "house": 5, "cusp_longitude": 224.165, "cusp_sign": "Scorpio", "cusp_sign_lord": "Mars", "cusp_nakshatra": "Anuradha", "kp": { "star_lord": "Saturn", "sub_lord": "Rahu" } },
+    { "house": 6, "cusp_longitude": 256.275, "cusp_sign": "Sagittarius", "cusp_sign_lord": "Jupiter", "cusp_nakshatra": "Purva Ashadha", "kp": { "star_lord": "Venus", "sub_lord": "Moon" } },
+    { "house": 7, "cusp_longitude": 285.873, "cusp_sign": "Capricorn", "cusp_sign_lord": "Saturn", "cusp_nakshatra": "Shravana", "kp": { "star_lord": "Moon", "sub_lord": "Saturn" } },
+    { "house": 8, "cusp_longitude": 310.056, "cusp_sign": "Aquarius", "cusp_sign_lord": "Saturn", "cusp_nakshatra": "Shatabhisha", "kp": { "star_lord": "Rahu", "sub_lord": "Jupiter" } },
+    { "house": 9, "cusp_longitude": 338.275, "cusp_sign": "Pisces", "cusp_sign_lord": "Jupiter", "cusp_nakshatra": "Uttara Bhadrapada", "kp": { "star_lord": "Saturn", "sub_lord": "Venus" } },
+    { "house": 10, "cusp_longitude": 10.509, "cusp_sign": "Aries", "cusp_sign_lord": "Mars", "cusp_nakshatra": "Ashwini", "kp": { "star_lord": "Ketu", "sub_lord": "Saturn" } },
+    { "house": 11, "cusp_longitude": 44.165, "cusp_sign": "Taurus", "cusp_sign_lord": "Venus", "cusp_nakshatra": "Rohini", "kp": { "star_lord": "Moon", "sub_lord": "Jupiter" } },
+    { "house": 12, "cusp_longitude": 76.275, "cusp_sign": "Gemini", "cusp_sign_lord": "Mercury", "cusp_nakshatra": "Ardra", "kp": { "star_lord": "Rahu", "sub_lord": "Venus" } }
   ]
 }

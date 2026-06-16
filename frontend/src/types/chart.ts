@@ -10,7 +10,7 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type SchemaVersion = "1.1";
+export type SchemaVersion = "1.2";
 export type BirthDate = string;
 export type BirthTime = string;
 export type BirthCity = string;
@@ -104,7 +104,6 @@ export type NavamsaSign =
   | "Pisces";
 export type StarLord = "Sun" | "Moon" | "Mars" | "Mercury" | "Jupiter" | "Venus" | "Saturn" | "Rahu" | "Ketu";
 export type SubLord = "Sun" | "Moon" | "Mars" | "Mercury" | "Jupiter" | "Venus" | "Saturn" | "Rahu" | "Ketu";
-export type SubSubLord = "Sun" | "Moon" | "Mars" | "Mercury" | "Jupiter" | "Venus" | "Saturn" | "Rahu" | "Ketu";
 export type SignificatorOfHouses = number[];
 /**
  * @minItems 12
@@ -340,7 +339,7 @@ export interface PlanetBlock {
   combust: Combust;
   speed_deg_per_day: SpeedDegPerDay;
   nakshatra?: NakshatraBlock | null;
-  kp?: KpBlock | null;
+  kp: KpBlock;
   significator_of_houses?: SignificatorOfHouses;
   significator_levels?: SignificatorLevels;
 }
@@ -356,7 +355,6 @@ export interface NakshatraBlock {
 export interface KpBlock {
   star_lord: StarLord;
   sub_lord: SubLord;
-  sub_sub_lord: SubSubLord;
 }
 export interface SignificatorLevels {
   [k: string]: "A" | "B" | "C" | "D";
@@ -367,6 +365,7 @@ export interface HouseBlock {
   cusp_sign: CuspSign;
   cusp_sign_lord: CuspSignLord;
   cusp_nakshatra?: CuspNakshatra;
+  kp: KpBlock;
   cusp_star_lord?: CuspStarLord;
   cusp_sub_lord?: CuspSubLord;
   cusp_sub_sub_lord?: CuspSubSubLord;

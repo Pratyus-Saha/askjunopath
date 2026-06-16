@@ -66,6 +66,10 @@ def _planet(index: int, offset: float = 0.0) -> dict:
         "retrograde": PLANETS[index] in {"Saturn", "Rahu", "Ketu"},
         "combust": False,
         "speed_deg_per_day": -0.05 if PLANETS[index] in {"Rahu", "Ketu"} else 1.0,
+        "kp": {
+            "star_lord": PLANETS[index],
+            "sub_lord": PLANETS[(index + 1) % len(PLANETS)],
+        },
     }
 
 
@@ -77,12 +81,16 @@ def _house(house: int, offset: float = 0.0) -> dict:
         "cusp_longitude": round(longitude, 4),
         "cusp_sign": sign,
         "cusp_sign_lord": SIGN_LORDS[sign],
+        "kp": {
+            "star_lord": PLANETS[(house - 1) % len(PLANETS)],
+            "sub_lord": PLANETS[house % len(PLANETS)],
+        },
     }
 
 
 def valid_chart(offset: float = 0.0) -> dict:
     return {
-        "schema_version": "1.1",
+        "schema_version": "1.2",
         "birth": {
             "datetime_local": "1994-03-21T14:35:00",
             "datetime_utc": "1994-03-21T09:05:00Z",
@@ -136,8 +144,10 @@ def test_progressive_optional_fields_can_be_absent() -> None:
     assert "metadata" not in chart
     for planet in chart["planets"]:
         assert "nakshatra" not in planet
-        assert "kp" not in planet
         assert "house_occupied" not in planet
+        assert set(planet["kp"]) == {"star_lord", "sub_lord"}
+    for house in chart["houses"]:
+        assert set(house["kp"]) == {"star_lord", "sub_lord"}
     assert_round_trip(chart)
 
 
@@ -151,7 +161,7 @@ def test_optional_metadata_round_trips_when_present() -> None:
         "longitude": 77.0266,
         "timezone": "Asia/Kolkata",
         "ayanamsa": 23.7261,
-        "engine_version": "1.3.0",
+        "engine_version": "1.4.0",
     }
 
     assert_round_trip(chart)
@@ -174,7 +184,6 @@ def test_populated_later_engine_blocks_round_trip() -> None:
             "kp": {
                 "star_lord": "Jupiter",
                 "sub_lord": "Venus",
-                "sub_sub_lord": "Saturn",
             },
             "significator_of_houses": [3, 6, 10, 11],
             "significator_levels": {"3": "C", "6": "B", "10": "A", "11": "D"},
@@ -305,7 +314,7 @@ def test_populated_later_engine_blocks_round_trip() -> None:
                         "longitude": 77.0266,
                         "timezone": "Asia/Kolkata",
                         "ayanamsa": 23.7261,
-                        "engine_version": "1.3.0",
+                        "engine_version": "1.4.0",
                         "unexpected": True,
                     }
                 }
@@ -328,6 +337,8 @@ def test_populated_later_engine_blocks_round_trip() -> None:
             ),
             "pada",
         ),
+        (lambda c: c["planets"][0]["kp"].update({"sub_index": 1}), "sub_index"),
+        (lambda c: c["houses"][0]["kp"].update({"row_index": 1}), "row_index"),
         (lambda c: c["houses"][0].update({"house": 13}), "house"),
         (lambda c: c["settings"].pop("ayanamsa"), "ayanamsa"),
     ],
@@ -351,7 +362,30 @@ def test_schema_file_was_generated_from_chart_model() -> None:
     schema = json.loads((ROOT / "schemas" / "chart.json").read_text())
     assert schema["title"] == "ChartData"
     assert schema["additionalProperties"] is False
-    assert schema["properties"]["schema_version"]["const"] == "1.1"
+    assert schema["properties"]["schema_version"]["const"] == "1.2"
+    kp_schema = schema["$defs"]["KpBlock"]
+    assert kp_schema["additionalProperties"] is False
+    assert set(kp_schema["properties"]) == {"star_lord", "sub_lord"}
+    assert set(kp_schema["required"]) == {"star_lord", "sub_lord"}
+    assert "kp" in schema["$defs"]["PlanetBlock"]["required"]
+    assert "kp" in schema["$defs"]["HouseBlock"]["required"]
+    assert set(
+        schema["$defs"]["D9Block"]["properties"]["placements"]["propertyNames"][
+            "enum"
+        ]
+    ) == set(PLANETS)
+    assert set(
+        schema["$defs"]["D10Block"]["properties"]["placements"]["propertyNames"][
+            "enum"
+        ]
+    ) == set(PLANETS)
+    prediction_properties = schema["$defs"]["PredictionFeature"]["properties"]
+    assert set(prediction_properties["dasha_support"]["propertyNames"]["enum"]) == set(
+        PLANETS
+    )
+    assert set(
+        prediction_properties["relevant_strengths"]["propertyNames"]["enum"]
+    ) == set(PLANETS)
     assert "metadata" not in schema["required"]
     metadata_ref = schema["properties"]["metadata"]["anyOf"][0]["$ref"]
     assert schema["$defs"][metadata_ref.rsplit("/", 1)[-1]][

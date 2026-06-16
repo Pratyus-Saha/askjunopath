@@ -1,10 +1,11 @@
-"""Integration tests: /chart/generate carries Day 2 nakshatra output (T2.3).
+"""Integration tests: /chart/generate carries nakshatra and public KP output.
 
 Every planet must carry a non-null 7-key NakshatraBlock computed from its
 own longitude; every house cusp must carry the nakshatra NAME STRING in
-cusp_nakshatra (never an object). Everything later engines own (KP, house
-occupancy, significators, dasha, strength, divisional, transits,
-prediction features) must remain at its Day 1 null/empty default.
+cusp_nakshatra (never an object). Every planet and house must also carry the
+D022 public KP block with only star_lord/sub_lord. Later engines own house
+occupancy, significators, dasha, strength, divisional, transits, and
+prediction features; those remain at their null/empty defaults.
 
 Geocoding and Supabase are mocked; ephemeris and nakshatra math are real.
 Moon nakshatra/pada expectations below are hand-derived from each Day 1
@@ -29,6 +30,7 @@ import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
 
 from app import main as app_main  # noqa: E402
+from app.engines.kp_engine import get_kp_sub_lord  # noqa: E402
 from app.engines.nakshatra_engine import (  # noqa: E402
     NAKSHATRAS,
     nakshatra_block,
@@ -47,6 +49,19 @@ APPROVED_NAKSHATRA_BLOCK_KEYS = {
     "pada",
     "degree_in_pada",
     "navamsa_sign",
+}
+APPROVED_KP_BLOCK_KEYS = {"star_lord", "sub_lord"}
+INTERNAL_KP_KEYS = {
+    "sub_index",
+    "sub_start_longitude",
+    "sub_end_longitude",
+    "degree_in_sub",
+    "sub_sub_lord",
+    "nakshatra_index",
+    "nakshatra_name",
+    "row_index",
+    "longitude",
+    "arcsec",
 }
 
 NAKSHATRA_NAMES = {name for name, _lord in NAKSHATRAS}
@@ -211,12 +226,49 @@ def test_cusp_nakshatra_derives_from_that_houses_cusp_longitude(chart):
 
 
 # ---------------------------------------------------------------------------
+# Public KP blocks
+# ---------------------------------------------------------------------------
+
+def test_every_planet_has_public_kp_block_only(chart):
+    for planet in chart["planets"]:
+        kp = planet["kp"]
+        assert isinstance(kp, dict), planet["name"]
+        assert set(kp) == APPROVED_KP_BLOCK_KEYS, planet["name"]
+        assert set(kp).isdisjoint(INTERNAL_KP_KEYS), planet["name"]
+
+
+def test_planet_kp_block_derives_from_that_planets_longitude(chart):
+    for planet in chart["planets"]:
+        lookup = get_kp_sub_lord(planet["longitude"])
+        assert planet["kp"] == {
+            "star_lord": lookup["star_lord"],
+            "sub_lord": lookup["sub_lord"],
+        }, planet["name"]
+
+
+def test_every_house_has_public_kp_block_only(chart):
+    for house in chart["houses"]:
+        kp = house["kp"]
+        assert isinstance(kp, dict), house["house"]
+        assert set(kp) == APPROVED_KP_BLOCK_KEYS, house["house"]
+        assert set(kp).isdisjoint(INTERNAL_KP_KEYS), house["house"]
+
+
+def test_house_kp_block_derives_from_that_houses_cusp_longitude(chart):
+    for house in chart["houses"]:
+        lookup = get_kp_sub_lord(house["cusp_longitude"])
+        assert house["kp"] == {
+            "star_lord": lookup["star_lord"],
+            "sub_lord": lookup["sub_lord"],
+        }, house["house"]
+
+
+# ---------------------------------------------------------------------------
 # Later-engine fields stay untouched (task requirement 5)
 # ---------------------------------------------------------------------------
 
 def test_later_engine_fields_remain_at_day1_defaults(chart):
     for planet in chart["planets"]:
-        assert planet["kp"] is None, planet["name"]
         assert planet["house_occupied"] is None, planet["name"]
         assert planet["significator_of_houses"] == [], planet["name"]
         assert planet["significator_levels"] == {}, planet["name"]
@@ -241,13 +293,15 @@ def test_later_engine_fields_remain_at_day1_defaults(chart):
 
 def test_chart_with_metadata_validates_through_chartdata(chart):
     parsed = ChartData.model_validate(chart)
-    assert parsed.schema_version == "1.1"
+    assert parsed.schema_version == "1.2"
     assert parsed.metadata is not None
-    assert parsed.metadata.engine_version == "1.3.0"
+    assert parsed.metadata.engine_version == "1.4.0"
     for planet in parsed.planets:
         assert planet.nakshatra is not None, planet.name
+        assert planet.kp is not None, planet.name
     for house in parsed.houses:
         assert isinstance(house.cusp_nakshatra, str), house.house
+        assert house.kp is not None, house.house
 
 
 def test_saved_chart_carries_the_same_nakshatra_fill(monkeypatch):
@@ -255,8 +309,10 @@ def test_saved_chart_carries_the_same_nakshatra_fill(monkeypatch):
     assert saved_chart == chart
     for planet in saved_chart["planets"]:
         assert set(planet["nakshatra"].keys()) == APPROVED_NAKSHATRA_BLOCK_KEYS
+        assert set(planet["kp"].keys()) == APPROVED_KP_BLOCK_KEYS
     for house in saved_chart["houses"]:
         assert isinstance(house["cusp_nakshatra"], str)
+        assert set(house["kp"].keys()) == APPROVED_KP_BLOCK_KEYS
 
 
 # ---------------------------------------------------------------------------
