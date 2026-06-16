@@ -84,6 +84,8 @@
 
 Midday cut: sub-sub lord DISPLAY (computation stays); landing polish beyond acceptance; T3.5 slips a day.
 
+**Out-of-band note (agent/claude/kp-lookup-engine, 2026-06-16):** the internal KP sub-lord lookup engine `backend/app/engines/kp_engine.py` + `tests/test_kp_engine.py` were built ahead of T3.2, reading the committed `data/kp_249.csv`. `get_kp_sub_lord(longitude_deg)` returns star_lord/sub_lord/sub_index/sub_start_longitude/sub_end_longitude/degree_in_sub. Internal only: no schema change, no `planets[].kp`/`houses[].kp`, no chart integration (those stay with T3.2 and the v1.2 bump per D022). 20 tests green (13 engine + 7 table). Founder to sync status.
+
 ---
 
 ## Day 4 — Sunday, June 14: KP cusp level + significators — **KP GATE DAY**
