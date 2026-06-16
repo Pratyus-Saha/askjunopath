@@ -29,6 +29,24 @@ How this file works:
 
 # Entries
 
+## KP-lookup — agent/claude/kp-lookup-engine — 2026-06-16 — Claude Code
+**Built:** the internal KP sub-lord lookup engine `backend/app/engines/kp_engine.py`, reading the committed `data/kp_249.csv`. `get_kp_sub_lord(longitude_deg)` normalises the longitude into `[0, 360)`, converts once to integer arc-seconds with the same discipline as the nakshatra engine (`arcsec = round((L % 360) * 3600) % 1_296_000`), then resolves the containing CSV row via `bisect` over the contiguous start bounds. Returns `star_lord` (nakshatra/star lord), `sub_lord`, `sub_index`, `sub_start_longitude`, `sub_end_longitude`, `degree_in_sub`, plus internal extras (`nakshatra_index`, `nakshatra_name`, `row_index`, `longitude`, `arcsec`). No public schema, no `planets[].kp`/`houses[].kp`, no chart integration, no prediction/significator/ruling-planet logic, no ephemeris or table changes.
+**Boundary rule:** each row covers the half-open interval `[start_arcsec, end_arcsec)` — lower bound inclusive, upper exclusive. A longitude exactly on a boundary belongs to the row that STARTS at that boundary. Because the arc-second conversion takes `% 1_296_000`, the max reachable value is `1_295_999` and `360°` (and tiny negatives) wrap to `0` → row 1; nothing ever maps to the final row's exclusive end `1_296_000`, so there is no off-by-one at the table end.
+**`sub_start_longitude` / `sub_end_longitude` semantics (assumption):** these are the matched CSV row's bounds. Where a logical sub-lord span is split at a 30° sign boundary into two rows (e.g. rows 22–23, Krittika/Rahu/sub_index 4), the returned bounds are the per-row bounds, not the merged logical span. This is the interpretation that makes "lookup result agrees with the CSV row containing the longitude" exact.
+**Files changed:**
+- `backend/app/engines/kp_engine.py` (new)
+- `tests/test_kp_engine.py` (new, 13 tests)
+- `HANDOFF.md`
+- `TASKBOARD.md`
+**Tests run:**
+- `uv run --with-requirements backend\requirements.txt --with pytest python -m pytest tests\test_kp_engine.py tests\test_kp_table.py -q` -> 20 passed (13 engine + 7 table).
+- `git diff --check` -> clean (no output).
+- `git status` -> branch `agent/claude/kp-lookup-engine`; only the two new files untracked before commit.
+**Tests cover:** `0° Aries`; exact sub-boundary (belongs to upper row); just-before / just-after a boundary; `359.99999°` (wraps to 0); `360°` wraps to 0; tiny negative wraps; large/±360 normalisation; a longitude where sub_lord ≠ star_lord cross-checked by hand from `data/kp_249.csv` (1.0° → Ketu / Venus); every row's interior midpoint agrees with its CSV row; no off-by-one at every row start/last-arcsec/end; required-keys presence; `degree_in_sub` offset invariant.
+**Known issues / deferred:** none. `scripts/check_allowed_files.py` is absent in this worktree (as noted in prior entries), so `git status`/`git diff --check` stand in for the allowed-files guard.
+**Next agent should read:** `backend/app/engines/kp_engine.py`, `tests/test_kp_engine.py`, D022. T3.2 (`agent/claude/kp-planet`) can consume this lookup when wiring KP into chart output (schema bump to v1.2 happens there, not here).
+**Tempted but did not:** add `planets[].kp`/`houses[].kp`, touch `schemas/chart.json`, bump the schema version, compute sub-sub lord, add significators/ruling planets/prediction logic, or modify `data/kp_249.csv`/`scripts/gen_kp_table.py`/ephemeris math.
+
 ## T3.1 — agent/codex/kp-table — 2026-06-16 11:53 — Codex
 **Built:** Added a deterministic KP 249 sub-lord table generator and committed CSV data. The base 243 Vimshottari sub-lord intervals are split at the six 30-degree sign boundaries that fall strictly inside a sub-lord span, producing 249 rows without changing sub-lord lengths.
 **Files changed:**
