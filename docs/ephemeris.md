@@ -41,6 +41,14 @@ All functions pure where possible. No module imports another engine's internals.
 
 **Ephemeris file guard.** If the `.se1` files are missing, pyswisseph silently falls back to the built-in Moshier ephemeris and returns slightly different numbers (playbook error trap #4). The engine exposes `ephemeris_files_ok() -> bool` that asserts the required `.se1` files physically exist at `SE_EPHE_PATH` AND that a test position call with `swe.FLG_SWIEPH` succeeds without fallback. `/health` (built by Codex per docs/health.md) calls this function; the Docker test calls `/health` from inside the container.
 
+Node-only arcsecond scatter against JHora, especially Rahu/Ketu deltas around 7-17 arcsec while the true-node regression still passes, usually means Swiss files are missing and pyswisseph is on Moshier fallback. Treat that as an environment problem first: strict JHora parity tests must guard on `ephemeris_files_ok()` and skip loudly with `SWISS_EPHE_REQUIRED` rather than reporting misleading Rahu failures.
+
+Local Windows setup for the strict JHora gate:
+
+```bat
+set "SE_EPHE_PATH=C:\Users\assas\swisseph\ephe"
+```
+
 **Production file packaging.** Do not commit Swiss `.se1` files to git by default. For backend image builds, copy the founder-approved local ephemeris files into `backend/ephe/` before running `docker build` from `backend/`; `.gitignore` keeps that directory out of commits. `backend/Dockerfile` copies `ephe/*.se1` into `/app/ephe` and sets `SE_EPHE_PATH=/app/ephe`, so a production image build fails loudly if the local build context does not include the files.
 
 ---
@@ -271,7 +279,7 @@ Definition of done: `pytest` green on all of the above except fixtures still mar
 | 1 | Every planet off by a consistent few arc-minutes | Wrong or missing ayanamsa mode | Verify `swe.set_sid_mode(swe.SIDM_KRISHNAMURTI, 0, 0)` runs before every calc, including in test setup |
 | 2 | Rahu off by up to 1.5°, everything else fine | Mean node used | Confirm `swe.TRUE_NODE` |
 | 3 | All positions off by a clean fraction of a degree, Moon worst | Local time reached `swe.julday`, or double tz conversion | Hand-trace the DST fixture: local → IANA → UTC → JD |
-| 4 | Positions close but consistently slightly different from JHora | Silent Moshier fallback | `ephemeris_files_ok()`; check `SE_EPHE_PATH` inside the container, not just on the host |
+| 4 | Positions close but consistently slightly different from JHora; node-only Rahu/Ketu scatter of 7-17 arcsec is a common variant | Silent Moshier fallback | `ephemeris_files_ok()`; check `SE_EPHE_PATH` inside the container, not just on the host |
 | 5 | Cusps wrong, planets right | `houses_ex` called without the sidereal flag, or before `set_sid_mode` | Check flag and call order |
 | 6 | Crash or garbage cusps on one input | High latitude reached Placidus | Input guard must reject before any swe call |
 

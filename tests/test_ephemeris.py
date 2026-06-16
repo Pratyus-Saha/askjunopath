@@ -34,6 +34,10 @@ FIXTURES_DIR = REPO_ROOT / "tests" / "fixtures" / "charts"
 
 PLANET_TOLERANCE_DEG = 5.0 / 3600.0  # 5 arc-seconds
 CUSP_TOLERANCE_DEG = 0.01
+SWISS_EPHE_REQUIRED = (
+    "SWISS_EPHE_REQUIRED: JHora parity tests require .se1 files; "
+    "current run may be Moshier fallback."
+)
 
 
 def load_fixtures():
@@ -65,6 +69,12 @@ def expected_or_skip(fixture, key):
     if fixture.get("status") == "PENDING_JHORA" or value in (None, {}, []):
         pytest.skip("PENDING_JHORA_VALUES")
     return value
+
+
+def require_swiss_ephemeris_files():
+    """Skip strict JHora parity checks unless Swiss files are active."""
+    if not ephemeris_files_ok():
+        pytest.skip(SWISS_EPHE_REQUIRED)
 
 
 # ---------------------------------------------------------------------------
@@ -381,6 +391,7 @@ def test_combust_flags_present_in_chart_output():
 
 @pytest.mark.parametrize("fixture", FIXTURES, ids=FIXTURE_IDS)
 def test_jhora_planet_longitudes(fixture):
+    require_swiss_ephemeris_files()
     expected_planets = expected_or_skip(fixture, "planets")
     planets = {p["name"]: p for p in chart_for(fixture)["planets"]}
     for name, expected_lon in expected_planets.items():
@@ -394,6 +405,7 @@ def test_jhora_planet_longitudes(fixture):
 def test_jhora_rahu_explicit(fixture):
     """Explicit Rahu assertion guarding mean-node regression even if the
     loop test above were ever weakened (docs/ephemeris.md sec 10 test 2)."""
+    require_swiss_ephemeris_files()
     expected_planets = expected_or_skip(fixture, "planets")
     if "Rahu" not in expected_planets:
         pytest.skip("PENDING_JHORA_VALUES")
@@ -405,6 +417,7 @@ def test_jhora_rahu_explicit(fixture):
 
 @pytest.mark.parametrize("fixture", FIXTURES, ids=FIXTURE_IDS)
 def test_jhora_cusp_longitudes(fixture):
+    require_swiss_ephemeris_files()
     expected_cusps = expected_or_skip(fixture, "cusps")
     houses = {h["house"]: h for h in chart_for(fixture)["houses"]}
     for house_number, expected_lon in expected_cusps.items():
@@ -416,5 +429,6 @@ def test_jhora_cusp_longitudes(fixture):
 
 @pytest.mark.parametrize("fixture", FIXTURES, ids=FIXTURE_IDS)
 def test_jhora_ascendant_sign_exact(fixture):
+    require_swiss_ephemeris_files()
     expected_sign = expected_or_skip(fixture, "ascendant_sign")
     assert chart_for(fixture)["ascendant"]["sign"] == expected_sign

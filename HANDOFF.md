@@ -29,6 +29,21 @@ How this file works:
 
 # Entries
 
+## BUG-001 — agent/codex/jhora-gate-ephe-guard — 2026-06-16 11:26 — Codex
+**Built:** Hardened the strict JHora parity tests so they first require active Swiss `.se1` files via `ephemeris_files_ok()` and skip loudly with `SWISS_EPHE_REQUIRED` when the run may be Moshier fallback. Updated BUG-001 and the ephemeris spec to record the diagnosed cause: unset `SE_EPHE_PATH`, no math fix, fixture edit, or tolerance loosening required.
+**Files changed:**
+- `tests/test_ephemeris.py`
+- `BUGS.md`
+- `docs/ephemeris.md`
+- `HANDOFF.md`
+**Tests run:**
+- `$env:SE_EPHE_PATH='C:\Users\assas\swisseph\ephe'; uv run --with-requirements backend\requirements.txt --with pytest python -m pytest tests\test_ephemeris.py -q` -> 88 passed.
+- `Remove-Item Env:SE_EPHE_PATH -ErrorAction SilentlyContinue; uv run --with-requirements backend\requirements.txt --with pytest python -m pytest tests\test_ephemeris.py -q -rs` -> 68 passed, 20 skipped with `SWISS_EPHE_REQUIRED: JHora parity tests require .se1 files; current run may be Moshier fallback.`
+- `Test-Path scripts\check_allowed_files.py` -> False; allowed-files guard script is absent in this worktree.
+**Known issues / deferred:** Local and CI strict JHora runs must keep setting `SE_EPHE_PATH` to the Swiss file directory. No ephemeris math issue remains for BUG-001.
+**Next agent should read:** `tests/test_ephemeris.py`, `BUGS.md`, `docs/ephemeris.md`. Next step: KP generator.
+**Tempted but did not:** change ephemeris math, fixture values, tolerances, KP, schema metadata D021, frontend, or prediction logic.
+
 ## D021 — agent/codex/schema-metadata-v1-1 — 2026-06-15 20:01 — Codex
 **Built:** Legalized optional chart response metadata in schema v1.1, keeping the object strict and extra-forbidden. Regenerated frontend ChartData and removed the temporary metadata wrapper in the chart page while preserving the live response envelope.
 **Files changed:**
