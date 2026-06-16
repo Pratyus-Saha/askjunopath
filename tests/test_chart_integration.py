@@ -1,11 +1,11 @@
-"""Integration tests: /chart/generate carries nakshatra and public KP output.
+"""Integration tests: /chart/generate carries nakshatra, KP, and houses.
 
 Every planet must carry a non-null 7-key NakshatraBlock computed from its
 own longitude; every house cusp must carry the nakshatra NAME STRING in
 cusp_nakshatra (never an object). Every planet and house must also carry the
-D022 public KP block with only star_lord/sub_lord. Later engines own house
-occupancy, significators, dasha, strength, divisional, transits, and
-prediction features; those remain at their null/empty defaults.
+D022 public KP block with only star_lord/sub_lord. House occupation is filled
+by cusp spans, while significators, dasha, strength, divisional, transits, and
+prediction features remain at their null/empty defaults.
 
 Geocoding and Supabase are mocked; ephemeris and nakshatra math are real.
 Moon nakshatra/pada expectations below are hand-derived from each Day 1
@@ -30,6 +30,7 @@ import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
 
 from app import main as app_main  # noqa: E402
+from app.engines.house_engine import house_of, occupants as house_occupants  # noqa: E402
 from app.engines.kp_engine import get_kp_sub_lord  # noqa: E402
 from app.engines.nakshatra_engine import (  # noqa: E402
     NAKSHATRAS,
@@ -270,17 +271,66 @@ def test_house_kp_block_derives_from_that_houses_cusp_longitude(chart):
 
 
 # ---------------------------------------------------------------------------
-# Later-engine fields stay untouched (task requirement 5)
+# House occupation
 # ---------------------------------------------------------------------------
 
-def test_later_engine_fields_remain_at_day1_defaults(chart):
+def test_every_planet_has_house_occupied(chart):
     for planet in chart["planets"]:
-        assert planet["house_occupied"] is None, planet["name"]
+        assert isinstance(planet["house_occupied"], int), planet["name"]
+        assert 1 <= planet["house_occupied"] <= 12, planet["name"]
+
+
+def test_every_house_has_occupants_list(chart):
+    for house in chart["houses"]:
+        assert isinstance(house["occupants"], list), house["house"]
+
+
+def test_planet_house_occupied_derives_from_cusp_spans(chart):
+    cusps = [house["cusp_longitude"] for house in chart["houses"]]
+
+    for planet in chart["planets"]:
+        assert planet["house_occupied"] == house_of(
+            planet["longitude"], cusps
+        ), planet["name"]
+
+
+def test_house_occupants_are_consistent_with_planet_house_occupied(chart):
+    planet_house = {
+        planet["name"]: planet["house_occupied"] for planet in chart["planets"]
+    }
+
+    for house in chart["houses"]:
+        for occupant in house["occupants"]:
+            assert planet_house[occupant] == house["house"]
+
+    all_occupants = [
+        occupant for house in chart["houses"] for occupant in house["occupants"]
+    ]
+    assert sorted(all_occupants) == sorted(PLANET_ORDER)
+
+
+def test_house_occupant_round_trip_matches_house_engine(chart):
+    cusps = [house["cusp_longitude"] for house in chart["houses"]]
+    expected = house_occupants(chart["planets"], cusps)
+
+    assert {
+        house["house"]: house["occupants"] for house in chart["houses"]
+    } == expected
+
+
+# ---------------------------------------------------------------------------
+# Later-engine fields stay untouched
+# ---------------------------------------------------------------------------
+
+def test_significators_remain_unpopulated_by_house_task(chart):
+    for planet in chart["planets"]:
         assert planet["significator_of_houses"] == [], planet["name"]
         assert planet["significator_levels"] == {}, planet["name"]
     for house in chart["houses"]:
-        assert house["occupants"] == [], house["house"]
         assert house["significators"] is None, house["house"]
+
+
+def test_other_later_engine_fields_remain_at_defaults(chart):
     assert chart["dashas"] is None
     assert chart["strengths"] == []
     assert chart["divisional"] == {"d9": None, "d10": None}
