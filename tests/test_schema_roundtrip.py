@@ -339,6 +339,12 @@ def test_populated_later_engine_blocks_round_trip() -> None:
         ),
         (lambda c: c["planets"][0]["kp"].update({"sub_index": 1}), "sub_index"),
         (lambda c: c["houses"][0]["kp"].update({"row_index": 1}), "row_index"),
+        (lambda c: c["houses"][0].update({"cusp_star_lord": "Sun"}), "cusp_star_lord"),
+        (lambda c: c["houses"][0].update({"cusp_sub_lord": "Venus"}), "cusp_sub_lord"),
+        (
+            lambda c: c["houses"][0].update({"cusp_sub_sub_lord": "Mercury"}),
+            "cusp_sub_sub_lord",
+        ),
         (lambda c: c["houses"][0].update({"house": 13}), "house"),
         (lambda c: c["settings"].pop("ayanamsa"), "ayanamsa"),
     ],
@@ -369,6 +375,10 @@ def test_schema_file_was_generated_from_chart_model() -> None:
     assert set(kp_schema["required"]) == {"star_lord", "sub_lord"}
     assert "kp" in schema["$defs"]["PlanetBlock"]["required"]
     assert "kp" in schema["$defs"]["HouseBlock"]["required"]
+    house_properties = schema["$defs"]["HouseBlock"]["properties"]
+    assert "cusp_star_lord" not in house_properties
+    assert "cusp_sub_lord" not in house_properties
+    assert "cusp_sub_sub_lord" not in house_properties
     assert set(
         schema["$defs"]["D9Block"]["properties"]["placements"]["propertyNames"][
             "enum"

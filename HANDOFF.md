@@ -29,6 +29,26 @@ How this file works:
 
 # Entries
 
+## remove-legacy-cusp-kp-fields — agent/codex/remove-legacy-cusp-kp-fields — 2026-06-16 14:05 — Codex
+**Built:** Removed the stale public `houses[]` legacy cusp KP placeholder fields (`cusp_star_lord`, `cusp_sub_lord`, `cusp_sub_sub_lord`) from the Pydantic model, JSON schema, and generated frontend chart type. Public house KP remains only at `houses[].kp.star_lord` and `houses[].kp.sub_lord`, per D022/schema v1.2.
+**Files changed:**
+- `backend/app/routers/chart.py`
+- `backend/app/schemas/models.py`
+- `schemas/chart.json`
+- `frontend/src/types/chart.ts`
+- `tests/test_chart_integration.py`
+- `tests/test_chart_route.py`
+- `tests/test_schema_roundtrip.py`
+- `HANDOFF.md`
+**Tests run:**
+- `$env:SE_EPHE_PATH='C:\Users\assas\swisseph\ephe'; uv run --with-requirements backend\requirements.txt --with pytest python -m pytest tests\test_kp_engine.py tests\test_kp_table.py tests\test_chart_route.py tests\test_chart_integration.py tests\test_schema_roundtrip.py tests\test_health.py -q` -> 84 passed, 2 warnings.
+- `npm.cmd run lint` from `frontend/` -> passed, no ESLint warnings or errors.
+- `npm.cmd run build` from `frontend/` -> passed.
+- `git diff --check` -> passed.
+**Known issues / deferred:** none.
+**Next agent should read:** `DECISIONS.md` D022, `backend/app/schemas/models.py`, `schemas/chart.json`, and the updated schema/route tests.
+**Tempted but did not:** change KP lookup internals, add sub-sub lord to the public contract, edit `data/kp_249.csv`, change ephemeris/nakshatra math, bump schema or engine version, or touch prediction/significator fields.
+
 ## KP-chart-integration — agent/codex/kp-chart-integration — 2026-06-16 13:12 — Codex
 **Built:** Integrated the internal KP sub-lord lookup into public chart output with the D022 MVP shape. Schema v1.2 now requires strict `kp` blocks on `planets[]` and `houses[]`, `/chart/generate` copies only `star_lord` and `sub_lord` from the internal lookup result, chart/cache version bumped to `1.4.0`, and stale cached charts that fail current v1.2 validation are recomputed instead of returned.
 **Files changed:**

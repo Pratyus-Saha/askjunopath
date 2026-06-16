@@ -59,7 +59,6 @@ def _build_chart_payload(
     }
     # Nakshatra fill follows docs/nakshatra.md. KP fill follows D022: expose
     # only star_lord/sub_lord, even though the internal lookup returns more.
-    # The legacy cusp_star_lord/sub/sub_sub fields remain null here.
     planets = [
         {
             **planet,

@@ -56,6 +56,11 @@ INTERNAL_KP_KEYS = {
     "longitude",
     "arcsec",
 }
+LEGACY_CUSP_KP_FIELDS = {
+    "cusp_star_lord",
+    "cusp_sub_lord",
+    "cusp_sub_sub_lord",
+}
 
 GEO_RESULT = {
     "latitude": FIXTURE_INPUT["lat"],
@@ -171,6 +176,7 @@ def test_route_adds_public_kp_blocks_only(client):
         lookup = get_kp_sub_lord(house["cusp_longitude"])
         assert set(kp) == APPROVED_KP_KEYS, house["house"]
         assert set(kp).isdisjoint(INTERNAL_KP_KEYS), house["house"]
+        assert set(house).isdisjoint(LEGACY_CUSP_KP_FIELDS), house["house"]
         assert kp == {
             "star_lord": lookup["star_lord"],
             "sub_lord": lookup["sub_lord"],
@@ -330,6 +336,7 @@ def test_stale_cache_hit_is_recomputed_instead_of_returned(
         assert set(planet["kp"]) == APPROVED_KP_KEYS
     for house in body["chart"]["houses"]:
         assert set(house["kp"]) == APPROVED_KP_KEYS
+        assert set(house).isdisjoint(LEGACY_CUSP_KP_FIELDS)
 
 
 # ---------------------------------------------------------------------------
