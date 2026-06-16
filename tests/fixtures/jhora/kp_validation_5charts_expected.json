@@ -1,0 +1,515 @@
+{
+  "source": "JHora KP export manually normalized into this fixture; raw export not committed",
+  "charts": [
+    {
+      "chart_id": "kp_validation_01",
+      "input": {
+        "date": "14 August 1998",
+        "time": "06:45:00",
+        "place": "Kolkata, India",
+        "latitude": 22.5725,
+        "longitude": 88.363889,
+        "timezone_offset": "5:30 East",
+        "iana_timezone": "Asia/Kolkata"
+      },
+      "expected": {
+        "planets": {
+          "Sun": {
+            "star_lord": "Mercury",
+            "sub_lord": "Jupiter"
+          },
+          "Moon": {
+            "star_lord": "Venus",
+            "sub_lord": "Moon"
+          },
+          "Mars": {
+            "star_lord": "Jupiter",
+            "sub_lord": "Rahu"
+          },
+          "Mercury": {
+            "star_lord": "Mercury",
+            "sub_lord": "Jupiter"
+          },
+          "Jupiter": {
+            "star_lord": "Jupiter",
+            "sub_lord": "Rahu"
+          },
+          "Venus": {
+            "star_lord": "Saturn",
+            "sub_lord": "Mercury"
+          },
+          "Saturn": {
+            "star_lord": "Ketu",
+            "sub_lord": "Saturn"
+          },
+          "Rahu": {
+            "star_lord": "Ketu",
+            "sub_lord": "Jupiter"
+          },
+          "Ketu": {
+            "star_lord": "Rahu",
+            "sub_lord": "Rahu"
+          }
+        },
+        "houses": {
+          "1": {
+            "star_lord": "Venus",
+            "sub_lord": "Moon"
+          },
+          "2": {
+            "star_lord": "Moon",
+            "sub_lord": "Jupiter"
+          },
+          "3": {
+            "star_lord": "Rahu",
+            "sub_lord": "Venus"
+          },
+          "4": {
+            "star_lord": "Mercury",
+            "sub_lord": "Mercury"
+          },
+          "5": {
+            "star_lord": "Venus",
+            "sub_lord": "Mars"
+          },
+          "6": {
+            "star_lord": "Moon",
+            "sub_lord": "Mercury"
+          },
+          "7": {
+            "star_lord": "Rahu",
+            "sub_lord": "Venus"
+          },
+          "8": {
+            "star_lord": "Saturn",
+            "sub_lord": "Jupiter"
+          },
+          "9": {
+            "star_lord": "Venus",
+            "sub_lord": "Sun"
+          },
+          "10": {
+            "star_lord": "Moon",
+            "sub_lord": "Saturn"
+          },
+          "11": {
+            "star_lord": "Rahu",
+            "sub_lord": "Sun"
+          },
+          "12": {
+            "star_lord": "Mercury",
+            "sub_lord": "Mercury"
+          }
+        }
+      }
+    },
+    {
+      "chart_id": "kp_validation_02",
+      "input": {
+        "date": "03 February 2002",
+        "time": "23:20:00",
+        "place": "Mumbai, India",
+        "latitude": 19.076111,
+        "longitude": 72.877778,
+        "timezone_offset": "5:30 East",
+        "iana_timezone": "Asia/Kolkata"
+      },
+      "expected": {
+        "planets": {
+          "Sun": {
+            "star_lord": "Moon",
+            "sub_lord": "Venus"
+          },
+          "Moon": {
+            "star_lord": "Rahu",
+            "sub_lord": "Saturn"
+          },
+          "Mars": {
+            "star_lord": "Mercury",
+            "sub_lord": "Mercury"
+          },
+          "Mercury": {
+            "star_lord": "Sun",
+            "sub_lord": "Mercury"
+          },
+          "Jupiter": {
+            "star_lord": "Rahu",
+            "sub_lord": "Mercury"
+          },
+          "Venus": {
+            "star_lord": "Mars",
+            "sub_lord": "Rahu"
+          },
+          "Saturn": {
+            "star_lord": "Moon",
+            "sub_lord": "Jupiter"
+          },
+          "Rahu": {
+            "star_lord": "Mars",
+            "sub_lord": "Ketu"
+          },
+          "Ketu": {
+            "star_lord": "Ketu",
+            "sub_lord": "Venus"
+          }
+        },
+        "houses": {
+          "1": {
+            "star_lord": "Mars",
+            "sub_lord": "Saturn"
+          },
+          "2": {
+            "star_lord": "Jupiter",
+            "sub_lord": "Venus"
+          },
+          "3": {
+            "star_lord": "Mercury",
+            "sub_lord": "Saturn"
+          },
+          "4": {
+            "star_lord": "Sun",
+            "sub_lord": "Mars"
+          },
+          "5": {
+            "star_lord": "Mars",
+            "sub_lord": "Saturn"
+          },
+          "6": {
+            "star_lord": "Jupiter",
+            "sub_lord": "Moon"
+          },
+          "7": {
+            "star_lord": "Mercury",
+            "sub_lord": "Saturn"
+          },
+          "8": {
+            "star_lord": "Sun",
+            "sub_lord": "Moon"
+          },
+          "9": {
+            "star_lord": "Mars",
+            "sub_lord": "Saturn"
+          },
+          "10": {
+            "star_lord": "Jupiter",
+            "sub_lord": "Venus"
+          },
+          "11": {
+            "star_lord": "Mercury",
+            "sub_lord": "Saturn"
+          },
+          "12": {
+            "star_lord": "Sun",
+            "sub_lord": "Rahu"
+          }
+        }
+      }
+    },
+    {
+      "chart_id": "kp_validation_03",
+      "input": {
+        "date": "27 November 1995",
+        "time": "15:10:00",
+        "place": "Delhi, India",
+        "latitude": 28.613889,
+        "longitude": 77.208889,
+        "timezone_offset": "5:30 East",
+        "iana_timezone": "Asia/Kolkata"
+      },
+      "expected": {
+        "planets": {
+          "Sun": {
+            "star_lord": "Saturn",
+            "sub_lord": "Sun"
+          },
+          "Moon": {
+            "star_lord": "Moon",
+            "sub_lord": "Saturn"
+          },
+          "Mars": {
+            "star_lord": "Ketu",
+            "sub_lord": "Moon"
+          },
+          "Mercury": {
+            "star_lord": "Saturn",
+            "sub_lord": "Rahu"
+          },
+          "Jupiter": {
+            "star_lord": "Mercury",
+            "sub_lord": "Saturn"
+          },
+          "Venus": {
+            "star_lord": "Ketu",
+            "sub_lord": "Rahu"
+          },
+          "Saturn": {
+            "star_lord": "Jupiter",
+            "sub_lord": "Mercury"
+          },
+          "Rahu": {
+            "star_lord": "Mars",
+            "sub_lord": "Ketu"
+          },
+          "Ketu": {
+            "star_lord": "Ketu",
+            "sub_lord": "Venus"
+          }
+        },
+        "houses": {
+          "1": {
+            "star_lord": "Ketu",
+            "sub_lord": "Venus"
+          },
+          "2": {
+            "star_lord": "Sun",
+            "sub_lord": "Saturn"
+          },
+          "3": {
+            "star_lord": "Mars",
+            "sub_lord": "Saturn"
+          },
+          "4": {
+            "star_lord": "Jupiter",
+            "sub_lord": "Saturn"
+          },
+          "5": {
+            "star_lord": "Mercury",
+            "sub_lord": "Ketu"
+          },
+          "6": {
+            "star_lord": "Venus",
+            "sub_lord": "Jupiter"
+          },
+          "7": {
+            "star_lord": "Mars",
+            "sub_lord": "Mercury"
+          },
+          "8": {
+            "star_lord": "Saturn",
+            "sub_lord": "Saturn"
+          },
+          "9": {
+            "star_lord": "Mercury",
+            "sub_lord": "Saturn"
+          },
+          "10": {
+            "star_lord": "Venus",
+            "sub_lord": "Saturn"
+          },
+          "11": {
+            "star_lord": "Moon",
+            "sub_lord": "Mercury"
+          },
+          "12": {
+            "star_lord": "Jupiter",
+            "sub_lord": "Jupiter"
+          }
+        }
+      }
+    },
+    {
+      "chart_id": "kp_validation_04",
+      "input": {
+        "date": "19 May 2004",
+        "time": "04:35:00",
+        "place": "Chennai, India",
+        "latitude": 13.082778,
+        "longitude": 80.270833,
+        "timezone_offset": "5:30 East",
+        "iana_timezone": "Asia/Kolkata"
+      },
+      "expected": {
+        "planets": {
+          "Sun": {
+            "star_lord": "Sun",
+            "sub_lord": "Saturn"
+          },
+          "Moon": {
+            "star_lord": "Sun",
+            "sub_lord": "Jupiter"
+          },
+          "Mars": {
+            "star_lord": "Rahu",
+            "sub_lord": "Mercury"
+          },
+          "Mercury": {
+            "star_lord": "Ketu",
+            "sub_lord": "Jupiter"
+          },
+          "Jupiter": {
+            "star_lord": "Venus",
+            "sub_lord": "Venus"
+          },
+          "Venus": {
+            "star_lord": "Mars",
+            "sub_lord": "Ketu"
+          },
+          "Saturn": {
+            "star_lord": "Rahu",
+            "sub_lord": "Venus"
+          },
+          "Rahu": {
+            "star_lord": "Venus",
+            "sub_lord": "Mars"
+          },
+          "Ketu": {
+            "star_lord": "Rahu",
+            "sub_lord": "Sun"
+          }
+        },
+        "houses": {
+          "1": {
+            "star_lord": "Venus",
+            "sub_lord": "Venus"
+          },
+          "2": {
+            "star_lord": "Moon",
+            "sub_lord": "Jupiter"
+          },
+          "3": {
+            "star_lord": "Rahu",
+            "sub_lord": "Saturn"
+          },
+          "4": {
+            "star_lord": "Saturn",
+            "sub_lord": "Ketu"
+          },
+          "5": {
+            "star_lord": "Ketu",
+            "sub_lord": "Rahu"
+          },
+          "6": {
+            "star_lord": "Moon",
+            "sub_lord": "Moon"
+          },
+          "7": {
+            "star_lord": "Rahu",
+            "sub_lord": "Venus"
+          },
+          "8": {
+            "star_lord": "Saturn",
+            "sub_lord": "Jupiter"
+          },
+          "9": {
+            "star_lord": "Ketu",
+            "sub_lord": "Saturn"
+          },
+          "10": {
+            "star_lord": "Sun",
+            "sub_lord": "Ketu"
+          },
+          "11": {
+            "star_lord": "Rahu",
+            "sub_lord": "Rahu"
+          },
+          "12": {
+            "star_lord": "Saturn",
+            "sub_lord": "Venus"
+          }
+        }
+      }
+    },
+    {
+      "chart_id": "kp_validation_05",
+      "input": {
+        "date": "20 August 2002",
+        "time": "15:45:00",
+        "place": "Siliguri, India",
+        "latitude": 26.7,
+        "longitude": 88.433333,
+        "timezone_offset": "5:30 East",
+        "iana_timezone": "Asia/Kolkata"
+      },
+      "expected": {
+        "planets": {
+          "Sun": {
+            "star_lord": "Ketu",
+            "sub_lord": "Sun"
+          },
+          "Moon": {
+            "star_lord": "Sun",
+            "sub_lord": "Saturn"
+          },
+          "Mars": {
+            "star_lord": "Ketu",
+            "sub_lord": "Ketu"
+          },
+          "Mercury": {
+            "star_lord": "Sun",
+            "sub_lord": "Moon"
+          },
+          "Jupiter": {
+            "star_lord": "Saturn",
+            "sub_lord": "Venus"
+          },
+          "Venus": {
+            "star_lord": "Moon",
+            "sub_lord": "Mercury"
+          },
+          "Saturn": {
+            "star_lord": "Mars",
+            "sub_lord": "Venus"
+          },
+          "Rahu": {
+            "star_lord": "Moon",
+            "sub_lord": "Venus"
+          },
+          "Ketu": {
+            "star_lord": "Mercury",
+            "sub_lord": "Venus"
+          }
+        },
+        "houses": {
+          "1": {
+            "star_lord": "Venus",
+            "sub_lord": "Saturn"
+          },
+          "2": {
+            "star_lord": "Mars",
+            "sub_lord": "Saturn"
+          },
+          "3": {
+            "star_lord": "Saturn",
+            "sub_lord": "Mercury"
+          },
+          "4": {
+            "star_lord": "Ketu",
+            "sub_lord": "Jupiter"
+          },
+          "5": {
+            "star_lord": "Sun",
+            "sub_lord": "Mercury"
+          },
+          "6": {
+            "star_lord": "Mars",
+            "sub_lord": "Saturn"
+          },
+          "7": {
+            "star_lord": "Jupiter",
+            "sub_lord": "Saturn"
+          },
+          "8": {
+            "star_lord": "Mercury",
+            "sub_lord": "Saturn"
+          },
+          "9": {
+            "star_lord": "Sun",
+            "sub_lord": "Ketu"
+          },
+          "10": {
+            "star_lord": "Rahu",
+            "sub_lord": "Jupiter"
+          },
+          "11": {
+            "star_lord": "Saturn",
+            "sub_lord": "Mercury"
+          },
+          "12": {
+            "star_lord": "Mercury",
+            "sub_lord": "Saturn"
+          }
+        }
+      }
+    }
+  ]
+}
