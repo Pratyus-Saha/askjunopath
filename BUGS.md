@@ -1,13 +1,13 @@
 # BUGS.md
 
 ## BUG-001: Rahu-only JHora tolerance mismatch
-**Status:** Open · **Severity:** Medium · **Area:** Ephemeris validation · **Discovered:** Day 2 validation
+**Status:** Diagnosed · **Severity:** Medium · **Area:** Ephemeris validation · **Discovered:** Day 2 validation
 
 **Blocked work:** No. This does not block nakshatra integration, chart integration, frontend type generation, or Day 2 closeout. Nakshatra, chart integration, Moon validation 10/10, and all frontend work passed. This is Rahu-only.
 
 ### Summary
 
-The backend test suite has Rahu-only failures in `tests/test_ephemeris.py` — small arcsecond-level mismatches against JHora reference values. Everything else in Day 2 passed: nakshatra engine tests, chart integration tests, Moon validation, frontend type generation, frontend lint, frontend build, and local browser-to-backend chart generation.
+The backend test suite produced Rahu-only failures in `tests/test_ephemeris.py` when `SE_EPHE_PATH` was unset. With Swiss `.se1` files loaded from `C:\Users\assas\swisseph\ephe`, the same Rahu/JHora assertions pass. The failures were therefore an environment/validation-gate problem, not a Rahu math bug.
 
 Failing tests:
 - `tests/test_ephemeris.py::test_jhora_planet_longitudes`
@@ -22,19 +22,21 @@ Failing tests:
 | fixture_04_pre1990 | ~11.51 arcsec |
 | fixture_05_southern | ~16.98 arcsec |
 
-### Evidence
+### Diagnosis
 
 - Deltas of 7-17 arcsec are consistent with a TRUE node, not a MEAN node (a mean node would show ~1.5°, roughly 5000 arcsec).
-- The local chart response/settings show `node_type: TRUE`, but the literal Swiss Ephemeris node body/flag has NOT yet been verified at the source level — that still needs focused verification. The TRUE-vs-MEAN read above is inferred from delta magnitude, not confirmed in code.
+- `test_rahu_is_true_node_not_mean_node` verifies the engine Rahu against a direct `swe.TRUE_NODE` call at the same Julian day.
+- When `SE_EPHE_PATH` is unset, pyswisseph silently falls back to Moshier even when the code asks for `swe.FLG_SWIEPH`; node-only arcsecond scatter is the visible symptom.
+- With `SE_EPHE_PATH=C:\Users\assas\swisseph\ephe` and `.se1` files available, the strict JHora comparison gate passes.
 - Ketu is derived as Rahu + 180°.
 - The mismatch is limited to Rahu-specific assertions. This is not a nakshatra issue.
 - Moon validation passed 10/10 after correcting one manual JHora input-time mistake.
 - Local Siliguri V10 chart generation matched JHora Moon nakshatra and pada: Uttara Ashadha, pada 3.
 - Browser-to-backend `/chart/generate` is verified and working.
 
-### Hypothesis (unproven)
+### Resolution
 
-A JHora-vs-pyswisseph true-node convention difference, or a Rahu-specific tolerance policy question. Not yet proven; needs focused diagnosis before any code or fixture change.
+No ephemeris math fix, fixture edit, or tolerance loosening is needed. The strict JHora parity tests should run only when `ephemeris_files_ok()` confirms Swiss `.se1` files are present and actually in use; otherwise they should skip loudly with `SWISS_EPHE_REQUIRED`.
 
 ### Do not do
 
@@ -46,7 +48,4 @@ A JHora-vs-pyswisseph true-node convention difference, or a Rahu-specific tolera
 
 ### Recommended next step
 
-Read-only diagnosis on a separate branch, scheduled AFTER KP. Confirm the exact Swiss Ephemeris node body/flag in use and compare against JHora node settings, then decide between a code fix, a fixture correction, or a documented tolerance change.
-
-- Diagnosis branch: `agent/claude/rahu-diagnosis`
-- Implementation branch (only if needed): `agent/codex/rahu-ephemeris-fix`
+Keep the ephemeris guard in the JHora parity tests and ensure local/CI runs set `SE_EPHE_PATH` to the Swiss file directory before running the strict gate.
