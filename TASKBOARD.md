@@ -67,7 +67,7 @@
 - chart_engine_version 1.3.0. Gate suite 696 passed, 2 warnings. Moon validation 10/10.
 - Frontend lint/build passed; browser-to-backend fetch verified.
 - Rahu-only ephemeris tolerance tracked as BUG-001.
-- D021 metadata schema change to be implemented before KP schema expansion.
+- D021 metadata schema change closed on `agent/codex/schema-metadata-v1-1`: schema v1.1 legalizes optional strict chart metadata and frontend ChartData was regenerated.
 
 ---
 

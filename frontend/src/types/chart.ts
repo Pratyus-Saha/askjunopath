@@ -1,4 +1,4 @@
-﻿/**
+/**
  * DO NOT EDIT — GENERATED
  * Generated from schemas/chart.json
  */
@@ -10,21 +10,29 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type SchemaVersion = "1.0";
+export type SchemaVersion = "1.1";
+export type BirthDate = string;
+export type BirthTime = string;
+export type BirthCity = string;
+export type Latitude = number;
+export type Longitude = number;
+export type Timezone = string;
+export type Ayanamsa = number;
+export type EngineVersion = string;
 export type DatetimeLocal = string;
 export type DatetimeUtc = string;
-export type Timezone = string;
+export type Timezone1 = string;
 export type Lat = number;
 export type Lon = number;
 export type PlaceLabel = string;
 export type ApproximateTime = boolean;
 export type JulianDayUt = number;
-export type Ayanamsa = "KP_NEWCOMB";
+export type Ayanamsa1 = "KP_NEWCOMB";
 export type AyanamsaValueDeg = number;
 export type NodeType = "TRUE";
 export type HouseSystem = "PLACIDUS";
 export type Zodiac = "SIDEREAL";
-export type Longitude = number;
+export type Longitude1 = number;
 export type Sign =
   | "Aries"
   | "Taurus"
@@ -55,7 +63,7 @@ export type Planets = [
   PlanetBlock
 ];
 export type Name = "Sun" | "Moon" | "Mars" | "Mercury" | "Jupiter" | "Venus" | "Saturn" | "Rahu" | "Ketu";
-export type Longitude1 = number;
+export type Longitude2 = number;
 export type Sign1 =
   | "Aries"
   | "Taurus"
@@ -277,6 +285,7 @@ export type ProbabilityPct = number;
 
 export interface ChartData {
   schema_version: SchemaVersion;
+  metadata?: ChartMetadata | null;
   birth: BirthBlock;
   settings: SettingsBlock;
   ascendant: AscendantBlock;
@@ -288,10 +297,20 @@ export interface ChartData {
   transits?: TransitsBlock;
   prediction_features?: PredictionFeaturesBlock;
 }
+export interface ChartMetadata {
+  birth_date: BirthDate;
+  birth_time: BirthTime;
+  birth_city: BirthCity;
+  latitude: Latitude;
+  longitude: Longitude;
+  timezone: Timezone;
+  ayanamsa: Ayanamsa;
+  engine_version: EngineVersion;
+}
 export interface BirthBlock {
   datetime_local: DatetimeLocal;
   datetime_utc: DatetimeUtc;
-  timezone: Timezone;
+  timezone: Timezone1;
   lat: Lat;
   lon: Lon;
   place_label: PlaceLabel;
@@ -299,20 +318,20 @@ export interface BirthBlock {
   julian_day_ut: JulianDayUt;
 }
 export interface SettingsBlock {
-  ayanamsa: Ayanamsa;
+  ayanamsa: Ayanamsa1;
   ayanamsa_value_deg: AyanamsaValueDeg;
   node_type: NodeType;
   house_system: HouseSystem;
   zodiac: Zodiac;
 }
 export interface AscendantBlock {
-  longitude: Longitude;
+  longitude: Longitude1;
   sign: Sign;
   sign_degree: SignDegree;
 }
 export interface PlanetBlock {
   name: Name;
-  longitude: Longitude1;
+  longitude: Longitude2;
   sign: Sign1;
   sign_lord: SignLord;
   sign_degree: SignDegree1;
@@ -510,4 +529,3 @@ export interface RagAlignment {
   status: Status;
   chunk_ids?: ChunkIds;
 }
-

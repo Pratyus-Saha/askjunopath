@@ -142,24 +142,37 @@ def test_route_never_calls_old_chart_engine(client, monkeypatch):
         assert "is_retrograde" not in planet
 
 
-def test_chart_payload_is_schema_valid_chart_json(client):
+def test_chart_payload_is_schema_valid_chart_json_with_metadata(client):
     response = client.post("/chart/generate", json=REQUEST_BODY, headers=HEADERS)
     assert response.status_code == 200
-    chart = dict(response.json()["chart"])
-    chart.pop("metadata")  # the one documented non-schema key
+    chart = response.json()["chart"]
     parsed = ChartData.model_validate(chart)
-    assert parsed.schema_version == "1.0"
+    assert parsed.schema_version == "1.1"
+    assert parsed.metadata is not None
     assert parsed.birth.timezone == FIXTURE_INPUT["timezone"]
     assert parsed.birth.approximate_time is False
 
 
-def test_legacy_metadata_block_for_db_and_scaffold_page(client, saved_charts):
+def test_metadata_block_for_db_and_scaffold_page(client, saved_charts):
     """save_chart() reads chart_data['metadata']['ayanamsa'/'engine_version']
-    for its columns, and the Day 1 scaffold page calls .toFixed on
-    metadata.latitude/longitude — these must stay numeric and present."""
+    for its columns, and the scaffold page calls .toFixed on metadata
+    latitude/longitude - these must stay numeric and present."""
     response = client.post("/chart/generate", json=REQUEST_BODY, headers=HEADERS)
     assert response.status_code == 200
     metadata = response.json()["chart"]["metadata"]
+    assert set(metadata) == {
+        "birth_date",
+        "birth_time",
+        "birth_city",
+        "latitude",
+        "longitude",
+        "timezone",
+        "ayanamsa",
+        "engine_version",
+    }
+    assert metadata["birth_date"] == REQUEST_BODY["birth_date"]
+    assert metadata["birth_time"] == REQUEST_BODY["birth_time"]
+    assert metadata["birth_city"] == REQUEST_BODY["birth_city"]
     assert isinstance(metadata["latitude"], float)
     assert isinstance(metadata["longitude"], float)
     assert isinstance(metadata["ayanamsa"], float)

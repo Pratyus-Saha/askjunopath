@@ -27,13 +27,10 @@ def _build_chart_payload(
 ) -> dict:
     """Assemble the stored/returned chart payload from trusted engine output.
 
-    The canonical part is validated through the frozen chart.json v1.0
-    contract (ChartData). One extra non-schema key, `metadata`, is kept
-    alongside it: save_chart() reads chart_data["metadata"]["ayanamsa"] and
-    ["engine_version"] for its table columns, and the Day 1 scaffold chart
-    page reads metadata.latitude/longitude/ayanamsa/timezone. Strip
-    `metadata` before re-validating a stored object against ChartData
-    (extra="forbid").
+    The canonical payload is validated through chart.json v1.1 (ChartData).
+    Its optional metadata block carries response trust signals used by
+    save_chart() and the scaffold chart page while remaining narrow and
+    extra-forbidden.
     """
     birth = {
         **ephemeris["birth"],
@@ -52,16 +49,7 @@ def _build_chart_payload(
         {**house, "cusp_nakshatra": nakshatra_name(house["cusp_longitude"])}
         for house in ephemeris["houses"]
     ]
-    chart_model = ChartData(
-        schema_version="1.0",
-        birth=birth,
-        settings=ephemeris["settings"],
-        ascendant=ephemeris["ascendant"],
-        planets=planets,
-        houses=houses,
-    )
-    payload = chart_model.model_dump(mode="json")
-    payload["metadata"] = {
+    metadata = {
         "birth_date": request_data.birth_date,
         "birth_time": request_data.birth_time,
         "birth_city": request_data.birth_city,
@@ -71,7 +59,16 @@ def _build_chart_payload(
         "ayanamsa": ephemeris["settings"]["ayanamsa_value_deg"],
         "engine_version": settings.chart_engine_version,
     }
-    return payload
+    chart_model = ChartData(
+        schema_version="1.1",
+        metadata=metadata,
+        birth=birth,
+        settings=ephemeris["settings"],
+        ascendant=ephemeris["ascendant"],
+        planets=planets,
+        houses=houses,
+    )
+    return chart_model.model_dump(mode="json")
 
 
 @router.post("/generate", response_model=ChartGenerateResponse)
