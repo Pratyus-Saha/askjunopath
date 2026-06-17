@@ -78,6 +78,10 @@ These are mutually consistent: `planet.house_occupied == h` iff
 
 - **No significators.** `houses[].significators`, `planets[].significator_of_houses`,
   and `planets[].significator_levels` are RESERVED and NOT populated in v1.2 (D023).
+  The internal base KP A/B/C/D significator ladder (D025,
+  `backend/app/engines/significator_engine.py`, T4.2) *consumes* `houses[].occupants`
+  filled here as its B/A inputs, but is itself internal-only and likewise populates
+  no public field.
 - **No KP block changes.** `planets[].kp` / `houses[].kp` are owned by the KP
   integration; the house_engine does not touch them and does not change the
   cusp-longitude KP lookup.

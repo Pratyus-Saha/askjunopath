@@ -288,3 +288,43 @@ When the founder explicitly authorizes public significator population, after T4.
 
 Never for the bhava-span rule itself; the midpoint formula is JHora's definition. Re-examine only if a JHora comparison surfaces an occupancy mismatch on a validated chart.
 
+## D025 — Base KP significator ladder excludes node agency in v1
+
+**Date:** 2026-06-17 · **Status:** LOCKED
+
+### Decision
+
+* **T4.2 implements only the base structural A/B/C/D ladder.** It is an internal engine (`backend/app/engines/significator_engine.py`), validated against the T4.1 hand-worked ladders, and is **not** exposed in the public chart response.
+* Rahu and Ketu are treated as **normal planet names** for star-lord matching and as possible occupants.
+* This v1 ladder does **not** implement full node agency through sign lord, conjunction, aspect, or representation.
+* This is a deliberate internal-only simplification for deterministic fixture validation.
+* **Full node agency must be restored before serious prediction/timing launch.**
+* Public chart significator fields remain **unpopulated under D023**.
+
+### Base A/B/C/D definition (house-centric)
+
+* **A** = planets whose KP star lord is one of the direct occupants of the house.
+* **B** = direct occupants of the house.
+* **C** = planets whose KP star lord is the house owner / `cusp_sign_lord`.
+* **D** = the house owner / `cusp_sign_lord`.
+
+Planet-centric equivalence (the transpose of the same relation): a planet signifies the houses occupied by its star lord (A), occupied by itself (B), owned by its star lord (C), owned by itself (D).
+
+### Scope (deliberately narrow)
+
+* Include the 9 classical planets only: Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu. Outer planets, the Lagna, and house cusps are ignored.
+* House owner source is `houses[].cusp_sign_lord`; direct occupants source is `houses[].occupants` (JHora bhava spans, D024); star lord source is `planets[].kp.star_lord`.
+* No node sign-lord agency, no conjunction agency, no aspect agency, no sub-lord filtering, no prediction interpretation, no API exposure.
+
+### Evidence
+
+User 1 Kolkata was cross-checked against JHora fallback source tables (Houses tab / D024 occupants, the KP star/sub table, and the "Planets occupying each planet's nakshatra" clipboard table). The real pipeline (ephemeris → KP → bhava-span house occupation → ladder) reproduces all 36 expected house rows across User 1 Kolkata, User 2 Mumbai, and User 5 Siliguri exactly. The fixture `tests/fixtures/jhora/t41_significator_ladders_expected.json` is the judge (AGENTS.md Rule 8).
+
+### Binds
+
+`backend/app/engines/significator_engine.py`, `tests/test_significator_engine.py`, `tests/fixtures/jhora/t41_significator_ladders_expected.json`, TASKBOARD.md T4.2.
+
+### Revisit
+
+When the founder authorizes restoring full node agency (sign lord, conjunction, aspect, representation) and/or lifts D023 to populate the public A/B/C/D ladder. That entry supersedes this simplification, not the base A/B/C/D shape.
+

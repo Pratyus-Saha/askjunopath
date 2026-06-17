@@ -9,7 +9,7 @@
 > - Public KP shape is exactly `planets[].kp.{star_lord, sub_lord}` and `houses[].kp.{star_lord, sub_lord}`. There is **no** `sub_sub_lord` in public output.
 > - The legacy public house fields `houses[].cusp_star_lord`, `houses[].cusp_sub_lord`, `houses[].cusp_sub_sub_lord` are **REMOVED** from the contract (deleted in schema v1.2; see HANDOFF `remove-legacy-cusp-kp-fields`). Where they still appear below they are marked REMOVED and kept only as historical context — they are NOT the current public contract.
 > - `planets[].house_occupied` and `houses[].occupants` already exist in v1.2 (present since v1.0) and are filled by the house_engine via CUSP SPANS (`docs/houses.md`). Populating them is NOT a schema bump.
-> - Significator fields (`houses[].significators`, `planets[].significator_of_houses`, `planets[].significator_levels`) exist in the model/schema but are **RESERVED / NOT POPULATED in v1.2**, pending decision D023. No agent populates them in public output yet.
+> - Significator fields (`houses[].significators`, `planets[].significator_of_houses`, `planets[].significator_levels`) exist in the model/schema but are **RESERVED / NOT POPULATED in v1.2**, pending decision D023. No agent populates them in public output yet. The internal base KP A/B/C/D ladder engine (D025, `backend/app/engines/significator_engine.py`, T4.2) computes these levels for internal validation only and does **not** write any of these public fields.
 
 ---
 
