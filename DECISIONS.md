@@ -328,3 +328,18 @@ User 1 Kolkata was cross-checked against JHora fallback source tables (Houses ta
 
 When the founder authorizes restoring full node agency (sign lord, conjunction, aspect, representation) and/or lifts D023 to populate the public A/B/C/D ladder. That entry supersedes this simplification, not the base A/B/C/D shape.
 
+## D026 — Node agency precedes career prediction
+
+KP node agency v2 must be built and JHora-validated before `prediction-career-v1`.
+
+Rahu/Ketu are dominant KP significator agents. They can borrow or represent meaning through sign lord, star lord, conjunction, and aspect relationships. Building the career predictor on the current node-blind base ladder would create incomplete prediction inputs and likely force a full predictor re-tune once node agency lands.
+
+Therefore the revised order is:
+
+1. Internal Vimshottari Dasha engine
+2. Node agency v2 via `agent/claude/significator-nodes-v2`
+3. JHora actual 4-level significator validation
+4. `prediction-career-v1`
+
+This supersedes the earlier plan where node agency v2 was deferred until after the first career prediction vertical.
+
