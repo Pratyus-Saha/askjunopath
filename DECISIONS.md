@@ -367,3 +367,28 @@ User 1 Kolkata (1998-08-14 06:45, Kolkata): the real pipeline (ephemeris → cha
 
 When the founder authorizes public dasha exposure (lifts D023 for the reserved `DashaBlock` shape) and/or adds Sookshma/Prana levels or the User 2 / User 5 dasha fixtures. Never for the true-tropical-solar convention itself — it is JHora's setting and the fixture is the judge.
 
+## D028 — Node agency v2 implemented with AstroSage external comparison; JHora final significator parity pending
+
+**Date:** 2026-06-17 · **Status:** ACTIVE
+
+### Decision
+
+* The internal significator engine (`backend/app/engines/significator_engine.py`) gains a **separate node-aware layer** on top of the unchanged node-blind A/B/C/D base ladder (D025). The base ladder behavior is preserved byte-for-byte and remains the T4.1-fixture judge.
+* **Node agency model.** Rahu/Ketu own no sign and act as **agents** for the classical planets they represent, resolved through three deterministic channels: **sign lord** (the dispositor of the node's sign), **conjunction** (classical planets in the same sign), and **aspect** (classical planets casting Parashari sign-based graha drishti onto the node's sign — every planet the 7th, Mars also 4th/8th, Jupiter 5th/9th, Saturn 3rd/10th). The node's **star lord** is already represented by the base ladder, so it is not double-counted.
+* **Bidirectional, single-pass.** The node gains the full **node-blind** significations of each agent; reciprocally each agent gains the house the node occupies (nodes own no house). Borrowing reads node-blind significations only, so the pass is order-independent and free of node-to-node feedback; **only the seven classical planets are ever agents** (a node never borrows from a node).
+* **Internal only.** Like the base ladder, the node-aware layer returns plain objects, reads the chart read-only, and populates **no** public chart field. `houses[].significators`, `planets[].significator_of_houses`, and `planets[].significator_levels` stay reserved/unpopulated under **D023**. The chart router does not call it. **No `schema_version` change** (stays `1.2`), **no `chart_engine_version` change** (stays `1.4.0`), router output unchanged.
+* **AstroSage is an external compatibility reference ONLY, never a judge.** The final planet-to-house / house-to-planet significator table at `tests/fixtures/external/astrosage_user1_significators.json` is from **AstroSage, not JHora**. It is marked `external_reference_only: true`, `is_judge: false`, carries no authority under AGENTS.md Rule 8, and must not be tuned-to: the deterministic rules are implemented for their own sake, then compared. No exact-match was forced.
+* **JHora final significator table remains UNAVAILABLE.** JHora's final 4-level (nakshatra / sub / prati-sub / sookshma / praana) significator table and its reverse "Planet Bodies occupying this planet" tables are not available for this chart. **No node-aware output may claim JHora significator parity** until that table exists.
+
+### Evidence
+
+User 1 Kolkata (1998-08-14 06:45): Rahu (Leo, dispositor Sun, house 1) → agent {Sun}; Ketu (Aquarius, dispositor Saturn, house 7) → agents {Saturn, Mars} (Mars's 8th-sign aspect Cancer→Aquarius). The bidirectional rule makes Mars signify house 7. Comparison against AstroSage: **3 of 9 planets match exactly with no tuning (Sun, Mercury, Mars)**; the other six differ, with the nodes diverging most — AstroSage represents both nodes against houses {6,12} while our JHora-bhava occupation (D024) places Rahu in 1 and Ketu in 7, so the node divergence is rooted in a house-placement/convention difference, not the agency rules. The node-blind base ladder still reproduces all 36 T4.1 fixture rows exactly.
+
+### Binds
+
+`backend/app/engines/significator_engine.py`, `tests/test_significator_engine.py`, `tests/fixtures/external/astrosage_user1_significators.json`, `docs/kp-significators.md`, TASKBOARD.md (node agency v2). Consumes/relates to D023 (reserved public fields), D024 (bhava-span occupation), D025 (node-blind base ladder), D026 (node agency precedes career prediction).
+
+### Revisit
+
+When the founder supplies the JHora final 4-level significator table (the real judge). That entry supersedes the AstroSage-comparison-only status, validates or corrects the agency model against JHora, and is the gate for `prediction-career-v1` (D026). Also revisit if the founder authorizes lifting D023 to populate the public A/B/C/D ladder.
+
