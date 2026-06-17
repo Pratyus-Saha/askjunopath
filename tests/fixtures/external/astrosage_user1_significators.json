@@ -1,0 +1,45 @@
+{
+  "source": "AstroSage KP planet-to-house / house-to-planet significator table",
+  "external_reference_only": true,
+  "is_judge": false,
+  "provenance": "AstroSage (https://www.astrosage.com) KP significator output for the User 1 Kolkata birth data. This is NOT a JHora export and NOT a founder-hand-worked fixture, so it is NOT a parity judge under AGENTS.md Rule 8. It is stored only as an external compatibility reference for the node-aware significator engine. The JHora final 4-level significator table for this chart is unavailable; until it exists, no engine output may claim JHora significator parity (DECISIONS.md D028).",
+  "caveats": [
+    "AstroSage uses its own ayanamsa/house-cusp and node-agency conventions, which differ from this project's JHora-aligned engine (KP-Newcomb ayanamsa, Placidus, JHora D024 bhava-span house occupation).",
+    "AstroSage places/represents both nodes against houses {6,12} for this chart, while our JHora-bhava occupation puts Rahu in house 1 and Ketu in house 7 (D024). Node significator divergence is therefore rooted in a house-placement/convention difference, not only in agency rules.",
+    "Differences against this table are expected and must be reported honestly, never tuned away."
+  ],
+  "chart_id": "user1_kolkata",
+  "input": {
+    "date": "1998-08-14",
+    "time": "06:45:00",
+    "place": "Kolkata, India",
+    "latitude": 22.5725,
+    "longitude": 88.363889,
+    "iana_timezone": "Asia/Kolkata"
+  },
+  "house_to_planets": {
+    "1": ["Sun"],
+    "2": ["Sun", "Mercury"],
+    "3": ["Moon", "Venus"],
+    "4": ["Mars"],
+    "5": ["Mars", "Jupiter"],
+    "6": ["Venus", "Saturn", "Rahu", "Ketu"],
+    "7": ["Mars", "Jupiter", "Venus", "Saturn"],
+    "8": ["Mars", "Jupiter", "Venus", "Saturn"],
+    "9": ["Moon", "Mars"],
+    "10": ["Moon", "Venus"],
+    "11": ["Sun", "Moon", "Mars", "Mercury", "Venus"],
+    "12": ["Sun", "Moon", "Mercury", "Rahu", "Ketu"]
+  },
+  "planet_to_houses": {
+    "Sun": [1, 2, 11, 12],
+    "Moon": [3, 9, 10, 11, 12],
+    "Mars": [4, 5, 7, 8, 9, 11],
+    "Mercury": [2, 11, 12],
+    "Jupiter": [5, 7, 8],
+    "Venus": [3, 6, 7, 8, 10, 11],
+    "Saturn": [6, 7, 8],
+    "Rahu": [6, 12],
+    "Ketu": [6, 12]
+  }
+}
