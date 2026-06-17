@@ -392,3 +392,32 @@ User 1 Kolkata (1998-08-14 06:45): Rahu (Leo, dispositor Sun, house 1) → agent
 
 When the founder supplies the JHora final 4-level significator table (the real judge). That entry supersedes the AstroSage-comparison-only status, validates or corrects the agency model against JHora, and is the gate for `prediction-career-v1` (D026). Also revisit if the founder authorizes lifting D023 to populate the public A/B/C/D ladder.
 
+## D029 — Internal career prediction v1 is a deterministic evidence scaffold, not a validated predictor
+
+**Date:** 2026-06-17 · **Status:** ACTIVE
+
+### Decision
+
+* The first prediction vertical (`backend/app/engines/prediction_career_engine.py`, `compute_career_prediction(chart, *, as_of)`) is built **internal-first and evidence-first**. Like the significator (D028) and dasha (D027) engines it consumes, it is **internal only**: reads the chart read-only, mutates nothing, is **not** imported by the chart router, populates **no** public field (`chart.dashas` stays `null`, reserved significator fields stay empty under D023), and bumps **no** `schema_version` (1.2) / `chart_engine_version` (1.4.0).
+* **Rule/evidence-first, not LLM-first.** The engine produces a structured object; the `summary` is **templated** from the evidence. **No LLM call.** A future narrative layer (separate branch) may wrap the structured output, but the deterministic engine is the source of truth.
+* **Model = promise + timing.** *Promise*: for each career house (2 income, 6 service, 10 profession, 11 gains) read the **cusp sub-lord** and the houses it signifies (node-aware, D028); a career house is "promised" when its cusp sub-lord signifies any career house, with the 10th cusp sub-lord as the headline. *Timing*: the current Vimshottari MD/AD/PD lords (D027) and the houses they signify; a career house is "activated" when a current dasha lord signifies it. Supporting houses {1,3,5,9} and challenging houses {8,12} are classified the same way. Every emitted factor cites a real planet and significations taken **verbatim** from the node-aware engine (a test forbids fabrication).
+* **Confidence is a transparent heuristic, capped at `medium` in v1.** The engine never claims `high` while the significator foundation is not JHora-validated; `confidence_basis` exposes the raw counts and the cap. Timing is **dasha-period level only** (no transit engine yet — no day-level event dates).
+* **Language is safe.** Hedged wording only ("may", "suggests", "indicates", "reflective guidance"); no guaranteed-outcome / job / marriage / wealth claims (enforced by a banned-phrase test); a fixed caveat states it is directional, not definitive, and not financial/medical/legal/professional advice.
+* **Validation gap stated, not hidden.** There is **no JHora/founder golden fixture** for career output, and the significators are **AstroSage-compared only (D028), not JHora-validated** — the JHora final significator table is unavailable. v1 is therefore a deterministic *evidence scaffold*, **not** a validated predictor. The tests assert mechanics (shape, evidence integrity, timing-depends-on-`as_of`, hedged language, no mutation, public API unchanged), **not** astrological correctness.
+
+### Evidence
+
+User 1 Kolkata as of 2026-06-17 12:00 IST: 10th cusp sub-lord **Saturn** signifies [6,7,9] (hits career house 6 → salaried-service signature); current stack **Moon ▸ Ketu ▸ Rahu** activates all four career houses {2,6,10,11} with 8/12 noise; confidence `medium` (raw `high` capped). The PD flips Mars→Rahu exactly on 2026-06-17, so the midnight stack activates {6,10,11} (no 2) — proving timing depends on `as_of`. `tests/test_prediction_career_engine.py` 15 passed; required slice 191 passed; full suite 985 passed.
+
+### Branch / merge order
+
+Built on `agent/claude/prediction-career-v1`, **stacked on `agent/claude/significator-nodes-v2`** (it needs `compute_node_aware_significators`, D028, which is not yet merged) and on the already-merged dasha engine (D027). Founder merge order: **nodes-v2 (D028) → career-v1 (D029)**.
+
+### Binds
+
+`backend/app/engines/prediction_career_engine.py`, `tests/test_prediction_career_engine.py`, `docs/prediction-career.md`, TASKBOARD.md. Consumes D027 (dasha), D028 (node-aware significators); gated by D026 (node agency + JHora 4-level significator validation precede career). 
+
+### Revisit
+
+When (a) a founder golden career fixture exists (hand-scored, mirroring T4.1/T7.1) and/or the JHora final significator table lands (D026) — then correctness validation and heuristic tuning happen and the `medium` cap can be revisited; and (b) the founder authorizes public exposure via a **separate** versioned `POST /predict/career` endpoint (never folded into `/chart/generate`). A narrative LLM layer and the feedback loop are later, separate branches.
+
