@@ -1,0 +1,86 @@
+{
+  "source": "T4.1 hand-worked base KP A/B/C/D significator ladders. House owner = houses[].cusp_sign_lord (ephemeris). Direct occupants = houses[].occupants (JHora bhava spans, D024). Star lords = planets[].kp.star_lord (KP engine). User 1 Kolkata cross-checked against JHora Houses tab / D024 occupants, the JHora KP star/sub table, and the JHora 'Planets occupying each planet's nakshatra' clipboard table. Base ladder per D025: 9 classical planets only, Rahu/Ketu as normal names for star-lord matching only, no node sign-lord/conjunction/aspect agency, no sub-lord filtering. Internal only; not exposed in the public chart (D023). Planet order is canonical everywhere: Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu.",
+  "ladder_definition": {
+    "A": "planets whose KP star lord is one of the direct occupants of the house",
+    "B": "direct occupants of the house",
+    "C": "planets whose KP star lord is the house owner (cusp_sign_lord)",
+    "D": "the house owner (cusp_sign_lord)"
+  },
+  "charts": [
+    {
+      "chart_id": "user1_kolkata",
+      "input": {
+        "date": "1998-08-14",
+        "time": "06:45:00",
+        "place": "Kolkata, India",
+        "latitude": 22.5725,
+        "longitude": 88.363889,
+        "iana_timezone": "Asia/Kolkata"
+      },
+      "rows": [
+        { "house": 1,  "owner": "Sun",     "occupants": ["Rahu"],                    "A": ["Ketu"],                  "B": ["Rahu"],                    "C": [],                       "D": ["Sun"] },
+        { "house": 2,  "owner": "Mercury", "occupants": [],                          "A": [],                        "B": [],                          "C": ["Sun", "Mercury"],       "D": ["Mercury"] },
+        { "house": 3,  "owner": "Venus",   "occupants": [],                          "A": [],                        "B": [],                          "C": ["Moon"],                 "D": ["Venus"] },
+        { "house": 4,  "owner": "Mars",    "occupants": [],                          "A": [],                        "B": [],                          "C": [],                       "D": ["Mars"] },
+        { "house": 5,  "owner": "Jupiter", "occupants": [],                          "A": [],                        "B": [],                          "C": ["Mars", "Jupiter"],      "D": ["Jupiter"] },
+        { "house": 6,  "owner": "Saturn",  "occupants": [],                          "A": [],                        "B": [],                          "C": ["Venus"],                "D": ["Saturn"] },
+        { "house": 7,  "owner": "Saturn",  "occupants": ["Ketu"],                    "A": ["Saturn", "Rahu"],        "B": ["Ketu"],                    "C": ["Venus"],                "D": ["Saturn"] },
+        { "house": 8,  "owner": "Jupiter", "occupants": ["Jupiter"],                 "A": ["Mars", "Jupiter"],       "B": ["Jupiter"],                 "C": ["Mars", "Jupiter"],      "D": ["Jupiter"] },
+        { "house": 9,  "owner": "Mars",    "occupants": ["Moon", "Saturn"],          "A": ["Venus"],                 "B": ["Moon", "Saturn"],          "C": [],                       "D": ["Mars"] },
+        { "house": 10, "owner": "Venus",   "occupants": [],                          "A": [],                        "B": [],                          "C": ["Moon"],                 "D": ["Venus"] },
+        { "house": 11, "owner": "Mercury", "occupants": ["Mars"],                    "A": [],                        "B": ["Mars"],                    "C": ["Sun", "Mercury"],       "D": ["Mercury"] },
+        { "house": 12, "owner": "Moon",    "occupants": ["Sun", "Mercury", "Venus"], "A": ["Sun", "Moon", "Mercury"], "B": ["Sun", "Mercury", "Venus"], "C": [],                       "D": ["Moon"] }
+      ]
+    },
+    {
+      "chart_id": "user2_mumbai",
+      "input": {
+        "date": "2002-02-03",
+        "time": "23:20:00",
+        "place": "Mumbai, India",
+        "latitude": 19.076111,
+        "longitude": 72.877778,
+        "iana_timezone": "Asia/Kolkata"
+      },
+      "rows": [
+        { "house": 1,  "owner": "Mercury", "occupants": ["Moon"],                    "A": ["Sun", "Saturn"],         "B": ["Moon"],                    "C": ["Mars"],                 "D": ["Mercury"] },
+        { "house": 2,  "owner": "Venus",   "occupants": [],                          "A": [],                        "B": [],                          "C": [],                       "D": ["Venus"] },
+        { "house": 3,  "owner": "Mars",    "occupants": ["Ketu"],                    "A": ["Ketu"],                  "B": ["Ketu"],                    "C": ["Venus", "Rahu"],        "D": ["Mars"] },
+        { "house": 4,  "owner": "Jupiter", "occupants": ["Mercury"],                 "A": ["Mars"],                  "B": ["Mercury"],                 "C": [],                       "D": ["Jupiter"] },
+        { "house": 5,  "owner": "Saturn",  "occupants": ["Sun", "Venus"],            "A": ["Mercury"],               "B": ["Sun", "Venus"],            "C": [],                       "D": ["Saturn"] },
+        { "house": 6,  "owner": "Jupiter", "occupants": [],                          "A": [],                        "B": [],                          "C": [],                       "D": ["Jupiter"] },
+        { "house": 7,  "owner": "Jupiter", "occupants": ["Mars"],                    "A": ["Venus", "Rahu"],         "B": ["Mars"],                    "C": [],                       "D": ["Jupiter"] },
+        { "house": 8,  "owner": "Mars",    "occupants": [],                          "A": [],                        "B": [],                          "C": ["Venus", "Rahu"],        "D": ["Mars"] },
+        { "house": 9,  "owner": "Venus",   "occupants": ["Jupiter", "Saturn", "Rahu"], "A": ["Moon", "Jupiter"],     "B": ["Jupiter", "Saturn", "Rahu"], "C": [],                     "D": ["Venus"] },
+        { "house": 10, "owner": "Mercury", "occupants": [],                          "A": [],                        "B": [],                          "C": ["Mars"],                 "D": ["Mercury"] },
+        { "house": 11, "owner": "Moon",    "occupants": [],                          "A": [],                        "B": [],                          "C": ["Sun", "Saturn"],        "D": ["Moon"] },
+        { "house": 12, "owner": "Mercury", "occupants": [],                          "A": [],                        "B": [],                          "C": ["Mars"],                 "D": ["Mercury"] }
+      ]
+    },
+    {
+      "chart_id": "user5_siliguri",
+      "input": {
+        "date": "2002-08-20",
+        "time": "15:45:00",
+        "place": "Siliguri, India",
+        "latitude": 26.7,
+        "longitude": 88.433333,
+        "iana_timezone": "Asia/Kolkata"
+      },
+      "rows": [
+        { "house": 1,  "owner": "Jupiter", "occupants": ["Moon"],                    "A": ["Venus", "Rahu"],         "B": ["Moon"],                    "C": [],                       "D": ["Jupiter"] },
+        { "house": 2,  "owner": "Saturn",  "occupants": [],                          "A": [],                        "B": [],                          "C": ["Jupiter"],              "D": ["Saturn"] },
+        { "house": 3,  "owner": "Jupiter", "occupants": [],                          "A": [],                        "B": [],                          "C": [],                       "D": ["Jupiter"] },
+        { "house": 4,  "owner": "Mars",    "occupants": [],                          "A": [],                        "B": [],                          "C": ["Saturn"],               "D": ["Mars"] },
+        { "house": 5,  "owner": "Venus",   "occupants": [],                          "A": [],                        "B": [],                          "C": [],                       "D": ["Venus"] },
+        { "house": 6,  "owner": "Venus",   "occupants": ["Saturn", "Rahu"],          "A": ["Jupiter"],               "B": ["Saturn", "Rahu"],          "C": [],                       "D": ["Venus"] },
+        { "house": 7,  "owner": "Mercury", "occupants": ["Jupiter"],                 "A": [],                        "B": ["Jupiter"],                 "C": ["Ketu"],                 "D": ["Mercury"] },
+        { "house": 8,  "owner": "Moon",    "occupants": ["Sun", "Mars"],             "A": ["Moon", "Mercury", "Saturn"], "B": ["Sun", "Mars"],         "C": ["Venus", "Rahu"],        "D": ["Moon"] },
+        { "house": 9,  "owner": "Mercury", "occupants": ["Mercury", "Venus"],        "A": ["Ketu"],                  "B": ["Mercury", "Venus"],        "C": ["Ketu"],                 "D": ["Mercury"] },
+        { "house": 10, "owner": "Venus",   "occupants": [],                          "A": [],                        "B": [],                          "C": [],                       "D": ["Venus"] },
+        { "house": 11, "owner": "Mars",    "occupants": [],                          "A": [],                        "B": [],                          "C": ["Saturn"],               "D": ["Mars"] },
+        { "house": 12, "owner": "Mars",    "occupants": ["Ketu"],                    "A": ["Sun", "Mars"],           "B": ["Ketu"],                    "C": ["Saturn"],               "D": ["Mars"] }
+      ]
+    }
+  ]
+}
