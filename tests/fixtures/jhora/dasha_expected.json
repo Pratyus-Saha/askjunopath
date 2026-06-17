@@ -1,0 +1,101 @@
+{
+  "source": "JHora (Jagannatha Hora) Vimshottari dasha export, User 1 Kolkata. JHora settings per the screenshots: 'Using true tropical solar years' and 'Started from Moon'. All timestamps are Asia/Kolkata local civil time, to the second, exactly as JHora displays them. These are the judge (AGENTS.md Rule 8): the engine conforms to these values, never the reverse. The engine reproduces them within the documented tolerance because it implements the same true-tropical-solar-year (true geometric tropical Sun transit) convention; the small residual (~3.8h on this chart) is the irreducible anchor offset from our Swiss ephemeris Moon differing from JHora's Moon by ~1 arc-second. See docs/dasha.md.",
+  "convention": {
+    "system": "VIMSHOTTARI",
+    "year_convention": "true tropical solar years (true/geometric tropical Sun transit; advance each boundary by cumulative_years * 360 deg of the Sun's tropical longitude)",
+    "started_from": "Moon",
+    "nakshatra_span_deg": 13.333333333333334,
+    "vimshottari_order": ["Ketu", "Venus", "Sun", "Moon", "Mars", "Rahu", "Jupiter", "Saturn", "Mercury"],
+    "dasha_years": {"Ketu": 7, "Venus": 20, "Sun": 6, "Moon": 10, "Mars": 7, "Rahu": 18, "Jupiter": 16, "Saturn": 19, "Mercury": 17},
+    "total_years": 120,
+    "boundary_rule": "start-inclusive, end-exclusive; an exact boundary timestamp belongs to the new (next) period",
+    "timezone": "Asia/Kolkata",
+    "tolerance_seconds": 21600,
+    "tolerance_note": "6 hours. The engine matches every row below to ~3.8h; any fixed-constant-year model (365.25 / 365.24219 / 365.2425) is off by 54-60h and fails this tolerance, which is how the PD-level tests prove the true-tropical-solar convention."
+  },
+  "charts": [
+    {
+      "chart_id": "user1_kolkata",
+      "input": {
+        "date": "1998-08-14",
+        "time": "06:45:00",
+        "place": "Kolkata, India",
+        "latitude": 22.5725,
+        "longitude": 88.363889,
+        "iana_timezone": "Asia/Kolkata"
+      },
+      "moon": {
+        "nakshatra": "Bharani",
+        "nakshatra_lord": "Venus"
+      },
+      "birth_balance": {
+        "lord": "Venus"
+      },
+      "birth_stack": {"md": "Venus", "ad": "Moon", "pd": "Venus"},
+      "current_stack_cases": [
+        {"at": "2026-06-17 00:00:00", "md": "Moon", "ad": "Ketu", "pd": "Mars", "note": "midnight, before the Mars->Rahu PD boundary"},
+        {"at": "2026-06-17 12:00:00", "md": "Moon", "ad": "Ketu", "pd": "Rahu", "note": "noon, after the Mars->Rahu PD boundary"},
+        {"at": "2026-06-17 11:09:11", "md": "Moon", "ad": "Ketu", "pd": "Rahu", "note": "exact JHora boundary timestamp: end-exclusive means the NEW (Rahu) period starts here"}
+      ],
+      "mahadashas": [
+        {"md": "Venus",   "start": "1992-12-20 10:32:57", "end": "2012-12-20 07:00:32"},
+        {"md": "Sun",     "start": "2012-12-20 07:00:32", "end": "2018-12-20 18:11:06"},
+        {"md": "Moon",    "start": "2018-12-20 18:11:06", "end": "2028-12-20 04:08:41"},
+        {"md": "Mars",    "start": "2028-12-20 04:08:41", "end": "2035-12-20 21:19:07"},
+        {"md": "Rahu",    "start": "2035-12-20 21:19:07", "end": "2053-12-20 05:57:30"},
+        {"md": "Jupiter", "start": "2053-12-20 05:57:30", "end": "2069-12-20 03:09:54"},
+        {"md": "Saturn",  "start": "2069-12-20 03:09:54", "end": "2088-12-19 17:44:14"},
+        {"md": "Mercury", "start": "2088-12-19 17:44:14", "end": "2105-12-20 20:50:43"},
+        {"md": "Ketu",    "start": "2105-12-20 20:50:43", "end": "2112-12-20 13:44:50"}
+      ],
+      "antardashas": {
+        "Venus": [
+          {"ad": "Venus",   "start": "1992-12-20 10:32:57", "end": "1996-04-18 13:33:47"},
+          {"ad": "Sun",     "start": "1996-04-18 13:33:47", "end": "1997-04-18 19:25:16"},
+          {"ad": "Moon",    "start": "1997-04-18 19:25:16", "end": "1998-12-20 21:46:05"},
+          {"ad": "Mars",    "start": "1998-12-20 21:46:05", "end": "2000-02-18 04:02:45"},
+          {"ad": "Rahu",    "start": "2000-02-18 04:02:45", "end": "2003-02-17 21:29:45"},
+          {"ad": "Jupiter", "start": "2003-02-17 21:29:45", "end": "2005-10-22 02:44:31"},
+          {"ad": "Saturn",  "start": "2005-10-22 02:44:31", "end": "2008-12-20 07:53:00"},
+          {"ad": "Mercury", "start": "2008-12-20 07:53:00", "end": "2011-10-22 13:33:01"},
+          {"ad": "Ketu",    "start": "2011-10-22 13:33:01", "end": "2012-12-20 07:00:32"}
+        ],
+        "Moon": [
+          {"ad": "Moon",    "start": "2018-12-20 18:11:06", "end": "2019-10-22 12:22:06"},
+          {"ad": "Mars",    "start": "2019-10-22 12:22:06", "end": "2020-05-19 07:41:49"},
+          {"ad": "Rahu",    "start": "2020-05-19 07:41:49", "end": "2021-11-20 22:05:08"},
+          {"ad": "Jupiter", "start": "2021-11-20 22:05:08", "end": "2023-03-19 16:25:03"},
+          {"ad": "Saturn",  "start": "2023-03-19 16:25:03", "end": "2024-10-21 17:16:15"},
+          {"ad": "Mercury", "start": "2024-10-21 17:16:15", "end": "2026-03-19 09:46:17"},
+          {"ad": "Ketu",    "start": "2026-03-19 09:46:17", "end": "2026-10-22 04:38:56"},
+          {"ad": "Venus",   "start": "2026-10-22 04:38:56", "end": "2028-06-19 13:36:22"},
+          {"ad": "Sun",     "start": "2028-06-19 13:36:22", "end": "2028-12-20 04:08:41"}
+        ]
+      },
+      "pratyantardashas": {
+        "Venus/Moon": [
+          {"pd": "Moon",    "start": "1997-04-18 19:25:16", "end": "1997-06-09 14:35:52"},
+          {"pd": "Mars",    "start": "1997-06-09 14:35:52", "end": "1997-07-16 07:01:22"},
+          {"pd": "Rahu",    "start": "1997-07-16 07:01:22", "end": "1997-10-17 03:28:34"},
+          {"pd": "Jupiter", "start": "1997-10-17 03:28:34", "end": "1998-01-04 09:09:09"},
+          {"pd": "Saturn",  "start": "1998-01-04 09:09:09", "end": "1998-04-08 20:22:20"},
+          {"pd": "Mercury", "start": "1998-04-08 20:22:20", "end": "1998-07-06 01:01:26"},
+          {"pd": "Ketu",    "start": "1998-07-06 01:01:26", "end": "1998-08-11 16:14:42"},
+          {"pd": "Venus",   "start": "1998-08-11 16:14:42", "end": "1998-11-21 08:07:15"},
+          {"pd": "Sun",     "start": "1998-11-21 08:07:15", "end": "1998-12-20 21:46:05"}
+        ],
+        "Moon/Ketu": [
+          {"pd": "Ketu",    "start": "2026-03-19 09:46:17", "end": "2026-03-31 18:25:58"},
+          {"pd": "Venus",   "start": "2026-03-31 18:25:58", "end": "2026-05-06 13:39:13"},
+          {"pd": "Sun",     "start": "2026-05-06 13:39:13", "end": "2026-05-17 10:27:41"},
+          {"pd": "Moon",    "start": "2026-05-17 10:27:41", "end": "2026-06-04 15:44:44"},
+          {"pd": "Mars",    "start": "2026-06-04 15:44:44", "end": "2026-06-17 11:09:11"},
+          {"pd": "Rahu",    "start": "2026-06-17 11:09:11", "end": "2026-07-20 11:39:03"},
+          {"pd": "Jupiter", "start": "2026-07-20 11:39:03", "end": "2026-08-18 17:23:51"},
+          {"pd": "Saturn",  "start": "2026-08-18 17:23:51", "end": "2026-09-22 00:38:47"},
+          {"pd": "Mercury", "start": "2026-09-22 00:38:47", "end": "2026-10-22 04:38:56"}
+        ]
+      }
+    }
+  ]
+}

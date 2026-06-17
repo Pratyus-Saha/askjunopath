@@ -129,6 +129,8 @@ Midday cut: significator strength tiers default flat (restore Day 7); Antigravit
 
 Midday cut: upcoming_pd populated to 10 (schema cap stays 30).
 
+**Out-of-band note (agent/claude/dasha-engine, 2026-06-17, D027).** The **internal Vimshottari dasha engine** landed: `backend/app/engines/dasha_engine.py` exposes `compute_dasha(*, moon_nakshatra_lord, moon_degree_in_nakshatra, birth)` and `compute_dasha_from_chart(chart)` returning a `DashaTimeline` (9 MD / 81 AD / 729 PD) with `current_stack(t)`. Convention per JHora screenshots = **true tropical solar years** ("Started from Moon"): each boundary is where the true/geometric **tropical** Sun (Swiss `FLG_SWIEPH|FLG_SPEED|FLG_TRUEPOS`, no sidereal) has advanced `cumulative_years × 360°` from the back-projected birth-MD start. This is **not** a fixed-day constant (D027 refines D002's 365.25 placeholder; `MEAN_TROPICAL_YEAR_DAYS = 365.2425` is only the solver seed). Birth MD lord = chart Moon nakshatra lord (Moon never recomputed); balance = `MD_years × (NAK_SPAN − moon_deg)/NAK_SPAN`. Start-inclusive/end-exclusive. **Internal only** — no public chart population, `chart.dashas` stays `null` (D023), no schema/version bump. Fixture `tests/fixtures/jhora/dasha_expected.json` (User 1 Kolkata: full 9-MD ladder, Venus+Moon AD sets, Venus/Moon + Moon/Ketu PD sets, 3 current_stack cases) is the judge; the real pipeline reproduces every row within **~3.8h** (gate 6h), and a fixed-constant year is off 54–60h and fails — proving the convention. `tests/test_dasha_engine.py` 73 passed; required slice 198 passed. Founder to sync status. T5.2 validation (10 charts), T5.3/T5.4 frontend, and public exposure (lift D023) remain to do.
+
 ---
 
 ## Day 6 — Tuesday, June 16: Strength V1 + D9/D10

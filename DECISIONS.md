@@ -343,3 +343,27 @@ Therefore the revised order is:
 
 This supersedes the earlier plan where node agency v2 was deferred until after the first career prediction vertical.
 
+## D027 — Dasha year is true tropical solar years (refines D002's 365.25 placeholder); engine internal-only
+
+**Date:** 2026-06-17 · **Status:** LOCKED
+
+### Decision
+
+* The internal Vimshottari dasha engine (`backend/app/engines/dasha_engine.py`, T5.1) uses **true tropical solar years**, matching the founder's JHora export ("Using true tropical solar years", "Started from Moon"). It is **internal only**: it returns a `DashaTimeline` object and populates **no** public field. `chart.dashas` stays **`null`** under D023. No schema bump (`schema_version` stays `1.2`), no engine version bump (`chart_engine_version` stays `1.4.0`); the chart router does not call it.
+* **True tropical solar years are not a fixed-day constant.** A dasha boundary at cumulative time `T` years from the back-projected birth-mahadasha start is the instant the **true/geometric tropical Sun** (Swiss `FLG_SWIEPH | FLG_SPEED | FLG_TRUEPOS`, **no** `FLG_SIDEREAL`) has advanced `T × 360°` of tropical longitude. The Sun's varying speed makes each solar year a slightly different length; the per-mahadasha implied year across the User 1 fixture ranges 365.2415–365.2451 days (cycle mean 365.24278). `MEAN_TROPICAL_YEAR_DAYS = 365.2425` is locked **only** as the transit-solver seed / reference value, never as a period length.
+* **This refines the D002 placeholder.** D002 / AGENTS.md §4 / PROJECT_CONTEXT §7 recorded the dasha year as "365.25 days." That was a placeholder; the founder's JHora reference uses true tropical solar years. D027 supersedes the **dasha-year value** in D002 only — every other D002 setting (sidereal, KP-Newcomb ayanamsa, true node, Placidus, JHora as judge) is unchanged. A fixed 365.25 is off by ~60h at PD level on the fixture and must not be used.
+* **Birth mahadasha** lord is the Moon's nakshatra lord, read from the existing chart Moon nakshatra block (the Moon is never recomputed). Birth balance = `MD_years × (NAK_SPAN − moon_degree_in_nakshatra) / NAK_SPAN`, `NAK_SPAN = 13.333333333333334°`.
+* **Boundaries** are start-inclusive / end-exclusive (an exact boundary belongs to the new period); MD/AD/PD nest proportionally (`MD_years × AD_years / 120`, then `× PD_years / 120`). Output rendered in the birth timezone (Asia/Kolkata for User 1).
+
+### Evidence
+
+User 1 Kolkata (1998-08-14 06:45, Kolkata): the real pipeline (ephemeris → chart Moon block → dasha) reproduces JHora's entire ladder — 9 mahadashas (1992→2112), the Venus and Moon antardasha sets, the Venus/Moon and Moon/Ketu pratyantardasha sets, and the three 2026-06-17 `current_stack` cases — within **~3.8h** (gate: 6h). The residual is the irreducible anchor offset from our Swiss Moon differing from JHora's by ~1″. A fixed-constant-year model (365.25 / 365.24219 / 365.2425) is off by 54–60h at PD level and fails the same tolerance, and the `current_stack` noon case (Moon/Ketu/**Rahu**) only resolves correctly under the Sun-transit model — so the PD tests prove the convention. Fixture `tests/fixtures/jhora/dasha_expected.json` is the judge (AGENTS.md Rule 8); no expected value was adjusted.
+
+### Binds
+
+`backend/app/engines/dasha_engine.py`, `tests/test_dasha_engine.py`, `tests/fixtures/jhora/dasha_expected.json`, `docs/dasha.md`, TASKBOARD.md T5.1. Downstream: D026 (node agency v2 → 4-level significator validation → career prediction) consumes this timeline internally; public exposure waits on a future founder decision lifting D023.
+
+### Revisit
+
+When the founder authorizes public dasha exposure (lifts D023 for the reserved `DashaBlock` shape) and/or adds Sookshma/Prana levels or the User 2 / User 5 dasha fixtures. Never for the true-tropical-solar convention itself — it is JHora's setting and the fixture is the judge.
+
