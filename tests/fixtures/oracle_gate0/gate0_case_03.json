@@ -1,0 +1,7 @@
+{
+  "chart_id": "gate0_case_03",
+  "description": "Gate 0 oracle-parity fixture. UT derived from existing Junopath fixture_05_southern (1990-11-23T17:20:00 Australia/Sydney, southern hemisphere, AEDT). Used only by scripts/compare_pyjhora.py for read-only PyJHora oracle comparison; not a Junopath expected-value fixture.",
+  "datetime_utc": "1990-11-23T06:20:00Z",
+  "lat": -33.8688,
+  "lon": 151.2093
+}

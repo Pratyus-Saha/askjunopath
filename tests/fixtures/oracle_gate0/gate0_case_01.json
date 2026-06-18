@@ -1,0 +1,7 @@
+{
+  "chart_id": "gate0_case_01",
+  "description": "Gate 0 oracle-parity fixture. UT derived from existing Junopath fixture_01_india (1994-03-21T14:35:00 Asia/Kolkata, Gurugram). Used only by scripts/compare_pyjhora.py for read-only PyJHora oracle comparison; not a Junopath expected-value fixture.",
+  "datetime_utc": "1994-03-21T09:05:00Z",
+  "lat": 28.4595,
+  "lon": 77.0266
+}
