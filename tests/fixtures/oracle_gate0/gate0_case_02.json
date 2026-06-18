@@ -1,0 +1,7 @@
+{
+  "chart_id": "gate0_case_02",
+  "description": "Gate 0 oracle-parity fixture. UT derived from existing Junopath fixture_02_us_dst (1985-07-04T08:30:00 America/New_York, NYC, EDT). Used only by scripts/compare_pyjhora.py for read-only PyJHora oracle comparison; not a Junopath expected-value fixture.",
+  "datetime_utc": "1985-07-04T12:30:00Z",
+  "lat": 40.7128,
+  "lon": -74.006
+}
