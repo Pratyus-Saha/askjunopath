@@ -422,3 +422,157 @@ Built on `agent/claude/prediction-career-v1`, **stacked on `agent/claude/signifi
 
 When (a) a founder golden career fixture exists (hand-scored, mirroring T4.1/T7.1) and/or the JHora final significator table lands (D026) — then correctness validation and heuristic tuning happen and the `medium` cap can be revisited; and (b) the founder authorizes public exposure via a **separate** versioned `POST /predict/career` endpoint (never folded into `/chart/generate`). A narrative LLM layer and the feedback loop are later, separate branches.
 
+## D030 — Internal Career Prediction API wrapper
+
+**Date:** 2026-06-18
+**Status:** Accepted
+**Owner:** Founder
+**Scope:** Backend internal/dev surface only
+
+### Decision
+
+Add an internal-only backend API wrapper for Career Prediction V1 at:
+
+```text
+POST /internal/predict/career
+```
+
+This route exists only as a development/internal testing surface for the deterministic Career Prediction V1 engine. It is not a public prediction endpoint, not a frontend feature, and not part of `/chart/generate`.
+
+The route accepts an inline `chart` payload and a timezone-aware `as_of`, then calls `compute_career_prediction` without changing engine logic. The response wraps the deterministic output with an internal-only envelope:
+
+```text
+internal_only: true
+caveat: route-level internal/dev-only warning
+as_of: resolved timezone-aware timestamp
+prediction: verbatim compute_career_prediction output
+```
+
+### Guardrails
+
+The route must remain fail-closed.
+
+Environment gate:
+
+```text
+allowed: development, dev, local, test
+blocked: production, staging, unknown/anything else
+```
+
+Blocked environments return `404`, not `401` or `403`, so the route does not reveal its existence.
+
+Token gate:
+
+```text
+INTERNAL_CAREER_API_TOKEN
+X-Internal-Career-Token
+```
+
+If `INTERNAL_CAREER_API_TOKEN` is set, the request must include the matching `X-Internal-Career-Token` header. Missing or incorrect tokens return `404`. Token comparison should use constant-time comparison. If the token is unset, local/dev/test access is allowed for developer testing.
+
+The environment gate wins: production/staging/unknown must return `404` even with a correct token.
+
+### Request behavior
+
+For v1, the route supports inline chart input only.
+
+```text
+chart: required inline ChartData-compatible object
+as_of: optional timezone-aware ISO timestamp
+chart_id: recognized but unsupported in v1
+```
+
+Rules:
+
+```text
+- valid timezone-aware as_of → accepted
+- missing as_of → safely derived as current UTC timestamp
+- naive as_of → rejected with 422
+- invalid as_of → rejected with 422
+- chart_id → rejected with 400 "unsupported in internal v1"
+```
+
+No database chart loading is added in this decision. `chart_id` support is explicitly deferred.
+
+### Non-goals
+
+This decision does not allow:
+
+```text
+- public /predict/career
+- frontend Career Prediction UI
+- exposing Career V1 inside /chart/generate
+- Gemini/LLM synthesis
+- confidence-cap changes
+- schema_version or chart_engine_version bump
+- mutation of chart.dashas
+- population of reserved significator fields
+- db.py changes
+- canonical schema changes
+- frontend type generation
+```
+
+### Rationale
+
+Career Prediction V1 is currently an internal deterministic evidence scaffold. It has passed internal safety/evidence checks, but it is not a validated public predictor. The internal API wrapper provides a safe backend test surface without turning the engine into a user-facing product.
+
+The route is intentionally placed under `/internal` instead of `/predict/career` so the future public prediction API surface remains reserved for a separate founder-approved decision.
+
+### Validation
+
+The implementation must be validated by tests covering:
+
+```text
+- internal route returns Career V1 output
+- route output matches direct compute_career_prediction output
+- public /chart/generate does not expose career prediction
+- chart.dashas remains null
+- reserved significator fields remain empty
+- no unsafe certainty language
+- no invented planets, houses, or dates
+- valid timezone-aware as_of accepted
+- naive/invalid as_of rejected
+- missing as_of derives UTC now
+- chart_id returns 400 unsupported
+- dev/local/test environments can access the route
+- production/staging/unknown environments return 404
+- missing/wrong token returns 404 when token is configured
+- correct token returns 200 only in allowed environments
+- production returns 404 even with correct token
+```
+
+Observed validation at merge time:
+
+```text
+tests/test_internal_predict_career.py: 37 passed
+full suite: 935 passed, 115 skipped, 0 failed
+```
+
+The skipped tests are pre-existing Swiss-ephemeris-gated tests.
+
+### Files / binds
+
+This decision binds:
+
+```text
+backend/app/routers/internal.py
+backend/app/main.py
+tests/test_internal_predict_career.py
+docs/prediction-career.md
+HANDOFF.md
+TASKBOARD.md
+```
+
+Related decisions:
+
+```text
+D023 — reserved significator fields remain unpopulated
+D026 — JHora final significator validation gate
+D027 — internal Vimshottari dasha engine
+D028 — node-aware KP significator agency
+D029 — Career Prediction V1 internal evidence engine
+```
+
+### Future work
+
+A public Career Prediction API or UI requires a separate decision. Before public exposure, founder review and stronger correctness validation are required. The internal route may later support `chart_id` only after a deliberate storage/read contract is designed and tested.
