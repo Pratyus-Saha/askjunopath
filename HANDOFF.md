@@ -29,6 +29,50 @@ How this file works:
 
 # Entries
 
+## internal-career-api-v1 — agent/claude/internal-career-api-v1 — 2026-06-19 — Claude Code
+**Built:** an **internal/dev-only API wrapper** for the existing Career V1 engine (D029): `backend/app/routers/internal.py` exposes `POST /internal/predict/career`, which calls `compute_career_prediction(chart, *, as_of)` **unchanged** and returns its evidence object **verbatim** inside an envelope `{internal_only: true, caveat, as_of, prediction}`. Engine logic, prompts, weights, and the `medium` cap are untouched — this is purely an API-like path so the backend can exercise Career V1.
+**Gating (internal/dev only, defense-in-depth):** a request-time dependency first applies the **environment gate** — the route is exposed only when `settings.environment` ∈ {`development`,`dev`,`local`,`test`}; every other environment (incl. `production`/`staging`/unknown) returns **404**, so it is invisible in prod (allow-list / fail-closed). Then an **optional token gate**: when `INTERNAL_CAREER_API_TOKEN` is set (read from `os.environ` at request time, **not** `config.py`), callers must also send a matching `X-Internal-Career-Token` header — missing/wrong → **404** (constant-time compare, never 401/403, to hide existence); unset → dev/local/test needs no header. The env gate wins, so **production returns 404 even with a correct token**. Deliberately **not** `/predict/career` and **not** `backend/app/routers/predict.py` — both are reserved for the *future public* endpoint (D029 revisit, T11.2).
+**Contract:** inline `chart` only in v1, validated against the canonical v1.2 `ChartData` (bad shape → 422; missing → 422). `chart_id` is accepted in the schema but returns **400** ("not supported in internal v1; pass an inline chart") — no by-id store read exists yet (only by-fingerprint), so the DB layer was left untouched. `as_of` must be ISO-8601 **timezone-aware** (naive or unparseable → 422); when omitted it is **safely derived** as `datetime.now(timezone.utc)`. Engine `ValueError` (naive / out-of-timeline) is caught → 422.
+**Internal-only invariants (verified by tests):** not wired into `/chart/generate`; populates no public chart field; input chart not mutated; `chart.dashas` stays null and reserved significator fields stay empty (D023); no `schema_version` (1.2) / `chart_engine_version` (1.4.0) bump; no LLM. The public chart route is asserted to expose **zero** career fields. Frontend, schemas, and public output untouched (Antigravity's lane; founder constraint).
+**Files changed:**
+- `backend/app/routers/internal.py` (new — gated router; request/response models live here, not in `app/schemas/models.py`, to keep `schemas/` untouched)
+- `backend/app/main.py` (mount the internal router; +4 lines, additive)
+- `tests/test_internal_predict_career.py` (new, 30 tests)
+- `docs/prediction-career.md` (short note: internal/dev wrapper now exists)
+- `TASKBOARD.md` (Day 11 out-of-band note)
+- `HANDOFF.md` (this entry, incl. the **D030 draft** below)
+- **NOT changed:** `DECISIONS.md` (D030 drafted below for the founder to paste, per Rule 4), `schemas/**`, `backend/app/schemas/models.py`, `backend/app/routers/chart.py`, `backend/app/core/db.py`, `backend/app/core/config.py`, the career/significator/dasha engines, `frontend/**`.
+**Tests run:**
+- `.venv/Scripts/python.exe -m pytest tests/test_internal_predict_career.py -q` → **37 passed, 2 warnings**.
+- full suite `.venv/Scripts/python.exe -m pytest -q` → **935 passed, 115 skipped, 2 warnings** (the skips are the pre-existing `@requires_swiss` tests — no `.se1` in this env; the new internal-route tests are Swiss-independent — they assert route-output **==** a direct `compute_career_prediction` call + the safety/gating/token invariants, not exact astrology — so all 37 ran).
+**Known issues / deferred:** `chart_id` input is intentionally unsupported in v1 (400) pending a by-id store read; gating is a request-time env check (a hardening pass could move to conditional mounting); no auth header required (env gate is the control for an internal surface); correctness still unvalidated (inherits D029's caveat). `scripts/check_allowed_files.py` still absent, so `git status --short` stands in. **Not committed / not pushed** per founder instruction (file list under review first).
+**Next agent should read:** `backend/app/routers/internal.py`, `tests/test_internal_predict_career.py`, `docs/prediction-career.md`, DECISIONS.md D029 (+ the D030 draft below).
+**Tempted but did not:** add a Gemini/LLM synthesis layer; change any engine logic or the `medium` cap; create the public `POST /predict/career` (or `predict.py`); add `chart_id` DB plumbing in `db.py`; add request/response models to `app/schemas/models.py`; touch `schemas/chart.json`, `config.py`, `chart.py`, or any `frontend/**`; bump `schema_version` / `chart_engine_version`; or edit `DECISIONS.md` directly (drafted D030 for the founder instead).
+
+### DRAFT D030 — for the founder to paste into DECISIONS.md (agents don't edit DECISIONS.md, Rule 4)
+
+> ## D030 — Internal-only Career V1 API wrapper (dev/test surface), env-gated; not public exposure
+>
+> **Date:** 2026-06-19 · **Status:** ACTIVE
+>
+> ### Decision
+> * A new internal route `POST /internal/predict/career` (`backend/app/routers/internal.py`) wraps `compute_career_prediction` (D029) so the backend can exercise Career V1 through an API-like path. It changes **no** engine logic and returns the engine's evidence object **verbatim**.
+> * **Gated to non-production environments.** A request-time guard exposes the route only when `settings.environment` ∈ {development, dev, local, test}; every other environment returns **404** (invisible in production). Allow-list / fail-closed.
+> * **Optional defense-in-depth token.** When `INTERNAL_CAREER_API_TOKEN` is set (read from `os.environ`, **not** `config.py`), callers must also present a matching `X-Internal-Career-Token` header; missing/wrong → **404** (constant-time compare, never 401/403). Unset → dev/local/test needs no header. The environment gate takes precedence: **production returns 404 even with a correct token**.
+> * **Inline chart only in v1.** Accepts an inline `chart` validated against the canonical v1.2 `ChartData`; `chart_id` is accepted in the schema but returns **400** ("not supported in internal v1; pass an inline chart") since no by-id store read exists yet (only by-fingerprint). A `chart_id` path waits on the public T11.2 work.
+> * **`as_of` timezone-aware or safely derived.** A provided `as_of` must be ISO-8601 + timezone-aware (naive/unparseable → 422); omitted `as_of` is derived as `datetime.now(timezone.utc)`. Engine `ValueError` → 422.
+> * **Internal-only invariants preserved.** Not wired into `/chart/generate`; no public chart field populated; input chart not mutated; `chart.dashas` stays null and reserved significator fields stay empty (D023); `medium` cap intact; **no LLM**; no `schema_version` (1.2) / `chart_engine_version` (1.4.0) bump. The envelope adds `internal_only: true` + a route-level caveat.
+> * **Not public exposure.** Explicitly the dev/test surface, distinct from the future public `POST /predict/career` (D029 revisit, T11.2), which stays gated behind founder-golden + JHora validation as a separate endpoint/file.
+>
+> ### Evidence
+> `tests/test_internal_predict_career.py` (37) → 37 passed. Full suite `pytest -q` → 935 passed, 115 skipped (Swiss `.se1` absent; internal-route tests Swiss-independent and all ran), 0 failed. Route output asserted **==** a direct `compute_career_prediction` call on the same chart; public `/chart/generate` asserted to expose no career fields and keep `dashas` null + significators reserved; gating asserted (dev → 200, production/other → 404; with a token configured: missing/wrong → 404, correct → 200, production → 404 even with correct token).
+>
+> ### Binds
+> `backend/app/routers/internal.py`, `backend/app/main.py` (router mount), `tests/test_internal_predict_career.py`, `docs/prediction-career.md`. Consumes D029 (career engine); honors D023 (reserved fields) and D022 (KP shape). Does not alter D029 logic.
+>
+> ### Revisit
+> When the founder authorizes **public** exposure (D029 revisit, after founder-golden + JHora validation, D026): build the separate versioned `POST /predict/career` (T11.2) with auth/caching, and decide whether this internal route gains a `chart_id` store-read path or is retired. The gating mechanism may move from a request-time env check to conditional mounting under a hardening pass.
+
 ## prediction-career-v1 — agent/claude/prediction-career-v1 — 2026-06-17 — Claude Code
 **Built:** the **internal career prediction v1 engine** `backend/app/engines/prediction_career_engine.py`. `compute_career_prediction(chart, *, as_of: datetime)` returns a structured, evidence-first dict. **Rule/evidence-first, NO LLM** — the `summary` is templated from the evidence.
 **Model (D029) = promise + timing.** *Promise*: for each career house (2 income, 6 service, 10 profession, 11 gains) read the **cusp sub-lord** (`houses[].kp.sub_lord`) and the houses it signifies in the **node-aware** engine (D028); a career house is "promised" when its cusp sub-lord signifies any career house (10th cusp sub-lord = headline). *Timing*: current Vimshottari **MD/AD/PD** lords (D027) and the houses they signify; a career house is "activated" when a current dasha lord signifies it. Supporting houses {1,3,5,9}, challenging {8,12}. Every factor cites a real planet with significations taken **verbatim** from the node-aware engine (a test forbids fabrication). Confidence = transparent heuristic **capped at `medium`** in v1 (never `high` on an unvalidated significator foundation); timing is **dasha-period level** (no transit precision). Hedged language only (banned-phrase test) + fixed caveat.
