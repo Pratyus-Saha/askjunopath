@@ -576,3 +576,13 @@ D029 — Career Prediction V1 internal evidence engine
 ### Future work
 
 A public Career Prediction API or UI requires a separate decision. Before public exposure, founder review and stronger correctness validation are required. The internal route may later support `chart_id` only after a deliberate storage/read contract is designed and tested.
+
+## D031 (2026-06-19) - Landing-page beige-and-navy editorial theme
+
+Landing-page theme set to a premium beige-and-navy editorial two-tone:
+beige base (#F6EFE3), near-black text on light, dark navy structure and contrast sections
+(#0D1B2A), ivory cards, antique gold accent (#B88A44), with sage (#647A67) and clay
+(#A7654B) as semantic-only secondaries. Replaces the prior dark navy background token.
+Reason: stronger premium and trust positioning, differentiates from the dark-mystical
+category. Tokens in docs/frontend/landing-design-system.md section 2. Scope: landing page.
+Chart and prediction surfaces revisit theme separately.

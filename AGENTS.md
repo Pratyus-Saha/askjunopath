@@ -85,7 +85,7 @@ Hard rules specific to this lane:
 - **If your fixture does not exist, the lane is skipped.** Never invent fixture data or fields; the fixture is the contract.
 - **Never edit `frontend/src/types/chart.ts` by hand.** It is generated from `schemas/chart.json` (Decision D009). If a type is missing, the schema question goes to the founder.
 - **One component per lane per day.** Finish, test, PR, stop.
-- **Design tokens are fixed:** navy background, Cormorant Garamond display, DM Sans body, gold `#C9A96E`. The disclaimer component renders on every prediction surface. Probabilistic phrasing only; no deterministic promises in any UI copy; the health domain never appears.
+- **Design tokens (landing page):** beige base `#F6EFE3`, near-black text `#111827` on light, dark navy structure and contrast surfaces `#0D1B2A`, ivory cards `#FFFDF8`, antique gold accent `#B88A44` with soft gold `#D8B878`, sage `#647A67` and clay `#A7654B` as semantic-only secondaries, Cormorant Garamond display, DM Sans body, DM Mono data. Full tokens live in `docs/frontend/landing-design-system.md`. Chart and prediction surfaces revisit theme separately. The disclaimer component renders on every prediction surface. Probabilistic phrasing only; no deterministic promises in any UI copy; the health domain never appears.
 
 Never:
 - `backend/**`, `schemas/**`, `Dockerfile`, CI, migrations
