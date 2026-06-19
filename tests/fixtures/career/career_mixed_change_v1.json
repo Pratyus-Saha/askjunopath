@@ -1,0 +1,62 @@
+{
+  "fixture_id": "career_mixed_change_v1",
+  "profile": "mixed_change",
+  "kind": "founder_golden",
+  "title": "Mixed / change career chart",
+  "description": "Founder GOLDEN career fixture (NOT a JHora oracle fixture). It anchors the documented v1 deterministic behaviour and the safety contract for a mixed / change archetype: the timing stack activates all four career houses AND both challenge houses (8 instability/breaks and 12 loss/foreign/remote), and the antardasha/pratyantardasha lords are the nodes Ketu/Rahu (change significators). The result is genuine opportunity entangled with disruption. Expected values are the engine's own deterministic output, reviewed by the founder for reasonableness and safety. They are NOT astrological ground truth: the significator foundation is AstroSage-compared only (D028) and there is no JHora career oracle. See docs/prediction-career.md and DECISIONS.md D029.",
+  "chart_input_ref": "fixture_04_pre1990",
+  "chart_input_note": "Chart built from the golden (JHora-validated) longitudes/cusps in tests/fixtures/charts/fixture_04_pre1990.json (1962-02-04T05:45:00 Europe/London). Swiss-independent: positions, KP sub-lords and significators come from the golden fixture values.",
+  "as_of": "2018-08-15T12:00:00+01:00",
+  "as_of_note": "Local noon (BST) in the chart's birth timezone. Chosen >10 days inside the MD/AD/PD periods so the active stack is identical under Swiss or Moshier Sun timing.",
+  "expected": {
+    "version": "career-v1",
+    "current_dasha_stack": {
+      "mahadasha": "Saturn",
+      "antardasha": "Ketu",
+      "pratyantardasha": "Rahu"
+    },
+    "tenth_cusp_sub_lord": "Mars",
+    "tenth_cusp_sub_lord_signifies": [1, 2, 4, 8, 11, 12],
+    "career_house_cusp_sub_lords": {
+      "2": "Venus",
+      "6": "Jupiter",
+      "10": "Mars",
+      "11": "Venus"
+    },
+    "promise_career_houses": [2, 6, 10, 11],
+    "activated_career_houses": [2, 6, 10, 11],
+    "challenge_houses": [8, 12],
+    "confidence_tier_range": ["medium"],
+    "raw_tier": "medium",
+    "career_signal": 4,
+    "challenge_signal": 2,
+    "required_theme_substrings": ["profession", "instability", "loss"],
+    "forbidden_theme_substrings": []
+  },
+  "safe_language": {
+    "banned_phrases": [
+      "will get", "guaranteed", "will definitely", "definitely",
+      "you will fail", "must leave", "certainly", "100%", "promise you"
+    ],
+    "required_hedge_markers_any": [
+      "may", "suggest", "indicat", "reflective", "not a guarantee"
+    ],
+    "caveat_must_contain": "not a guarantee"
+  },
+  "must_not_claim": [
+    "Must not name any planet outside the chart's 9 classical grahas (no Pluto/Neptune/Uranus).",
+    "Must not reference any house outside 1..12.",
+    "Must not emit any date outside the as_of date and the dasha-derived AD/PD windows (no day-level event dates).",
+    "Must not report confidence 'high'.",
+    "Must not predict a specific disruptive event (job loss, relocation, firing) as certain — challenge houses must read as hedged change/instability, never a guaranteed bad outcome.",
+    "Must not suppress the challenge houses: with houses 8 and 12 activated, the summary must surface change/instability/loss/remote language rather than an unqualified positive reading.",
+    "Must not populate any public chart field (chart.dashas stays null; reserved significator fields stay empty, D023).",
+    "Must not claim JHora-validated or astrologically proven correctness."
+  ],
+  "founder_review": {
+    "status": "pending",
+    "reviewed_by": null,
+    "reviewed_on": null,
+    "notes": "Founder to confirm this is a reasonable 'mixed / change' archetype: all four career houses are active but houses 8 and 12 are also hit and the AD/PD lords are nodes. The expected reading is opportunity-with-disruption, hedged. Astrological correctness is NOT asserted (D028/D029)."
+  }
+}

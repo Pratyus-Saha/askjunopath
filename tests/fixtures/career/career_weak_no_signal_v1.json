@@ -1,0 +1,62 @@
+{
+  "fixture_id": "career_weak_no_signal_v1",
+  "profile": "weak_no_signal",
+  "kind": "founder_golden",
+  "title": "Weak / no-clear-signal career chart",
+  "description": "Founder GOLDEN career fixture (NOT a JHora oracle fixture). It anchors the documented v1 deterministic behaviour and the safety contract for a weak / no-clear-signal archetype: the timing stack activates at most one career house, so the raw heuristic tier is 'low' and the published confidence is 'low'. This is the case the engine MUST stay humble about. Expected values are the engine's own deterministic output, reviewed by the founder for reasonableness and safety. They are NOT astrological ground truth: the significator foundation is AstroSage-compared only (D028) and there is no JHora career oracle. See docs/prediction-career.md and DECISIONS.md D029.",
+  "chart_input_ref": "fixture_03_midnight",
+  "chart_input_note": "Chart built from the golden (JHora-validated) longitudes/cusps in tests/fixtures/charts/fixture_03_midnight.json (2001-01-01T00:10:00 Asia/Kolkata). Swiss-independent: positions, KP sub-lords and significators come from the golden fixture values.",
+  "as_of": "2030-11-15T12:00:00+05:30",
+  "as_of_note": "Local noon in the chart's birth timezone. Chosen >10 days inside the MD/AD/PD periods so the active stack is identical under Swiss or Moshier Sun timing.",
+  "expected": {
+    "version": "career-v1",
+    "current_dasha_stack": {
+      "mahadasha": "Saturn",
+      "antardasha": "Jupiter",
+      "pratyantardasha": "Jupiter"
+    },
+    "tenth_cusp_sub_lord": "Jupiter",
+    "tenth_cusp_sub_lord_signifies": [4, 7, 9, 12],
+    "career_house_cusp_sub_lords": {
+      "2": "Jupiter",
+      "6": "Jupiter",
+      "10": "Jupiter",
+      "11": "Venus"
+    },
+    "promise_career_houses": [11],
+    "activated_career_houses": [6],
+    "challenge_houses": [12],
+    "confidence_tier_range": ["low"],
+    "raw_tier": "low",
+    "career_signal": 1,
+    "challenge_signal": 1,
+    "max_activated_career_houses": 1,
+    "required_theme_substrings": [],
+    "forbidden_theme_substrings": []
+  },
+  "safe_language": {
+    "banned_phrases": [
+      "will get", "guaranteed", "will definitely", "definitely",
+      "you will fail", "must leave", "certainly", "100%", "promise you"
+    ],
+    "required_hedge_markers_any": [
+      "may", "suggest", "indicat", "reflective", "not a guarantee"
+    ],
+    "caveat_must_contain": "not a guarantee"
+  },
+  "must_not_claim": [
+    "Must not name any planet outside the chart's 9 classical grahas (no Pluto/Neptune/Uranus).",
+    "Must not reference any house outside 1..12.",
+    "Must not emit any date outside the as_of date and the dasha-derived AD/PD windows (no day-level event dates).",
+    "Must not report confidence 'medium' or 'high' for this chart — a single activated career house must stay 'low'.",
+    "Must not manufacture a strong or clear career direction from a weak signal; the reading must remain non-committal.",
+    "Must not populate any public chart field (chart.dashas stays null; reserved significator fields stay empty, D023).",
+    "Must not claim JHora-validated or astrologically proven correctness."
+  ],
+  "founder_review": {
+    "status": "pending",
+    "reviewed_by": null,
+    "reviewed_on": null,
+    "notes": "Founder to confirm this is a reasonable 'weak / no-clear-signal' archetype: only career house 6 is activated, confidence is 'low', and the reading should be appropriately tentative. Astrological correctness is NOT asserted (D028/D029)."
+  }
+}

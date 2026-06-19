@@ -1,0 +1,61 @@
+{
+  "fixture_id": "career_supportive_v1",
+  "profile": "supportive",
+  "kind": "founder_golden",
+  "title": "Clearly supportive career chart",
+  "description": "Founder GOLDEN career fixture (NOT a JHora oracle fixture). It anchors the documented v1 deterministic behaviour and the safety contract for a clearly supportive career archetype: a strong promise side (3 of 4 career-house cusp sub-lords signify career houses) plus a strong timing side (raw heuristic tier 'high', the maximum the engine produces). Expected values are the engine's own deterministic output, reviewed by the founder for reasonableness and safety. They are NOT astrological ground truth: the significator foundation is AstroSage-compared only (D028), the JHora final 4-level significator table is unavailable, and there is no JHora career oracle. See docs/prediction-career.md and DECISIONS.md D029.",
+  "chart_input_ref": "fixture_02_us_dst",
+  "chart_input_note": "Chart built from the golden (JHora-validated) longitudes/cusps in tests/fixtures/charts/fixture_02_us_dst.json (1985-07-04T08:30:00 America/New_York). Swiss-independent: positions, KP sub-lords and significators come from the golden fixture values, so promise-side and significator facts are exact.",
+  "as_of": "2018-02-15T12:00:00-05:00",
+  "as_of_note": "Local noon in the chart's birth timezone. Chosen >10 days inside the MD/AD/PD periods so the active stack is identical under Swiss or Moshier Sun timing; the engine's documented sub-day date residual cannot flip the active lords.",
+  "expected": {
+    "version": "career-v1",
+    "current_dasha_stack": {
+      "mahadasha": "Jupiter",
+      "antardasha": "Jupiter",
+      "pratyantardasha": "Venus"
+    },
+    "tenth_cusp_sub_lord": "Venus",
+    "tenth_cusp_sub_lord_signifies": [2, 4, 11, 12],
+    "career_house_cusp_sub_lords": {
+      "2": "Venus",
+      "6": "Mercury",
+      "10": "Venus",
+      "11": "Venus"
+    },
+    "promise_career_houses": [2, 10, 11],
+    "activated_career_houses": [2, 6, 11],
+    "challenge_houses": [12],
+    "confidence_tier_range": ["medium"],
+    "raw_tier": "high",
+    "career_signal": 3,
+    "challenge_signal": 1,
+    "required_theme_substrings": ["income", "gains"],
+    "forbidden_theme_substrings": []
+  },
+  "safe_language": {
+    "banned_phrases": [
+      "will get", "guaranteed", "will definitely", "definitely",
+      "you will fail", "must leave", "certainly", "100%", "promise you"
+    ],
+    "required_hedge_markers_any": [
+      "may", "suggest", "indicat", "reflective", "not a guarantee"
+    ],
+    "caveat_must_contain": "not a guarantee"
+  },
+  "must_not_claim": [
+    "Must not name any planet outside the chart's 9 classical grahas (no Pluto/Neptune/Uranus).",
+    "Must not reference any house outside 1..12.",
+    "Must not emit any date outside the as_of date and the dasha-derived AD/PD windows (no day-level event dates).",
+    "Must not report confidence 'high' even though the raw heuristic tier is 'high' (v1 caps the published confidence at 'medium').",
+    "Must not guarantee a specific job, promotion, salary, or outcome.",
+    "Must not populate any public chart field (chart.dashas stays null; reserved significator fields stay empty, D023).",
+    "Must not claim JHora-validated or astrologically proven correctness."
+  ],
+  "founder_review": {
+    "status": "pending",
+    "reviewed_by": null,
+    "reviewed_on": null,
+    "notes": "Founder to confirm this is a reasonable 'clearly supportive' archetype: promise side flags career houses 2/10/11 and the timing stack activates 2/6/11 with only one challenge house. Astrological correctness is NOT asserted (no JHora oracle; significators AstroSage-compared only, D028/D029)."
+  }
+}
