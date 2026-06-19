@@ -104,10 +104,6 @@ at midnight activates {6, 10, 11} (no house 2) — timing genuinely depends on
 
 > **v1 is a deterministic evidence *scaffold*, not a validated predictor.**
 
-- There is **no JHora/founder golden fixture** for career output yet. The tests
-  assert deterministic mechanics (shape, evidence integrity, timing-depends-on-date,
-  hedged language, no mutation, public API unchanged) — **not** that the prediction
-  is astrologically correct.
 - The significator foundation is **AstroSage-compared only (3/9 exact), not
   JHora-validated** (D028). The JHora final 4-level significator table is
   unavailable. Career output inherits that gap.
@@ -115,11 +111,62 @@ at midnight activates {6, 10, 11} (no house 2) — timing genuinely depends on
   model-dependent.
 - Timing is **dasha-period level only** — there is no transit engine in v1, so no
   day-level event dates.
+- There is still **no JHora career oracle** — nothing asserts the prediction is
+  astrologically *correct*. The career golden fixtures below lock *behaviour* and
+  *safety*, not correctness.
 
-**Before any tuning or user exposure:** a founder hand-scores a few charts into a
-golden fixture (mirroring T4.1 / T7.1), and/or the JHora final significator table
-lands (D026 gate). Public exposure would be a **separate** `POST /predict/career`
-endpoint, never `/chart/generate`.
+**Before any tuning or user exposure:** the JHora final significator table lands
+(D026 gate) so correctness can be validated and the `medium` cap revisited. Public
+exposure would be a **separate** `POST /predict/career` endpoint, never
+`/chart/generate`.
 
-See `tests/test_prediction_career_engine.py`, DECISIONS.md **D029** (and D023,
-D026, D027, D028).
+---
+
+## Founder golden fixtures — NOT JHora oracle fixtures
+
+`tests/fixtures/career/career_*.json` (consumed by
+`tests/test_prediction_career_golden.py`) are **founder golden fixtures**. Keep the
+distinction sharp:
+
+| | JHora **oracle** fixture | Founder **golden** fixture |
+|---|---|---|
+| Examples | `tests/fixtures/jhora/*`, `tests/fixtures/nakshatra/boundaries_330.json` | `tests/fixtures/career/career_*.json` |
+| Source of values | Jagannatha Hora export | the engine's **own** deterministic output |
+| Role | **judge** of astrological correctness; the engine conforms to it (AGENTS.md Rule 8) | **anchor** of documented v1 *behaviour* + *safety*, reviewed by the founder for *reasonableness* |
+| Asserts correctness? | yes | **no** — there is no JHora career oracle yet |
+
+The three fixtures cover one archetype each, so the documented tier band is exercised
+end to end:
+
+| Fixture | Profile | Chart ref | Career / challenge signal | Raw tier → published |
+|---|---|---|---|---|
+| `career_supportive_v1` | clearly supportive | `fixture_02_us_dst` | 3 / 1 | `high` → **`medium`** (cap in action) |
+| `career_mixed_change_v1` | mixed / change | `fixture_04_pre1990` | 4 / 2 (houses 8 + 12) | `medium` → **`medium`** |
+| `career_weak_no_signal_v1` | weak / no clear signal | `fixture_03_midnight` | 1 / 1 | `low` → **`low`** |
+
+Each fixture records the founder-reviewable promise + timing reading (current
+MD/AD/PD, the 10th and 2/6/10/11 cusp sub-lords, promise-side and timing-side career
+houses, challenge houses, expected tier band and themes) plus an explicit
+`must_not_claim` list and `safe_language` contract, and a `founder_review` block
+(`status: pending` until the founder signs off).
+
+`test_prediction_career_golden.py` asserts the **safety contract** the engine must
+never break, independent of any astrology being "right": no invented planets (9
+classical grahas only, never Pluto/Neptune/Uranus), no invented houses (1..12), no
+invented dates (only `as_of` + the dasha-derived AD/PD windows — no day-level event
+dates), no unsafe certainty language, confidence **capped at `medium`** (never
+`high`), outputs **internal-only** (chart not mutated, `chart.dashas` stays `null`,
+reserved significator fields stay empty), and the per-profile tier/theme constraints.
+
+Charts are rebuilt from the **golden (JHora-validated) longitudes/cusps** of the
+referenced `tests/fixtures/charts/*` fixtures, so the build is Swiss-independent;
+each `as_of` sits well inside its MD/AD/PD periods so the active stack is identical
+under Swiss or Moshier Sun timing, and the tests never assert exact boundary dates.
+
+`test_prediction_career_engine.py` continues to assert the lower-level deterministic
+mechanics (shape, evidence integrity, timing-depends-on-`as_of`, no mutation, public
+API unchanged).
+
+See `tests/test_prediction_career_golden.py`,
+`tests/test_prediction_career_engine.py`, DECISIONS.md **D029** (and D023, D026,
+D027, D028).
