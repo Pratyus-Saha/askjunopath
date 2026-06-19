@@ -122,6 +122,35 @@ exposure would be a **separate** `POST /predict/career` endpoint, never
 
 ---
 
+## Internal/dev API wrapper — `POST /internal/predict/career` (D030)
+
+For backend testing there is an **internal/dev-only** route, `backend/app/routers/internal.py`,
+exposing `POST /internal/predict/career`. It calls `compute_career_prediction(chart, *, as_of)`
+**unchanged** and returns its evidence object **verbatim** in an envelope
+`{ internal_only: true, caveat, as_of, prediction }`. It is **not public**:
+
+* **Gated to non-production** — exposed only when `settings.environment` ∈
+  {`development`,`dev`,`local`,`test`}; any other environment returns **404**
+  (invisible in production). Allow-list / fail-closed.
+* **Optional defense-in-depth token** — when `INTERNAL_CAREER_API_TOKEN` is set
+  (read from `os.environ`, not `config.py`), an `X-Internal-Career-Token` header is
+  also required; missing/wrong → **404** (constant-time compare, never 401/403).
+  Unset → dev/local/test needs no header. The env gate wins, so production returns
+  **404 even with a correct token**.
+* **Inline chart only (v1)** — accepts an inline `chart` validated against the
+  canonical v1.2 `ChartData`; `chart_id` returns **400** (no by-id store read yet).
+* **`as_of`** must be ISO-8601 **timezone-aware** (naive/invalid → 422) or is
+  safely derived as `datetime.now(timezone.utc)` when omitted.
+* It is **not** wired into `/chart/generate`, populates **no** public field,
+  does not mutate the chart, keeps `chart.dashas` null + significators reserved
+  (D023), keeps the `medium` cap, calls **no LLM**, and bumps **no**
+  `schema_version` / `chart_engine_version`.
+
+This is **distinct from** the future *public* `POST /predict/career` (D029 revisit,
+TASKBOARD T11.2), which remains gated behind founder-golden + JHora validation.
+
+---
+
 ## Founder golden fixtures — NOT JHora oracle fixtures
 
 `tests/fixtures/career/career_*.json` (consumed by
