@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "AskJunoPath - Precise Astrological Timing",
-  description: "AskJunoPath combines KP astrology, planetary math, and AI to show clear timing logic behind life events.",
+  title: "JunoPath - Precise Astrological Timing",
+  description: "AskJunoPath computes your chart in code and explains the reasoning behind every reading.",
 };
 
 export default function RootLayout({
@@ -16,7 +13,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen bg-slate-950 text-slate-100 antialiased`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" />
+      </head>
+      <body className="min-h-screen antialiased">
         {children}
       </body>
     </html>

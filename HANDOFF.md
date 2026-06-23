@@ -1,4 +1,4 @@
-﻿# HANDOFF.md
+# HANDOFF.md
 **The append-only handoff log. Every agent writes an entry here BEFORE stopping; the founder reads at merge time and at the 21:00 sweep.**
 
 How this file works:
@@ -28,6 +28,31 @@ How this file works:
 ---
 
 # Entries
+
+## port-foundation — agent/antigravity/port-foundation — 2026-06-23 13:35 — Antigravity
+**Built:** Ported JunoPath design layer, fonts, and cn helper from sky-logic-map. Replaced globals.css :root and body blocks, updated layout.tsx to use Google Fonts <link> tags, and copied utils.ts. Tested CSS integration temporarily in page.tsx and verified visual style.
+**Files changed:** rontend/app/globals.css, rontend/app/layout.tsx, rontend/src/lib/utils.ts.
+**Tests run:** Visual test using 
+pm run dev by temporarily replacing page.tsx -> passed.
+**Known issues / deferred:** none.
+**Next agent should read:** rontend/app/globals.css, rontend/app/layout.tsx.
+**Tempted but did not:** touch any other file or install packages outside the allowed boundary.
+
+## FE-1 visual rescue — agent/antigravity/landing-visual-rescue — 2026-06-19 19:48 — Antigravity
+**Built:** Visual rescue pass completed. Stripped out generic SaaS treatments (rounded borders, center-aligned blocks, solid gold fills) in favor of a premium editorial system. Implemented the asymmetric 3/12 + 8/12 layout grid across sections, full-width hairline rules, and DM Mono section kickers (01 / THE BASICS, etc.). Upgraded `.bg-paper-grain` with a soft edge vignette. The Hero now features a static SVG engraved instrument instead of a placeholder box. A reading is displayed as an elegant ivory card.
+**Files changed:** `frontend/app/globals.css`, `frontend/app/page.tsx`, `frontend/src/components/layout/SectionBlock.tsx`, `frontend/src/components/landing/Hero.tsx`, `frontend/src/components/landing/StepCard.tsx`, `frontend/src/components/landing/SampleReading.tsx`, `frontend/src/components/landing/TrustPanel.tsx`, `frontend/src/components/landing/CTABlock.tsx`.
+**Tests run:** `npm run lint && npm run build` inside `frontend/` → passed (0 lint errors, compiled successfully).
+**Known issues / deferred:** The instrument in the Hero is purely decorative SVG as instructed, waiting for the FE-2 `ZodiacWheel` logic to replace or integrate with it.
+**Next agent should read:** `docs/frontend/landing-design-system.md` and the updated components to understand the editorial grid logic.
+**Tempted but did not:** Connect the `/chart` CTA to actual functionality or edit `types/chart.ts`.
+
+## FE-1 — agent/antigravity/landing-shell — 2026-06-19 19:14 — Antigravity
+**Built:** The JunoPath landing page shell, complete with the requested two-tone (beige/navy) design system tokens mapped into global CSS and Tailwind config. Implemented all structured sections (Hero with ZodiacWheel mounting slot, How it works, Trust panel, Sample reading with logic reveal) strictly using `landing-spec.md` copy. No form or live API/chart generation exists.
+**Files changed:** `frontend/tailwind.config.ts`, `frontend/app/globals.css`, `frontend/app/layout.tsx`, `frontend/app/page.tsx`, new components in `frontend/src/components/*` (SiteNav, SectionBlock, Hero, StepCard, TrustPanel, SampleReading, ConfidenceChip, Disclaimer, CTABlock, SiteFooter), and component contracts under `docs/frontend/components/`.
+**Tests run:** `cmd /c "npm run lint && npm run build"` inside `frontend/` → passed (0 lint errors, compiled successfully).
+**Known issues / deferred:** The `check_allowed_files.py` script was not found, so file guarding was managed via manual verification. The `ZodiacWheel` and `SkyReadout` are empty mounting slots deferred to `FE-2`.
+**Next agent should read:** `frontend/src/components/landing/Hero.tsx` (for the mounting slot).
+**Tempted but did not:** Create the actual `ZodiacWheel` SVG, add the `/chart` form or generation logic, edit `types/chart.ts`, modify components with non-CSS-motion animations like JS scroll listeners.
 
 ## internal-career-api-v1 — agent/claude/internal-career-api-v1 — 2026-06-19 — Claude Code
 **Built:** an **internal/dev-only API wrapper** for the existing Career V1 engine (D029): `backend/app/routers/internal.py` exposes `POST /internal/predict/career`, which calls `compute_career_prediction(chart, *, as_of)` **unchanged** and returns its evidence object **verbatim** inside an envelope `{internal_only: true, caveat, as_of, prediction}`. Engine logic, prompts, weights, and the `medium` cap are untouched — this is purely an API-like path so the backend can exercise Career V1.
