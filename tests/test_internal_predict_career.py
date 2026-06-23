@@ -43,6 +43,7 @@ import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
 
 from app import main as app_main  # noqa: E402
+from app.core.auth import get_current_user  # noqa: E402
 from app.core.config import settings  # noqa: E402
 from app.engines.ephemeris_engine import compute_ephemeris  # noqa: E402
 from app.engines.prediction_career_engine import compute_career_prediction  # noqa: E402
@@ -464,6 +465,13 @@ def public_client(monkeypatch):
     monkeypatch.setattr(chart_router.GeocodingService, "geocode", fake_geocode)
     monkeypatch.setattr(chart_router, "get_chart_by_fingerprint", fake_get_chart)
     monkeypatch.setattr(chart_router, "save_chart", fake_save_chart)
+    # Auth swap (D006): the public chart route now resolves identity via the
+    # Supabase-JWT dependency; override it here (the internal route is unchanged).
+    monkeypatch.setitem(
+        app_main.app.dependency_overrides,
+        get_current_user,
+        lambda: "internal-route-test-user",
+    )
     return TestClient(app_main.app)
 
 

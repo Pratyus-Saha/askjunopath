@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Header, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from app.schemas.models import BirthDataRequest, ChartGenerateResponse, ChartData
+from app.core.auth import get_current_user
 from app.utils.geocode import GeocodingService
 from app.core.fingerprint import generate_chart_fingerprint
 from app.core.db import get_chart_by_fingerprint, save_chart
@@ -112,7 +113,7 @@ def _build_chart_payload(
 @router.post("/generate", response_model=ChartGenerateResponse)
 async def generate_chart(
     request_data: BirthDataRequest,
-    x_user_id: str | None = Header(default=None, alias="X-User-Id")
+    user_id: str = Depends(get_current_user),
 ):
     """
     Generate an astrological chart with fingerprint caching.
@@ -124,12 +125,6 @@ async def generate_chart(
     houses[].cusp_nakshatra. The deprecated app.core.chart_engine is no
     longer called on any path.
     """
-    if not x_user_id:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Authentication failed. Missing required X-User-Id header."
-        )
-
     geocoder = GeocodingService()
 
     # 1. Geocode birth city using Nominatim
@@ -159,7 +154,7 @@ async def generate_chart(
     )
 
     # 3. Lookup cache in Supabase user_charts table
-    cached_record = get_chart_by_fingerprint(x_user_id, fingerprint)
+    cached_record = get_chart_by_fingerprint(user_id, fingerprint)
     if cached_record and _cached_chart_is_current(cached_record.get("chart_json")):
         return ChartGenerateResponse(
             cache_status="HIT",
@@ -208,7 +203,7 @@ async def generate_chart(
 
         # 5. Save output to Supabase cache
         saved_record = save_chart(
-            user_id=x_user_id,
+            user_id=user_id,
             chart_fingerprint=fingerprint,
             birth_data={
                 "birth_date": request_data.birth_date,

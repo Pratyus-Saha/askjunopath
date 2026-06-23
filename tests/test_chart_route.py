@@ -24,6 +24,7 @@ from fastapi.testclient import TestClient  # noqa: E402
 
 from app import main as app_main  # noqa: E402
 from app.core import chart_engine as old_chart_engine  # noqa: E402
+from app.core.auth import get_current_user  # noqa: E402
 from app.core.config import settings  # noqa: E402
 from app.core.fingerprint import generate_chart_fingerprint  # noqa: E402
 from app.engines.ephemeris_engine import compute_ephemeris  # noqa: E402
@@ -96,6 +97,14 @@ def client(monkeypatch, saved_charts):
     monkeypatch.setattr(chart_router.GeocodingService, "geocode", fake_geocode)
     monkeypatch.setattr(chart_router, "get_chart_by_fingerprint", fake_get_chart)
     monkeypatch.setattr(chart_router, "save_chart", fake_save_chart)
+    # Auth swap (D006): the route now resolves identity via get_current_user
+    # (Supabase JWT). Override it in tests instead of supplying real tokens;
+    # monkeypatch.setitem restores dependency_overrides after the test.
+    monkeypatch.setitem(
+        app_main.app.dependency_overrides,
+        get_current_user,
+        lambda: "route-test-user",
+    )
     return TestClient(app_main.app)
 
 
@@ -294,7 +303,12 @@ def test_response_envelope_unchanged(client):
     assert body["chart_id"] == "route-test-row-id"
 
 
-def test_missing_user_header_still_401(client):
+def test_missing_user_header_still_401(client, monkeypatch):
+    # Exercise the real JWT dependency: drop the test override so a request
+    # with no Authorization bearer token returns 401 (D006 auth swap).
+    monkeypatch.delitem(
+        app_main.app.dependency_overrides, get_current_user, raising=False
+    )
     response = client.post("/chart/generate", json=REQUEST_BODY)
     assert response.status_code == 401
 

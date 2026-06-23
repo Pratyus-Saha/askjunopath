@@ -31,6 +31,7 @@ import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
 
 from app import main as app_main  # noqa: E402
+from app.core.auth import get_current_user  # noqa: E402
 from app.engines.ephemeris_engine import compute_ephemeris  # noqa: E402
 from app.engines.house_engine import house_of, occupants as house_occupants  # noqa: E402
 from app.engines.kp_engine import get_kp_sub_lord  # noqa: E402
@@ -152,6 +153,12 @@ def generate_chart(monkeypatch, fixture: dict) -> tuple[dict, dict]:
     monkeypatch.setattr(chart_router.GeocodingService, "geocode", fake_geocode)
     monkeypatch.setattr(chart_router, "get_chart_by_fingerprint", fake_get_chart)
     monkeypatch.setattr(chart_router, "save_chart", fake_save_chart)
+    # Auth swap (D006): override the Supabase-JWT dependency for the route.
+    monkeypatch.setitem(
+        app_main.app.dependency_overrides,
+        get_current_user,
+        lambda: "integration-test-user",
+    )
 
     client = TestClient(app_main.app)
     response = client.post(
