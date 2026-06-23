@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
+import { supabase } from "@/lib/supabase";
 import type { ChartData } from "../../src/types/chart";
 import sampleFixture from "../../src/fixtures/chart.sample.json";
 
@@ -46,11 +47,19 @@ export default function ChartPage() {
     }
     
     try {
+      // Auth swap (D006): identity comes from the Supabase session JWT.
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session) {
+        setError("Please sign in to generate a chart");
+        return;
+      }
+
       const response = await fetch(`${apiUrl}/chart/generate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-User-Id": "dev_user_1", // Day 1 constant
+          "Authorization": `Bearer ${session.access_token}`,
         },
         body: JSON.stringify({
           birth_date: birthDate,
