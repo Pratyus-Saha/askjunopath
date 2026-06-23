@@ -13,10 +13,13 @@ app = FastAPI(
     version=settings.chart_engine_version,
 )
 
-# Configure CORS (Allow all for Day 1 MVP)
+# Configure CORS (locked to the Vercel domain and local dev origin; BUG-005)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://askjunopath.vercel.app",
+        "http://localhost:3000",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
