@@ -1,0 +1,9 @@
+# JunoPath
+
+> AI-powered astrology intelligence that computes precise birth charts and explains the reasoning behind every reading.
+
+JunoPath is a premium astrology platform that calculates birth-chart data deterministically and uses AI to produce transparent, evidence-based interpretations. It is not a horoscope app.
+
+## Pages
+
+- [Home](/): Overview of JunoPath, the chart instrument, methodology, and reading example.
