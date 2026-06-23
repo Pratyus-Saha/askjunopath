@@ -29,7 +29,7 @@ export default function ChartPage() {
     setLoading(true);
     setError(null);
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7860";
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
     const useFixture = process.env.NEXT_PUBLIC_USE_FIXTURE === "1";
 
     if (useFixture) {
