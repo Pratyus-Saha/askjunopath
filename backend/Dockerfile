@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN mkdir -p /app/ephe
 COPY ephe/*.se1 /app/ephe/
-
+COPY data/kp_249.csv /data/kp_249.csv
 COPY . .
 
 EXPOSE 8000
