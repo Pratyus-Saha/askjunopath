@@ -1,0 +1,38 @@
+[
+  {
+    "description": "Transit Jupiter conjunct natal Jupiter",
+    "transit_planet": "Jupiter",
+    "natal_point": "natal_jupiter",
+    "natal_longitude_deg": 100.29,
+    "exact_contact_date": "2026-07-20",
+    "orb_degrees": 1.0,
+    "expected_window_includes_date": true,
+    "verified_in_jhora": true,
+    "jhora_transit_longitude": "10 Cn 14 23",
+    "natal_longitude_label": "10 Cn 17 34"
+  },
+  {
+    "description": "Transit Mars conjunct natal Saturn",
+    "transit_planet": "Mars",
+    "natal_point": "natal_saturn",
+    "natal_longitude_deg": 62.94,
+    "exact_contact_date": "2026-08-07",
+    "orb_degrees": 1.5,
+    "expected_window_includes_date": true,
+    "verified_in_jhora": true,
+    "jhora_transit_longitude": "2 Ge 29 11",
+    "natal_longitude_label": "2 Ge 56 32"
+  },
+  {
+    "description": "Transit Venus conjunct natal Sun",
+    "transit_planet": "Venus",
+    "natal_point": "natal_sun",
+    "natal_longitude_deg": 123.44,
+    "exact_contact_date": "2026-07-08",
+    "orb_degrees": 1.5,
+    "expected_window_includes_date": true,
+    "verified_in_jhora": true,
+    "jhora_transit_longitude": "3 Le 08 01",
+    "natal_longitude_label": "3 Le 26 34"
+  }
+]
