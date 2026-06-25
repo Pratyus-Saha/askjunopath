@@ -1,0 +1,45 @@
+[
+  {
+    "description": "Transit Jupiter conjunct natal Jupiter",
+    "transit_planet": "Jupiter",
+    "natal_point": "natal_jupiter",
+    "domain": "relationship",
+    "natal_longitude_deg": 100.29,
+    "exact_contact_date": "2026-07-20",
+    "orb_degrees": 1.0,
+    "expected_window_includes_date": true,
+    "verified_in_jhora": true,
+    "jhora_transit_longitude": "10 Cn 14 23",
+    "natal_longitude_label": "10 Cn 17 34",
+    "domain_rationale": "Natal Jupiter occupies house 7 (relationship primary), is the current MD and AD lord, and signifies houses [1,2,3,6,7,12] (node-aware) including the 7th."
+  },
+  {
+    "description": "Transit Mars conjunct natal Saturn",
+    "transit_planet": "Mars",
+    "natal_point": "natal_saturn",
+    "domain": "career",
+    "natal_longitude_deg": 62.94,
+    "exact_contact_date": "2026-08-07",
+    "orb_degrees": 1.5,
+    "expected_window_includes_date": true,
+    "verified_in_jhora": true,
+    "jhora_transit_longitude": "2 Ge 29 11",
+    "natal_longitude_label": "2 Ge 56 32",
+    "domain_rationale": "Natal Saturn occupies house 6 (career supporting) and signifies houses [2,3,4,6,8,11,12] (node-aware), hitting career houses 2, 6 and 11."
+  },
+  {
+    "description": "Transit Sun conjunct natal Jupiter",
+    "transit_planet": "Sun",
+    "natal_point": "natal_jupiter",
+    "domain": "relationship",
+    "natal_longitude_deg": 100.29,
+    "exact_contact_date": "2026-07-27",
+    "orb_degrees": 1.0,
+    "expected_window_includes_date": true,
+    "verified_in_jhora": true,
+    "contact_date_source": "project KP swisseph ephemeris (SIDM_KRISHNAMURTI, 0h UT); transit Sun crosses within 1 deg of natal Jupiter on 2026-07-27 (0.41 deg) and 2026-07-28 (0.54 deg). 2026-07-26 is 1.37 deg, just outside orb, so the exact in-orb contact is 2026-07-27, ~1 day after a 1 deg/day hand estimate.",
+    "jhora_transit_longitude": "9 Cn 52 34",
+    "natal_longitude_label": "10 Cn 17 34",
+    "domain_rationale": "Replaces the withdrawn Venus->Sun fixture (natal Sun signifies only blocking houses 8/12, so it is correctly never a domain contact). Natal Jupiter is a relationship contact via house 7 + MD/AD lordship; transit Sun conjuncts it here."
+  }
+]
