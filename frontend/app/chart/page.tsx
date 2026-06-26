@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import AuthGuard from "@/components/AuthGuard";
 
 import { supabase } from "@/lib/supabase";
 import type { ChartData } from "../../src/types/chart";
@@ -90,7 +91,8 @@ export default function ChartPage() {
   };
 
   return (
-    <main className="min-h-screen px-4 py-8 md:px-8 max-w-7xl mx-auto space-y-8">
+    <AuthGuard>
+      <main className="min-h-screen px-4 py-8 md:px-8 max-w-7xl mx-auto space-y-8">
       {/* Header bar */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-4">
         <Link href="/" className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
@@ -327,5 +329,6 @@ export default function ChartPage() {
 
       </div>
     </main>
+    </AuthGuard>
   );
 }
