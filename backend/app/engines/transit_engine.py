@@ -114,6 +114,14 @@ _PD_OVERLAP_BONUS = 1.3
 _TOP_N = 3
 _MIN_SEPARATION_DAYS = 7
 
+# Slow transit planets — the only bodies that qualify for find_next_contact. They
+# move slowly enough that a contact is a durable, datable event rather than a
+# day-long brush, so "the next slow-planet contact" is a meaningful forward signal;
+# the fast bodies (Sun / Mercury / Venus / Mars / Moon) are deliberately excluded.
+_SLOW_PLANETS: tuple[str, ...] = ("Jupiter", "Saturn", "Rahu", "Ketu")
+_NEXT_CONTACT_STEP_DAYS = 3
+_NEXT_CONTACT_MAX_DAYS = 36525  # ~100 years; a defensive bound, normally hit far sooner
+
 
 # ---------------------------------------------------------------------------
 # Swiss ephemeris helpers (locked KP config, same SE_EPHE_PATH as the engines)
@@ -554,3 +562,88 @@ def compute_transit_windows(
         )
 
     return [_format_window(window) for window in _select_top(windows)]
+
+
+def find_next_contact(chart: dict, domain: str, after_days: int = 90) -> dict:
+    """Scan forward (no fixed ceiling) for the next *slow*-planet transit contact.
+
+    Starting at ``today + after_days`` this steps forward and returns the first
+    date a slow transit planet (Jupiter, Saturn, Rahu, Ketu) comes within its orb
+    of any of the domain's natal contact points. The contact-point model is
+    exactly the one :func:`compute_transit_windows` uses (cusps of primary +
+    supporting houses, natal planets whose significators touch a domain house,
+    current dasha lords, and the primary houses' KP cusp sub-lords), so "next
+    contact" is continuous with the window engine. Only the four slow planets
+    qualify — the fast bodies are ignored — because a slow-planet contact is a
+    durable, datable event rather than a day-long brush.
+
+    Unlike :func:`compute_transit_windows`, the scan has **no fixed ceiling**: it
+    keeps stepping (at a 3-day cadence, well inside a slow planet's daily motion)
+    until a qualifying contact is found, so for a valid domain with at least one
+    contact point it never returns an empty dict. A defensive ~100-year bound
+    guards against a pathological no-contact chart by returning the single
+    closest approach seen; in practice a slow planet reaches orb of one of the
+    several natal points long before that.
+
+    Args:
+        chart: assembled chart payload (read-only), same shape the window engine
+            reads.
+        domain: ``"career"``, ``"finance"`` or ``"relationship"``. Any other
+            value (or a chart with no contact points) returns ``{}``.
+        after_days: days from today before the forward scan begins (default 90),
+            so the returned contact is always at least this far out. Negative
+            values are clamped to 0.
+
+    Returns:
+        ``{"planet", "natal_point", "natal_longitude", "estimated_date",
+        "days_away"}`` — ``estimated_date`` is an ISO date string and
+        ``days_away`` is measured from today. ``{}`` only for an unknown domain
+        or a chart with no contact points.
+    """
+    groups = DOMAIN_HOUSES.get(domain)
+    if groups is None:
+        return {}
+
+    contacts = _build_contact_points(chart, groups)
+    if not contacts:
+        return {}
+
+    _init_swe()
+
+    # Slow-planet orbs, iterated in canonical (deterministic) TRANSIT_PLANETS order
+    # so a same-date tie resolves the same way every call.
+    slow = [
+        (name, base_orb)
+        for name, base_orb, _weight, _step in TRANSIT_PLANETS
+        if name in _SLOW_PLANETS
+    ]
+
+    today = date.today()
+    closest: dict[str, Any] | None = None
+    closest_diff = 360.0
+
+    day = max(after_days, 0)
+    while day <= _NEXT_CONTACT_MAX_DAYS:
+        scan_date = today + timedelta(days=day)
+        jd = _julian_day(scan_date)
+        for name, orb in slow:
+            longitude = _transit_longitude(name, jd)
+            for point_name, natal_longitude in contacts.items():
+                diff = _angular_diff(longitude, natal_longitude)
+                contact = {
+                    "planet": name,
+                    "natal_point": point_name,
+                    "natal_longitude": round(natal_longitude, 2),
+                    "estimated_date": scan_date.isoformat(),
+                    "days_away": (scan_date - today).days,
+                }
+                if diff <= orb:
+                    return contact
+                if diff < closest_diff:
+                    closest_diff = diff
+                    closest = contact
+        day += _NEXT_CONTACT_STEP_DAYS
+
+    # Defensive fallback (effectively unreachable for a real chart): the closest
+    # approach seen across the whole scan, so the result is never empty.
+    return closest or {}

@@ -37,7 +37,13 @@ from pathlib import Path
 
 import pytest
 
-from app.engines.transit_engine import compute_transit_windows
+from app.engines.transit_engine import compute_transit_windows, find_next_contact
+
+# The four slow bodies are the only ones find_next_contact may return.
+SLOW_PLANETS = {"Jupiter", "Saturn", "Rahu", "Ketu"}
+NEXT_CONTACT_KEYS = {
+    "planet", "natal_point", "natal_longitude", "estimated_date", "days_away"
+}
 
 # ---------------------------------------------------------------------------
 # Swiss-ephemeris availability gate (mirrors conftest's SE_EPHE_PATH wiring so
@@ -333,3 +339,54 @@ def test_rahu_not_duplicated_within_30_days(test_chart):
                 f"Rahu produced two windows on {point} within 30 days: "
                 f"{start_a}..{end_a} and {start_b}..{end_b}"
             )
+
+
+# ---------------------------------------------------------------------------
+# Test 8 — find_next_contact: forward slow-planet contact search
+# ---------------------------------------------------------------------------
+
+@requires_swiss
+def test_find_next_contact_shape_and_slow_planet(test_chart):
+    """For every domain the forward scan yields a populated, well-formed contact
+    anchored on a slow planet at least ``after_days`` out."""
+    for domain in ALL_DOMAINS:
+        contact = find_next_contact(test_chart, domain)
+        assert contact, f"{domain}: find_next_contact returned empty"
+        assert set(contact) == NEXT_CONTACT_KEYS, contact
+        assert contact["planet"] in SLOW_PLANETS, contact
+        assert 0.0 <= contact["natal_longitude"] < 360.0, contact
+        # Default after_days=90: the contact is never sooner than that.
+        assert contact["days_away"] >= 90, contact
+        # estimated_date is a real ISO date consistent with days_away.
+        estimated = date.fromisoformat(contact["estimated_date"])
+        assert (estimated - date.today()).days == contact["days_away"], contact
+
+
+@requires_swiss
+def test_find_next_contact_respects_after_days(test_chart):
+    """A larger ``after_days`` pushes the earliest qualifying contact further out."""
+    for domain in ALL_DOMAINS:
+        contact = find_next_contact(test_chart, domain, after_days=400)
+        assert contact["days_away"] >= 400, contact
+
+
+@requires_swiss
+def test_find_next_contact_is_deterministic(test_chart):
+    """Same chart, domain and after_days on the same day -> identical contact."""
+    for domain in ALL_DOMAINS:
+        first = find_next_contact(test_chart, domain)
+        second = find_next_contact(test_chart, domain)
+        assert first == second, domain
+
+
+@requires_swiss
+def test_find_next_contact_never_empty_for_valid_domains(test_chart):
+    """The defining guarantee: a valid domain always gets a non-empty contact."""
+    for domain in ALL_DOMAINS:
+        assert find_next_contact(test_chart, domain), domain
+
+
+def test_find_next_contact_invalid_domain_returns_empty(test_chart):
+    """An unknown domain returns {} without raising (no swiss call needed)."""
+    assert find_next_contact(test_chart, "invalid_domain") == {}
+    assert find_next_contact(test_chart, "") == {}
