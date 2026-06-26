@@ -7,7 +7,8 @@ It is dev/internal-gated, NOT public:
 * it is gated to non-production environments (``settings.environment``);
 * it is never wired into ``/chart/generate`` and populates no public field;
 * it bumps no ``schema_version`` / ``chart_engine_version``;
-* it calls no LLM and keeps the engine's ``medium`` confidence cap;
+* it calls no LLM and returns the engine's unified confidence (five-branch
+  table; the v1 ``medium`` cap is lifted, so it may reach ``high``);
 * it returns the evidence-first object EXACTLY from ``compute_career_prediction``,
   wrapped in an envelope that carries an ``internal_only`` flag + caveat.
 
@@ -186,13 +187,25 @@ def _mentioned_dates(pred: dict) -> set[str]:
 
 def _valid_dates(pred: dict) -> set[str]:
     stack = pred["current_dasha_stack"]
-    return {
+    valid = {
         pred["as_of"][:10],
         stack["antardasha_window"][0],
         stack["antardasha_window"][1],
         stack["pratyantardasha_window"][0],
         stack["pratyantardasha_window"][1],
     }
+    # Block 4+5: transit windows and the forward next-contact are a *legitimate*
+    # source of day-level dates in the unified contract (they come from the
+    # transit engine, not free text), so they are valid, not "invented".
+    for window in pred.get("transit_windows", []):
+        valid.add(window["start_date"])
+        valid.add(window["end_date"])
+        for trigger in window["triggers"]:
+            valid.add(trigger["contact_date"])
+    next_contact = pred.get("transit_summary", {}).get("next_contact") or {}
+    if next_contact.get("estimated_date"):
+        valid.add(next_contact["estimated_date"])
+    return valid
 
 
 # --------------------------------------------------------------------------- #
@@ -225,9 +238,12 @@ def test_internal_route_envelope_has_internal_only_flag_and_caveat(client):
 
 
 def test_internal_route_keeps_medium_confidence_cap(client):
+    # The v1 medium cap is lifted (Block 4+5): the route returns the engine's
+    # unified confidence, which follows the five-branch table and may reach
+    # "high". This still verifies a valid lowercase tier plus the transparent,
+    # not-yet-JHora-validated confidence basis.
     pred = _post(client, chart=_user1_chart()).json()["prediction"]
-    assert pred["confidence"] in {"low", "medium"}
-    assert pred["confidence"] != "high"
+    assert pred["confidence"] in {"low", "medium", "high"}
     assert "not validated" in pred["confidence_basis"]["note"].lower()
 
 

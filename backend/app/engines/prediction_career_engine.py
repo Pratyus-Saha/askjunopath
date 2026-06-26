@@ -23,11 +23,21 @@ Model (D029): KP separates *promise* from *timing*.
 Every emitted factor cites a real planet and the houses it signifies (taken
 verbatim from the node-aware significator engine), so the output is auditable.
 
+Unified contract (Block 4+5). The engine now also emits the cross-domain
+prediction contract shared with the finance/relationship engines — ``domain``,
+``promise_met``, ``signal_strength``, ``caution_flag``, ``dasha_timing``,
+``transit_windows``, ``transit_summary``, ``event_types`` and ``cusp_sublords`` —
+alongside its existing career-native keys. ``confidence`` now follows the unified
+five-branch table (promise + dasha support + transit) and may reach ``high``; the
+old v1 ``medium`` cap is lifted. Timing gains a near-term transit (gochara) layer
+on top of the dasha-period reading.
+
 **Validation status.** There is no JHora/founder golden fixture for career output
 yet, and the significator foundation is AstroSage-*compared* only (D028), not
-JHora-validated. So v1 is a deterministic *evidence scaffold*, not a validated
-predictor: language is hedged, confidence is capped at ``medium``, and nothing is
-exposed publicly. Correctness validation waits on a founder golden fixture / the
+JHora-validated. So this stays a deterministic *evidence scaffold*, not a validated
+predictor: language is hedged, ``high`` confidence denotes factor *convergence*
+(signal strength) rather than a guaranteed or purely positive outcome, and nothing
+is exposed publicly. Correctness validation waits on a founder golden fixture / the
 JHora final significator table.
 """
 
@@ -39,8 +49,20 @@ from typing import Any
 
 from app.engines.dasha_engine import compute_dasha_from_chart
 from app.engines.significator_engine import compute_node_aware_significators
+from app.engines.transit_engine import compute_transit_windows, find_next_contact
 
 VERSION = "career-v1"
+DOMAIN = "career"
+
+# Slow transit bodies — a window carrying one of these is a "slow-planet window".
+SLOW_PLANETS: tuple[str, ...] = ("Jupiter", "Saturn", "Rahu", "Ketu")
+_SCAN_DAYS = 90
+
+# Allowed event-type labels for career windows (templated, never free text).
+EVENT_ADVANCE = "career-advancement window"
+EVENT_OPPORTUNITY = "opportunity window"
+EVENT_DISRUPTION = "career-disruption caution"
+EVENT_STEADY = "steady-progress window"
 
 # Career-relevant house taxonomy (KP), house -> short human label.
 CAREER_HOUSES: dict[int, str] = {
@@ -92,6 +114,32 @@ def _tenth_theme(houses: list[int]) -> str:
     if 12 in present:
         return "foreign, remote, or behind-the-scenes work"
     return "a mixed professional pattern"
+
+
+def _transit_framing(
+    transit_windows: list[dict[str, Any]],
+    slow_planet_window: bool,
+    next_contact: dict[str, Any],
+) -> str:
+    """A short, always-non-empty human framing of the transit picture."""
+    if slow_planet_window:
+        return (
+            "A slow-planet contact window is active in the scanned span, so the "
+            "transit timing signal is at its strongest here."
+        )
+    if transit_windows:
+        return (
+            "Only fast-planet contact windows form in the scanned span, so the "
+            "transit timing signal is light and short-lived."
+        )
+    planet = next_contact.get("planet")
+    estimated = next_contact.get("estimated_date")
+    if planet and estimated:
+        return (
+            "No contact windows form in the scanned span; the next slow-planet "
+            f"contact ({planet}) is estimated around {estimated}."
+        )
+    return "No contact windows form in the scanned span."
 
 
 def compute_career_prediction(
@@ -235,7 +283,9 @@ def compute_career_prediction(
         f"{theme_labels[house]} (house {house})" for house in sorted(theme_houses)
     ]
 
-    # ---- Confidence (transparent heuristic, capped at "medium" in v1) -------
+    # ---- Career-signal heuristic (raw_tier) ---------------------------------
+    # raw_tier stays the transparent career-signal heuristic; the published
+    # `confidence` now follows the unified five-branch table computed below.
     activated_career = {
         house
         for house in CAREER_HOUSES
@@ -252,8 +302,6 @@ def compute_career_prediction(
         raw_tier = "medium"
     else:
         raw_tier = "low"
-    # v1 never claims "high": the significators are not JHora-validated yet.
-    confidence = "medium" if raw_tier == "high" else raw_tier
     confidence_basis = {
         "career_signal": career_signal,
         "challenge_signal": challenge_signal,
@@ -261,9 +309,10 @@ def compute_career_prediction(
         "challenge_houses_hit": sorted(challenge_hit),
         "raw_tier": raw_tier,
         "note": (
-            "v1 transparent heuristic, capped at 'medium'; the underlying "
-            "significators are AstroSage-compared and not validated against JHora "
-            "yet."
+            "Transparent career-signal heuristic; the published confidence now "
+            "follows the unified five-branch table (promise + dasha + transit) and "
+            "may reach 'high'. The underlying significators are AstroSage-compared "
+            "and not validated against JHora yet."
         ),
     }
 
@@ -291,13 +340,98 @@ def compute_career_prediction(
     summary += "This is reflective guidance, not a guarantee of any specific outcome."
 
     timing_interpretation = (
-        "Timing is read at the dasha-period level (not day-level; v1 has no transit "
-        f"precision). The current antardasha ({ad.lord}) runs "
-        f"{ad.start.date().isoformat()} to {ad.end.date().isoformat()}, and the "
-        f"pratyantardasha ({pd.lord}) runs {pd.start.date().isoformat()} to "
-        f"{pd.end.date().isoformat()}. These windows may favour the activated "
-        "career houses above; they are not exact event dates."
+        "Dasha timing is read at the period level. The current antardasha "
+        f"({ad.lord}) runs {ad.start.date().isoformat()} to "
+        f"{ad.end.date().isoformat()}, and the pratyantardasha ({pd.lord}) runs "
+        f"{pd.start.date().isoformat()} to {pd.end.date().isoformat()}. These "
+        "windows may favour the activated career houses above. A separate near-term "
+        "transit (gochara) scan adds day-level contact windows (see transit_windows "
+        "/ transit_summary); those are indicative timing, not exact event dates."
     )
+
+    # ---- Unified prediction contract (Block 4+5 parity) ---------------------
+    # Adds the cross-domain contract fields alongside the existing career-native
+    # keys; the existing keys are unchanged. `confidence` is recomputed from the
+    # unified five-branch table (career may now reach "high").
+    # Promise gate: the 10th (primary career house) cusp sub-lord — consistent
+    # with the finance/relationship engines, which gate on their own primary-house
+    # cusp sub-lords. Promise is met when it signifies any career house.
+    tenth_info = career_house_cusp_sub_lords["10"]
+    promise_met = bool(tenth_info["hits_career"])
+
+    # Caution: the 10th (headline) cusp sub-lord points to challenge houses
+    # (instability / loss) without touching a career house.
+    caution_flag = bool(tenth_info["hits_challenge"]) and not tenth_info["hits_career"]
+
+    md_supports = bool(dasha_support["mahadasha"]["career_hits"])
+    ad_supports = bool(dasha_support["antardasha"]["career_hits"])
+    pd_supports = bool(dasha_support["pratyantardasha"]["career_hits"])
+    dasha_supports = (md_supports + ad_supports + pd_supports) >= 2
+    blocking_dasha = any(
+        dasha_support[level]["challenge_hits"]
+        for level in ("mahadasha", "antardasha", "pratyantardasha")
+    )
+    dasha_timing = {
+        "md_lord": md.lord,
+        "ad_lord": ad.lord,
+        "pd_lord": pd.lord,
+        "md_supports": md_supports,
+        "ad_supports": ad_supports,
+        "pd_supports": pd_supports,
+    }
+
+    transit_windows = (
+        compute_transit_windows(
+            chart, DOMAIN, start_date=as_of.date(), scan_days=_SCAN_DAYS
+        )
+        or []
+    )
+    slow_planet_window = any(
+        any(trigger["planet"] in SLOW_PLANETS for trigger in window["triggers"])
+        for window in transit_windows
+    )
+    next_contact = find_next_contact(chart, DOMAIN)
+    transit_summary = {
+        "windows_found": len(transit_windows),
+        "has_slow_planet_contact": slow_planet_window,
+        "next_contact": next_contact,
+        "framing": _transit_framing(transit_windows, slow_planet_window, next_contact),
+    }
+
+    # Unified confidence — career may now reach "high" (the v1 medium cap is lifted).
+    if not promise_met:
+        confidence = "low"
+    elif dasha_supports:
+        confidence = "high" if slow_planet_window else "medium"
+    else:
+        confidence = "medium" if transit_windows else "low"
+
+    supporting_lords = md_supports + ad_supports + pd_supports
+    signal_strength = 0
+    if promise_met:
+        signal_strength += 30
+    signal_strength += 10 * supporting_lords
+    if slow_planet_window:
+        signal_strength += 20
+    if transit_windows:
+        signal_strength += 10
+    if promise_met and not caution_flag:
+        signal_strength += 10
+    signal_strength = max(0, min(100, signal_strength))
+
+    event_types: list[str] = []
+    if promise_met and dasha_supports and slow_planet_window:
+        event_types.append(EVENT_ADVANCE)
+    elif promise_met and (transit_windows or dasha_supports):
+        event_types.append(EVENT_OPPORTUNITY)
+    if caution_flag or blocking_dasha:
+        event_types.append(EVENT_DISRUPTION)
+    event_types.append(EVENT_STEADY)
+
+    cusp_sublords = {
+        "primary_houses": {"10": tenth_sub_lord},
+        "sublord_significations": {tenth_sub_lord: tenth_info["signifies"]},
+    }
 
     return {
         "version": VERSION,
@@ -315,4 +449,14 @@ def compute_career_prediction(
         "confidence_basis": confidence_basis,
         "evidence": evidence,
         "caveat": CAVEAT,
+        # --- unified cross-domain contract fields ---
+        "domain": DOMAIN,
+        "promise_met": promise_met,
+        "signal_strength": signal_strength,
+        "caution_flag": caution_flag,
+        "dasha_timing": dasha_timing,
+        "transit_windows": transit_windows,
+        "transit_summary": transit_summary,
+        "event_types": event_types,
+        "cusp_sublords": cusp_sublords,
     }

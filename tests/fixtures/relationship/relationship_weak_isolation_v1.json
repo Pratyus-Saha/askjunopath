@@ -1,0 +1,315 @@
+{
+  "schema_version": "1.2",
+  "birth": {
+    "datetime_local": "1990-01-01T12:00:00",
+    "timezone": "Asia/Kolkata"
+  },
+  "dashas": {
+    "system": "VIMSHOTTARI",
+    "current": {
+      "md_lord": "Jupiter",
+      "ad_lord": "Jupiter",
+      "pd_lord": "Mercury"
+    },
+    "upcoming_pd": []
+  },
+  "planets": [
+    {
+      "name": "Sun",
+      "longitude": 95.0,
+      "sign": "Cancer",
+      "sign_lord": "Moon",
+      "house_occupied": 6,
+      "retrograde": false,
+      "combust": false,
+      "kp": {
+        "star_lord": "Saturn",
+        "sub_lord": "Saturn"
+      },
+      "significator_of_houses": [
+        3
+      ]
+    },
+    {
+      "name": "Moon",
+      "longitude": 60.0,
+      "sign": "Gemini",
+      "sign_lord": "Mercury",
+      "house_occupied": 4,
+      "retrograde": false,
+      "combust": false,
+      "kp": {
+        "star_lord": "Mars",
+        "sub_lord": "Mercury"
+      },
+      "significator_of_houses": [
+        1
+      ]
+    },
+    {
+      "name": "Mars",
+      "longitude": 70.0,
+      "sign": "Gemini",
+      "sign_lord": "Mercury",
+      "house_occupied": 5,
+      "retrograde": false,
+      "combust": false,
+      "kp": {
+        "star_lord": "Rahu",
+        "sub_lord": "Jupiter"
+      },
+      "significator_of_houses": [
+        6,
+        8,
+        12
+      ]
+    },
+    {
+      "name": "Mercury",
+      "longitude": 250.5,
+      "sign": "Sagittarius",
+      "sign_lord": "Jupiter",
+      "house_occupied": 11,
+      "retrograde": false,
+      "combust": false,
+      "kp": {
+        "star_lord": "Ketu",
+        "sub_lord": "Saturn"
+      },
+      "significator_of_houses": [
+        1
+      ]
+    },
+    {
+      "name": "Jupiter",
+      "longitude": 200.0,
+      "sign": "Libra",
+      "sign_lord": "Venus",
+      "house_occupied": 9,
+      "retrograde": false,
+      "combust": false,
+      "kp": {
+        "star_lord": "Jupiter",
+        "sub_lord": "Jupiter"
+      },
+      "significator_of_houses": [
+        3,
+        9
+      ]
+    },
+    {
+      "name": "Venus",
+      "longitude": 205.0,
+      "sign": "Libra",
+      "sign_lord": "Venus",
+      "house_occupied": 9,
+      "retrograde": false,
+      "combust": false,
+      "kp": {
+        "star_lord": "Jupiter",
+        "sub_lord": "Mercury"
+      },
+      "significator_of_houses": [
+        4
+      ]
+    },
+    {
+      "name": "Saturn",
+      "longitude": 30.0,
+      "sign": "Taurus",
+      "sign_lord": "Venus",
+      "house_occupied": 3,
+      "retrograde": false,
+      "combust": false,
+      "kp": {
+        "star_lord": "Sun",
+        "sub_lord": "Rahu"
+      },
+      "significator_of_houses": [
+        10
+      ]
+    },
+    {
+      "name": "Rahu",
+      "longitude": 40.0,
+      "sign": "Taurus",
+      "sign_lord": "Venus",
+      "house_occupied": 4,
+      "retrograde": false,
+      "combust": false,
+      "kp": {
+        "star_lord": "Moon",
+        "sub_lord": "Moon"
+      },
+      "significator_of_houses": [
+        1
+      ]
+    },
+    {
+      "name": "Ketu",
+      "longitude": 220.0,
+      "sign": "Scorpio",
+      "sign_lord": "Mars",
+      "house_occupied": 10,
+      "retrograde": false,
+      "combust": false,
+      "kp": {
+        "star_lord": "Saturn",
+        "sub_lord": "Venus"
+      },
+      "significator_of_houses": [
+        10
+      ]
+    }
+  ],
+  "houses": [
+    {
+      "house": 1,
+      "cusp_longitude": 301,
+      "cusp_sign": "Aquarius",
+      "cusp_sign_lord": "Saturn",
+      "kp": {
+        "star_lord": "Mars",
+        "sub_lord": "Mercury"
+      },
+      "occupants": []
+    },
+    {
+      "house": 2,
+      "cusp_longitude": 331,
+      "cusp_sign": "Pisces",
+      "cusp_sign_lord": "Jupiter",
+      "kp": {
+        "star_lord": "Jupiter",
+        "sub_lord": "Mars"
+      },
+      "occupants": []
+    },
+    {
+      "house": 3,
+      "cusp_longitude": 1,
+      "cusp_sign": "Aries",
+      "cusp_sign_lord": "Mars",
+      "kp": {
+        "star_lord": "Ketu",
+        "sub_lord": "Venus"
+      },
+      "occupants": [
+        "Saturn"
+      ]
+    },
+    {
+      "house": 4,
+      "cusp_longitude": 31,
+      "cusp_sign": "Taurus",
+      "cusp_sign_lord": "Venus",
+      "kp": {
+        "star_lord": "Sun",
+        "sub_lord": "Rahu"
+      },
+      "occupants": [
+        "Moon",
+        "Rahu"
+      ]
+    },
+    {
+      "house": 5,
+      "cusp_longitude": 61,
+      "cusp_sign": "Gemini",
+      "cusp_sign_lord": "Mercury",
+      "kp": {
+        "star_lord": "Mars",
+        "sub_lord": "Mercury"
+      },
+      "occupants": [
+        "Mars"
+      ]
+    },
+    {
+      "house": 6,
+      "cusp_longitude": 91,
+      "cusp_sign": "Cancer",
+      "cusp_sign_lord": "Moon",
+      "kp": {
+        "star_lord": "Jupiter",
+        "sub_lord": "Mars"
+      },
+      "occupants": [
+        "Sun"
+      ]
+    },
+    {
+      "house": 7,
+      "cusp_longitude": 121,
+      "cusp_sign": "Leo",
+      "cusp_sign_lord": "Sun",
+      "kp": {
+        "star_lord": "Ketu",
+        "sub_lord": "Mars"
+      },
+      "occupants": []
+    },
+    {
+      "house": 8,
+      "cusp_longitude": 151,
+      "cusp_sign": "Virgo",
+      "cusp_sign_lord": "Mercury",
+      "kp": {
+        "star_lord": "Sun",
+        "sub_lord": "Rahu"
+      },
+      "occupants": []
+    },
+    {
+      "house": 9,
+      "cusp_longitude": 181,
+      "cusp_sign": "Libra",
+      "cusp_sign_lord": "Venus",
+      "kp": {
+        "star_lord": "Mars",
+        "sub_lord": "Mercury"
+      },
+      "occupants": [
+        "Jupiter",
+        "Venus"
+      ]
+    },
+    {
+      "house": 10,
+      "cusp_longitude": 211,
+      "cusp_sign": "Scorpio",
+      "cusp_sign_lord": "Mars",
+      "kp": {
+        "star_lord": "Jupiter",
+        "sub_lord": "Mars"
+      },
+      "occupants": [
+        "Ketu"
+      ]
+    },
+    {
+      "house": 11,
+      "cusp_longitude": 241,
+      "cusp_sign": "Sagittarius",
+      "cusp_sign_lord": "Jupiter",
+      "kp": {
+        "star_lord": "Ketu",
+        "sub_lord": "Venus"
+      },
+      "occupants": [
+        "Mercury"
+      ]
+    },
+    {
+      "house": 12,
+      "cusp_longitude": 271,
+      "cusp_sign": "Capricorn",
+      "cusp_sign_lord": "Saturn",
+      "kp": {
+        "star_lord": "Sun",
+        "sub_lord": "Rahu"
+      },
+      "occupants": []
+    }
+  ]
+}
