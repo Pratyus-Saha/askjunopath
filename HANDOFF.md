@@ -29,6 +29,24 @@ How this file works:
 
 # Entries
 
+## port-qa — agent/antigravity/port-qa — 2026-06-23 14:00 — Antigravity
+**Built:** Ran QA checks for the Landing port. Verified the `globals.css` structure has the design layer after Tailwind directives to ensure proper cascade. Verified mobile responsiveness classes (`md:grid-cols`, `sm:text-`) and reduced-motion media queries are present in the CSS.
+**Files changed:** None.
+**Tests run:** `npm run build` -> Compiled successfully, static pages generated.
+**Known issues / deferred:** Cannot visually inspect the page rendering or anchor scrolling behavior, but structurally the code matches the source.
+**Next agent should read:** n/a.
+**Tempted but did not:** Make any visual or copy modifications as they are outside the allowed boundary.
+
+
+## port-page — agent/antigravity/port-page — 2026-06-23 13:55 — Antigravity
+**Built:** Ported the seven Juno components and created `Landing.tsx` as client components from the Lovable source. Moved them to `frontend/components/juno/` and `utils.ts` to `frontend/lib/utils.ts` to correctly map with `@/`. Replaced `page.tsx` with the specified metadata boilerplate. Installed `clsx` and `tailwind-merge` because they were missing. Fixed ESLint quote unescaped errors and warnings.
+**Files changed:** `frontend/components/juno/*`, `frontend/app/page.tsx`, `frontend/lib/utils.ts`, `frontend/app/layout.tsx`, `frontend/package.json`.
+**Tests run:** `npm run build` -> Compiled successfully, static pages generated.
+**Known issues / deferred:** None.
+**Next agent should read:** `frontend/components/juno/Landing.tsx`, `frontend/app/page.tsx`.
+**Tempted but did not:** Rewrite paths in `tsconfig.json` initially instead of moving directories as requested.
+
+
 ## port-foundation — agent/antigravity/port-foundation — 2026-06-23 13:35 — Antigravity
 **Built:** Ported JunoPath design layer, fonts, and cn helper from sky-logic-map. Replaced globals.css :root and body blocks, updated layout.tsx to use Google Fonts <link> tags, and copied utils.ts. Tested CSS integration temporarily in page.tsx and verified visual style.
 **Files changed:** rontend/app/globals.css, rontend/app/layout.tsx, rontend/src/lib/utils.ts.
