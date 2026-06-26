@@ -3,52 +3,113 @@
 import { useState } from "react";
 import Link from "next/link";
 import AuthGuard from "@/components/AuthGuard";
-
 import { supabase } from "@/lib/supabase";
-import type { ChartData } from "../../src/types/chart";
-import sampleFixture from "../../src/fixtures/chart.sample.json";
 
 type ChartResponse = {
-  cache_status: string;
+  cache_status?: string;
   chart_id: string;
-  chart_fingerprint: string;
-  chart: ChartData;
+  chart_fingerprint?: string;
+  chart: {
+    metadata: {
+      birth_city?: string;
+      latitude: number;
+      longitude: number;
+      timezone?: string;
+      ayanamsa?: number;
+    };
+    ascendant: {
+      sign: string;
+      sign_degree: number;
+    };
+    planets: Array<{
+      name: string;
+      longitude: number;
+      sign: string;
+      sign_degree: number;
+      house_occupied?: number;
+      nakshatra?: {
+        name: string;
+        lord: string;
+      };
+      kp?: {
+        star_lord: string;
+        sub_lord: string;
+      };
+      retrograde: boolean;
+    }>;
+    houses: Array<{
+      house: number;
+      cusp_longitude: number;
+      cusp_sign: string;
+      kp?: {
+        star_lord: string;
+        sub_lord: string;
+      };
+    }>;
+    dasha?: {
+      current?: {
+        mahadasha?: { lord: string };
+        antardasha?: { lord: string };
+        pratyantardasha?: { lord: string };
+      };
+    };
+  };
 };
 
 export default function ChartPage() {
-  // Form input states with requested Day 1 defaults
-  const [birthDate, setBirthDate] = useState("1998-04-21");
-  const [birthTime, setBirthTime] = useState("14:35");
-  const [birthCity, setBirthCity] = useState("Kolkata");
+  const [name, setName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [birthTime, setBirthTime] = useState("");
+  const [birthCity, setBirthCity] = useState("");
+  const [lat, setLat] = useState<number | "">("");
+  const [lon, setLon] = useState<number | "">("");
+  const [approxTime, setApproxTime] = useState(false);
 
+  const [locating, setLocating] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [chartData, setChartData] = useState<ChartResponse | null>(null);
-  const [showRawJson, setShowRawJson] = useState(false);
+
+  const handleCityBlur = async () => {
+    if (!birthCity.trim()) return;
+    setLocating(true);
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
+          birthCity
+        )}&format=json&limit=1`,
+        {
+          headers: {
+            "User-Agent": "AskJunoPath/1.0",
+          },
+        }
+      );
+      if (!res.ok) throw new Error("Geocoding failed");
+      const data = await res.json();
+      if (data && data.length > 0) {
+        setLat(parseFloat(data[0].lat));
+        setLon(parseFloat(data[0].lon));
+      } else {
+        // Did not find city
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLocating(false);
+    }
+  };
 
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!birthDate || !birthTime || !birthCity || lat === "" || lon === "") {
+      setError("Please fill in all required fields, including latitude and longitude.");
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-    const useFixture = process.env.NEXT_PUBLIC_USE_FIXTURE === "1";
-
-    if (useFixture) {
-      setTimeout(() => {
-        setChartData({
-          cache_status: "HIT",
-          chart_id: "fixture_01_sample",
-          chart_fingerprint: "static_fixture",
-          chart: sampleFixture as ChartData
-        });
-        setLoading(false);
-      }, 500);
-      return;
-    }
-    
     try {
-      // Auth swap (D006): identity comes from the Supabase session JWT.
       const { data: { session } } = await supabase.auth.getSession();
 
       if (!session) {
@@ -56,17 +117,32 @@ export default function ChartPage() {
         return;
       }
 
+      const [year, month, day] = birthDate.split("-").map(Number);
+      const [hour, minute] = birthTime.split(":").map(Number);
+
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      
+      const payload = {
+        name: name,
+        year: year,
+        month: month,
+        day: day,
+        hour: hour,
+        minute: minute,
+        second: 0,
+        latitude: Number(lat),
+        longitude: Number(lon),
+        timezone_offset: 5.5,
+        ayanamsa: "kp_newcomb"
+      };
+
       const response = await fetch(`${apiUrl}/chart/generate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${session.access_token}`,
         },
-        body: JSON.stringify({
-          birth_date: birthDate,
-          birth_time: birthTime,
-          birth_city: birthCity,
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -78,13 +154,14 @@ export default function ChartPage() {
       setChartData(data);
     } catch (err: any) {
       console.error(err);
-      setError(err.message || "An unexpected error occurred. Is the backend API running?");
+      setError(err.message || "An unexpected error occurred while generating the chart.");
     } finally {
       setLoading(false);
     }
   };
 
   const formatDegrees = (deg: number) => {
+    if (deg === undefined || deg === null) return "-";
     const d = Math.floor(deg);
     const m = Math.floor((deg - d) * 60);
     return `${d}° ${m}'`;
@@ -92,243 +169,280 @@ export default function ChartPage() {
 
   return (
     <AuthGuard>
-      <main className="min-h-screen px-4 py-8 md:px-8 max-w-7xl mx-auto space-y-8">
-      {/* Header bar */}
-      <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-        <Link href="/" className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
-          AskJunoPath
-        </Link>
-        <span className="text-xs text-slate-500 font-mono">MVP Scaffold</span>
-      </div>
-
-      {/* Main Content Split Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        {/* Left Side: Form inputs card */}
-        <div className="lg:col-span-1 bg-slate-900/40 backdrop-blur-md rounded-2xl border border-slate-800 p-6 space-y-6">
-          <div>
-            <h2 className="text-xl font-semibold text-slate-200">Birth Details</h2>
-            <p className="text-xs text-slate-500 mt-1">Enter your birth parameters to calculate the chart</p>
+      <main className="min-h-screen bg-navy p-4 md:p-8">
+        <div className="max-w-7xl mx-auto space-y-8">
+          
+          <div className="flex items-center justify-between border-b border-gold-soft pb-4">
+            <Link href="/" className="text-xl font-serif text-gold-bright">
+              AskJunoPath
+            </Link>
+            <span className="text-xs text-muted-dark font-mono uppercase tracking-widest">Chart Generation</span>
           </div>
 
-          <form onSubmit={handleGenerate} className="space-y-4">
-            <div>
-              <label className="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Birth Date</label>
-              <input
-                type="date"
-                required
-                value={birthDate}
-                onChange={(e) => setBirthDate(e.target.value)}
-                className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-slate-100"
-              />
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            {/* Form */}
+            <div className="lg:col-span-4 space-y-6">
+              <div className="bg-navy-raised border border-gold-soft rounded-md p-6 relative overflow-hidden shadow-2xl">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gold"></div>
+                <h2 className="text-xl font-serif text-ivory-warm mb-1">Birth Data</h2>
+                <p className="text-sm text-muted-dark mb-6">Enter details to calculate chart alignments.</p>
 
-            <div>
-              <label className="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Birth Time (24h)</label>
-              <input
-                type="time"
-                required
-                value={birthTime}
-                onChange={(e) => setBirthTime(e.target.value)}
-                className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-slate-100"
-              />
-            </div>
+                <form onSubmit={handleGenerate} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-medium text-muted-dark uppercase tracking-wider mb-1">Full Name (Optional)</label>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="e.g. Jane Doe"
+                      className="w-full bg-navy border border-gold-soft rounded px-3 py-2.5 text-sm text-ivory placeholder:text-muted-dark/50 focus:outline-none focus:border-gold transition-colors"
+                      disabled={loading}
+                    />
+                  </div>
 
-            <div>
-              <label className="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Birth City</label>
-              <input
-                type="text"
-                required
-                placeholder="e.g. Kolkata"
-                value={birthCity}
-                onChange={(e) => setBirthCity(e.target.value)}
-                className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-slate-100 placeholder-slate-600"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-slate-100 font-semibold py-3.5 rounded-xl shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.01]"
-            >
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                  </svg>
-                  Calculating...
-                </span>
-              ) : "Generate Chart"}
-            </button>
-          </form>
-
-          {error && (
-            <div className="bg-red-950/30 border border-red-800/50 rounded-xl p-4 text-sm text-red-300">
-              <span className="font-semibold block mb-1">Calculation Error</span>
-              {error}
-            </div>
-          )}
-        </div>
-
-        {/* Right Side: Results visualizer */}
-        <div className="lg:col-span-2 space-y-6">
-          {chartData ? (
-            <div className="bg-slate-900/20 rounded-2xl border border-slate-800 p-6 space-y-6">
-              
-              {/* Cache status and metadata header */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-4">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-100">Astrological Profile</h3>
-                  <p className="text-xs text-slate-400 mt-1 font-mono">
-                    ID: {chartData.chart_id}
-                  </p>
-                </div>
-                
-                {/* Cache Badge */}
-                <div>
-                  {chartData.cache_status === "HIT" ? (
-                    <div className="inline-flex flex-col items-end">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        Cache HIT
-                      </span>
-                      <span className="text-[10px] text-emerald-500 mt-1 font-medium">Loaded saved chart</span>
-                    </div>
-                  ) : (
-                    <div className="inline-flex flex-col items-end">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
-                        <span className="w-2 h-2 rounded-full bg-purple-400" />
-                        Cache MISS
-                      </span>
-                      <span className="text-[10px] text-purple-500 mt-1 font-medium">Generated new chart</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Calculations Metadata Grid */}
-              {(() => {
-                const meta = chartData.chart.metadata;
-                return (
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-950/50 p-4 rounded-xl border border-slate-800/50 text-xs">
+                  <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <span className="text-slate-500 block mb-1">Birth Location</span>
-                      <span className="text-slate-300 font-semibold truncate block">{meta?.birth_city || "-"}</span>
+                      <label className="block text-xs font-medium text-muted-dark uppercase tracking-wider mb-1">Date *</label>
+                      <input
+                        type="date"
+                        required
+                        value={birthDate}
+                        onChange={(e) => setBirthDate(e.target.value)}
+                        className="w-full bg-navy border border-gold-soft rounded px-3 py-2.5 text-sm text-ivory focus:outline-none focus:border-gold transition-colors"
+                        disabled={loading}
+                      />
                     </div>
                     <div>
-                      <span className="text-slate-500 block mb-1">Coordinates</span>
-                      <span className="text-slate-300 font-semibold font-mono block">
-                        {meta?.latitude?.toFixed(4) || "0.0000"}°, {meta?.longitude?.toFixed(4) || "0.0000"}°
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-slate-500 block mb-1">Ayanamsa (KP)</span>
-                      <span className="text-slate-300 font-semibold block">{meta?.ayanamsa ? formatDegrees(meta.ayanamsa) : "-"}</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-500 block mb-1">Timezone</span>
-                      <span className="text-slate-300 font-semibold block">{meta?.timezone || "-"}</span>
+                      <label className="block text-xs font-medium text-muted-dark uppercase tracking-wider mb-1">Time (24h) *</label>
+                      <input
+                        type="time"
+                        required
+                        value={birthTime}
+                        onChange={(e) => setBirthTime(e.target.value)}
+                        className="w-full bg-navy border border-gold-soft rounded px-3 py-2.5 text-sm text-ivory focus:outline-none focus:border-gold transition-colors"
+                        disabled={loading}
+                      />
                     </div>
                   </div>
-                );
-              })()}
 
-              {/* Ascendant lagna display */}
-              <div className="bg-indigo-950/20 border border-indigo-500/20 rounded-xl p-4 flex items-center justify-between">
-                <div>
-                  <span className="text-xs text-indigo-300 uppercase tracking-widest block font-medium">Ascendant (Lagna)</span>
-                  <span className="text-2xl font-black text-slate-100 mt-1 block">
-                    {chartData.chart.ascendant.sign} <span className="text-indigo-400 text-lg font-normal">({formatDegrees(chartData.chart.ascendant.sign_degree)})</span>
-                  </span>
-                </div>
-                <div className="text-right text-xs">
-                  <span className="text-slate-500 block">Nakshatra / Lord</span>
-                  <span className="text-indigo-300 font-semibold mt-1 block">
-                    -
-                  </span>
-                </div>
+                  <div>
+                    <label className="block text-xs font-medium text-muted-dark uppercase tracking-wider mb-1">City *</label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        required
+                        value={birthCity}
+                        onChange={(e) => setBirthCity(e.target.value)}
+                        onBlur={handleCityBlur}
+                        placeholder="e.g. New York"
+                        className="w-full bg-navy border border-gold-soft rounded px-3 py-2.5 text-sm text-ivory placeholder:text-muted-dark/50 focus:outline-none focus:border-gold transition-colors"
+                        disabled={loading}
+                      />
+                      {locating && (
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-xs text-gold">
+                          <svg className="animate-spin h-3 w-3" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Locating...
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-medium text-muted-dark uppercase tracking-wider mb-1">Latitude *</label>
+                      <input
+                        type="number"
+                        step="any"
+                        required
+                        value={lat}
+                        onChange={(e) => setLat(e.target.value === "" ? "" : Number(e.target.value))}
+                        className="w-full bg-navy border border-gold-soft rounded px-3 py-2.5 text-sm text-ivory focus:outline-none focus:border-gold transition-colors"
+                        disabled={loading}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-muted-dark uppercase tracking-wider mb-1">Longitude *</label>
+                      <input
+                        type="number"
+                        step="any"
+                        required
+                        value={lon}
+                        onChange={(e) => setLon(e.target.value === "" ? "" : Number(e.target.value))}
+                        className="w-full bg-navy border border-gold-soft rounded px-3 py-2.5 text-sm text-ivory focus:outline-none focus:border-gold transition-colors"
+                        disabled={loading}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2 pt-2">
+                    <input
+                      type="checkbox"
+                      id="approxTime"
+                      checked={approxTime}
+                      onChange={(e) => setApproxTime(e.target.checked)}
+                      className="mt-1 h-4 w-4 bg-navy border-gold-soft text-gold focus:ring-gold rounded"
+                      disabled={loading}
+                    />
+                    <label htmlFor="approxTime" className="text-xs text-muted-dark cursor-pointer">
+                      Approximate time?
+                      {approxTime && <span className="block text-clay mt-0.5">Results may vary with approximate time.</span>}
+                    </label>
+                  </div>
+
+                  <div className="pt-4">
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="btn-juno w-full"
+                    >
+                      {loading ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Calculating...
+                        </span>
+                      ) : (
+                        "Generate Chart"
+                      )}
+                    </button>
+                  </div>
+                  
+                  {error && (
+                    <div className="text-clay text-sm text-center bg-clay/10 py-2 px-3 rounded border border-clay/20 mt-4">
+                      {error}
+                    </div>
+                  )}
+                </form>
               </div>
-
-              {/* Planets Positions Table */}
-              <div>
-                <h4 className="text-sm font-bold text-slate-300 mb-3 uppercase tracking-wider">Planetary Positions</h4>
-                <div className="overflow-x-auto border border-slate-800 rounded-xl">
-                  <table className="w-full text-left border-collapse text-xs md:text-sm">
-                    <thead>
-                      <tr className="bg-slate-950/80 border-b border-slate-800 text-slate-400 font-mono">
-                        <th className="py-3.5 px-4 font-medium">Planet</th>
-                        <th className="py-3.5 px-4 font-medium">Sidereal Longitude</th>
-                        <th className="py-3.5 px-4 font-medium">Zodiac Sign</th>
-                        <th className="py-3.5 px-4 font-medium">Nakshatra</th>
-                        <th className="py-3.5 px-4 font-medium">Lord</th>
-                        <th className="py-3.5 px-4 font-medium">KP Star/Sub</th>
-                        <th className="py-3.5 px-4 font-medium text-center">Retro</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-800/50">
-                      {chartData.chart.planets.map((planet) => (
-                        <tr key={planet.name} className="hover:bg-slate-800/10 transition-colors">
-                          <td className="py-3.5 px-4 font-bold text-slate-200">{planet.name}</td>
-                          <td className="py-3.5 px-4 font-mono text-slate-300">
-                            {formatDegrees(planet.longitude)}
-                          </td>
-                          <td className="py-3.5 px-4 text-slate-300">
-                            {planet.sign} <span className="text-slate-500 text-[10px] ml-1">({formatDegrees(planet.sign_degree)})</span>
-                          </td>
-                          <td className="py-3.5 px-4 text-slate-300">{planet.nakshatra?.name || "-"}</td>
-                          <td className="py-3.5 px-4 text-slate-400 font-medium">{planet.nakshatra?.lord || "-"}</td>
-                          <td className="py-3.5 px-4 text-slate-400 font-medium">
-                            {planet.kp ? `${planet.kp.star_lord} / ${planet.kp.sub_lord}` : "-"}
-                          </td>
-                          <td className="py-3.5 px-4 text-center">
-                            {planet.retrograde ? (
-                              <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                                RETRO
-                              </span>
-                            ) : (
-                              <span className="text-slate-600">-</span>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              {/* Collapsible raw JSON */}
-              <div className="pt-2">
-                <button
-                  type="button"
-                  onClick={() => setShowRawJson(!showRawJson)}
-                  className="text-xs text-indigo-400 hover:text-indigo-300 font-semibold focus:outline-none flex items-center gap-1.5"
-                >
-                  <span>{showRawJson ? "▼ Hide" : "▶ Show"} Raw Astrological Data JSON</span>
-                </button>
-                {showRawJson && (
-                  <pre className="bg-slate-950 border border-slate-800 rounded-xl p-4 mt-3 text-[10px] font-mono overflow-auto max-h-[300px] text-slate-400">
-                    {JSON.stringify(chartData, null, 2)}
-                  </pre>
-                )}
-              </div>
-
             </div>
-          ) : (
-            <div className="h-full min-h-[350px] border border-dashed border-slate-800 rounded-2xl flex flex-col items-center justify-center text-center p-8 text-slate-600">
-              <svg className="w-12 h-12 text-slate-800 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-              </svg>
-              <h3 className="text-base font-semibold text-slate-500">No Chart Loaded</h3>
-              <p className="text-xs text-slate-600 max-w-sm mt-1">
-                Enter your birth details in the sidebar and click Generate Chart to calculate your alignments.
-              </p>
+
+            {/* Results */}
+            <div className="lg:col-span-8 space-y-6">
+              {chartData ? (
+                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  
+                  {/* Action Buttons */}
+                  <div className="flex flex-wrap gap-3">
+                    <Link href="/predict/career" className="btn-juno btn-juno-compact">Career Reading</Link>
+                    <Link href="/predict/finance" className="btn-juno btn-juno-compact">Finance Reading</Link>
+                    <Link href="/predict/relationship" className="btn-juno btn-juno-compact">Relationship Reading</Link>
+                  </div>
+
+                  <div className="bg-navy-raised border border-gold-soft rounded-md p-6 shadow-xl">
+                    <h2 className="text-xl font-serif text-ivory-warm mb-6 flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-gold inline-block"></span>
+                      Your Chart
+                    </h2>
+
+                    {/* Dasha */}
+                    {chartData.chart.dasha?.current && (
+                      <div className="mb-8 p-4 bg-navy border border-ink-soft rounded">
+                        <h3 className="text-xs font-mono uppercase tracking-widest text-muted-dark mb-3">Current Dasha</h3>
+                        <div className="flex flex-wrap gap-4 text-sm">
+                          <div className="flex items-center gap-2">
+                            <span className="text-muted-dark">MD:</span>
+                            <span className="text-ivory font-medium">{chartData.chart.dasha.current.mahadasha?.lord || "-"}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-muted-dark">AD:</span>
+                            <span className="text-ivory font-medium">{chartData.chart.dasha.current.antardasha?.lord || "-"}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-muted-dark">PD:</span>
+                            <span className="text-ivory font-medium">{chartData.chart.dasha.current.pratyantardasha?.lord || "-"}</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      {/* Planets Table */}
+                      <div>
+                        <h3 className="text-xs font-mono uppercase tracking-widest text-muted-dark mb-3">Planetary Positions</h3>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-left text-sm whitespace-nowrap">
+                            <thead>
+                              <tr className="border-b border-gold-soft/50 text-muted-dark font-medium">
+                                <th className="pb-2 font-normal">Planet</th>
+                                <th className="pb-2 font-normal">Longitude</th>
+                                <th className="pb-2 font-normal">Nakshatra</th>
+                                <th className="pb-2 font-normal text-right">House</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-ink-soft">
+                              {chartData.chart.planets.map((planet) => (
+                                <tr key={planet.name} className="hover:bg-navy transition-colors">
+                                  <td className="py-2.5 text-ivory">{planet.name}</td>
+                                  <td className="py-2.5 text-muted-dark font-mono text-xs">{formatDegrees(planet.longitude)}</td>
+                                  <td className="py-2.5 text-muted-dark">{planet.nakshatra?.name || "-"}</td>
+                                  <td className="py-2.5 text-right text-gold-bright font-medium">{planet.house_occupied || "-"}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      {/* Houses Table */}
+                      <div>
+                        <h3 className="text-xs font-mono uppercase tracking-widest text-muted-dark mb-3">House Cusps</h3>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-left text-sm whitespace-nowrap">
+                            <thead>
+                              <tr className="border-b border-gold-soft/50 text-muted-dark font-medium">
+                                <th className="pb-2 font-normal">House</th>
+                                <th className="pb-2 font-normal">Cusp</th>
+                                <th className="pb-2 font-normal text-right">Sublord</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-ink-soft">
+                              {chartData.chart.houses.map((house) => (
+                                <tr key={house.house} className="hover:bg-navy transition-colors">
+                                  <td className="py-2.5 text-ivory">H{house.house}</td>
+                                  <td className="py-2.5 text-muted-dark font-mono text-xs">{formatDegrees(house.cusp_longitude)}</td>
+                                  <td className="py-2.5 text-right text-gold-bright font-medium">{house.kp?.sub_lord || "-"}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              ) : (
+                <div className="h-full flex flex-col items-center justify-center p-12 border border-dashed border-ink-soft rounded-md bg-navy-raised/50">
+                  
+                  {/* Disabled reading buttons state */}
+                  <div className="flex flex-wrap justify-center gap-3 mb-10 opacity-40 pointer-events-none">
+                    <button className="btn-juno btn-juno-compact">Career Reading</button>
+                    <button className="btn-juno btn-juno-compact">Finance Reading</button>
+                    <button className="btn-juno btn-juno-compact">Relationship Reading</button>
+                  </div>
+                  
+                  <div className="w-12 h-12 rounded-full border border-gold-soft flex items-center justify-center mb-4 text-gold-soft">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-serif text-ivory mb-2">No Chart Generated</h3>
+                  <p className="text-sm text-muted-dark max-w-md text-center">
+                    Enter your birth details and generate a chart to view your planetary alignments and unlock deep readings.
+                  </p>
+                </div>
+              )}
             </div>
-          )}
+
+          </div>
         </div>
-
-      </div>
-    </main>
+      </main>
     </AuthGuard>
   );
 }
