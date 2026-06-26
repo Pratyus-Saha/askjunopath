@@ -188,11 +188,23 @@ def _mentioned_dates(pred: dict) -> set[str]:
 
 def _valid_dates(pred: dict) -> set[str]:
     stack = pred["current_dasha_stack"]
-    return {
+    valid = {
         pred["as_of"][:10],
         stack["antardasha_window"][0], stack["antardasha_window"][1],
         stack["pratyantardasha_window"][0], stack["pratyantardasha_window"][1],
     }
+    # Block 4+5: transit windows and the forward next-contact are a *legitimate*
+    # source of day-level dates in the unified contract (they come from the
+    # transit engine, not free text). They are valid, not "invented".
+    for window in pred.get("transit_windows", []):
+        valid.add(window["start_date"])
+        valid.add(window["end_date"])
+        for trigger in window["triggers"]:
+            valid.add(trigger["contact_date"])
+    next_contact = pred.get("transit_summary", {}).get("next_contact") or {}
+    if next_contact.get("estimated_date"):
+        valid.add(next_contact["estimated_date"])
+    return valid
 
 
 # --------------------------------------------------------------------------- #
@@ -296,14 +308,15 @@ def test_no_unsafe_certainty_language(fixture):
 
 @pytest.mark.parametrize("fixture", GOLDEN_FIXTURES, ids=FIXTURE_IDS)
 def test_confidence_capped_at_medium(fixture):
+    # NOTE: the v1 "medium cap" is LIFTED under the unified contract (Block 4+5):
+    # career confidence now follows the five-branch table and may reach "high".
+    # This test is retained (no deletion) and now asserts the table-derived tier
+    # matches the fixture's reviewed expectation.
     _chart, pred = _prediction_for(fixture)
     exp = fixture["expected"]
-    # The published confidence never reaches "high" in v1.
-    assert pred["confidence"] in {"low", "medium"}
-    assert pred["confidence"] != "high"
-    # And it matches the fixture's expected (post-cap) tier.
+    assert pred["confidence"] in {"low", "medium", "high"}
     assert pred["confidence"] in exp["confidence_tier_range"]
-    # The raw, pre-cap tier is exposed transparently.
+    # The raw, pre-table career-signal heuristic tier is still exposed transparently.
     assert pred["confidence_basis"]["raw_tier"] == exp["raw_tier"]
     assert pred["confidence_basis"]["career_signal"] == exp["career_signal"]
     assert pred["confidence_basis"]["challenge_signal"] == exp["challenge_signal"]
@@ -354,9 +367,12 @@ def _fixture(profile: str) -> dict:
 def test_supportive_shows_the_medium_cap_in_action():
     fx = _fixture("supportive")
     _chart, pred = _prediction_for(fx)
-    # Raw heuristic is the maximum tier ("high"), but it is capped to "medium".
+    # The raw career-signal heuristic is the maximum tier ("high"), yet the unified
+    # confidence lands at "medium" here — not because of a cap, but because no
+    # slow-planet transit window forms at this fixture's as_of (high needs one).
     assert pred["confidence_basis"]["raw_tier"] == "high"
     assert pred["confidence"] == "medium"
+    assert pred["transit_summary"]["has_slow_planet_contact"] is False
     assert pred["confidence_basis"]["career_signal"] >= 3
     assert pred["confidence_basis"]["challenge_signal"] <= 1
 
@@ -375,6 +391,79 @@ def test_mixed_surfaces_change_and_challenge():
 def test_weak_stays_low_and_non_committal():
     fx = _fixture("weak_no_signal")
     _chart, pred = _prediction_for(fx)
+    # Promise is unmet (the 10th/primary cusp sub-lord touches no career house),
+    # so the unified table holds this at "low" regardless of any transit windows.
+    assert pred["promise_met"] is False
     assert pred["confidence"] == "low"
     activated = [h for h, info in pred["career_house_activation"].items() if info["activated"]]
     assert len(activated) <= fx["expected"]["max_activated_career_houses"]
+
+
+# --------------------------------------------------------------------------- #
+# Unified contract (Block 4+5) — career now carries the cross-domain fields and
+# may reach "high"; confidence follows the five-branch table.
+# --------------------------------------------------------------------------- #
+def _expected_unified_confidence(pred: dict) -> str:
+    promise = pred["promise_met"]
+    dt = pred["dasha_timing"]
+    dasha_supports = (dt["md_supports"] + dt["ad_supports"] + dt["pd_supports"]) >= 2
+    slow = pred["transit_summary"]["has_slow_planet_contact"]
+    has_windows = bool(pred["transit_windows"])
+    if not promise:
+        return "low"
+    if dasha_supports:
+        return "high" if slow else "medium"
+    return "medium" if has_windows else "low"
+
+
+def test_career_reaches_high_under_unified_table():
+    # The medium cap is lifted: the mixed/change chart converges promise + full
+    # dasha support + a slow-planet transit window, so confidence is "high".
+    # "high" here denotes factor convergence (signal strength), not a good outcome
+    # — the challenge houses remain surfaced as blocking factors / disruption.
+    fx = _fixture("mixed_change")
+    _chart, pred = _prediction_for(fx)
+    assert pred["confidence"] == "high"
+    assert pred["promise_met"] is True
+    assert pred["transit_summary"]["has_slow_planet_contact"] is True
+    assert "career-disruption caution" in pred["event_types"]
+    assert pred["blocking_factors"], "high confidence must not suppress disruption"
+
+
+@pytest.mark.parametrize("fixture", GOLDEN_FIXTURES, ids=FIXTURE_IDS)
+def test_unified_confidence_follows_five_branch_table(fixture):
+    _chart, pred = _prediction_for(fixture)
+    assert pred["confidence"] == pred["confidence"].lower()
+    assert pred["confidence"] == _expected_unified_confidence(pred)
+
+
+@pytest.mark.parametrize("fixture", GOLDEN_FIXTURES, ids=FIXTURE_IDS)
+def test_unified_contract_fields_present(fixture):
+    _chart, pred = _prediction_for(fixture)
+    for key in (
+        "domain", "promise_met", "signal_strength", "caution_flag",
+        "dasha_timing", "transit_windows", "transit_summary", "event_types",
+        "cusp_sublords",
+    ):
+        assert key in pred, key
+    assert pred["domain"] == "career"
+    assert isinstance(pred["promise_met"], bool)
+    assert isinstance(pred["caution_flag"], bool)
+    assert isinstance(pred["signal_strength"], int)
+    assert 0 <= pred["signal_strength"] <= 100
+    assert isinstance(pred["transit_windows"], list)
+    assert set(pred["dasha_timing"]) == {
+        "md_lord", "ad_lord", "pd_lord", "md_supports", "ad_supports", "pd_supports",
+    }
+    ts = pred["transit_summary"]
+    assert set(ts) == {"windows_found", "has_slow_planet_contact", "next_contact", "framing"}
+    assert ts["framing"] and ts["next_contact"]
+    assert ts["next_contact"]["planet"] in {"Jupiter", "Saturn", "Rahu", "Ketu"}
+    assert pred["event_types"]
+    for event in pred["event_types"]:
+        assert event in {
+            "career-advancement window", "opportunity window",
+            "career-disruption caution", "steady-progress window",
+        }
+    assert set(pred["cusp_sublords"]) == {"primary_houses", "sublord_significations"}
+    assert set(pred["cusp_sublords"]["primary_houses"]) == {"10"}

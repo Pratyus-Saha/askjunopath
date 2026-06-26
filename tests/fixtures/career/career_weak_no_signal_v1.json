@@ -47,7 +47,7 @@
   "must_not_claim": [
     "Must not name any planet outside the chart's 9 classical grahas (no Pluto/Neptune/Uranus).",
     "Must not reference any house outside 1..12.",
-    "Must not emit any date outside the as_of date and the dasha-derived AD/PD windows (no day-level event dates).",
+    "Must not emit any date outside the as_of date, the dasha-derived AD/PD windows, or the transit (gochara) windows and next-contact estimate now carried in transit_windows / transit_summary (Block 4+5); those day-level transit dates are legitimate, but no other invented dates.",
     "Must not report confidence 'medium' or 'high' for this chart — a single activated career house must stay 'low'.",
     "Must not manufacture a strong or clear career direction from a weak signal; the reading must remain non-committal.",
     "Must not populate any public chart field (chart.dashas stays null; reserved significator fields stay empty, D023).",

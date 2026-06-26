@@ -257,12 +257,39 @@ def test_evidence_significations_match_node_aware_engine():
 @requires_swiss
 def test_confidence_is_transparent_and_capped():
     pred = compute_career_prediction(_user1_chart(), as_of=AS_OF_NOON)
-    # v1 caps confidence at "medium" on an unvalidated significator foundation.
-    assert pred["confidence"] in {"low", "medium"}
-    assert pred["confidence"] == "medium"  # User 1 noon: strong activation + noise
+    # The v1 medium cap is lifted (Block 4+5): confidence follows the unified
+    # five-branch table. User 1 noon lands at "medium" deterministically here
+    # (promised + dasha support, but no slow-planet window to reach "high").
+    assert pred["confidence"] in {"low", "medium", "high"}
+    assert pred["confidence"] == "medium"
     basis = pred["confidence_basis"]
     assert "career_signal" in basis and "challenge_signal" in basis
     assert "not validated" in basis["note"].lower()
+
+
+@requires_swiss
+def test_unified_contract_fields_present_on_live_chart():
+    # The career engine now also carries the cross-domain unified contract fields
+    # (Block 4+5), alongside its existing career-native keys.
+    pred = compute_career_prediction(_user1_chart(), as_of=AS_OF_NOON)
+    for key in (
+        "domain", "promise_met", "signal_strength", "caution_flag",
+        "dasha_timing", "transit_windows", "transit_summary", "event_types",
+        "cusp_sublords",
+    ):
+        assert key in pred, key
+    assert pred["domain"] == "career"
+    assert isinstance(pred["promise_met"], bool)
+    assert isinstance(pred["caution_flag"], bool)
+    assert isinstance(pred["signal_strength"], int)
+    assert 0 <= pred["signal_strength"] <= 100
+    assert isinstance(pred["transit_windows"], list)
+    ts = pred["transit_summary"]
+    assert set(ts) == {"windows_found", "has_slow_planet_contact", "next_contact", "framing"}
+    assert ts["framing"], "framing must always be a non-empty string"
+    assert ts["next_contact"]["planet"] in {"Jupiter", "Saturn", "Rahu", "Ketu"}
+    assert ts["next_contact"]["days_away"] >= 90
+    assert set(pred["cusp_sublords"]["primary_houses"]) == {"10"}
 
 
 # --- Safe language (no guaranteed-outcome claims) -----------------------------
