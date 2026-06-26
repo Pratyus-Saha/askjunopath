@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.routers.chart import router as chart_router
 from app.routers.internal import router as internal_router
+from app.routers.predict import router as predict_router
 
 app = FastAPI(
     title="AskJunoPath API",
@@ -31,6 +32,9 @@ app.include_router(chart_router)
 # Internal/dev-only career prediction wrapper (D029). Self-gates to non-production
 # environments at request time; invisible (404) in production. Not a public API.
 app.include_router(internal_router)
+
+# Public prediction endpoints (Phase 3): POST /predict/{career,finance,relationship}.
+app.include_router(predict_router, prefix="/predict", tags=["predict"])
 
 
 def _ephemeris_check() -> dict[str, str]:
