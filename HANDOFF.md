@@ -29,6 +29,14 @@ How this file works:
 
 # Entries
 
+## dasha-timeline — agent/antigravity/dasha-timeline — 2026-06-27 14:35 — Antigravity
+**Built:** Built the Vimshottari Dasha Timeline UI page, rendering active MD/AD/PD, expanding antardashas for the active MD, and listing the next 5 upcoming periods. Handled client-side hydration correctly and fallback non-fixture mode states.
+**Files changed:** `frontend/app/chart/dasha/page.tsx`
+**Tests run:** `npm run lint && npm run build` inside `frontend/` -> passed.
+**Known issues / deferred:** "Load your chart first" is shown in non-fixture mode if `localStorage` has no chart data or if it lacks the timeline.
+**Next agent should read:** n/a.
+**Tempted but did not:** Rewrite local storage saving logic in `chart/page.tsx` to explicitly add timeline, since my task is strictly to build this UI.
+
 ## predict-ui — agent/antigravity/predict-ui — 2026-06-27 13:45 — Antigravity
 **Built:** Built three identical UI prediction pages (career, finance, relationship) that load data from local fixtures in fixture mode or fetch from the live API with Supabase auth in non-fixture mode. Implemented domain heading, disclaimer, confidence badge, signal strength, caution flag, synthesis text with references, transit windows, and raw JSON expansion following the ui-ux-pro-max guidelines.
 **Files changed:** `frontend/app/predict/career/page.tsx`, `frontend/app/predict/finance/page.tsx`, `frontend/app/predict/relationship/page.tsx`.
