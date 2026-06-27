@@ -18,7 +18,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://askjunopath.vercel.app",
+        "https://askjunopath.vercel.app", "https://askjunopath-web.vercel.app",
         "http://localhost:3000",
     ],
     allow_credentials=True,
