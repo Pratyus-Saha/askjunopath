@@ -15,7 +15,7 @@ export default function LoginPage() {
     setError(null);
 
     try {
-      const { error: signInError } = await supabase.auth.signInWithOtp({ email });
+      const { error: signInError } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: "https://askjunopath-web.vercel.app/auth/callback" } });
 
       if (signInError) {
         throw signInError;
