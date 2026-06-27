@@ -1,0 +1,648 @@
+{
+  "domain": "career",
+  "engine_output": {
+    "version": "career-v1",
+    "as_of": "2026-06-27T07:26:10.342698+00:00",
+    "summary": "As of 2026-06-27, the active Vimshottari stack is Saturn (mahadasha) > Moon (antardasha) > Ketu (pratyantardasha). This may activate career houses 2, 10, 11. The 10th-cusp sub-lord Saturn signifies houses [4, 7, 8], which suggests business, partnership, or independent work. Activation of house(s) 8, 12 indicates instability/sudden-change/breaks, loss/foreign/remote/isolation/expenses, so supportive periods may also carry change, expense, or remote/behind-the-scenes work. This is reflective guidance, not a guarantee of any specific outcome.",
+    "promise": {
+      "career_house_cusp_sub_lords": {
+        "2": {
+          "sub_lord": "Saturn",
+          "signifies": [
+            4,
+            7,
+            8
+          ],
+          "hits_career": [],
+          "hits_challenge": [
+            8
+          ]
+        },
+        "6": {
+          "sub_lord": "Moon",
+          "signifies": [
+            1,
+            4,
+            12
+          ],
+          "hits_career": [],
+          "hits_challenge": [
+            12
+          ]
+        },
+        "10": {
+          "sub_lord": "Saturn",
+          "signifies": [
+            4,
+            7,
+            8
+          ],
+          "hits_career": [],
+          "hits_challenge": [
+            8
+          ]
+        },
+        "11": {
+          "sub_lord": "Jupiter",
+          "signifies": [
+            4,
+            6,
+            9
+          ],
+          "hits_career": [
+            6
+          ],
+          "hits_challenge": []
+        }
+      },
+      "tenth_cusp_sub_lord": "Saturn",
+      "tenth_cusp_sub_lord_signifies": [
+        4,
+        7,
+        8
+      ],
+      "promised_career_houses": [
+        11
+      ]
+    },
+    "career_house_activation": {
+      "2": {
+        "label": "income/resources",
+        "activated": true,
+        "activated_by": [
+          "Ketu"
+        ],
+        "promised_by_cusp_sub_lord": false,
+        "cusp_sub_lord": "Saturn"
+      },
+      "6": {
+        "label": "job/service/competition",
+        "activated": false,
+        "activated_by": [],
+        "promised_by_cusp_sub_lord": false,
+        "cusp_sub_lord": "Moon"
+      },
+      "10": {
+        "label": "profession/status",
+        "activated": true,
+        "activated_by": [
+          "Ketu"
+        ],
+        "promised_by_cusp_sub_lord": false,
+        "cusp_sub_lord": "Saturn"
+      },
+      "11": {
+        "label": "gains/network",
+        "activated": true,
+        "activated_by": [
+          "Ketu"
+        ],
+        "promised_by_cusp_sub_lord": true,
+        "cusp_sub_lord": "Jupiter"
+      }
+    },
+    "current_dasha_stack": {
+      "mahadasha": "Saturn",
+      "antardasha": "Moon",
+      "pratyantardasha": "Ketu",
+      "antardasha_window": [
+        "2025-04-22",
+        "2026-11-24"
+      ],
+      "pratyantardasha_window": [
+        "2026-06-16",
+        "2026-07-21"
+      ]
+    },
+    "dasha_support": {
+      "mahadasha": {
+        "lord": "Saturn",
+        "signifies": [
+          4,
+          7,
+          8
+        ],
+        "career_hits": [],
+        "support_hits": [],
+        "challenge_hits": [
+          8
+        ]
+      },
+      "antardasha": {
+        "lord": "Moon",
+        "signifies": [
+          1,
+          4,
+          12
+        ],
+        "career_hits": [],
+        "support_hits": [
+          1
+        ],
+        "challenge_hits": [
+          12
+        ]
+      },
+      "pratyantardasha": {
+        "lord": "Ketu",
+        "signifies": [
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "career_hits": [
+          2,
+          10,
+          11
+        ],
+        "support_hits": [
+          3,
+          5,
+          9
+        ],
+        "challenge_hits": [
+          8,
+          12
+        ]
+      }
+    },
+    "supporting_factors": [
+      {
+        "type": "promise",
+        "house": 11,
+        "source": "Jupiter",
+        "signifies": [
+          4,
+          6,
+          9
+        ],
+        "career_hits": [
+          6
+        ],
+        "challenge_hits": [],
+        "note": "11th cusp sub-lord Jupiter signifies houses [4, 6, 9]"
+      },
+      {
+        "type": "timing",
+        "level": "pratyantardasha",
+        "source": "Ketu",
+        "signifies": [
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "career_hits": [
+          2,
+          10,
+          11
+        ],
+        "challenge_hits": [
+          8,
+          12
+        ],
+        "note": "pratyantardasha lord Ketu signifies houses [2, 3, 4, 5, 7, 8, 9, 10, 11, 12]"
+      }
+    ],
+    "blocking_factors": [
+      {
+        "type": "promise",
+        "house": 2,
+        "source": "Saturn",
+        "signifies": [
+          4,
+          7,
+          8
+        ],
+        "career_hits": [],
+        "challenge_hits": [
+          8
+        ],
+        "note": "2th cusp sub-lord Saturn signifies houses [4, 7, 8]"
+      },
+      {
+        "type": "promise",
+        "house": 6,
+        "source": "Moon",
+        "signifies": [
+          1,
+          4,
+          12
+        ],
+        "career_hits": [],
+        "challenge_hits": [
+          12
+        ],
+        "note": "6th cusp sub-lord Moon signifies houses [1, 4, 12]"
+      },
+      {
+        "type": "promise",
+        "house": 10,
+        "source": "Saturn",
+        "signifies": [
+          4,
+          7,
+          8
+        ],
+        "career_hits": [],
+        "challenge_hits": [
+          8
+        ],
+        "note": "10th cusp sub-lord Saturn signifies houses [4, 7, 8]"
+      },
+      {
+        "type": "timing",
+        "level": "mahadasha",
+        "source": "Saturn",
+        "signifies": [
+          4,
+          7,
+          8
+        ],
+        "career_hits": [],
+        "challenge_hits": [
+          8
+        ],
+        "note": "mahadasha lord Saturn signifies houses [4, 7, 8]"
+      },
+      {
+        "type": "timing",
+        "level": "antardasha",
+        "source": "Moon",
+        "signifies": [
+          1,
+          4,
+          12
+        ],
+        "career_hits": [],
+        "challenge_hits": [
+          12
+        ],
+        "note": "antardasha lord Moon signifies houses [1, 4, 12]"
+      },
+      {
+        "type": "timing",
+        "level": "pratyantardasha",
+        "source": "Ketu",
+        "signifies": [
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "career_hits": [
+          2,
+          10,
+          11
+        ],
+        "challenge_hits": [
+          8,
+          12
+        ],
+        "note": "pratyantardasha lord Ketu signifies houses [2, 3, 4, 5, 7, 8, 9, 10, 11, 12]"
+      }
+    ],
+    "career_themes": [
+      "income/resources (house 2)",
+      "instability/sudden-change/breaks (house 8)",
+      "profession/status (house 10)",
+      "gains/network (house 11)",
+      "loss/foreign/remote/isolation/expenses (house 12)"
+    ],
+    "timing_interpretation": "Dasha timing is read at the period level. The current antardasha (Moon) runs 2025-04-22 to 2026-11-24, and the pratyantardasha (Ketu) runs 2026-06-16 to 2026-07-21. These windows may favour the activated career houses above. A separate near-term transit (gochara) scan adds day-level contact windows (see transit_windows / transit_summary); those are indicative timing, not exact event dates.",
+    "confidence": "low",
+    "confidence_basis": {
+      "career_signal": 3,
+      "challenge_signal": 2,
+      "activated_career_houses": [
+        2,
+        10,
+        11
+      ],
+      "challenge_houses_hit": [
+        8,
+        12
+      ],
+      "raw_tier": "medium",
+      "note": "Transparent career-signal heuristic; the published confidence now follows the unified five-branch table (promise + dasha + transit) and may reach 'high'. The underlying significators are AstroSage-compared and not validated against JHora yet."
+    },
+    "evidence": [
+      {
+        "type": "promise",
+        "house": 2,
+        "source": "Saturn",
+        "signifies": [
+          4,
+          7,
+          8
+        ],
+        "career_hits": [],
+        "challenge_hits": [
+          8
+        ],
+        "note": "2th cusp sub-lord Saturn signifies houses [4, 7, 8]"
+      },
+      {
+        "type": "promise",
+        "house": 6,
+        "source": "Moon",
+        "signifies": [
+          1,
+          4,
+          12
+        ],
+        "career_hits": [],
+        "challenge_hits": [
+          12
+        ],
+        "note": "6th cusp sub-lord Moon signifies houses [1, 4, 12]"
+      },
+      {
+        "type": "promise",
+        "house": 10,
+        "source": "Saturn",
+        "signifies": [
+          4,
+          7,
+          8
+        ],
+        "career_hits": [],
+        "challenge_hits": [
+          8
+        ],
+        "note": "10th cusp sub-lord Saturn signifies houses [4, 7, 8]"
+      },
+      {
+        "type": "promise",
+        "house": 11,
+        "source": "Jupiter",
+        "signifies": [
+          4,
+          6,
+          9
+        ],
+        "career_hits": [
+          6
+        ],
+        "challenge_hits": [],
+        "note": "11th cusp sub-lord Jupiter signifies houses [4, 6, 9]"
+      },
+      {
+        "type": "timing",
+        "level": "mahadasha",
+        "source": "Saturn",
+        "signifies": [
+          4,
+          7,
+          8
+        ],
+        "career_hits": [],
+        "challenge_hits": [
+          8
+        ],
+        "note": "mahadasha lord Saturn signifies houses [4, 7, 8]"
+      },
+      {
+        "type": "timing",
+        "level": "antardasha",
+        "source": "Moon",
+        "signifies": [
+          1,
+          4,
+          12
+        ],
+        "career_hits": [],
+        "challenge_hits": [
+          12
+        ],
+        "note": "antardasha lord Moon signifies houses [1, 4, 12]"
+      },
+      {
+        "type": "timing",
+        "level": "pratyantardasha",
+        "source": "Ketu",
+        "signifies": [
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "career_hits": [
+          2,
+          10,
+          11
+        ],
+        "challenge_hits": [
+          8,
+          12
+        ],
+        "note": "pratyantardasha lord Ketu signifies houses [2, 3, 4, 5, 7, 8, 9, 10, 11, 12]"
+      }
+    ],
+    "caveat": "Internal career prediction v1. This is reflective guidance based on KP significators and Vimshottari dasha timing, not a guarantee of any specific outcome, and not financial, medical, legal, or professional advice. The underlying significators are compared against AstroSage and are not validated against the JHora final significator table yet, so treat this as directional, not definitive. Use real-world judgement for real-world decisions.",
+    "domain": "career",
+    "promise_met": false,
+    "signal_strength": 20,
+    "caution_flag": true,
+    "dasha_timing": {
+      "md_lord": "Saturn",
+      "ad_lord": "Moon",
+      "pd_lord": "Ketu",
+      "md_supports": false,
+      "ad_supports": false,
+      "pd_supports": true
+    },
+    "transit_windows": [
+      {
+        "start_date": "2026-07-09",
+        "end_date": "2026-07-14",
+        "domain": "career",
+        "window_score": 3.33,
+        "pd_overlap": false,
+        "trigger_count": 6,
+        "triggers": [
+          {
+            "planet": "Mars",
+            "natal_point": "cusp_11",
+            "natal_point_longitude": 44.16,
+            "contact_date": "2026-07-09",
+            "angular_diff_deg": 1.08,
+            "weight": 2
+          },
+          {
+            "planet": "Mars",
+            "natal_point": "cusp_11",
+            "natal_point_longitude": 44.16,
+            "contact_date": "2026-07-10",
+            "angular_diff_deg": 0.38,
+            "weight": 2
+          },
+          {
+            "planet": "Mars",
+            "natal_point": "cusp_11",
+            "natal_point_longitude": 44.16,
+            "contact_date": "2026-07-11",
+            "angular_diff_deg": 0.32,
+            "weight": 2
+          },
+          {
+            "planet": "Mars",
+            "natal_point": "cusp_11",
+            "natal_point_longitude": 44.16,
+            "contact_date": "2026-07-12",
+            "angular_diff_deg": 1.02,
+            "weight": 2
+          },
+          {
+            "planet": "Venus",
+            "natal_point": "cusp_2",
+            "natal_point_longitude": 130.06,
+            "contact_date": "2026-07-13",
+            "angular_diff_deg": 0.55,
+            "weight": 2
+          },
+          {
+            "planet": "Venus",
+            "natal_point": "cusp_2",
+            "natal_point_longitude": 130.06,
+            "contact_date": "2026-07-14",
+            "angular_diff_deg": 0.55,
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "start_date": "2026-08-27",
+        "end_date": "2026-08-28",
+        "domain": "career",
+        "window_score": 1.93,
+        "pd_overlap": false,
+        "trigger_count": 3,
+        "triggers": [
+          {
+            "planet": "Sun",
+            "natal_point": "cusp_2",
+            "natal_point_longitude": 130.06,
+            "contact_date": "2026-08-27",
+            "angular_diff_deg": 0.43,
+            "weight": 1
+          },
+          {
+            "planet": "Mercury",
+            "natal_point": "cusp_2",
+            "natal_point_longitude": 130.06,
+            "contact_date": "2026-08-28",
+            "angular_diff_deg": 0.82,
+            "weight": 1
+          },
+          {
+            "planet": "Sun",
+            "natal_point": "cusp_2",
+            "natal_point_longitude": 130.06,
+            "contact_date": "2026-08-28",
+            "angular_diff_deg": 0.54,
+            "weight": 1
+          }
+        ]
+      }
+    ],
+    "transit_summary": {
+      "windows_found": 2,
+      "has_slow_planet_contact": false,
+      "next_contact": {
+        "planet": "Jupiter",
+        "natal_point": "cusp_2",
+        "natal_longitude": 130.06,
+        "estimated_date": "2027-08-12",
+        "days_away": 411
+      },
+      "framing": "Only fast-planet contact windows form in the scanned span, so the transit timing signal is light and short-lived."
+    },
+    "event_types": [
+      "career-disruption caution",
+      "steady-progress window"
+    ],
+    "cusp_sublords": {
+      "primary_houses": {
+        "10": "Saturn"
+      },
+      "sublord_significations": {
+        "Saturn": [
+          4,
+          7,
+          8
+        ]
+      }
+    }
+  },
+  "synthesis": [
+    {
+      "text": "Regarding your career, the 10th house sub-lord is Saturn. This Saturn signifies houses 4, 7, and 8, which could indicate career experiences involving home or comfort from house 4, public dealings or partnerships from house 7, or unexpected changes or challenges from house 8.",
+      "references": [
+        "Saturn",
+        "house_4",
+        "house_7",
+        "house_8",
+        "house_10"
+      ]
+    },
+    {
+      "text": "Your current Dasha period shows Saturn as the Maha Dasha lord, influencing long-term career themes. The Antar Dasha lord is Moon, shaping a more immediate phase within this period. Ketu is the Pratyantar Dasha lord, pointing to very specific, short-term career influences.",
+      "references": [
+        "Ketu",
+        "Moon",
+        "Saturn"
+      ]
+    },
+    {
+      "text": "The influences of Saturn, Moon, and Ketu as Dasha lords suggest a potential career-disruption caution. Despite this, the planetary influences, including Mars, Venus, Mercury, and Sun in transit windows, also indicate a steady-progress window.",
+      "references": [
+        "Ketu",
+        "Moon",
+        "Sun",
+        "Venus",
+        "Mars",
+        "Mercury",
+        "Saturn"
+      ]
+    },
+    {
+      "text": "Looking at transit windows, a period between 2026-07-09 and 2026-07-14 shows triggering influences from Mars and Venus, which may relate to career events. Another transit window from 2026-08-27 to 2026-08-28 highlights triggering influences from Mercury and Sun, possibly affecting your career path. The positions of house 2 and house 11 are also noted in your chart data.",
+      "references": [
+        "Sun",
+        "Venus",
+        "Mars",
+        "Mercury",
+        "house_2",
+        "house_11"
+      ]
+    }
+  ],
+  "fallback_used": false,
+  "disclaimer": "AskJunoPath computes chart positions using Swiss Ephemeris and explains them using KP astrology principles. Astrology's predictive accuracy is unproven. This is not professional advice."
+}

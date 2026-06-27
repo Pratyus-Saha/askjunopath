@@ -1,0 +1,168 @@
+{
+  "domain": "relationship",
+  "engine_output": {
+    "domain": "relationship",
+    "promise_met": false,
+    "confidence": "low",
+    "signal_strength": 10,
+    "caution_flag": false,
+    "dasha_timing": {
+      "md_lord": null,
+      "ad_lord": null,
+      "pd_lord": null,
+      "md_supports": false,
+      "ad_supports": false,
+      "pd_supports": false
+    },
+    "transit_windows": [
+      {
+        "start_date": "2026-07-09",
+        "end_date": "2026-07-14",
+        "domain": "relationship",
+        "window_score": 3.33,
+        "pd_overlap": false,
+        "trigger_count": 6,
+        "triggers": [
+          {
+            "planet": "Mars",
+            "natal_point": "cusp_11",
+            "natal_point_longitude": 44.16,
+            "contact_date": "2026-07-09",
+            "angular_diff_deg": 1.08,
+            "weight": 2
+          },
+          {
+            "planet": "Mars",
+            "natal_point": "cusp_11",
+            "natal_point_longitude": 44.16,
+            "contact_date": "2026-07-10",
+            "angular_diff_deg": 0.38,
+            "weight": 2
+          },
+          {
+            "planet": "Mars",
+            "natal_point": "cusp_11",
+            "natal_point_longitude": 44.16,
+            "contact_date": "2026-07-11",
+            "angular_diff_deg": 0.32,
+            "weight": 2
+          },
+          {
+            "planet": "Mars",
+            "natal_point": "cusp_11",
+            "natal_point_longitude": 44.16,
+            "contact_date": "2026-07-12",
+            "angular_diff_deg": 1.02,
+            "weight": 2
+          },
+          {
+            "planet": "Venus",
+            "natal_point": "cusp_2",
+            "natal_point_longitude": 130.06,
+            "contact_date": "2026-07-13",
+            "angular_diff_deg": 0.55,
+            "weight": 2
+          },
+          {
+            "planet": "Venus",
+            "natal_point": "cusp_2",
+            "natal_point_longitude": 130.06,
+            "contact_date": "2026-07-14",
+            "angular_diff_deg": 0.55,
+            "weight": 2
+          }
+        ]
+      },
+      {
+        "start_date": "2026-08-21",
+        "end_date": "2026-08-28",
+        "domain": "relationship",
+        "window_score": 2.3,
+        "pd_overlap": false,
+        "trigger_count": 4,
+        "triggers": [
+          {
+            "planet": "Moon",
+            "natal_point": "cusp_5",
+            "natal_point_longitude": 224.16,
+            "contact_date": "2026-08-21",
+            "angular_diff_deg": 0.57,
+            "weight": 1
+          },
+          {
+            "planet": "Sun",
+            "natal_point": "cusp_2",
+            "natal_point_longitude": 130.06,
+            "contact_date": "2026-08-27",
+            "angular_diff_deg": 0.43,
+            "weight": 1
+          },
+          {
+            "planet": "Mercury",
+            "natal_point": "cusp_2",
+            "natal_point_longitude": 130.06,
+            "contact_date": "2026-08-28",
+            "angular_diff_deg": 0.82,
+            "weight": 1
+          },
+          {
+            "planet": "Sun",
+            "natal_point": "cusp_2",
+            "natal_point_longitude": 130.06,
+            "contact_date": "2026-08-28",
+            "angular_diff_deg": 0.54,
+            "weight": 1
+          }
+        ]
+      }
+    ],
+    "transit_summary": {
+      "windows_found": 2,
+      "has_slow_planet_contact": false,
+      "next_contact": {
+        "planet": "Jupiter",
+        "natal_point": "cusp_2",
+        "natal_longitude": 130.06,
+        "estimated_date": "2027-08-12",
+        "days_away": 411
+      },
+      "framing": "Only fast-planet contact windows form in the scanned span, so the transit timing signal is light and short-lived."
+    },
+    "event_types": [
+      "social-connection window"
+    ],
+    "summary": "As of 2026-06-27, the active Vimshottari stack is None (mahadasha) > None (antardasha) > None (pratyantardasha). The 7th cusp sub-lord does not clearly signify supportive partnership houses, so the relationship signal stays muted. Lighter transit contact windows form, which may colour the timing but carry less weight. This is reflective guidance based on KP significators and Vimshottari timing, not a guarantee of any specific outcome, and not relationship or personal advice.",
+    "cusp_sublords": {
+      "primary_houses": {
+        "7": "Saturn"
+      },
+      "sublord_significations": {
+        "Saturn": []
+      }
+    }
+  },
+  "synthesis": [
+    {
+      "text": "Regarding your primary relationships, Saturn is preliminarily identified as the sublord of House 7. The position of House 2 is noted at 130.06 degrees in your chart. House 5, often associated with romantic connections, is observed at 224.16 degrees. Additionally, House 11 is present at 44.16 degrees.",
+      "references": [
+        "Saturn",
+        "house_7",
+        "house_2",
+        "house_5",
+        "house_11"
+      ]
+    },
+    {
+      "text": "A possible social-connection window is suggested between July 9 and July 14, 2026, influenced by Mars and Venus. Another social-connection window appears between August 21 and August 28, 2026, with Mercury, Moon, and Sun as potential trigger planets.",
+      "references": [
+        "Moon",
+        "Sun",
+        "Venus",
+        "Mars",
+        "Mercury"
+      ]
+    }
+  ],
+  "fallback_used": false,
+  "disclaimer": "AskJunoPath computes chart positions using Swiss Ephemeris and explains them using KP astrology principles. Astrology's predictive accuracy is unproven. This is not professional advice."
+}
