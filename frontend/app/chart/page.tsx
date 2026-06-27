@@ -123,17 +123,11 @@ export default function ChartPage() {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       
       const payload = {
-        name: name,
-        year: year,
-        month: month,
-        day: day,
-        hour: hour,
-        minute: minute,
-        second: 0,
+        birth_date: birthDate,
+        birth_time: birthTime,
+        birth_city: birthCity,
         latitude: Number(lat),
         longitude: Number(lon),
-        timezone_offset: 5.5,
-        ayanamsa: "kp_newcomb"
       };
 
       const response = await fetch(`${apiUrl}/chart/generate`, {
@@ -467,3 +461,4 @@ export default function ChartPage() {
     </AuthGuard>
   );
 }
+
