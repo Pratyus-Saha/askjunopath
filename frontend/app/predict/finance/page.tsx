@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import AuthGuard from "@/components/AuthGuard";
-import ConfidenceChip from "@/src/components/ui/ConfidenceChip";
+import ConfidenceChip from "@/components/ui/ConfidenceChip";
 import { supabase } from "@/lib/supabase";
 import fixture from "@/src/fixtures/synthesis_finance.json";
 
