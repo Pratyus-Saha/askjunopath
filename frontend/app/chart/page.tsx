@@ -122,13 +122,11 @@ export default function ChartPage() {
 
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       
-      const payload = {
-        birth_date: birthDate,
-        birth_time: birthTime,
-        birth_city: birthCity,
-        latitude: Number(lat),
-        longitude: Number(lon),
-      };
+const payload = {
+  birth_date: birthDate,
+  birth_time: birthTime,
+  birth_city: birthCity,
+};
 
       const response = await fetch(`${apiUrl}/chart/generate`, {
         method: "POST",
@@ -140,8 +138,17 @@ export default function ChartPage() {
       });
 
       if (!response.ok) {
-        const errData = await response.json().catch(() => ({}));
-        throw new Error(errData.detail || `Server error: ${response.status}`);
+const errData = await response.json().catch(() => ({}));
+const d = errData?.detail;
+let msg;
+if (Array.isArray(d)) {
+  msg = d.map((e: any) => e?.msg || JSON.stringify(e)).join("; ");
+} else if (d && typeof d === "object") {
+  msg = (d as any).message || (d as any).error || JSON.stringify(d);
+} else {
+  msg = d || `Server error: ${response.status}`;
+}
+throw new Error(msg);
       }
 
       const data: ChartResponse = await response.json();
