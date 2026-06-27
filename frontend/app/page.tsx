@@ -1,18 +1,29 @@
-import type { Metadata } from "next";
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 import Landing from "@/components/juno/Landing";
 
-const DESCRIPTION =
-  "JunoPath computes your birth chart to the arc-second and explains the reasoning behind every line. A precise instrument, not a horoscope.";
-
-export const metadata: Metadata = {
-  title: "JunoPath — The exact sky you were born under",
-  description: DESCRIPTION,
-  openGraph: {
-    title: "JunoPath — Astrology, computed and explained",
-    description: DESCRIPTION,
-  },
-};
-
 export default function Page() {
+  const router = useRouter();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        router.replace("/chart");
+      }
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (session) {
+          router.replace("/chart");
+        }
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, [router]);
+
   return <Landing />;
 }
