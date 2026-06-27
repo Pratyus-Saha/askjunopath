@@ -14,6 +14,7 @@ if env_path.exists():
 from app.engines.prediction_career_engine import compute_career_prediction
 from app.engines.prediction_finance_engine import compute_finance_prediction
 from app.engines.prediction_relationship_engine import compute_relationship_prediction
+from app.engines.dasha_engine import compute_dasha_from_chart
 from app.synthesis.disclaimer import get_disclaimer
 from app.synthesis.gemini_synthesizer import synthesize
 from app.synthesis.payload_builder import build_payload
@@ -66,6 +67,7 @@ for h in chart["houses"]:
 
 as_of = datetime.now(timezone.utc)
 
+# Generate synthesis fixtures
 for domain, fn in DOMAINS.items():
     print("\nRunning " + domain)
     engine_output = fn(chart, as_of=as_of)
@@ -90,5 +92,34 @@ for domain, fn in DOMAINS.items():
     out = OUT / ("synthesis_" + domain + ".json")
     out.write_text(json.dumps(result, indent=2, default=str))
     print("Written " + str(out))
+
+# Generate dasha timeline fixture
+print("\nRunning dasha timeline")
+timeline = compute_dasha_from_chart(chart)
+
+# Convert dataclass to dict if needed
+import dataclasses
+
+def serialize_timeline(tl):
+    def period_to_dict(p):
+        return {
+            "level": p.level,
+            "lords": list(p.lords),
+            "start": p.start.isoformat(),
+            "end": p.end.isoformat(),
+        }
+    return {
+        "birth": tl.birth.isoformat(),
+        "birth_balance_lord": tl.birth_balance_lord,
+        "birth_balance_years": tl.birth_balance_years,
+        "mahadashas": [period_to_dict(p) for p in tl.mahadashas],
+        "antardashas": [period_to_dict(p) for p in tl.antardashas],
+        "pratyantardashas": [period_to_dict(p) for p in tl.pratyantardashas],
+    }
+
+timeline_dict = serialize_timeline(timeline)
+dasha_out = OUT / "dasha_timeline.json"
+dasha_out.write_text(json.dumps(timeline_dict, indent=2, default=str))
+print("Written " + str(dasha_out))
 
 print("\nAll done")
