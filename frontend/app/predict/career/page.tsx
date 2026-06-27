@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import AuthGuard from "@/components/AuthGuard";
 import ConfidenceChip from "@/components/ui/ConfidenceChip";
 import { supabase } from "@/lib/supabase";
@@ -51,26 +52,37 @@ export default function CareerPredictionPage() {
   const [result, setResult] = useState<PredictionResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [needsChart, setNeedsChart] = useState(false);
 
   useEffect(() => {
     async function fetchPrediction() {
       setLoading(true);
       setError(null);
+      setNeedsChart(false);
       try {
         if (process.env.NEXT_PUBLIC_USE_FIXTURE === "true") {
           setResult(fixture as unknown as PredictionResult);
         } else {
+          const stored = localStorage.getItem("junopath_chart");
+          if (!stored) {
+            setNeedsChart(true);
+            return;
+          }
+          const chart = JSON.parse(stored);
+
           const { data: { session } } = await supabase.auth.getSession();
           if (!session) {
             throw new Error("You must be logged in to view predictions.");
           }
 
-          const res = await fetch("https://askjunopath-backend.kindtree-c857c99f.centralindia.azurecontainerapps.io/predict/career", {
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+          const res = await fetch(`${apiUrl}/predict/career`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${session.access_token}`,
             },
+            body: JSON.stringify({ chart }),
           });
 
           if (!res.ok) {
@@ -106,11 +118,21 @@ export default function CareerPredictionPage() {
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
             </div>
+          ) : needsChart ? (
+            <div className="py-12 text-center space-y-4">
+              <p className="text-[var(--ivory)]">Please generate your chart first</p>
+              <Link
+                href="/chart"
+                className="inline-block px-4 py-2 bg-[var(--navy-raised)] border border-[var(--border)] rounded hover:bg-[var(--navy-deep)] transition-colors text-[var(--gold)]"
+              >
+                Go to chart
+              </Link>
+            </div>
           ) : error ? (
             <div className="text-[var(--clay)] py-8 text-center space-y-4">
               <p>{error}</p>
-              <button 
-                onClick={() => window.location.reload()} 
+              <button
+                onClick={() => window.location.reload()}
                 className="px-4 py-2 bg-[var(--navy-raised)] border border-[var(--border)] rounded hover:bg-[var(--navy-deep)] transition-colors text-[var(--ivory)]"
               >
                 Retry

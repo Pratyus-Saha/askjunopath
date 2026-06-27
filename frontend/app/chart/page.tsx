@@ -152,6 +152,14 @@ export default function ChartPage() {
 
       const data: ChartResponse = await response.json();
       setChartData(data);
+
+      // Persist the chart so the predict pages (career/finance/relationship)
+      // can read it from localStorage and POST it to /predict/{domain}.
+      try {
+        localStorage.setItem("junopath_chart", JSON.stringify(data.chart));
+      } catch (storageErr) {
+        console.error("Failed to persist chart to localStorage", storageErr);
+      }
     } catch (err: any) {
       console.error(err);
       setError(err.message || "An unexpected error occurred while generating the chart.");
@@ -340,6 +348,15 @@ export default function ChartPage() {
                       Your Chart
                     </h2>
 
+                    {/* Ascendant */}
+                    <div className="mb-8 p-4 bg-navy border border-ink-soft rounded">
+                      <h3 className="text-xs font-mono uppercase tracking-widest text-muted-dark mb-3">Ascendant</h3>
+                      <div className="flex flex-wrap items-baseline gap-2 text-sm">
+                        <span className="text-lg font-serif text-gold-bright">{chartData.chart.ascendant.sign}</span>
+                        <span className="text-muted-dark font-mono text-xs">{formatDegrees(chartData.chart.ascendant.sign_degree)}</span>
+                      </div>
+                    </div>
+
                     {/* Dasha */}
                     {chartData.chart.dasha?.current && (
                       <div className="mb-8 p-4 bg-navy border border-ink-soft rounded">
@@ -370,6 +387,7 @@ export default function ChartPage() {
                             <thead>
                               <tr className="border-b border-gold-soft/50 text-muted-dark font-medium">
                                 <th className="pb-2 font-normal">Planet</th>
+                                <th className="pb-2 font-normal">Sign</th>
                                 <th className="pb-2 font-normal">Longitude</th>
                                 <th className="pb-2 font-normal">Nakshatra</th>
                                 <th className="pb-2 font-normal text-right">House</th>
@@ -379,6 +397,7 @@ export default function ChartPage() {
                               {chartData.chart.planets.map((planet) => (
                                 <tr key={planet.name} className="hover:bg-navy transition-colors">
                                   <td className="py-2.5 text-ivory">{planet.name}</td>
+                                  <td className="py-2.5 text-ivory">{planet.sign}</td>
                                   <td className="py-2.5 text-muted-dark font-mono text-xs">{formatDegrees(planet.longitude)}</td>
                                   <td className="py-2.5 text-muted-dark">{planet.nakshatra?.name || "-"}</td>
                                   <td className="py-2.5 text-right text-gold-bright font-medium">{planet.house_occupied || "-"}</td>
@@ -397,6 +416,7 @@ export default function ChartPage() {
                             <thead>
                               <tr className="border-b border-gold-soft/50 text-muted-dark font-medium">
                                 <th className="pb-2 font-normal">House</th>
+                                <th className="pb-2 font-normal">Sign</th>
                                 <th className="pb-2 font-normal">Cusp</th>
                                 <th className="pb-2 font-normal text-right">Sublord</th>
                               </tr>
@@ -405,6 +425,7 @@ export default function ChartPage() {
                               {chartData.chart.houses.map((house) => (
                                 <tr key={house.house} className="hover:bg-navy transition-colors">
                                   <td className="py-2.5 text-ivory">H{house.house}</td>
+                                  <td className="py-2.5 text-ivory">{house.cusp_sign}</td>
                                   <td className="py-2.5 text-muted-dark font-mono text-xs">{formatDegrees(house.cusp_longitude)}</td>
                                   <td className="py-2.5 text-right text-gold-bright font-medium">{house.kp?.sub_lord || "-"}</td>
                                 </tr>

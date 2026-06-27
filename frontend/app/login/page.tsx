@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [usePassword, setUsePassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,6 +29,27 @@ export default function LoginPage() {
     } catch (err: any) {
       console.error(err);
       setError(err.message || "Failed to send magic link. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePasswordLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+
+      if (signInError) {
+        throw signInError;
+      }
+
+      router.push("/chart");
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "Failed to sign in. Please check your credentials.");
     } finally {
       setLoading(false);
     }
@@ -53,6 +78,69 @@ export default function LoginPage() {
               We&apos;ve sent a sign-in link to <span className="text-ivory font-medium">{email}</span>.
             </p>
           </div>
+        ) : usePassword ? (
+          <form onSubmit={handlePasswordLogin} className="space-y-6">
+            <div>
+              <label htmlFor="email" className="sr-only">Email address</label>
+              <input
+                id="email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="w-full bg-navy border border-gold-soft rounded px-4 py-3 text-ivory placeholder:text-muted-dark focus:outline-none focus:border-gold transition-colors"
+                disabled={loading}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password" className="sr-only">Password</label>
+              <input
+                id="password"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                className="w-full bg-navy border border-gold-soft rounded px-4 py-3 text-ivory placeholder:text-muted-dark focus:outline-none focus:border-gold transition-colors"
+                disabled={loading}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn-juno w-full"
+            >
+              {loading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  Signing in...
+                </span>
+              ) : (
+                "Sign in"
+              )}
+            </button>
+
+            {error && (
+              <div className="text-clay text-sm text-center bg-clay/10 py-2 px-3 rounded border border-clay/20">
+                {error}
+              </div>
+            )}
+
+            <button
+              type="button"
+              onClick={() => { setUsePassword(false); setError(null); }}
+              disabled={loading}
+              className="w-full text-center text-sm text-gold hover:text-gold-bright transition-colors"
+            >
+              Use magic link instead
+            </button>
+          </form>
         ) : (
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
@@ -92,6 +180,15 @@ export default function LoginPage() {
                 {error}
               </div>
             )}
+
+            <button
+              type="button"
+              onClick={() => { setUsePassword(true); setError(null); }}
+              disabled={loading}
+              className="w-full text-center text-sm text-gold hover:text-gold-bright transition-colors"
+            >
+              Sign in with password instead
+            </button>
           </form>
         )}
       </div>
