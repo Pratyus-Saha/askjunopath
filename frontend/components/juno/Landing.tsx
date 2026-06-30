@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 
 import { useEffect, useState } from "react";
@@ -18,6 +19,19 @@ export default function Landing() {
   return (
     <main className="relative min-h-screen overflow-x-clip">
       <Starfield />
+      <div className="fixed top-0 left-0 right-0 z-[60] pointer-events-none">
+        <div className="mx-auto flex h-[60px] max-w-[1240px] items-center justify-end px-6 md:px-10">
+          <div className="pointer-events-auto mr-[170px] md:mr-[190px]">
+            <Link 
+              href="/login" 
+              className="text-[13px] font-sans tracking-wide px-4 py-1.5 rounded transition-colors shadow-lg"
+              style={{ backgroundColor: "var(--navy)", color: "#C9A96E", border: "1px solid rgba(199, 154, 78, 0.4)" }}
+            >
+              Sign In
+            </Link>
+          </div>
+        </div>
+      </div>
       <Navbar />
       <JourneyRail />
       <Hero />
@@ -70,13 +84,13 @@ function Hero() {
         </p>
 
         <div className="hero-rise mt-12 flex flex-wrap items-center justify-center gap-6" data-d="4">
-          <button
-            className="btn-juno btn-juno-light"
+          <Link
+            href="/login"
+            className="btn-juno btn-juno-light inline-flex items-center justify-center"
             style={{ background: "var(--ivory)", color: "var(--ink)" }}
-            onClick={() => document.getElementById("try")?.scrollIntoView({ behavior: "smooth" })}
           >
             Generate your chart
-          </button>
+          </Link>
           <button
             className="link-gold text-[13.5px] font-mono tracking-[0.06em]"
             onClick={() => document.getElementById("reading")?.scrollIntoView({ behavior: "smooth" })}
