@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const links = [
   { id: "method", label: "How it works" },
@@ -53,9 +54,18 @@ export function Navbar() {
           ))}
         </nav>
 
-        <button onClick={() => go("try")} className="btn-juno btn-juno-compact">
-          Generate your chart
-        </button>
+        <div className="flex items-center gap-4">
+          <Link 
+            href="/login" 
+            className="text-[13px] font-sans tracking-wide px-4 py-1.5 rounded transition-colors shadow-sm hover:opacity-90"
+            style={{ backgroundColor: "var(--navy)", color: "#C9A96E", border: "1px solid rgba(199, 154, 78, 0.4)" }}
+          >
+            Sign In
+          </Link>
+          <button onClick={() => go("try")} className="btn-juno btn-juno-compact">
+            Generate your chart
+          </button>
+        </div>
       </div>
     </header>
   );

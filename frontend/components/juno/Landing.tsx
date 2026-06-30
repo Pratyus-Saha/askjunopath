@@ -19,19 +19,6 @@ export default function Landing() {
   return (
     <main className="relative min-h-screen overflow-x-clip">
       <Starfield />
-      <div className="fixed top-0 left-0 right-0 z-[60] pointer-events-none">
-        <div className="mx-auto flex h-[60px] max-w-[1240px] items-center justify-end px-6 md:px-10">
-          <div className="pointer-events-auto mr-[170px] md:mr-[190px]">
-            <Link 
-              href="/login" 
-              className="text-[13px] font-sans tracking-wide px-4 py-1.5 rounded transition-colors shadow-lg"
-              style={{ backgroundColor: "var(--navy)", color: "#C9A96E", border: "1px solid rgba(199, 154, 78, 0.4)" }}
-            >
-              Sign In
-            </Link>
-          </div>
-        </div>
-      </div>
       <Navbar />
       <JourneyRail />
       <Hero />
