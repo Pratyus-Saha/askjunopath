@@ -63,12 +63,13 @@ export default function CareerPredictionPage() {
         if (process.env.NEXT_PUBLIC_USE_FIXTURE === "true") {
           setResult(fixture as unknown as PredictionResult);
         } else {
-          const stored = localStorage.getItem("junopath_chart");
+          const stored = sessionStorage.getItem("ajp.chart.v1");
           if (!stored) {
             setNeedsChart(true);
             return;
           }
-          const chart = JSON.parse(stored);
+          const parsed = JSON.parse(stored);
+          const chart = parsed.chart;
 
           const { data: { session } } = await supabase.auth.getSession();
           if (!session) {

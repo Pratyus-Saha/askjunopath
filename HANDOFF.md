@@ -3,6 +3,14 @@
 
 How this file works:
 
+## Phase 0 Front-Door Fix — agent/antigravity/fix-navigation — 2026-06-30
+**Built:** Implemented sessionStorage (ajp.chart.v1) persistence for chart and birth data, created a shared prediction layout with a toggle bar, and added deep-link safety redirection to /chart.
+**Files changed:** frontend/app/chart/page.tsx, frontend/app/predict/layout.tsx, frontend/app/predict/career/page.tsx, frontend/app/predict/finance/page.tsx, frontend/app/predict/relationship/page.tsx.
+**Tests run:** npm run build (passed with no new errors).
+**Known issues / deferred:** Returning null during deep-link redirect in layout.tsx shows a brief blank screen during redirect but prevents a crash from accessing missing chart data.
+**Next agent should read:** n/a.
+**Tempted but did not:** Tempted to change the `app/chart/page.tsx` home link to match the back buttons, but adhered to keeping it pointing to `/` as designed.
+
 - **Newest entry at the top**, directly under this header block.
 - **Agents append entries; they never edit or delete existing ones.** A correction is a new entry referencing the old.
 - **One entry per task**, written even when the task failed or was blocked. A blocked entry containing one specific question is a successful handoff; the founder answers in the relevant spec doc, then replies "updated <doc>, follow it."
