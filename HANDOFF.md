@@ -3,6 +3,22 @@
 
 How this file works:
 
+## Navbar Login Refactor — agent/antigravity/fix-navigation — 2026-06-30
+**Built:** Moved the "Sign In" link into `Navbar.tsx` and removed the absolute positioning overlay workaround from `Landing.tsx`.
+**Files changed:** frontend/components/juno/Landing.tsx, frontend/components/juno/Navbar.tsx
+**Tests run:** npm run build (passed with 0 errors).
+**Known issues / deferred:** None.
+**Next agent should read:** n/a
+**Tempted but did not:** n/a
+
+## Login Entry Point — agent/antigravity/fix-navigation — 2026-06-30
+**Built:** Added a "Sign In" link to the top-right corner of the landing page, and changed the primary "Generate Your Chart" CTA button to also navigate to `/login`.
+**Files changed:** frontend/components/juno/Landing.tsx
+**Tests run:** npm run build (passed with 0 errors).
+**Known issues / deferred:** None.
+**Next agent should read:** n/a
+**Tempted but did not:** Tempted to change Navbar.tsx but adhered to the allowed files list and positioned the button over it instead.
+
 ## Phase 0 Front-Door Fix — agent/antigravity/fix-navigation — 2026-06-30
 **Built:** Implemented sessionStorage (ajp.chart.v1) persistence for chart and birth data, created a shared prediction layout with a toggle bar, and added deep-link safety redirection to /chart.
 **Files changed:** frontend/app/chart/page.tsx, frontend/app/predict/layout.tsx, frontend/app/predict/career/page.tsx, frontend/app/predict/finance/page.tsx, frontend/app/predict/relationship/page.tsx.

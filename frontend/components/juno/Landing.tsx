@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 
 import { useEffect, useState } from "react";
@@ -70,13 +71,13 @@ function Hero() {
         </p>
 
         <div className="hero-rise mt-12 flex flex-wrap items-center justify-center gap-6" data-d="4">
-          <button
-            className="btn-juno btn-juno-light"
+          <Link
+            href="/login"
+            className="btn-juno btn-juno-light inline-flex items-center justify-center"
             style={{ background: "var(--ivory)", color: "var(--ink)" }}
-            onClick={() => document.getElementById("try")?.scrollIntoView({ behavior: "smooth" })}
           >
             Generate your chart
-          </button>
+          </Link>
           <button
             className="link-gold text-[13.5px] font-mono tracking-[0.06em]"
             onClick={() => document.getElementById("reading")?.scrollIntoView({ behavior: "smooth" })}
