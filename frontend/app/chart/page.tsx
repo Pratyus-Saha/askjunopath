@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import AuthGuard from "@/components/AuthGuard";
 import { supabase } from "@/lib/supabase";
 
@@ -69,6 +70,27 @@ export default function ChartPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [chartData, setChartData] = useState<ChartResponse | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem("ajp.chart.v1");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed && parsed.chart) {
+          setChartData({ chart: parsed.chart } as ChartResponse);
+          if (parsed.birthData) {
+            setName(parsed.birthData.name || "");
+            setBirthDate(parsed.birthData.birth_date || "");
+            setBirthTime(parsed.birthData.birth_time || "");
+            setBirthCity(parsed.birthData.birth_city || "");
+          }
+        }
+      }
+    } catch (e) {
+      sessionStorage.removeItem("ajp.chart.v1");
+    }
+  }, []);
 
   const handleCityBlur = async () => {
     if (!birthCity.trim()) return;
@@ -155,11 +177,14 @@ throw new Error(msg);
       setChartData(data);
 
       // Persist the chart so the predict pages (career/finance/relationship)
-      // can read it from localStorage and POST it to /predict/{domain}.
+      // can read it from sessionStorage and POST it to /predict/{domain}.
       try {
-        localStorage.setItem("junopath_chart", JSON.stringify(data.chart));
+        sessionStorage.setItem("ajp.chart.v1", JSON.stringify({
+          birthData: { name, birth_date: birthDate, birth_time: birthTime, birth_city: birthCity },
+          chart: data.chart
+        }));
       } catch (storageErr) {
-        console.error("Failed to persist chart to localStorage", storageErr);
+        console.error("Failed to persist chart to sessionStorage", storageErr);
       }
     } catch (err: any) {
       console.error(err);
