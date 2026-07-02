@@ -3,6 +3,14 @@
 
 How this file works:
 
+## Vedic Fixtures - agent/codex/vedic-fixtures - 2026-07-02
+**Built:** Transcribed the five raw JHora charts into `tests/fixtures/vedic_fixtures.json` as structured JSON, using literal body, house, divisional, and Vimsottari table values only. Added the raw source fixture file so the PR preserves the input used for transcription.
+**Files changed:** `tests/fixtures/jhora_raw.txt`, `tests/fixtures/vedic_fixtures.json`, `HANDOFF.md`.
+**Tests run:** `python -m json.tool tests/fixtures/vedic_fixtures.json` via bundled Python (passed); custom JSON shape/table check via bundled Python (passed); `uv run --with-requirements backend/requirements.txt --with pytest python -m pytest -q` (1155 passed, 2 warnings).
+**Known issues / deferred:** `vedic_02` raw text includes a Jup/Moon/Ven/Merc Vimsottari chain before its Merc/Moon/Sat/Merc chain; the fixture follows the prompt's earliest-listed-period rule without calculating around it. Missing AD/PD/SD levels and non-literal GMT offsets are left as null.
+**Next agent should read:** `tests/fixtures/jhora_raw.txt`, `tests/fixtures/vedic_fixtures.json`.
+**Tempted but did not:** infer missing timezone offsets, derive dasha levels that are not literally present, or include Pluto/Neptune/Uranus from house rows.
+
 ## Navbar Login Refactor — agent/antigravity/fix-navigation — 2026-06-30
 **Built:** Moved the "Sign In" link into `Navbar.tsx` and removed the absolute positioning overlay workaround from `Landing.tsx`.
 **Files changed:** frontend/components/juno/Landing.tsx, frontend/components/juno/Navbar.tsx
