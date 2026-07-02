@@ -361,24 +361,24 @@
     },
     "dasha_at_birth": {
       "MD": {
-        "lord": "Jup",
-        "start": "2013-12-04 13:35:50",
-        "end": "2029-12-04 10:40:56"
+        "lord": "Sat",
+        "start": "1999-10-08 04:00:30",
+        "end": "2018-10-07 18:26:41"
       },
       "AD": {
-        "lord": null,
-        "start": null,
-        "end": null
+        "lord": "Sat",
+        "start": "1999-10-08 04:00:30",
+        "end": "2002-10-10 22:14:14"
       },
       "PD": {
-        "lord": null,
-        "start": null,
-        "end": null
+        "lord": "Ven",
+        "start": "2000-11-04 15:13:56",
+        "end": "2001-05-03 09:17:08"
       },
       "SD": {
-        "lord": null,
-        "start": null,
-        "end": null
+        "lord": "Mars",
+        "start": "2000-12-28 02:33:57",
+        "end": "2001-01-07 10:29:21"
       }
     }
   },
