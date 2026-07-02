@@ -16,21 +16,24 @@ It is printed for human review by ``scripts/vedic_validate.py``.
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
-
 import pytest
 
 from app.engines.vedic_engine import (
     SETTINGS,
+    SIGNS,
     aspected_houses,
     compute_vedic_chart,
     dignity_of,
     varga_sign_index,
     whole_sign_house,
 )
-
-FIXTURE_PATH = Path(__file__).resolve().parent / "fixtures" / "vedic_fixtures.json"
+from vedic_fixture_adapter import (
+    FIELD_A_ORDER,
+    FIXTURE_PATH,
+    check_field_a,
+    load_fixtures,
+    run_chart,
+)
 
 # One self-chosen SMOKE chart (Bengaluru, +05:30). NOT a fixture, NOT validation
 # — only exercises the code paths so the structural invariants have data.
@@ -132,8 +135,8 @@ def test_varga_out_of_scope_divisor_raises():
 
 def test_varga_result_always_in_range(smoke_chart):
     for p in smoke_chart["planets"]:
-        assert p["d9_sign"] in _SIGNS
-        assert p["d10_sign"] in _SIGNS
+        assert p["d9_sign"] in SIGNS
+        assert p["d10_sign"] in SIGNS
 
 
 # ---- Dignity (structure only; values are field B, reviewed manually) --------
@@ -197,80 +200,26 @@ def test_dasha_four_levels_nested(smoke_chart):
 
 
 # ---------------------------------------------------------------------------
-# Field A — JHora-oracle validation (skips: fixtures do not exist yet)
+# Field A — JHora-oracle validation
+#
+# vedic_fixtures.json is a JSON ARRAY whose vocabulary (2-letter signs, short
+# nakshatras, DMS longitudes, string/null gmt_offset, MD/AD/PD/SD dasha) is read
+# and normalized by vedic_fixture_adapter. This test only orchestrates; it never
+# fabricates values. If the file is absent it SKIPS.
 # ---------------------------------------------------------------------------
 
-def _load_fixtures():
+
+@pytest.mark.parametrize("chart_id", FIELD_A_ORDER)
+def test_field_a_against_jhora(chart_id):
     if not FIXTURE_PATH.exists():
         pytest.skip(
             "BLOCKED ON FIXTURES: tests/fixtures/vedic_fixtures.json is absent. "
             "Per spec, functions are built and validation stops here; JHora "
             "values are never fabricated."
         )
-    return json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
-
-
-# India charts (+05:30) run first; NYC/Sydney only after they are green.
-_FIELD_A_ORDER = ["vedic_01", "vedic_02", "vedic_05", "vedic_03", "vedic_04"]
-
-
-@pytest.mark.parametrize("chart_id", _FIELD_A_ORDER)
-def test_field_a_against_jhora(chart_id):
-    fixtures = _load_fixtures()
+    fixtures = load_fixtures()
     if chart_id not in fixtures:
         pytest.skip(f"{chart_id} not in fixtures")
-    _assert_field_a(chart_id, fixtures[chart_id])
-
-
-_SIGNS = [
-    "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra",
-    "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces",
-]
-
-_ARCSEC_TOLERANCE_DEG = 60.0 / 3600.0   # target < 60"
-
-
-def _assert_field_a(chart_id: str, fx: dict) -> None:
-    """Assert one chart against its JHora expectations (see fixture schema doc
-    in scripts/vedic_validate.py). Longitudes within <60"; sign/nakshatra/pada/
-    house/D-9/D-10 exact; dasha lords + start/end to the minute."""
-    result = compute_vedic_chart(
-        datetime_local=fx["datetime_local"],
-        gmt_offset=fx["gmt_offset"],
-        lat=fx["lat"],
-        lon=fx["lon"],
-        target_date=fx["datetime_local"],   # dasha_at_birth is evaluated at birth
-    )
-    exp = fx["expected"]
-    planets = {p["name"]: p for p in result["planets"]}
-
-    for name, ep in exp["planets"].items():
-        gp = planets[name]
-        if "longitude" in ep:
-            assert abs(gp["longitude"] - ep["longitude"]) <= _ARCSEC_TOLERANCE_DEG, (
-                f"{chart_id} {name} longitude"
-            )
-        for field in ("sign", "nakshatra", "pada", "house", "d9_sign", "d10_sign"):
-            if field in ep:
-                assert gp[field] == ep[field], f"{chart_id} {name} {field}"
-
-    if "lagna" in exp:
-        for field, val in exp["lagna"].items():
-            if field == "longitude":
-                assert abs(result["lagna"]["longitude"] - val) <= _ARCSEC_TOLERANCE_DEG
-            else:
-                assert result["lagna"][field] == val, f"{chart_id} lagna {field}"
-
-    if "dasha_at_birth" in exp:
-        _assert_dasha_to_the_minute(chart_id, result["dasha"], exp["dasha_at_birth"])
-
-
-def _assert_dasha_to_the_minute(chart_id: str, got: dict, exp: dict) -> None:
-    from datetime import datetime
-
-    for level in ("maha", "antar", "pratyantar", "sookshma"):
-        assert got[level]["lord"] == exp[level]["lord"], f"{chart_id} {level} lord"
-        for edge in ("start", "end"):
-            g = datetime.fromisoformat(got[level][edge]).replace(second=0, microsecond=0)
-            e = datetime.fromisoformat(exp[level][edge]).replace(second=0, microsecond=0)
-            assert g == e, f"{chart_id} {level} {edge} (to the minute)"
+    entry = fixtures[chart_id]
+    fails = check_field_a(entry, run_chart(entry))
+    assert not fails, f"{chart_id}: " + "; ".join(fails)

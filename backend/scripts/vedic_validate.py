@@ -22,56 +22,51 @@ If the fixtures file is absent the harness reports BLOCKED for field A and the
 self-chosen SMOKE chart so the dignity/aspect logic can be eyeballed. It never
 fabricates JHora values.
 
-Expected ``vedic_fixtures.json`` schema (one entry per chart id)::
+On-disk ``vedic_fixtures.json`` shape (a JSON ARRAY; vocabulary is translated by
+``vedic_fixture_adapter``)::
 
-    {
-      "vedic_01": {
-        "name": "India A",
-        "datetime_local": "1990-01-01T14:35:00",
-        "gmt_offset": 5.5,
-        "lat": 12.9716, "lon": 77.5946,
-        "expected": {
-          "lagna": {"sign": "...", "nakshatra": "...", "pada": 1,
-                     "d9_sign": "...", "d10_sign": "...", "longitude": 27.6},
-          "planets": {
-            "Sun": {"longitude": 256.9, "sign": "...", "nakshatra": "...",
-                     "pada": 2, "house": 9, "d9_sign": "...", "d10_sign": "..."},
-            ...
-          },
-          "dasha_at_birth": {
-            "maha":       {"lord": "...", "start": "ISO", "end": "ISO"},
-            "antar":      {"lord": "...", "start": "ISO", "end": "ISO"},
-            "pratyantar": {"lord": "...", "start": "ISO", "end": "ISO"},
-            "sookshma":   {"lord": "...", "start": "ISO", "end": "ISO"}
-          }
-        }
-      },
+    [
+      {"id": "vedic_01",
+       "input": {"date": "1995-08-15", "time": "10:30",
+                  "gmt_offset": "+05:30" | null, "place": "Kolkata",
+                  "lat": 22.5726, "lon": 88.3639},
+       "lagna": {"lon_dms": "9Li42'52.88\"", "sign": "Li", "nakshatra": "Swat",
+                  "pada": 1, "d9_sign": "Sg", "d10_sign": "Cp"},
+       "planets": {"Sun": {"lon_dms": "28Cn07'32.20\"", "sign": "Cn",
+                            "nakshatra": "Asre", "pada": 4, "house": 10,
+                            "d9_sign": "Pi", "d10_sign": "Aq"}, ...},
+       "houses": {"1": {"sign": "Li", "planets": ["As", "Ra"]}, ...},
+       "dasha_at_birth": {"MD": {"lord": "Merc", "start": "1985-01-30 05:11:57",
+                                  "end": "2002-01-30 08:23:30"},
+                          "AD"/"PD"/"SD": ... (lord may be null)}},
       ...
-    }
+    ]
+
+Signs are 2-letter abbrevs, nakshatras short, longitude is a DMS string,
+``gmt_offset`` a signed string or null (resolved from ``place`` when null), and
+dasha keys are MD/AD/PD/SD with abbreviated lords and naive local timestamps.
 """
 
 from __future__ import annotations
 
-import json
 import os
 import sys
-from datetime import datetime
 from pathlib import Path
 
-# Allow running as a bare script from the backend dir.
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+_BACKEND = Path(__file__).resolve().parent.parent
+# Allow running as a bare script: backend root (for app.*) and tests/ (adapter).
+sys.path.insert(0, str(_BACKEND))
+sys.path.insert(0, str(_BACKEND / "tests"))
 
 from app.engines.vedic_engine import compute_vedic_chart  # noqa: E402
-
-FIXTURE_PATH = (
-    Path(__file__).resolve().parent.parent / "tests" / "fixtures" / "vedic_fixtures.json"
+from vedic_fixture_adapter import (  # noqa: E402
+    FIELD_A_ORDER,
+    FIXTURE_PATH,
+    INDIA_CHARTS,
+    check_field_a,
+    load_fixtures,
+    run_chart,
 )
-
-# India first, then NYC, then Sydney (spec run order).
-FIELD_A_ORDER = ["vedic_01", "vedic_02", "vedic_05", "vedic_03", "vedic_04"]
-INDIA_CHARTS = {"vedic_01", "vedic_02", "vedic_05"}
-
-_ARCSEC_TOL_DEG = 60.0 / 3600.0
 
 # A self-chosen SMOKE chart - NOT a fixture, NOT validation.
 SMOKE = dict(
@@ -88,49 +83,6 @@ SMOKE = dict(
 # Field A
 # ---------------------------------------------------------------------------
 
-def _check_field_a(fx: dict) -> list[str]:
-    """Return a list of failure strings for one chart ([] == pass)."""
-    result = compute_vedic_chart(
-        datetime_local=fx["datetime_local"],
-        gmt_offset=fx["gmt_offset"],
-        lat=fx["lat"],
-        lon=fx["lon"],
-        target_date=fx["datetime_local"],
-    )
-    exp = fx["expected"]
-    fails: list[str] = []
-    planets = {p["name"]: p for p in result["planets"]}
-
-    for name, ep in exp.get("planets", {}).items():
-        gp = planets[name]
-        if "longitude" in ep and abs(gp["longitude"] - ep["longitude"]) > _ARCSEC_TOL_DEG:
-            delta_arcsec = abs(gp["longitude"] - ep["longitude"]) * 3600.0
-            fails.append(f"{name}.longitude off by {delta_arcsec:.1f}\"")
-        for field in ("sign", "nakshatra", "pada", "house", "d9_sign", "d10_sign"):
-            if field in ep and gp[field] != ep[field]:
-                fails.append(f"{name}.{field} {gp[field]!r}!={ep[field]!r}")
-
-    for field, val in exp.get("lagna", {}).items():
-        if field == "longitude":
-            if abs(result["lagna"]["longitude"] - val) > _ARCSEC_TOL_DEG:
-                fails.append("lagna.longitude off")
-        elif result["lagna"][field] != val:
-            fails.append(f"lagna.{field} {result['lagna'][field]!r}!={val!r}")
-
-    exp_dasha = exp.get("dasha_at_birth")
-    if exp_dasha:
-        got = result["dasha"]
-        for level in ("maha", "antar", "pratyantar", "sookshma"):
-            if got[level]["lord"] != exp_dasha[level]["lord"]:
-                fails.append(f"dasha.{level}.lord")
-            for edge in ("start", "end"):
-                g = datetime.fromisoformat(got[level][edge]).replace(second=0, microsecond=0)
-                e = datetime.fromisoformat(exp_dasha[level][edge]).replace(second=0, microsecond=0)
-                if g != e:
-                    fails.append(f"dasha.{level}.{edge} (minute)")
-    return fails
-
-
 def run_field_a(fixtures: dict) -> None:
     print("=" * 72)
     print("FIELD A - placements / houses / vargas / dasha (JHora oracle)")
@@ -143,10 +95,13 @@ def run_field_a(fixtures: dict) -> None:
         if chart_id not in INDIA_CHARTS and not india_ok:
             print(f"  {chart_id:10s} DEFERRED - India charts not green yet")
             continue
-        fails = _check_field_a(fixtures[chart_id])
+        entry = fixtures[chart_id]
+        inp = entry["input"]
+        fails = check_field_a(entry, run_chart(entry))
         status = "PASS" if not fails else "FAIL"
-        print(f"  {chart_id:10s} {status}"
-              + ("" if not fails else "  :: " + "; ".join(fails)))
+        header = f"  {chart_id:10s} {status}  (UT{inp['gmt_offset']:+.2f}h {inp['place']})"
+        print(header + ("" if not fails
+                        else "\n               :: " + "\n               :: ".join(fails)))
         if fails and chart_id in INDIA_CHARTS:
             india_ok = False
 
@@ -179,17 +134,13 @@ def main() -> int:
             os.environ["SE_EPHE_PATH"] = str(ephe)
 
     if FIXTURE_PATH.exists():
-        fixtures = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+        fixtures = load_fixtures()
         run_field_a(fixtures)
         print()
         for chart_id in FIELD_A_ORDER:
             if chart_id in fixtures:
-                fx = fixtures[chart_id]
-                result = compute_vedic_chart(
-                    datetime_local=fx["datetime_local"], gmt_offset=fx["gmt_offset"],
-                    lat=fx["lat"], lon=fx["lon"], target_date=fx["datetime_local"],
-                )
-                print_field_b(f"{chart_id} - {fx.get('name', '')}", result)
+                entry = fixtures[chart_id]
+                print_field_b(f"{chart_id} ({entry['input']['place']})", run_chart(entry))
         return 0
 
     # Blocked path.
