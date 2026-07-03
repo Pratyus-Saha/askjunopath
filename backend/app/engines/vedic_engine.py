@@ -239,6 +239,17 @@ def degree_in_nakshatra(longitude: float) -> float:
     return (_arcsec(longitude) % NAKSHATRA_ARCSEC) / 3600.0
 
 
+def _degree_in_nakshatra_precise(longitude: float) -> float:
+    """Full-precision degrees into the nakshatra (NO arc-second rounding).
+
+    Used ONLY for the Vimshottari balance-at-birth. The balance amplifies
+    sub-arc-second Moon precision by the mahadasha length (~1.4 min per MD-year
+    per 0.1"), so it must not consume the arc-second-rounded
+    ``degree_in_nakshatra`` (which stays rounded for readable display).
+    """
+    return _norm(longitude) % (NAKSHATRA_ARCSEC / 3600.0)
+
+
 def _placement(longitude: float) -> dict:
     """Common placement block: sign/degree/nakshatra/pada + varga signs."""
     lon = _norm(longitude)
@@ -434,7 +445,7 @@ def compute_vedic_chart(
     dasha = compute_current_dasha(
         moon_longitude=moon["longitude"],
         moon_nakshatra_lord=moon["nakshatra_lord"],
-        moon_degree_in_nakshatra=degree_in_nakshatra(moon["longitude"]),
+        moon_degree_in_nakshatra=_degree_in_nakshatra_precise(moon["longitude"]),
         birth=birth_aware,
         target=target_aware,
     )
