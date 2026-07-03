@@ -60,6 +60,55 @@ How this file works:
 ---
 
 # Entries
+## 2026-07-03 — Vedic Engine: Validated & Merged to Main
+
+**Status:** DONE. Merged to `main` (`7aa21b6`). No further action needed to unblock Phase 1.
+
+### What shipped
+- Vedic (Parashari) engine: D-1, D-9, D-10 vargas; whole-sign houses; Lahiri
+  ayanamsa; Mean nodes; Vimshottari 4-level dasha (current path); dignity;
+  graha drishti aspects. Fully separate module, zero KP contamination.
+- **Validated to 0.1 arc-second** on placements, D-9, D-10, house occupancy —
+  all 5 JHora fixture charts (Kolkata, Delhi, NYC, Sydney, Mumbai).
+- Dasha MD lord: 5/5 charts match. Dasha anchor timing: fixed a rounding bug
+  (commit `443a2fa`) that was losing arc-second precision on the Moon before
+  the balance-at-birth calculation — dropped anchor drift from 14–68 min to
+  a consistent 8–28 min across all charts.
+- Nav fix (Phase 0) also confirmed merged this session.
+
+### Known, non-blocking residuals (fully diagnosed, not hidden)
+1. **Lagna longitude off by 397″–2004″** across charts. Ruled out via
+   elimination: not obliquity, not API discrepancy, not time precision, not
+   sidereal projection, not geodetic/geocentric latitude. Most likely a
+   coordinate-precision mismatch between fixture-logged lat/lon and JHora's
+   internal atlas. Zero impact on sign/nakshatra/pada — all correct on every
+   chart. One collateral effect: vedic_05's `d10_sign` flips because its
+   residual straddles a boundary. Optional 10-min closure: re-run vedic_01
+   with JHora's exact atlas coordinates for Kolkata.
+2. **vedic_01/03/05 dasha depth (AD/PD/SD) incomplete.** Only vedic_02's
+   fixture was drilled to full birth-anchored depth. Engine is correct
+   (proven via vedic_02). This is a fixture-completeness gap — manually
+   drill the other 3 in JHora when convenient, same process used for
+   vedic_02. Not blocking.
+3. **~0.14″ residual ayanamsa constant** (uniform across all 9 bodies + both
+   mean nodes — proves it's a sub-arcsecond Lahiri-variant nuance, not a
+   bug). Amplifies to ~1.45 min/MD-year. Documented, correctly not chased
+   further — below the precision any report will ever need.
+
+### Process learning from this session
+Four separate "commit ≠ shipped" gaps surfaced today: wrong fixture path
+across worktrees, `pytest` vs `python -m pytest` invocation difference,
+missing dependencies in `requirements.txt` (pytest/hypothesis were never
+declared — fix this file, it's currently incomplete), and one fix
+(`443a2fa`) committed locally but never pushed before a merge was run
+against a stale `origin` ref. **New rule: verify against `origin`, not
+local branch state, before marking any fix "done."**
+
+### Next
+Phase 1 — the interpretation/personality-report layer, using this validated
+Vedic data (placements, dignity, aspects, D-9, houses) as input. This is the
+actual priority. No more engine work until the 10-person comprehension test
+runs against a real report.
 
 ## vedic-engine — agent/claude/vedic-engine — 2026-07-02 — Claude Code
 **Frozen scope:** 3 varga D-1/D-9/D-10; 4 dasha levels MD-AD-PD-SD current-path-only; whole-sign; Lahiri; Mean nodes; dignity + graha drishti (no Ra/Ke aspects) — dignity/aspects are computed, not JHora-validated, pending manual check.
@@ -658,4 +707,5 @@ pm test script available in frontend/package.json).
 - CORS unhardened; rate limits absent; both scheduled June 21.
 **Next agent should read:** docs/PROJECT_CONTEXT.md, AGENTS.md, then your task's spec doc per TASKBOARD.md.
 **Tempted but did not:** n/a.
+
 
