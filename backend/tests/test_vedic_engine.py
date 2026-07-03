@@ -120,12 +120,16 @@ def test_varga_d9_classical_starts():
     assert varga_sign_index(29.9, 9) == 8
 
 
-def test_varga_d10_classical_starts():
-    # odd sign (Aries) -> itself; even sign (Taurus) -> 9th (Capricorn).
-    assert varga_sign_index(0.0, 10) == 0         # Aries
-    assert varga_sign_index(30.0, 10) == 9        # Taurus -> Capricorn
-    # 2nd dashamsha of Aries (3-6 deg) -> Taurus (idx 1)
-    assert varga_sign_index(4.0, 10) == 1
+def test_varga_d10_jhora_rule():
+    # Odd sign (Aries) -> from itself, forward.
+    assert varga_sign_index(0.0, 10) == 0         # Aries part0 -> Aries
+    assert varga_sign_index(4.0, 10) == 1         # Aries part1 (3-6 deg) -> Taurus
+    # Even sign (Taurus) -> from the 9th sign counting in REVERSE (JHora rule,
+    # (sign + 4 - part) % 12); the naive forward even->9th (Capricorn) is wrong.
+    assert varga_sign_index(30.0, 10) == 5        # Taurus part0 -> Virgo
+    assert varga_sign_index(34.0, 10) == 4        # Taurus part1 (3-6 deg) -> Leo (reverse)
+    # Anchor to a real fixture value: vedic_01 Sun Cancer 28.125 (part 9) -> Aquarius.
+    assert varga_sign_index(118.125, 10) == 10    # Aquarius
 
 
 def test_varga_out_of_scope_divisor_raises():

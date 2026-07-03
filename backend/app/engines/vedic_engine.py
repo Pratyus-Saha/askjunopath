@@ -262,24 +262,29 @@ def _placement(longitude: float) -> dict:
 # Varga (divisional) — ONE function parameterized by divisor (Parashari)
 # ---------------------------------------------------------------------------
 
-def _varga_start_sign(divisor: int, sign: int) -> int:
-    """0-based sign where the standard Parashari counting begins for a varga.
+def _varga_seed(divisor: int, sign: int) -> tuple[int, int]:
+    """Return ``(start_sign, step)`` for the Parashari counting of a varga.
 
-    Only the divisors in v1 scope are implemented (D-1, D-9, D-10).
+    The divisional sign is ``(start + step * part) % 12``; ``step`` is +1
+    (forward) or -1 (reverse). Only the divisors in v1 scope are implemented
+    (D-1, D-9, D-10).
     """
     if divisor == 1:                       # Rasi (D-1)
-        return sign
-    if divisor == 9:                       # Navamsa (D-9)
+        return sign, 1
+    if divisor == 9:                       # Navamsa (D-9): always forward
         modality = sign % 3
         if modality == 0:                  # movable -> from itself
-            return sign
+            return sign, 1
         if modality == 1:                  # fixed   -> from the 9th
-            return (sign + 8) % 12
-        return (sign + 4) % 12             # dual    -> from the 5th
+            return (sign + 8) % 12, 1
+        return (sign + 4) % 12, 1          # dual    -> from the 5th
     if divisor == 10:                      # Dashamsha (D-10)
-        if sign % 2 == 0:                  # odd sign (1-based) -> from itself
-            return sign
-        return (sign + 8) % 12             # even sign -> from the 9th
+        if sign % 2 == 0:                  # odd sign (1-based) -> from itself, forward
+            return sign, 1
+        # Even sign -> from the 9th sign counting in REVERSE. Equivalent to
+        # (sign + 4 - part) % 12; verified 16/16 against the JHora fixtures.
+        # (The naive forward even->9th does NOT match JHora here.)
+        return (sign + 4) % 12, -1
     raise NotImplementedError(
         f"varga D-{divisor} is outside v1 scope (only D-1, D-9, D-10)"
     )
@@ -295,7 +300,8 @@ def varga_sign_index(longitude: float, divisor: int) -> int:
     part = int(deg_in_sign * divisor / 30.0)   # 0-based part within the sign
     if part >= divisor:                         # guard the 30.0 boundary
         part = divisor - 1
-    return (_varga_start_sign(divisor, sign) + part) % 12
+    start, step = _varga_seed(divisor, sign)
+    return (start + step * part) % 12
 
 
 # ---------------------------------------------------------------------------
