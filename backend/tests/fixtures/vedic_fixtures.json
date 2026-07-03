@@ -1,0 +1,955 @@
+[
+  {
+    "id": "vedic_01",
+    "input": {
+      "date": "1995-08-15",
+      "time": "10:30",
+      "gmt_offset": "+05:30",
+      "place": "Kolkata",
+      "lat": 22.5726,
+      "lon": 88.3639
+    },
+    "lagna": {
+      "lon_dms": "9Li42'52.88\"",
+      "sign": "Li",
+      "nakshatra": "Swat",
+      "pada": 1,
+      "d9_sign": "Sg",
+      "d10_sign": "Cp"
+    },
+    "planets": {
+      "Sun": {
+        "lon_dms": "28Cn07'32.20\"",
+        "sign": "Cn",
+        "nakshatra": "Asre",
+        "pada": 4,
+        "house": 10,
+        "d9_sign": "Pi",
+        "d10_sign": "Aq"
+      },
+      "Moon": {
+        "lon_dms": "24Pi55'40.28\"",
+        "sign": "Pi",
+        "nakshatra": "Reva",
+        "pada": 3,
+        "house": 6,
+        "d9_sign": "Aq",
+        "d10_sign": "Sc"
+      },
+      "Mars": {
+        "lon_dms": "21Vi19'43.44\"",
+        "sign": "Vi",
+        "nakshatra": "Hast",
+        "pada": 4,
+        "house": 12,
+        "d9_sign": "Cn",
+        "d10_sign": "Ge"
+      },
+      "Mercury": {
+        "lon_dms": "15Le16'40.07\"",
+        "sign": "Le",
+        "nakshatra": "PPha",
+        "pada": 1,
+        "house": 11,
+        "d9_sign": "Le",
+        "d10_sign": "Cp"
+      },
+      "Jupiter": {
+        "lon_dms": "11Sc58'17.67\"",
+        "sign": "Sc",
+        "nakshatra": "Anu",
+        "pada": 3,
+        "house": 2,
+        "d9_sign": "Li",
+        "d10_sign": "Sg"
+      },
+      "Venus": {
+        "lon_dms": "26Cn32'15.06\"",
+        "sign": "Cn",
+        "nakshatra": "Asre",
+        "pada": 3,
+        "house": 10,
+        "d9_sign": "Aq",
+        "d10_sign": "Pi"
+      },
+      "Saturn": {
+        "lon_dms": "29Aq41'48.70\"",
+        "sign": "Aq",
+        "nakshatra": "PBha",
+        "pada": 3,
+        "house": 5,
+        "d9_sign": "Ge",
+        "d10_sign": "Sc"
+      },
+      "Rahu": {
+        "lon_dms": "5Li59'24.51\"",
+        "sign": "Li",
+        "nakshatra": "Chit",
+        "pada": 4,
+        "house": 1,
+        "d9_sign": "Sc",
+        "d10_sign": "Sc"
+      },
+      "Ketu": {
+        "lon_dms": "5Ar59'24.51\"",
+        "sign": "Ar",
+        "nakshatra": "Aswi",
+        "pada": 2,
+        "house": 7,
+        "d9_sign": "Ta",
+        "d10_sign": "Ta"
+      }
+    },
+    "houses": {
+      "1": {
+        "sign": "Li",
+        "planets": [
+          "As",
+          "Ra"
+        ]
+      },
+      "2": {
+        "sign": "Sc",
+        "planets": [
+          "Ju"
+        ]
+      },
+      "3": {
+        "sign": "Sg",
+        "planets": []
+      },
+      "4": {
+        "sign": "Cp",
+        "planets": []
+      },
+      "5": {
+        "sign": "Aq",
+        "planets": [
+          "Sa"
+        ]
+      },
+      "6": {
+        "sign": "Pi",
+        "planets": [
+          "Mo"
+        ]
+      },
+      "7": {
+        "sign": "Ar",
+        "planets": [
+          "Ke"
+        ]
+      },
+      "8": {
+        "sign": "Ta",
+        "planets": []
+      },
+      "9": {
+        "sign": "Ge",
+        "planets": []
+      },
+      "10": {
+        "sign": "Cn",
+        "planets": [
+          "Su",
+          "Ve"
+        ]
+      },
+      "11": {
+        "sign": "Le",
+        "planets": [
+          "Me"
+        ]
+      },
+      "12": {
+        "sign": "Vi",
+        "planets": [
+          "Ma"
+        ]
+      }
+    },
+    "dasha_at_birth": {
+      "MD": {
+        "lord": "Merc",
+        "start": "1985-01-30 05:11:57",
+        "end": "2002-01-30 08:23:30"
+      },
+      "AD": {
+        "lord": "Merc",
+        "start": "1985-01-30 05:11:57",
+        "end": "1987-06-29 12:34:28"
+      },
+      "PD": {
+        "lord": "Merc",
+        "start": "1985-01-30 05:11:57",
+        "end": "1985-06-03 17:46:08"
+      },
+      "SD": {
+        "lord": "Merc",
+        "start": "1985-01-30 05:11:57",
+        "end": "1985-02-16 09:34:48"
+      }
+    }
+  },
+  {
+    "id": "vedic_02",
+    "input": {
+      "date": "2001-01-01",
+      "time": "23:58",
+      "gmt_offset": null,
+      "place": "Delhi",
+      "lat": 28.6139,
+      "lon": 77.209
+    },
+    "lagna": {
+      "lon_dms": "11Vi14'51.11\"",
+      "sign": "Vi",
+      "nakshatra": "Hast",
+      "pada": 1,
+      "d9_sign": "Ar",
+      "d10_sign": "Li"
+    },
+    "planets": {
+      "Sun": {
+        "lon_dms": "17Sg33'25.06\"",
+        "sign": "Sg",
+        "nakshatra": "PSha",
+        "pada": 2,
+        "house": 4,
+        "d9_sign": "Vi",
+        "d10_sign": "Ta"
+      },
+      "Moon": {
+        "lon_dms": "4Pi12'18.33\"",
+        "sign": "Pi",
+        "nakshatra": "UBha",
+        "pada": 1,
+        "house": 7,
+        "d9_sign": "Le",
+        "d10_sign": "Ge"
+      },
+      "Mars": {
+        "lon_dms": "11Li31'37.26\"",
+        "sign": "Li",
+        "nakshatra": "Swat",
+        "pada": 2,
+        "house": 2,
+        "d9_sign": "Cp",
+        "d10_sign": "Cp"
+      },
+      "Mercury": {
+        "lon_dms": "21Sg40'04.81\"",
+        "sign": "Sg",
+        "nakshatra": "PSha",
+        "pada": 3,
+        "house": 4,
+        "d9_sign": "Li",
+        "d10_sign": "Cn"
+      },
+      "Jupiter": {
+        "lon_dms": "8Ta15'38.63\"",
+        "sign": "Ta",
+        "nakshatra": "Krit",
+        "pada": 4,
+        "house": 9,
+        "d9_sign": "Pi",
+        "d10_sign": "Cn"
+      },
+      "Venus": {
+        "lon_dms": "3Aq57'15.29\"",
+        "sign": "Aq",
+        "nakshatra": "Dhan",
+        "pada": 4,
+        "house": 6,
+        "d9_sign": "Sc",
+        "d10_sign": "Pi"
+      },
+      "Saturn": {
+        "lon_dms": "0Ta41'22.85\"",
+        "sign": "Ta",
+        "nakshatra": "Krit",
+        "pada": 2,
+        "house": 9,
+        "d9_sign": "Cp",
+        "d10_sign": "Vi"
+      },
+      "Rahu": {
+        "lon_dms": "21Ge46'41.19\"",
+        "sign": "Ge",
+        "nakshatra": "Puna",
+        "pada": 1,
+        "house": 10,
+        "d9_sign": "Ar",
+        "d10_sign": "Cp"
+      },
+      "Ketu": {
+        "lon_dms": "21Sg46'41.19\"",
+        "sign": "Sg",
+        "nakshatra": "PSha",
+        "pada": 3,
+        "house": 4,
+        "d9_sign": "Li",
+        "d10_sign": "Cn"
+      }
+    },
+    "houses": {
+      "1": {
+        "sign": "Vi",
+        "planets": [
+          "As"
+        ]
+      },
+      "2": {
+        "sign": "Li",
+        "planets": [
+          "Ma"
+        ]
+      },
+      "3": {
+        "sign": "Sc",
+        "planets": []
+      },
+      "4": {
+        "sign": "Sg",
+        "planets": [
+          "Su",
+          "Me",
+          "Ke"
+        ]
+      },
+      "5": {
+        "sign": "Cp",
+        "planets": []
+      },
+      "6": {
+        "sign": "Aq",
+        "planets": [
+          "Ve"
+        ]
+      },
+      "7": {
+        "sign": "Pi",
+        "planets": [
+          "Mo"
+        ]
+      },
+      "8": {
+        "sign": "Ar",
+        "planets": []
+      },
+      "9": {
+        "sign": "Ta",
+        "planets": [
+          "Ju",
+          "Sa"
+        ]
+      },
+      "10": {
+        "sign": "Ge",
+        "planets": [
+          "Ra"
+        ]
+      },
+      "11": {
+        "sign": "Cn",
+        "planets": []
+      },
+      "12": {
+        "sign": "Le",
+        "planets": []
+      }
+    },
+    "dasha_at_birth": {
+      "MD": {
+        "lord": "Sat",
+        "start": "1999-10-08 04:00:30",
+        "end": "2018-10-07 18:26:41"
+      },
+      "AD": {
+        "lord": "Sat",
+        "start": "1999-10-08 04:00:30",
+        "end": "2002-10-10 22:14:14"
+      },
+      "PD": {
+        "lord": "Ven",
+        "start": "2000-11-04 15:13:56",
+        "end": "2001-05-03 09:17:08"
+      },
+      "SD": {
+        "lord": "Mars",
+        "start": "2000-12-28 02:33:57",
+        "end": "2001-01-07 10:29:21"
+      }
+    }
+  },
+  {
+    "id": "vedic_03",
+    "input": {
+      "date": "1994-07-04",
+      "time": "14:15",
+      "gmt_offset": null,
+      "place": "New York City",
+      "lat": 40.7128,
+      "lon": -74.006
+    },
+    "lagna": {
+      "lon_dms": "1Li37'20.37\"",
+      "sign": "Li",
+      "nakshatra": "Chit",
+      "pada": 3,
+      "d9_sign": "Li",
+      "d10_sign": "Li"
+    },
+    "planets": {
+      "Sun": {
+        "lon_dms": "18Ge45'16.90\"",
+        "sign": "Ge",
+        "nakshatra": "Ardr",
+        "pada": 4,
+        "house": 9,
+        "d9_sign": "Pi",
+        "d10_sign": "Sg"
+      },
+      "Moon": {
+        "lon_dms": "1Ta45'56.53\"",
+        "sign": "Ta",
+        "nakshatra": "Krit",
+        "pada": 2,
+        "house": 8,
+        "d9_sign": "Cp",
+        "d10_sign": "Vi"
+      },
+      "Mars": {
+        "lon_dms": "6Ta48'30.43\"",
+        "sign": "Ta",
+        "nakshatra": "Krit",
+        "pada": 4,
+        "house": 8,
+        "d9_sign": "Pi",
+        "d10_sign": "Cn"
+      },
+      "Mercury": {
+        "lon_dms": "5Ge48'16.40\"",
+        "sign": "Ge",
+        "nakshatra": "Mrig",
+        "pada": 4,
+        "house": 9,
+        "d9_sign": "Sc",
+        "d10_sign": "Cn"
+      },
+      "Jupiter": {
+        "lon_dms": "10Li59'39.76\"",
+        "sign": "Li",
+        "nakshatra": "Swat",
+        "pada": 2,
+        "house": 1,
+        "d9_sign": "Cp",
+        "d10_sign": "Cp"
+      },
+      "Venus": {
+        "lon_dms": "28Cn48'07.74\"",
+        "sign": "Cn",
+        "nakshatra": "Asre",
+        "pada": 4,
+        "house": 10,
+        "d9_sign": "Pi",
+        "d10_sign": "Aq"
+      },
+      "Saturn": {
+        "lon_dms": "18Aq30'25.33\"",
+        "sign": "Aq",
+        "nakshatra": "Sata",
+        "pada": 4,
+        "house": 5,
+        "d9_sign": "Pi",
+        "d10_sign": "Le"
+      },
+      "Rahu": {
+        "lon_dms": "27Li31'43.09\"",
+        "sign": "Li",
+        "nakshatra": "Visa",
+        "pada": 3,
+        "house": 1,
+        "d9_sign": "Ge",
+        "d10_sign": "Cn"
+      },
+      "Ketu": {
+        "lon_dms": "27Ar31'43.09\"",
+        "sign": "Ar",
+        "nakshatra": "Krit",
+        "pada": 1,
+        "house": 7,
+        "d9_sign": "Sg",
+        "d10_sign": "Cp"
+      }
+    },
+    "houses": {
+      "1": {
+        "sign": "Li",
+        "planets": [
+          "As",
+          "Ju",
+          "Ra"
+        ]
+      },
+      "2": {
+        "sign": "Sc",
+        "planets": []
+      },
+      "3": {
+        "sign": "Sg",
+        "planets": []
+      },
+      "4": {
+        "sign": "Cp",
+        "planets": []
+      },
+      "5": {
+        "sign": "Aq",
+        "planets": [
+          "Sa"
+        ]
+      },
+      "6": {
+        "sign": "Pi",
+        "planets": []
+      },
+      "7": {
+        "sign": "Ar",
+        "planets": [
+          "Ke"
+        ]
+      },
+      "8": {
+        "sign": "Ta",
+        "planets": [
+          "Mo",
+          "Ma"
+        ]
+      },
+      "9": {
+        "sign": "Ge",
+        "planets": [
+          "Su",
+          "Me"
+        ]
+      },
+      "10": {
+        "sign": "Cn",
+        "planets": [
+          "Ve"
+        ]
+      },
+      "11": {
+        "sign": "Le",
+        "planets": []
+      },
+      "12": {
+        "sign": "Vi",
+        "planets": []
+      }
+    },
+    "dasha_at_birth": {
+      "MD": {
+        "lord": "Sun",
+        "start": "1992-03-16 16:01:29",
+        "end": "1998-03-17 03:10:04"
+      },
+      "AD": {
+        "lord": null,
+        "start": null,
+        "end": null
+      },
+      "PD": {
+        "lord": null,
+        "start": null,
+        "end": null
+      },
+      "SD": {
+        "lord": null,
+        "start": null,
+        "end": null
+      }
+    }
+  },
+  {
+    "id": "vedic_04",
+    "input": {
+      "date": "1998-11-20",
+      "time": "06:40",
+      "gmt_offset": null,
+      "place": "Sydney",
+      "lat": -33.8688,
+      "lon": 151.2093
+    },
+    "lagna": {
+      "lon_dms": "18Sc57'41.31\"",
+      "sign": "Sc",
+      "nakshatra": "Jye",
+      "pada": 1,
+      "d9_sign": "Sg",
+      "d10_sign": "Vi"
+    },
+    "planets": {
+      "Sun": {
+        "lon_dms": "3Sc26'09.16\"",
+        "sign": "Sc",
+        "nakshatra": "Anu",
+        "pada": 1,
+        "house": 1,
+        "d9_sign": "Le",
+        "d10_sign": "Aq"
+      },
+      "Moon": {
+        "lon_dms": "10Sc23'11.51\"",
+        "sign": "Sc",
+        "nakshatra": "Anu",
+        "pada": 3,
+        "house": 1,
+        "d9_sign": "Li",
+        "d10_sign": "Sg"
+      },
+      "Mars": {
+        "lon_dms": "1Vi51'42.83\"",
+        "sign": "Vi",
+        "nakshatra": "UPha",
+        "pada": 2,
+        "house": 11,
+        "d9_sign": "Cp",
+        "d10_sign": "Cp"
+      },
+      "Mercury": {
+        "lon_dms": "23Sc30'30.63\"",
+        "sign": "Sc",
+        "nakshatra": "Jye",
+        "pada": 3,
+        "house": 1,
+        "d9_sign": "Aq",
+        "d10_sign": "Le"
+      },
+      "Jupiter": {
+        "lon_dms": "24Aq23'29.21\"",
+        "sign": "Aq",
+        "nakshatra": "PBha",
+        "pada": 2,
+        "house": 4,
+        "d9_sign": "Ta",
+        "d10_sign": "Li"
+      },
+      "Venus": {
+        "lon_dms": "8Sc36'35.85\"",
+        "sign": "Sc",
+        "nakshatra": "Anu",
+        "pada": 2,
+        "house": 1,
+        "d9_sign": "Vi",
+        "d10_sign": "Cp"
+      },
+      "Saturn": {
+        "lon_dms": "4Ar18'03.86\"",
+        "sign": "Ar",
+        "nakshatra": "Aswi",
+        "pada": 2,
+        "house": 6,
+        "d9_sign": "Ta",
+        "d10_sign": "Ta"
+      },
+      "Rahu": {
+        "lon_dms": "2Le47'28.59\"",
+        "sign": "Le",
+        "nakshatra": "Magh",
+        "pada": 1,
+        "house": 10,
+        "d9_sign": "Ar",
+        "d10_sign": "Le"
+      },
+      "Ketu": {
+        "lon_dms": "2Aq47'28.59\"",
+        "sign": "Aq",
+        "nakshatra": "Dhan",
+        "pada": 3,
+        "house": 4,
+        "d9_sign": "Li",
+        "d10_sign": "Aq"
+      }
+    },
+    "houses": {
+      "1": {
+        "sign": "Sc",
+        "planets": [
+          "As",
+          "Su",
+          "Mo",
+          "Me",
+          "Ve"
+        ]
+      },
+      "2": {
+        "sign": "Sg",
+        "planets": []
+      },
+      "3": {
+        "sign": "Cp",
+        "planets": []
+      },
+      "4": {
+        "sign": "Aq",
+        "planets": [
+          "Ju",
+          "Ke"
+        ]
+      },
+      "5": {
+        "sign": "Pi",
+        "planets": []
+      },
+      "6": {
+        "sign": "Ar",
+        "planets": [
+          "Sa"
+        ]
+      },
+      "7": {
+        "sign": "Ta",
+        "planets": []
+      },
+      "8": {
+        "sign": "Ge",
+        "planets": []
+      },
+      "9": {
+        "sign": "Cn",
+        "planets": []
+      },
+      "10": {
+        "sign": "Le",
+        "planets": [
+          "Ra"
+        ]
+      },
+      "11": {
+        "sign": "Vi",
+        "planets": [
+          "Ma"
+        ]
+      },
+      "12": {
+        "sign": "Li",
+        "planets": []
+      }
+    },
+    "dasha_at_birth": {
+      "MD": {
+        "lord": "Sat",
+        "start": "1988-11-01 15:37:48",
+        "end": "2007-11-02 06:11:33"
+      },
+      "AD": {
+        "lord": null,
+        "start": null,
+        "end": null
+      },
+      "PD": {
+        "lord": null,
+        "start": null,
+        "end": null
+      },
+      "SD": {
+        "lord": null,
+        "start": null,
+        "end": null
+      }
+    }
+  },
+  {
+    "id": "vedic_05",
+    "input": {
+      "date": "1976-03-07",
+      "time": "16:20",
+      "gmt_offset": "+05:30",
+      "place": "Mumbai",
+      "lat": 19.076,
+      "lon": 72.8777
+    },
+    "lagna": {
+      "lon_dms": "21Cn08'21.95\"",
+      "sign": "Cn",
+      "nakshatra": "Asre",
+      "pada": 2,
+      "d9_sign": "Cp",
+      "d10_sign": "Ar"
+    },
+    "planets": {
+      "Sun": {
+        "lon_dms": "23Aq28'52.01\"",
+        "sign": "Aq",
+        "nakshatra": "PBha",
+        "pada": 2,
+        "house": 8,
+        "d9_sign": "Ta",
+        "d10_sign": "Vi"
+      },
+      "Moon": {
+        "lon_dms": "3Ta55'03.79\"",
+        "sign": "Ta",
+        "nakshatra": "Krit",
+        "pada": 3,
+        "house": 11,
+        "d9_sign": "Aq",
+        "d10_sign": "Le"
+      },
+      "Mars": {
+        "lon_dms": "1Ge51'31.40\"",
+        "sign": "Ge",
+        "nakshatra": "Mrig",
+        "pada": 3,
+        "house": 12,
+        "d9_sign": "Li",
+        "d10_sign": "Ge"
+      },
+      "Mercury": {
+        "lon_dms": "3Aq17'23.92\"",
+        "sign": "Aq",
+        "nakshatra": "Dhan",
+        "pada": 3,
+        "house": 8,
+        "d9_sign": "Li",
+        "d10_sign": "Pi"
+      },
+      "Jupiter": {
+        "lon_dms": "2Ar15'46.26\"",
+        "sign": "Ar",
+        "nakshatra": "Aswi",
+        "pada": 1,
+        "house": 10,
+        "d9_sign": "Ar",
+        "d10_sign": "Ar"
+      },
+      "Venus": {
+        "lon_dms": "27Cp07'27.18\"",
+        "sign": "Cp",
+        "nakshatra": "Dhan",
+        "pada": 2,
+        "house": 7,
+        "d9_sign": "Vi",
+        "d10_sign": "Le"
+      },
+      "Saturn": {
+        "lon_dms": "2Cn52'24.72\"",
+        "sign": "Cn",
+        "nakshatra": "Puna",
+        "pada": 4,
+        "house": 1,
+        "d9_sign": "Cn",
+        "d10_sign": "Sc"
+      },
+      "Rahu": {
+        "lon_dms": "22Li13'14.32\"",
+        "sign": "Li",
+        "nakshatra": "Visa",
+        "pada": 1,
+        "house": 4,
+        "d9_sign": "Ar",
+        "d10_sign": "Ta"
+      },
+      "Ketu": {
+        "lon_dms": "22Ar13'14.32\"",
+        "sign": "Ar",
+        "nakshatra": "Bhar",
+        "pada": 3,
+        "house": 10,
+        "d9_sign": "Li",
+        "d10_sign": "Sc"
+      }
+    },
+    "houses": {
+      "1": {
+        "sign": "Cn",
+        "planets": [
+          "As",
+          "Sa"
+        ]
+      },
+      "2": {
+        "sign": "Le",
+        "planets": []
+      },
+      "3": {
+        "sign": "Vi",
+        "planets": []
+      },
+      "4": {
+        "sign": "Li",
+        "planets": [
+          "Ra"
+        ]
+      },
+      "5": {
+        "sign": "Sc",
+        "planets": []
+      },
+      "6": {
+        "sign": "Sg",
+        "planets": []
+      },
+      "7": {
+        "sign": "Cp",
+        "planets": [
+          "Ve"
+        ]
+      },
+      "8": {
+        "sign": "Aq",
+        "planets": [
+          "Su",
+          "Me"
+        ]
+      },
+      "9": {
+        "sign": "Pi",
+        "planets": []
+      },
+      "10": {
+        "sign": "Ar",
+        "planets": [
+          "Ju",
+          "Ke"
+        ]
+      },
+      "11": {
+        "sign": "Ta",
+        "planets": [
+          "Mo"
+        ]
+      },
+      "12": {
+        "sign": "Ge",
+        "planets": [
+          "Ma"
+        ]
+      }
+    },
+    "dasha_at_birth": {
+      "MD": {
+        "lord": "Sun",
+        "start": "1972-12-04 14:47:15",
+        "end": "1978-12-05 01:46:55"
+      },
+      "AD": {
+        "lord": null,
+        "start": null,
+        "end": null
+      },
+      "PD": {
+        "lord": null,
+        "start": null,
+        "end": null
+      },
+      "SD": {
+        "lord": null,
+        "start": null,
+        "end": null
+      }
+    }
+  }
+]
