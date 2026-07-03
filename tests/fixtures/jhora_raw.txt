@@ -1,0 +1,1330 @@
+Clean Indian baseline
+
+Use this as your first control chart.
+
+1.Sample V1
+Date: 15 August 1995
+Time: 10:30 AM
+Place: Kolkata, West Bengal, India
+Latitude: 22.5726 N
+Longitude: 88.3639 E
+Timezone: Asia/Kolkata
+
+Body                    Longitude        Nakshatra Pada Rasi Navamsa
+
+Lagna                    9 Li 42' 52.88" Swat      1    Li   Sg
+Sun - AmK               28 Cn 07' 32.20" Asre      4    Cn   Pi
+Moon - MK/PK            24 Pi 55' 40.28" Reva      3    Pi   Aq
+Mars - PiK              21 Vi 19' 43.44" Hast      4    Vi   Cn
+Mercury - GK            15 Le 16' 40.07" PPha      1    Le   Le
+Jupiter - DK            11 Sc 58' 17.67" Anu       3    Sc   Li
+Venus - BK              26 Cn 32' 15.06" Asre      3    Cn   Aq
+Saturn (R) - AK         29 Aq 41' 48.70" PBha      3    Aq   Ge
+Rahu                     5 Li 59' 24.51" Chit      4    Li   Sc
+Ketu                     5 Ar 59' 24.51" Aswi      2    Ar   Ta
+Maandi                   5 Sc 50' 40.82" Anu       1    Sc   Le
+Gulika                  25 Li 17' 12.42" Visa      2    Li   Ta
+Bhava Lagna             16 Li 45' 16.11" Swat      4    Li   Pi
+Hora Lagna               5 Cp 23' 00.02" USha      3    Cp   Aq
+Ghati Lagna              1 Vi 16' 11.74" UPha      2    Vi   Cp
+Vighati Lagna           10 Sg 42' 10.37" Mool      4    Sg   Cn
+Varnada Lagna            9 Cn 42' 52.88" Push      2    Cn   Vi
+Sree Lagna              22 Ta 46' 00.54" Rohi      4    Ta   Cn
+Pranapada Lagna         10 Sg 42' 10.37" Mool      4    Sg   Cn
+Indu Lagna              24 Ar 55' 40.28" Bhar      4    Ar   Sc
+Bhrigu Bindu             0 Cp 27' 32.39" USha      2    Cp   Cp
+Dhooma                  11 Sg 27' 32.20" Mool      4    Sg   Cn
+Vyatipata               18 Cn 32' 27.80" Asre      1    Cn   Sg
+Parivesha               18 Cp 32' 27.80" Srav      3    Cp   Ge
+Indra Chapa             11 Ge 27' 32.20" Ardr      2    Ge   Cp
+Upaketu                 28 Ge 07' 32.20" Puna      3    Ge   Ge
+Kaala                   19 Sg 21' 46.80" PSha      2    Sg   Vi
+Mrityu                   8 Le 43' 36.34" Magh      3    Le   Ge
+Artha Prahara            0 Vi 43' 50.11" UPha      2    Vi   Cp
+Yama Ghantaka           22 Vi 52' 32.56" Hast      4    Vi   Cn
+Prana Sphuta            13 Ge 51' 36.84" Ardr      3    Ge   Aq
+Deha Sphuta             14 Vi 42' 34.69" Hast      2    Vi   Ta
+Mrityu Sphuta           25 Cn 07' 59.13" Asre      3    Cn   Aq
+Sookshma TriSphuta      23 Pi 42' 10.65" Reva      3    Pi   Aq
+Tithi Sphuta            26 Sc 48' 08.08" Jye       4    Sc   Pi
+Yoga Sphuta (Sun-Moon)  23 Cn 03' 12.49" Asre      2    Cn   Cp
+Rahu Tithi Sphuta        7 Ge 51' 52.30" Ardr      1    Ge   Sg
+Kshetra Sphuta          28 Ar 13' 41.39" Krit      1    Ar   Sg
+Beeja Sphuta             6 Cn 38' 04.92" Push      1    Cn   Le
+TriSphuta               29 Ar 55' 45.59" Krit      1    Ar   Sg
+ChatusSphuta            28 Le 03' 17.79" UPha      1    Le   Sg
+PanchaSphuta             4 Pi 02' 42.29" UBha      1    Pi   Le
+AL                      13 Ta 21' 37.23" Rohi      2    Ta   Ta
+A2                       2 Vi 15' 56.13" UPha      2    Vi   Cp
+A3                      14 Li 13' 42.45" Swat      3    Li   Aq
+A4                      19 Ar 40' 44.52" Bhar      2    Ar   Vi
+A5                       2 Ge 15' 56.13" Mrig      3    Ge   Li
+A6                      14 Cn 13' 42.45" Push      4    Cn   Sc
+A7                       2 Pi 56' 34.00" PBha      4    Pi   Cn
+A8                      13 Li 21' 37.23" Swat      3    Li   Aq
+A9                      20 Li 50' 27.25" Visa      1    Li   Ar
+A10                     10 Sg 08' 27.68" Mool      4    Sg   Cn
+A11                     16 Cn 32' 11.52" Push      4    Cn   Sc
+UL                      20 Cn 50' 27.25" Asre      2    Cn   Cp
+V2                       9 Li 42' 52.88" Swat      1    Li   Sg
+V3                       9 Sc 42' 52.88" Anu       2    Sc   Vi
+V4                       9 Aq 42' 52.88" Sata      1    Aq   Sg
+V5                       9 Pi 42' 52.88" UBha      2    Pi   Vi
+V6                       9 Aq 42' 52.88" Sata      1    Aq   Sg
+V7                       9 Sc 42' 52.88" Anu       2    Sc   Vi
+V8                       9 Li 42' 52.88" Swat      1    Li   Sg
+V9                       9 Cn 42' 52.88" Push      2    Cn   Vi
+V10                      9 Aq 42' 52.88" Sata      1    Aq   Sg
+V11                      9 Pi 42' 52.88" UBha      2    Pi   Vi
+V12                      9 Aq 42' 52.88" Sata      1    Aq   Sg
+Kunda                    6 Sg 53' 23.58" Mool      3    Sg   Ge
+Yoga Sphuta             26 Li 23' 12.49" Visa      2    Li   Ta
+Avayoga Sphuta           3 Ta 03' 12.49" Krit      2    Ta   Cp
+
+House Start            Cusp             End              Planets in it
+
+1st    0 Li 00' 00.00"  9 Li 42' 52.88"  0 Sc 00' 00.00" As, Ra
+2nd    0 Sc 00' 00.00"  9 Sc 42' 52.88"  0 Sg 00' 00.00" Ju, Pl
+3rd    0 Sg 00' 00.00"  9 Sg 42' 52.88"  0 Cp 00' 00.00" Ne
+4th    0 Cp 00' 00.00"  9 Cp 42' 52.88"  0 Aq 00' 00.00" Ur
+5th    0 Aq 00' 00.00"  9 Aq 42' 52.88"  0 Pi 00' 00.00" Sa
+6th    0 Pi 00' 00.00"  9 Pi 42' 52.88"  0 Ar 00' 00.00" Mo
+7th    0 Ar 00' 00.00"  9 Ar 42' 52.88"  0 Ta 00' 00.00" Ke
+8th    0 Ta 00' 00.00"  9 Ta 42' 52.88"  0 Ge 00' 00.00" 
+9th    0 Ge 00' 00.00"  9 Ge 42' 52.88"  0 Cn 00' 00.00" 
+10th   0 Cn 00' 00.00"  9 Cn 42' 52.88"  0 Le 00' 00.00" Su, Ve
+11th   0 Le 00' 00.00"  9 Le 42' 52.88"  0 Vi 00' 00.00" Me
+12th   0 Vi 00' 00.00"  9 Vi 42' 52.88"  0 Li 00' 00.00" Ma
+
+
+Body                   D-1    D-9    D-10 (5-8) D-2 (US) D-3 (US) D-4    D-7 (7-1) D-12 (Trd) D-16 (Rev) D-20 (Trd) D-24 (Rev) D-27 (Trd) D-30   D-40   D-45   D-60 (RvAr) D-10 x D-9 D-0    D-5    D-6    D-8    D-11   D-81   D-108  D-144
+
+Lagna                   9Li43 27Sg26  7Cp09     19Ar26   29Li09    8Cp52  8Sg00    26Cp35      5Vi26     14Li18     23Pi09     22Ge18     21Aq26 28Ar35 17Ge10 12Sc53       4Pi19      0Ar00 18Aq34 28Ta17 17Ge43 16Cp52  6Sg53 29Li11 18Sc55
+Sun                    28Cn08 13Pi08 18Aq45      3Li45    5Cp37   22Ar30 13Cn07     7Ge30     29Ar59     22Li31     14Vi59      9Aq23      3Sc46 15Sc01  5Li39 22Cn28      18Pi42      0Ar00 20Sc38 18Pi45 15Sc00  9Sc23 28Li10  7Le34  0Vi05
+Moon                   24Pi56 14Aq21 20Sc43     10Aq09   15Cp13    9Sg43  5Ar30    29Sg08     21Aq09     18Sg33      1Sg44     13Sc03     27Cp50  7Cn07 11Cp45  4Aq20       6Cp30      0Ar00  4Sc38 29Aq34 19Aq25  4Aq12  9Aq09 22Cn13 19Sc37
+Mars                   21Vi20 11Cn58 26Ge43     17Aq21   26Cn01   25Pi19  0Sc42    15Ta57     18Ar44      6Li34     28Aq07      5Aq53      9Cp52 13Aq09 29Cn48 10Vi17       0Ge25      0Ar00 16Cp39  7Aq58 20Cp38 24Ge37 17Li38 23Sc30 11Sc20
+Mercury                15Le17 17Le30  2Cp47      0Cp33   15Ta50    1Aq07 16Sc57     3Aq20      4Ar27      5Li33      6Le40     22Ta30      8Sg20 11Sg07 27Ge30 16Li40      25Cp00      0Ar00 16Sg23  1Cn40  2Ar13 18Ta03  7Vi30  0Pi00 10Pi00
+Jupiter                11Sc58 17Li45  0Sg17      6Cn03   24Aq05   17Aq53  6Pi12    23Pi40     18Ta27     29Cn26     12Li41     23Sc14     29Vi09 28Cp52 28Cp43  1Ar42       2Ar34      0Ar00 29Vi51 11Sg50  5Pi46 11Cp41  9Pi42  2Ta56 13Sg54
+Venus                  26Cn32 28Aq50  4Pi37      6Li55   10Cp23   16Ar09 24Cn14    18Ta27     25Ta24     20Vi45     23Li06     26Sg31     16Sc08 11Vi30 24Cn11 27Li45      11Le37      0Ar00 12Sc41  9Pi14  2Sc18 21Li55 19Ge32 16Cp03 11Sg24
+Saturn                 29Aq42 27Ge16 26Sc58     29Cp24   29Sg05   28Sc47 27Le53    26Cp22     25Sc09     23Cn56     22Cn43     21Sg49     20Li54 17Cn52 16Ar22 11Pi49       2Pi43      0Ar00 28Li29 28Vi11 27Cn34 26Ar40  5Ge27 27Ar16 16Sc21
+Rahu                    5Li59 23Sc55 29Sc54     11Ar59   17Li58   23Li58 11Sc56    11Sg53      5Cn51     29Cn48     23Sg46     11Pi44     29Aq42 29Sc36 29Sg33 29Pi25      29Pi07      0Ar00 29Ar57  5Ta56 17Ta55  5Sg53  5Aq12 16Le56 22Ar35
+Ketu                    5Ar59 23Ta55 29Ta54     11Ar59   17Ar58   23Ar58 11Ta56    11Ge53      5Cn51     29Cn48     23Sg46     11Vi44     29Aq42 29Sc36 29Sg33 29Pi25      29Vi07      0Ar00 29Ar57  5Ta56 17Ta55  5Ge53  5Le12 16Aq56 22Li35
+Maandi                  5Sc51 22Le36  1Aq33     18Cn19   12Pi28   23Sc23 19Ar05    10Cp08     26Le29     26Pi54      9Pi44      7Ge48     25Vi20 23Ta47 23Ar01  9Ar19      13Li59      0Ar00 29Ta13  5Sc04 16Cp45  4Sc17 23Li25  1Ta13  1Ta38
+Gulika                 25Li17 17Ta35 12Ge52     20Ta34   15Sg52   11Cn09 27Pi00     3Le26     14Ta35     25Le44      6Ar53     22Le45      8Li36 21Cp28 27Ta54 17Ge12      25Cp49      0Ar00  6Li26  1Vi43 22Li18  8Cn09  8Ge14  0Sg58 11Vi18
+Bhava Lagna            16Li45  0Pi47 17Pi33      3Ta31   20Sc16    7Ar01 27Cp17    21Ar03     28Sg04      5Pi05     12Vi06      2Cp22     22Sg38 10Aq11  3Ta57 15Cp16       7Sg54      0Ar00 23Sg46 10Cn32 14Le02  4Ar18  7Cn07  9Pi29 12Sg39
+Hora Lagna              5Cp23 18Aq27  6Ar10     19Sc14   13Vi51   21Cp32 22Ge19     4Pi36      3Ta52     17Cn40     20Pi48     25Sc21     11Vi30  5Ta20  2Sg15  6Ta60      25Ta30      0Ar00 26Ta55  2Sc18 13Ta04 29Le13 16Pi03 11Vi24 25Ar12
+Ghati Lagna             1Vi16 11Cp26 17Cp18     27Pi28   26Vi11    5Vi05 21Pi07    15Vi14      9Pi41     25Le24     29Ge31      4Le17      8Ta06 20Sc48 27Cp09 13Cp48       5Ge42      0Ar00  6Ta21  7Li37 10Le10 13Sc58 12Ar52 17Ta09  2Pi52
+Vighati Lagna          10Sg42  6Cn20 17Pi02     21Le24    2Ta07   12Pi49 14Aq55     8Ar26     21Ta15      4Pi03     16Ar52     18Cp59     21Sg05  8Ge07  1Ar38 12Cp10       3Sg16      0Ar00 23Aq31  4Ge13 25Li37 27Sc44 26Le56 15Vi55 11Cn13
+Varnada Lagna           9Cn43 27Vi26 22Aq51     10Sc34    0Pi51    8Li52 21Sc60    26Li35     24Aq34     14Li18      6Sg51     22Vi18     21Vi26 28Li35 17Ge10 17Le07      25Ar41      0Ar00 18Vi34 28Sc17 17Ge43 16Ar52  6Vi53 29Cn11 18Le55
+Sree Lagna             22Ta46 24Cn54 12Aq20     14Ge28   21Cn42    1Aq04 20Ge38     3Aq12     25Sc44      5Pi20     23Cp36     14Pi42     23Cp00 10Ar40  4Ge30 13Ge59      20Cp59      0Ar00 23Cp50 16Aq36  2Ge08 10Sc26 14Aq07 28Ar49  8Pi25
+Pranapada Lagna        10Sg42  6Cn20 17Pi02     21Le24    2Ta07   12Pi49 14Aq55     8Ar26     21Ta15      4Pi03     16Ar52     18Cp59     21Sg05  8Ge07  1Ar38 12Cp10       3Sg16      0Ar00 23Aq31  4Ge13 25Li37 27Sc44 26Le56 15Vi55 11Cn13
+Indu Lagna             24Ar56 14Sc21  9Sg17     19Ta51   14Ge47    9Cp43 24Vi30    29Cp08      8Ta51     18Le33     28Pi16     13Aq03     27Ge50  7Cp07 11Ta45 25Ta40      23Ge30      0Ar00  4Li38 29Le34 19Li25  4Cp12  9Sc09 22Ar13 19Sg37
+Bhrigu Bindu            0Cp28  4Cp08 25Ta25     29Sc05   28Vi37    1Cp50 26Cn47     5Cp30     22Cn39      9Ar11     18Cn59     12Cn24     13Ta46 18Li22 20Ar39  2Pi28      18Le41      0Ar00  2Ta18  2Li45  3Ar40  5Cn03  7Aq11 19Aq34  6Pi06
+Dhooma                 11Sg28 13Cn08 24Pi35     22Le55    4Ta23   15Pi50 20Aq13    17Ar30      3Ge21     19Pi11      5Ta01      9Aq23     13Sg46  8Cn21  5Ta39 27Aq32      11Aq18      0Ar00 27Aq18  8Ge45  1Sc40  6Sg03 28Li10  7Sg34  0Sc05
+Vyatipata              18Cn32 16Sg52 24Ta35     22Li55    4Aq23   14Cp10 20Vi13    12Aq30      3Li21     10Ar49      5Ta01     20Ta37     16Pi14 21Li39 24Cn21 27Aq32      11Le18      0Ar00  2Cp42 21Cp15 28Le20 23Cn57  1Vi50 22Ge26 29Ge55
+Parivesha              18Cp32 16Ge52 24Sc35     22Li55    4Le23   14Cn10 20Pi13    12Le30      3Li21     10Ar49      5Ta01     20Sc37     16Pi14 21Li39 24Cn21 27Aq32      11Aq18      0Ar00  2Cp42 21Cp15 28Le20 23Cp57  1Pi50 22Sg26 29Sg55
+Indra Chapa            11Ge28 13Cp08 24Vi35     22Le55    4Sc23   15Vi50 20Le13    17Li30      3Ge21     19Pi11      5Ta01      9Le23     13Sg46  8Cn21  5Ta39 27Aq32      11Le18      0Ar00 27Aq18  8Ge45  1Sc40  6Ge03 28Ar10  7Ge34  0Ta05
+Upaketu                28Ge08 13Ge08 11Pi15     26Vi15   24Sg23   22Pi30 16Sg53     7Ta30      0Pi01     22Aq31     15Ge01      9Sc23      3Li46 15Ta01  5Ge39  7Sg32      11Li18      0Ar00 20Li38 18Vi45 15Pi00  9Sg23 28Cp10  7Sc34  0Le05
+Kaala                  19Sg22 24Vi16 13Ge38      8Vi44   28Ta05   17Ge27 15Ar32    22Cn21      9Li48     27Le16     14Sc43     12Vi48     10Ge53 24Ta31  1Ta20 21Ge47       2Aq40      0Ar00  6Ge49 26Cn11  4Cp54  2Pi60  8Le24 21Ge12 28Pi16
+Mrityu                  8Le44 18Ge32 27Li16     17Sg27   26Ar11    4Sc54  1Li05    14Sc43     19Sg38     24Ta32     29Aq27     25Sc37     21Aq48 19Pi04  2Vi42 13Vi36       5Ge25      0Ar00 13Aq38 22Ta22  9Aq49  5Pi60 16Pi52 12Cp29 26Ar39
+Artha Prahara           0Vi44  6Cp35 22Cp42     28Pi32   27Vi48    2Vi55 24Pi53     8Vi46     18Pi19     14Le37     12Cn28     19Cn44     21Ta55 29Li13  2Cp53 16Aq10      24Cn15      0Ar00  3Ta39  4Li23  5Le51  8Sc02 29Aq11 18Pi54 15Sg12
+Yama Ghantaka          22Vi53 25Cn53 11Ge15     14Aq15   21Cn22    1Ge30 19Li52     4Ge31     23Pi59      7Sc31     20Cp59     17Pi39     26Cp16 15Ar02  9Li24  7Ge27      11Cp11      0Ar00 24Cp23 17Aq15  3Aq00 11Cn38 22Aq56 10Ta35 24Cn06
+Prana Sphuta           13Ge52  4Aq45 18Li36     27Le43   11Sc35   25Vi26  7Vi01    16Sc19     11Cn46      7Ta12      2Cn39     14Li14     25Sg48 14Li25 23Le43 21Cn37      17Pi25      0Ar00  9Sg18 23Ge10 20Sc53  2Cn28 12Sc41 26Pi54 15Ta52
+Deha Sphuta            14Vi43 12Ta23  2Vi54      0Pi35   15Le52   28Sg50 17Sg02    26Aq31      4Le39     24Ta12      6Le58      7Le10     21Pi17 18Ta23  1Li56 17Li25      26Cp08      0Ar00 13Pi33 28Sg15 27Sc41 11Ar48 21Ar29 28Vi38 18Sg11
+Mrityu Sphuta          25Cn08 16Aq12 18Pi40      9Li44   14Cp36   10Ar32  4Le04     1Ta36     17Ge52     22Le40     26Sc48     18Sc36      3Sc60 15Cn19 20Ta59 22Cp01      18Sg01      0Ar00  5Sc40  0Pi48 21Li04  6Li28 25Aq47 14Le22 19Ta10
+Sookshma TriSphuta     23Pi42  3Aq20  2Sg58     12Aq36   18Cp53    4Sg49 14Ar05    14Sg26     10Pi45     24Sc04      1Cp08      9Li59     21Cp05 18Ta07 16Sc38 17Ar49      26Ar44      0Ar00 28Cp31 22Aq13  9Aq37 20Cp44 29Li56  9Pi55 23Ta14
+Tithi Sphuta           26Sc48  1Pi13  1Cn59      6Ge24    9Cp36   17Le13 22Sc23    21Vi38     21Vi10     26Ta03     16Li45      3Cp40     24Sc04 22Vi05  6Sg06 11Li52      17Cn48      0Ar00 14Sc01 10Pi49  4Cn25 24Ge49 10Cn59 14Pi39 19Ta31
+Yoga Sphuta (Sun-Moon) 23Cn03 27Cp29  9Ar28     13Li54   20Cp50    2Ar13 18Le38     6Ar38     21Cn09     11Cn04     16Cp43     22Vi27      1Cp36 22Ar08 17Aq24 26Ta48      25Ge11      0Ar00 25Cp16 18Aq19  4Li26 13Vi35  7Vi20 29Sc46 19Ge42
+Rahu Tithi Sphuta       7Ge52 10Sg47 18Le39     15Le44   23Li36    1Vi27 25Cn03     4Vi22      5Ar50      7Cp17      8Aq45      2Ta21     25Aq56 14Aq35 23Sc54 21Cn52      17Vi48      0Ar00  9Aq19 17Ta11  2Li55 26Ar31  7Cn02  9Ar22 22Li30
+Kshetra Sphuta         28Ar14 14Sg03 12Cp17     26Ta27   24Ge41   22Cp55 17Li36     8Pi44      1Cn39     24Li34     17Ge29     12Ta10      6Li51 19Ta08 10Li16 13Sg41      20Ar32      0Ar00 21Li08 19Vi22 15Sc50 10Aq31  6Le29 18Ta39 14Ge51
+Beeja Sphuta            6Cn38 29Le43 23Vi39     16Sc44   10Pi06   26Cn32 13Sg33    19Vi37     13Ar51     12Le42     20Aq46     29Ge08     19Vi02 25Ge23 28Cp34 21Aq55       2Le53      0Ar00  3Vi10  9Sc48 23Ta05 12Pi59 27Sg25 26Cn33 25Ar24
+TriSphuta              29Ar56 29Sg22 29Cp18     29Ta52   29Ge47   29Cp43 29Li30    29Pi09     28Cn52     28Sc35     28Cn18     28Ge06     27Li53 27Cn10 26Sg49 25Pi46      23Vi38      0Ar00 29Li39 29Vi35 29Sc26 29Aq13 24Sg17 22Sc22 19Aq49
+ChatusSphuta           28Le03 12Sg30 10Ta33     26Cp07   24Ge10   22Ta13 16Aq23     6Cn40     28Li53     21Ge06     13Ge19      7Ta29      1Li39 12Ta12  2Aq28  3Sg18       4Ar57      0Ar00 20Li16 18Vi20 14Cn26  8Li36 22Cn27 29Ar56 19Vi55
+PanchaSphuta            4Pi03  6Le24 19Ge33     21Pi55   17Pi52   16Pi11  1Vi41    18Ar32     25Cp17     20Li54     22Ar55     19Ar13      1Ta21 11Pi48  2Ge02 27Cn18      25Pi57      0Ar00 20Ta14 24Li16  2Vi22 14Ge30 27Ta39 16Li52 12Sc30
+AL                     13Ta22  0Ta15  0Ar00      3Cn17   19Le55   23Le26 26Le29    10Li19     26Ar14     27Le12      9Vi21      0Cn44     10Pi49 24Pi25  1Ar13  8Cp23       0Ar00      0Ar00  6Pi48 20Sg10 16Pi53 26Cn58  2Cp11  2Ta55  3Aq53
+A2                      2Vi16 20Cp23  0Ar00     25Pi28   23Vi12    9Vi04 14Pi08    27Vi11     23Aq45     15Vi19      5Ge38      1Vi10      7Ta58  0Cp37 11Pi57 14Sc04       0Ar00      0Ar00 11Ta20 13Li36 18Le07 24Sc55  3Cn31  4Vi41 26Cn15
+A3                     14Li14  8Aq03  0Ar00     28Ar27   12Sc41   26Cp55  9Cp36    20Pi44     17Sc39     14Cp34     11Cn29     24Li10      6Sg51 29Li08 10Cp17 13Le42       0Ar00      0Ar00 11Sg09 25Ge22 23Cn50  6Pi31 12Sg30  6Ta40  8Sc54
+A4                     19Ar41 27Vi07  0Ar00      9Ta21   29Ta02   18Li43 17Le45    26Sc09     14Aq52      3Ta35     22Sc18     21Vi20     20Ge22  7Ge10 15Vi33 10Cn45       0Ar00      0Ar00  8Ge24 28Cn04  7Vi26  6Sc28  4Vi00 25Cn20 13Vi47
+A5                      2Ge16 20Li23  0Ar00      4Le32    6Li48    9Ge04 15Ge52    27Ge11      6Cp15     15Vi19     24Vi22      1Sg10      7Ar58  0Cn37 11Pi57 15Le56       0Ar00      0Ar00 11Ar20 13Ar36 18Le07 24Aq55  3Ar31  4Ge41 26Ar15
+A6                     14Cn14  8Sc03  0Ar00      1Sc33   17Aq19   26Li55 20Li24    20Sg44     12Sg21     14Cp34     18Le31     24Cp10      6Pi51 29Ar08 10Cp17 16Sc18       0Ar00      0Ar00 11Pi09 25Sg22 23Cn50  6Ge31 12Vi30  6Aq40  8Le54
+A7                      2Pi57 26Cn29  0Ar00     24Pi07   21Pi10   11Pi46  9Vi24     5Ar19     12Aq55     28Vi51     19Ta22     19Pi27     28Ta17 27Cp43 12Ar26  3Li26       0Ar00      0Ar00 14Ta43 17Li39 23Le33  2Ge22 28Aq22 17Ta49  3Ge46
+A8                     13Li22  0Aq15  0Ar00     26Ar43   10Sc05   23Cp26  3Cp31    10Pi19      3Sc46     27Sg12     20Ge39      0Li44     10Sg49 24Vi25  1Sg13 21Ge37       0Ar00      0Ar00  6Sg48 20Ge10 16Cn53 26Aq58  2Li11  2Aq55  3Cn53
+A9                     20Li50  7Ar34  0Ar00     11Ta41    2Sg31   23Ar22 25Aq53    10Ge05      3Pi27     26Ta49     20Sg11     22Ar42     25Ge14 23Cn38  7Sc50 20Vi27       0Ar00      0Ar00 14Ge12  5Le03 16Vi44 19Ta15  8Ge07  0Cn49  1Li05
+A10                    10Sg08  1Cn16  0Ar00     20Le17    0Ta25   10Pi34 10Aq59     1Ar42     12Ta15     22Aq49      3Ar23      3Cp48      4Sg14 15Ta38  6Pi21  8Sg28       0Ar00      0Ar00 20Aq42  0Ge51 21Li08 21Sc33 11Cn25 15Cn14 20Ar18
+A11                    16Cn32 28Sc50  0Ar00     26Li56   10Aq23    6Cp09  4Li15    18Cp26      5Sc25      0Pi44     23Ge07     26Pi29     16Pi06  1Le28 24Ar09 27Ge48       0Ar00      0Ar00 22Pi41  9Cp13 12Le18  1Cn54 19Pi28 15Li57 11Le16
+UL                     20Cn50  7Cp34  0Ar00     18Li19   27Cp29   23Cp22  4Vi07    10Pi05     26Le33     26Ta49      9Pi49     22Cn42     25Cp14 23Cp38  7Sc50  9Li33       0Ar00      0Ar00 14Cp12  5Aq03 16Vi44 19Le15  8Pi07  0Ar49  1Cn05
+V2                      9Li43 27Sg26  7Pi09     19Ar26   29Li09    8Cp52  8Sg00    26Cp35      5Vi26     14Li18     23Pi09     22Ge18     21Aq26 28Ar35 17Ge10 12Sc53       4Vi19      0Ar00 18Aq34 28Ta17 17Ge43 16Cp52  6Sg53 29Li11 18Sc55
+V3                      9Sc43 27Vi26 22Aq51     10Cn34    0Pi51    8Aq52 21Pi60    26Aq35     24Ge34     14Ge18      6Sg51     22Vi18     21Vi26 28Li35 17Li10 17Le07      25Ar41      0Ar00 18Vi34 28Sc17 17Aq43 16Sg52  6Vi53 29Cn11 18Sg55
+V4                      9Aq43 27Sg26  7Sc09     19Sg26   29Li09    8Ta52  8Ar00    26Ta35      5Cp26     14Ge18     23Pi09     22Ge18     21Aq26 28Ar35 17Li10 12Sc53       4Vi19      0Ar00 18Aq34 28Ta17 17Aq43 16Vi52  6Sg53 29Li11 18Pi55
+V5                      9Pi43 27Vi26 22Li51     10Pi34    0Pi51    8Ge52 21Cn60    26Ge35     24Li34     14Aq18      6Sg51     22Vi18     21Vi26 28Li35 17Aq10 17Le07      25Ar41      0Ar00 18Vi34 28Sc17 17Li43 16Le52  6Vi53 29Cn11 18Ar55
+V6                      9Aq43 27Sg26  7Cn09     19Sg26   29Li09    8Ta52  8Ar00    26Ta35      5Cp26     14Ge18     23Pi09     22Ge18     21Aq26 28Ar35 17Li10 12Sc53       4Vi19      0Ar00 18Aq34 28Ta17 17Aq43 16Vi52  6Sg53 29Li11 18Pi55
+V7                      9Sc43 27Vi26 22Aq51     10Cn34    0Pi51    8Aq52 21Pi60    26Aq35     24Ge34     14Ge18      6Sg51     22Vi18     21Vi26 28Li35 17Li10 17Le07      25Ar41      0Ar00 18Vi34 28Sc17 17Aq43 16Sg52  6Vi53 29Cn11 18Sg55
+V8                      9Li43 27Sg26  7Pi09     19Ar26   29Li09    8Cp52  8Sg00    26Cp35      5Vi26     14Li18     23Pi09     22Ge18     21Aq26 28Ar35 17Ge10 12Sc53       4Vi19      0Ar00 18Aq34 28Ta17 17Ge43 16Cp52  6Sg53 29Li11 18Sc55
+V9                      9Cn43 27Vi26 22Aq51     10Sc34    0Pi51    8Li52 21Sc60    26Li35     24Aq34     14Li18      6Sg51     22Vi18     21Vi26 28Li35 17Ge10 17Le07      25Ar41      0Ar00 18Vi34 28Sc17 17Ge43 16Ar52  6Vi53 29Cn11 18Le55
+V10                     9Aq43 27Sg26  7Cn09     19Sg26   29Li09    8Ta52  8Ar00    26Ta35      5Cp26     14Ge18     23Pi09     22Ge18     21Aq26 28Ar35 17Li10 12Sc53       4Vi19      0Ar00 18Aq34 28Ta17 17Aq43 16Vi52  6Sg53 29Li11 18Pi55
+V11                     9Pi43 27Vi26 22Li51     10Pi34    0Pi51    8Ge52 21Cn60    26Ge35     24Li34     14Aq18      6Sg51     22Vi18     21Vi26 28Li35 17Aq10 17Le07      25Ar41      0Ar00 18Vi34 28Sc17 17Li43 16Le52  6Vi53 29Cn11 18Ar55
+V12                     9Aq43 27Sg26  7Sc09     19Sg26   29Li09    8Ta52  8Ar00    26Ta35      5Cp26     14Ge18     23Pi09     22Ge18     21Aq26 28Ar35 17Li10 12Sc53       4Vi19      0Ar00 18Aq34 28Ta17 17Aq43 16Vi52  6Sg53 29Li11 18Pi55
+Kunda                   6Sg53  2Ge01  8Aq54     13Le47   20Ar40   27Sg34 18Cp14    22Aq41     20Pi14     17Sg48     15Cp21      6Li02     26Aq42  5Cp36 10Li03 23Ta24      20Sg05      0Ar00  4Aq27 11Ta20 25Vi07 15Li47 18Li05 24Ge06  2Sc09
+Yoga Sphuta            26Li23 27Ta29 23Ge52     22Ta46   19Sg10   15Cn33  4Ar42    16Le38      2Ge11     17Vi44      3Ta17     22Vi27     11Li36  5Pi28 17Cn24 23Le12       4Ta49      0Ar00 11Li56  8Vi19  1Sc06 20Cn15  7Vi20 29Pi46 19Aq42
+Avayoga Sphuta          3Ta03 27Cp29 29Le28     23Cn54   20Vi50   12Ta13  8Sc38     6Ge38     11Li09      1Aq04     16Ta43     22Vi27      1Ta36  2Aq08 17Sg24 26Vi48      25Sg11      0Ar00 15Ta16 18Li19 24Sg26  3Ar35  7Vi20 29Sc46 19Le42
+
+
+
+
+Vimsottari Dasa:
+
+ Maha Dasas:
+
+ Merc: 1985-01-30 (5:11:57) - 2002-01-30 (8:23:30)
+ Ket: 2002-01-30 (8:23:30) - 2009-01-30 (0:52:45)
+ Ven: 2009-01-30 (0:52:45) - 2029-01-29 (21:19:57)
+ Sun: 2029-01-29 (21:19:57) - 2035-01-30 (8:34:31)
+ Moon: 2035-01-30 (8:34:31) - 2045-01-29 (18:36:15)
+ Mars: 2045-01-29 (18:36:15) - 2052-01-30 (11:27:55)
+ Rah: 2052-01-30 (11:27:55) - 2070-01-29 (20:23:33)
+ Jup: 2070-01-29 (20:23:33) - 2086-01-29 (17:27:30)
+ Sat: 2086-01-29 (17:27:30) - 2105-01-30 (8:08:47)
+
+
+Vimsottari Dasa:
+
+ Merc MD: 1985-01-30 (5:11:57) - 2002-01-30 (8:23:30)
+
+  Antardasas in this MD:
+
+  Merc: 1985-01-30 (5:11:57) - 1987-06-29 (12:34:28)
+  Ket: 1987-06-29 (12:34:28) - 1988-06-25 (14:54:14)
+  Ven: 1988-06-25 (14:54:14) - 1991-04-24 (22:52:50)
+  Sun: 1991-04-24 (22:52:50) - 1992-02-29 (14:30:28)
+  Moon: 1992-02-29 (14:30:28) - 1993-08-02 (13:16:11)
+  Mars: 1993-08-02 (13:16:11) - 1994-07-30 (15:52:04)
+  Rah: 1994-07-30 (15:52:04) - 1997-02-13 (22:15:42)
+  Jup: 1997-02-13 (22:15:42) - 1999-05-22 (19:07:54)
+  Sat: 1999-05-22 (19:07:54) - 2002-01-30 (8:23:30)
+
+Vimsottari Dasa:
+
+ Merc MD: 1985-01-30 (5:11:57) - 2002-01-30 (8:23:30)
+  Merc AD: 1985-01-30 (5:11:57) - 1987-06-29 (12:34:28)
+
+   Pratyantardasas in this AD:
+
+   Merc: 1985-01-30 (5:11:57) - 1985-06-03 (17:46:08)
+   Ket: 1985-06-03 (17:46:08) - 1985-07-26 (17:21:05)
+   Ven: 1985-07-26 (17:21:05) - 1985-12-20 (2:53:22)
+   Sun: 1985-12-20 (2:53:22) - 1986-01-31 (16:41:49)
+   Moon: 1986-01-31 (16:41:49) - 1986-04-14 (0:00:10)
+   Mars: 1986-04-14 (0:00:10) - 1986-06-05 (6:52:07)
+   Rah: 1986-06-05 (6:52:07) - 1986-10-18 (1:39:19)
+   Jup: 1986-10-18 (1:39:19) - 1987-02-09 (7:01:47)
+   Sat: 1987-02-09 (7:01:47) - 1987-06-29 (12:34:28)
+
+Vimsottari Dasa:
+
+ Merc MD: 1985-01-30 (5:11:57) - 2002-01-30 (8:23:30)
+  Merc AD: 1985-01-30 (5:11:57) - 1987-06-29 (12:34:28)
+   Merc PD: 1985-01-30 (5:11:57) - 1985-06-03 (17:46:08)
+
+    Sookshma-antardasas in this PD:
+
+    Merc: 1985-01-30 (5:11:57) - 1985-02-16 (9:34:48)
+    Ket: 1985-02-16 (9:34:48) - 1985-02-23 (12:05:45)
+    Ven: 1985-02-23 (12:05:45) - 1985-03-15 (22:45:42)
+    Sun: 1985-03-15 (22:45:42) - 1985-03-22 (2:57:07)
+    Moon: 1985-03-22 (2:57:07) - 1985-04-01 (11:08:03)
+    Mars: 1985-04-01 (11:08:03) - 1985-04-08 (17:50:04)
+    Rah: 1985-04-08 (17:50:04) - 1985-04-27 (14:08:05)
+    Jup: 1985-04-27 (14:08:05) - 1985-05-14 (12:04:31)
+    Sat: 1985-05-14 (12:04:31) - 1985-06-03 (17:46:08)
+
+Vimsottari Dasa:
+
+ Merc MD: 1985-01-30 (5:11:57) - 2002-01-30 (8:23:30)
+  Merc AD: 1985-01-30 (5:11:57) - 1987-06-29 (12:34:28)
+   Merc PD: 1985-01-30 (5:11:57) - 1985-06-03 (17:46:08)
+    Merc SD: 1985-01-30 (5:11:57) - 1985-02-16 (9:34:48)
+
+     Praana-antardasas in this SD:
+
+     Merc: 1985-01-30 (5:11:57) - 1985-02-01 (15:28:39)
+     Ket: 1985-02-01 (15:28:39) - 1985-02-02 (15:29:20)
+     Ven: 1985-02-02 (15:29:20) - 1985-02-05 (12:08:21)
+     Sun: 1985-02-05 (12:08:21) - 1985-02-06 (8:44:51)
+     Moon: 1985-02-06 (8:44:51) - 1985-02-07 (19:06:31)
+     Mars: 1985-02-07 (19:06:31) - 1985-02-08 (19:10:14)
+     Rah: 1985-02-08 (19:10:14) - 1985-02-11 (9:04:35)
+     Jup: 1985-02-11 (9:04:35) - 1985-02-13 (16:08:27)
+     Sat: 1985-02-13 (16:08:27) - 1985-02-16 (9:34:48)
+
+Vimsottari Dasa:
+
+ Merc MD: 1985-01-30 (5:11:57) - 2002-01-30 (8:23:30)
+  Merc AD: 1985-01-30 (5:11:57) - 1987-06-29 (12:34:28)
+   Merc PD: 1985-01-30 (5:11:57) - 1985-06-03 (17:46:08)
+    Merc SD: 1985-01-30 (5:11:57) - 1985-02-16 (9:34:48)
+     Merc PAD: 1985-01-30 (5:11:57) - 1985-02-01 (15:28:39)
+
+      Deha-antardasas in this PAD:
+
+      Merc: 1985-01-30 (5:11:57) - 1985-01-30 (13:27:08)
+      Ket: 1985-01-30 (13:27:08) - 1985-01-30 (16:51:04)
+      Ven: 1985-01-30 (16:51:04) - 1985-01-31 (2:33:44)
+      Sun: 1985-01-31 (2:33:44) - 1985-01-31 (5:28:34)
+      Moon: 1985-01-31 (5:28:34) - 1985-01-31 (10:19:57)
+      Mars: 1985-01-31 (10:19:57) - 1985-01-31 (13:43:55)
+      Rah: 1985-01-31 (13:43:55) - 1985-01-31 (22:28:29)
+      Jup: 1985-01-31 (22:28:29) - 1985-02-01 (6:14:49)
+      Sat: 1985-02-01 (6:14:49) - 1985-02-01 (15:28:39)
+
+
+
+Sample ID: vedic_02
+Date: 1 January 2001
+Time: 11:58 PM
+Place: Delhi, India
+Latitude: 28.6139 N
+Longitude: 77.2090 E
+
+Body                    Longitude        Nakshatra Pada Rasi Navamsa
+
+Lagna                   11 Vi 14' 51.11" Hast      1    Vi   Ar
+Sun - AmK               17 Sg 33' 25.06" PSha      2    Sg   Vi
+Moon - PiK               4 Pi 12' 18.33" UBha      1    Pi   Le
+Mars - BK               11 Li 31' 37.26" Swat      2    Li   Cp
+Mercury - AK            21 Sg 40' 04.81" PSha      3    Sg   Li
+Jupiter (R) - MK/PK      8 Ta 15' 38.63" Krit      4    Ta   Pi
+Venus - GK               3 Aq 57' 15.29" Dhan      4    Aq   Sc
+Saturn (R) - DK          0 Ta 41' 22.85" Krit      2    Ta   Cp
+Rahu                    21 Ge 46' 41.19" Puna      1    Ge   Ar
+Ketu                    21 Sg 46' 41.19" PSha      3    Sg   Li
+Maandi                  20 Cn 35' 57.30" Asre      2    Cn   Cp
+Gulika                   9 Cn 34' 29.80" Push      2    Cn   Vi
+Bhava Lagna             27 Le 24' 50.76" UPha      1    Le   Sg
+Hora Lagna               7 Ta 16' 16.46" Krit      4    Ta   Pi
+Ghati Lagna              6 Ge 50' 33.56" Ardr      1    Ge   Sg
+Vighati Lagna            4 Sc 41' 59.07" Anu       1    Sc   Le
+Varnada Lagna           11 Li 14' 51.11" Swat      2    Li   Cp
+Sree Lagna               4 Li 47' 05.96" Chit      4    Li   Sc
+Pranapada Lagna          4 Pi 41' 59.07" UBha      1    Pi   Le
+Indu Lagna               4 Le 12' 18.33" Magh      2    Le   Ta
+Bhrigu Bindu            27 Li 59' 29.76" Visa      3    Li   Ge
+Dhooma                   0 Ta 53' 25.06" Krit      2    Ta   Cp
+Vyatipata               29 Aq 06' 34.94" PBha      3    Aq   Ge
+Parivesha               29 Le 06' 34.94" UPha      1    Le   Sg
+Indra Chapa              0 Sc 53' 25.06" Visa      4    Sc   Cn
+Upaketu                 17 Sc 33' 25.06" Jye       1    Sc   Sg
+Kaala                    5 Vi 37' 56.81" UPha      3    Vi   Aq
+Mrityu                  20 Li 41' 49.21" Visa      1    Li   Ar
+Artha Prahara           12 Sc 46' 16.42" Anu       3    Sc   Li
+Yama Ghantaka            5 Sg 35' 58.11" Mool      2    Sg   Ta
+Prana Sphuta             5 Li 48' 45.34" Chit      4    Li   Sc
+Deha Sphuta             13 Sg 12' 56.43" Mool      4    Sg   Cn
+Mrityu Sphuta           24 Sc 34' 53.69" Jye       3    Sc   Aq
+Sookshma TriSphuta      13 Aq 36' 35.46" Sata      3    Aq   Aq
+Tithi Sphuta            16 Ge 38' 53.27" Ardr      3    Ge   Aq
+Yoga Sphuta (Sun-Moon)  21 Sc 45' 43.39" Jye       2    Sc   Cp
+Rahu Tithi Sphuta        4 Li 13' 16.13" Chit      4    Li   Sc
+Kshetra Sphuta          23 Li 59' 34.22" Visa      2    Li   Ta
+Beeja Sphuta            29 Sc 46' 18.98" Jye       4    Sc   Pi
+TriSphuta               25 Sc 01' 39.24" Jye       3    Sc   Aq
+ChatusSphuta            12 Le 35' 04.30" Magh      4    Le   Cn
+PanchaSphuta             4 Sc 21' 45.49" Anu       1    Sc   Le
+AL                       2 Ar 05' 18.51" Aswi      1    Ar   Ar
+A2                      26 Ta 39' 39.47" Mrig      1    Ta   Le
+A3                       2 Aq 18' 31.27" Dhan      3    Aq   Li
+A4                       5 Li 16' 26.15" Chit      4    Li   Sc
+A5                      20 Le 07' 54.59" PPha      3    Le   Li
+A6                      20 Cn 07' 54.59" Asre      2    Cn   Cp
+A7                       5 Cn 16' 26.15" Push      1    Cn   Le
+A8                      11 Cp 48' 23.41" Srav      1    Cp   Ar
+A9                      26 Cn 39' 39.47" Asre      3    Cn   Aq
+A10                      2 Cn 05' 18.51" Puna      4    Cn   Cn
+A11                     27 Li 09' 45.55" Visa      3    Li   Ge
+UL                      23 Ar 51' 59.01" Bhar      4    Ar   Sc
+V2                      11 Cp 14' 51.11" Srav      1    Cp   Ar
+V3                      11 Aq 14' 51.11" Sata      2    Aq   Cp
+V4                      11 Ta 14' 51.11" Rohi      1    Ta   Ar
+V5                      11 Ge 14' 51.11" Ardr      2    Ge   Cp
+V6                      11 Vi 14' 51.11" Hast      1    Vi   Ar
+V7                      11 Li 14' 51.11" Swat      2    Li   Cp
+V8                      11 Cp 14' 51.11" Srav      1    Cp   Ar
+V9                      11 Aq 14' 51.11" Sata      2    Aq   Cp
+V10                     11 Ta 14' 51.11" Rohi      1    Ta   Ar
+V11                     11 Ge 14' 51.11" Ardr      2    Ge   Cp
+V12                     11 Vi 14' 51.11" Hast      1    Vi   Ar
+Kunda                   11 Cn 02' 59.74" Push      3    Cn   Li
+Yoga Sphuta             25 Aq 05' 43.39" PBha      2    Aq   Ta
+Avayoga Sphuta           1 Vi 45' 43.39" UPha      2    Vi   Cp
+
+House Start            Cusp             End              Planets in it
+
+1st    0 Vi 00' 00.00" 11 Vi 14' 51.11"  0 Li 00' 00.00" As
+2nd    0 Li 00' 00.00" 11 Li 14' 51.11"  0 Sc 00' 00.00" Ma
+3rd    0 Sc 00' 00.00" 11 Sc 14' 51.11"  0 Sg 00' 00.00" Pl
+4th    0 Sg 00' 00.00" 11 Sg 14' 51.11"  0 Cp 00' 00.00" Su, Me, Ke
+5th    0 Cp 00' 00.00" 11 Cp 14' 51.11"  0 Aq 00' 00.00" Ur, Ne
+6th    0 Aq 00' 00.00" 11 Aq 14' 51.11"  0 Pi 00' 00.00" Ve
+7th    0 Pi 00' 00.00" 11 Pi 14' 51.11"  0 Ar 00' 00.00" Mo
+8th    0 Ar 00' 00.00" 11 Ar 14' 51.11"  0 Ta 00' 00.00" 
+9th    0 Ta 00' 00.00" 11 Ta 14' 51.11"  0 Ge 00' 00.00" Ju, Sa
+10th   0 Ge 00' 00.00" 11 Ge 14' 51.11"  0 Cn 00' 00.00" Ra
+11th   0 Cn 00' 00.00" 11 Cn 14' 51.11"  0 Le 00' 00.00" 
+12th   0 Le 00' 00.00" 11 Le 14' 51.11"  0 Vi 00' 00.00" 
+
+Body                   D-1    D-9    D-10 (5-8) D-2 (US) D-3 (US) D-4    D-7 (7-1) D-12 (Trd) D-16 (Rev) D-20 (Trd) D-24 (Rev) D-27 (Trd) D-30   D-40   D-45   D-60 (RvAr) D-10 x D-9 D-0    D-5    D-6    D-8    D-11   D-81   D-108  D-144
+
+Lagna                  11Vi15 11Ar14  7Li31      7Pi30   26Le15   14Sg59 11Cp16    14Cp58      0Li02     14Pi57      0Sc04      3Ta41      7Vi26 29Sg54 26Ar08 15Ta09       7Sg43      0Ar00 26Vi14  7Sg29 29Li59  3Pi43 11Cn03 14Le44 29Ge39
+Sun                    17Sg33  8Vi01 25Ta34      5Vi07   22Ta40   10Ge14  2Ar54     0Cn41     10Vi55     21Cn08      1Li22     24Cn02     16Sg43 12Pi17 10Aq04  3Pi25      20Le08      0Ar00 27Sg47 15Cn21 20Sg27 13Aq08 12Pi07  6Sg09  8Cn12
+Moon                    4Pi12  7Le51 17Ge57     21Pi35   17Pi23   16Pi49  0Vi34    20Ar28     22Cp43     24Li06     19Ar05     23Ar32      6Ta09 18Pi12  9Ge14 17Cn42      11Pi33      0Ar00 21Ta02 25Li14  3Vi38 16Ge15 10Ge37  4Sc09  5Sg32
+Mars                   11Li32 13Cp45 25Cp16     23Ar03    4Sc35   16Cp06 20Sg41    18Aq19      4Li26     20Sc32      6Ta39     11Le14     15Sg49 11Cn05  8Vi43  1Pi37      17Le26      0Ar00 27Aq38  9Ge10  2Cn13  6Aq48  3Ta41 14Ge55  9Vi53
+Mercury                21Sg40 15Li01  6Cn41     13Vi20    5Ge00   26Ge40  1Ta41    20Le01     16Sc41     13Li22     10Cp02     15Sc02     20Ge02 26Le43 15Le04 10Sc05       0Vi07      0Ar00 18Ge20 10Le00 23Cp21 28Pi21 15Aq06  0Ar09  0Ar12
+Jupiter                 8Ta16 14Pi21  7Cn24     13Cn29    5Vi13    3Le03  2Li10     9Le08     17Cn50     15Ta13     11Cp45     13Aq02      7Vi49  0Vi26 11Le44 14Sc21       6Vi32      0Ar00 11Vi18 19Sc34  6Aq05  0Ge52  9Sc07 22Le10 19Sc33
+Venus                   3Aq57  5Sc35  9Pi33      7Sg55   11Li52   15Aq49 27Aq41    17Pi27      3Li16     19Aq05      4Sc54     16Cp46     28Ar38  8Vi10 27Cp56 27Sc15      25Vi53      0Ar00 19Ar46 23Ar44  1Cp38 13Cn30 20Le18  7Cp04 29Vi25
+Saturn                  0Ta41  6Cp12 23Vi06     28Cn37   27Vi56    2Ta46 25Sc10     8Ta17     18Sc58     13Sg48     13Cn27     18Cn37     20Ta41 27Li35  1Vi02 18Aq37      27Cn56      0Ar00  3Ta27  4Li08  5Sg31  7Pi35 25Aq52 14Pi29  9Le19
+Rahu                   21Ge47 16Ar00  7Cp47     13Vi33    5Sg20   27Sg07  2Sc27    21Aq20     18Sc27     15Li34     12Cp40     18Ta01     23Ge21  1Vi07 20Le01 16Sc41      10Pi02      0Ar00 18Ge53 10Le40 24Cp13 29Vi34 24Le02 12Li02 16Li03
+Ketu                   21Sg47 16Li00  7Cn47     13Vi33    5Ge20   27Ge07  2Ta27    21Le20     18Sc27     15Li34     12Cp40     18Sc01     23Ge21  1Vi07 20Le01 16Sc41      10Vi02      0Ar00 18Ge53 10Le40 24Cp13 29Pi34 24Aq02 12Ar02 16Ar03
+Maandi                 20Cn36  5Cp24  4Ta00     18Li48   28Cp12   22Cp24  5Vi48     7Pi11      0Vi25     21Ta59     15Pi37     16Cn11     17Cp59 13Cp58 26Li58 24Li03       6Aq04      0Ar00 12Cp60  3Aq36 14Vi48 16Le36 18Aq32  4Pi43 26Ta18
+Gulika                  9Cn34 26Vi10 24Le15     10Sc51    1Pi17    8Li18 22Sc59    24Li54     26Aq48     11Li30     10Sg12     18Vi31     17Vi15 22Li60 10Ge52 25Le30       8Sc15      0Ar00 17Vi52 27Sc27 16Ge36 15Ar19 25Le34 14Cn06 28Cn48
+Bhava Lagna            27Le25  6Sg44  4Ta08     24Cp50   22Ge15   19Ta39 11Aq54    28Ge58     18Li38      8Ge17     27Ta56     20Ar11     12Li25 16Ar34  3Cp38 24Li51       7Aq16      0Ar00 17Li04 14Vi29  9Cn19  1Li33  0Ge33 20Aq43 17Ta38
+Hora Lagna              7Ta16  5Pi26 17Cn17     15Cn27    8Vi11   29Ta05  9Li06    27Cn15      3Le40     25Ar25      5Aq29     16Cp19      8Vi08 20Cn51 27Ge12 13Cp44       5Sg35      0Ar00  6Vi21 13Sc38 28Cp10 19Ta59 18Le58  5Ta18 27Ta04
+Ghati Lagna             6Ge51  1Sg35  8Le26     13Le41   20Li32   27Ge22 17Cn54    22Le07     19Pi29     16Sg51     14Cp13      4Ar45     25Aq17  3Cp42  7Li55 20Ta34      15Ge50      0Ar00  4Aq13 11Ta03 24Vi44 15Ar16 14Ar15 19Sg00 25Ar21
+Vighati Lagna           4Sc42 12Le18 13Aq00     20Cn36   15Pi54   18Sc48 27Ar06    26Sg24     14Vi48      3Pi60      7Ar12      6Ta54     20Ta60  7Ar59  1Pi29 18Ge01      27Cp01      0Ar00 23Ta30 28Li12  7Cp36 21Li42 20Cn41 27Sg34 16Li46
+Varnada Lagna          11Li15 11Pi14 22Ta29     22Ge30    3Ta45   14Ta59 18Sg44    14Ar58     29Pi58     14Ar57     29Li56      3Aq41      7Aq26 29Pi54 26Cn08 14Aq51      22Cn17      0Ta00 26Aq14  7Cn29 29Cn59  3Ar43 11Sg03 14Vi44 29Sc39
+Sree Lagna              4Li47 13Sc04 17Sc51      9Ar34   14Li21   19Li08  3Sc30    27Sc25     16Ge34      5Cn42     24Sc50      9Aq12     23Ar33 11Li24  5Sc19 17Cp06      10Sg39      0Ar00 23Ar55 28Ar43  8Ta17 22Sc38 27Li35  6Ar47 29Vi02
+Pranapada Lagna         4Pi42 12Le18 13Ge00     20Pi36   15Pi54   18Pi48 27Le06    26Ar24     14Cp48      3Sc60      7Ar12      6Ta54     20Ta60  7Ar59  1Cn29 18Ge01      27Cp01      0Ar00 23Ta30 28Li12  7Vi36 21Ge42 20Cn41 27Sg34 16Aq46
+Indu Lagna              4Le12  7Ta51 12Vi03      8Sg25   12Ar37   16Le49 29Le26    20Vi28      7Li17     24Aq06     10Sc55     23Cn32      6Ar09 18Vi12  9Aq14 12Sg18      18Ar27      0Ar00 21Ar02 25Ar14  3Cp38 16Cp15 10Pi37  4Le09  5Ta32
+Bhrigu Bindu           27Li59 11Ge55  9Cn55     25Ta59   23Sg58   21Cn58 15Ar56     5Vi54     27Ge52     19Li50     11Ge48      5Sc46     29Li45  9Ta40 29Vi37 29Sc30      29Vi15      0Ar00 19Li57 17Vi57 13Sc56  7Le54 17Cp19 23Li06 10Sc47
+Dhooma                  0Ta53  8Cp01 21Vi06     28Cn13   27Vi20    3Ta34 23Sc46    10Ta41     15Sc45     17Sg48      8Cn38     24Cn02     26Ta43  5Sc37 10Vi04  6Aq35       9Cn52      0Ar00  4Ta27  5Li21  7Sg07  9Pi48 12Pi07  6Ar09  8Vi12
+Vyatipata              29Aq07 21Ge59 21Sc06     28Cp13   27Sg20   26Sc26 23Le46    19Cp19     15Sc45     12Cn12      8Cn38      5Sg58      3Li17 24Ge23 19Pi56  6Aq35       9Cp52      0Ar00 25Li33 24Vi39 22Cn53 20Ar12 17Ar53 23Aq51 21Le48
+Parivesha              29Le07 21Sg59 21Ta06     28Cp13   27Ge20   26Ta26 23Aq46    19Cn19     15Sc45     12Cn12      8Cn38      5Ge58      3Li17 24Ge23 19Pi56  6Aq35       9Cn52      0Ar00 25Li33 24Vi39 22Cn53 20Li12 17Li53 23Le51 21Aq48
+Indra Chapa             0Sc53  8Cn01 21Pi06     28Cn13   27Pi20    3Sc34 23Ta46    10Sc41     15Sc45     17Sg48      8Cn38     24Cp02     26Ta43  5Sc37 10Vi04  6Aq35       9Cp52      0Ar00  4Ta27  5Li21  7Sg07  9Vi48 12Vi07  6Li09  8Pi12
+Upaketu                17Sc33  8Sg01  4Li26     24Ge53    7Aq20   10Ta14 27Cp06     0Ge41     19Aq05     21Sc08     28Ta38     24Ar02     16Pi43 12Vi17 10Li04 26Ar35       9Sc52      0Ar00 27Pi47 15Cp21 20Ar27 13Pi08 12Ge07  6Pi09  8Ge12
+Kaala                   5Vi38 20Aq42  3Sg41     18Pi44   13Vi06   22Vi32 20Aq34     7Sc35     29Sg53     22Sc39     14Pi49      2Sg05     18Vi58 15Ta18 13Le28 22Ar03       3Ta05      0Ar00 28Ta10  3Sc48 15Vi04  1Cp57  6Ar14  8Li18  1Aq04
+Mrityu                 20Li42  6Ar16 26Ar58     11Ta24    2Sg05   22Ar47 24Aq53     8Ge22      1Pi09     23Ta56     16Sg44     18Ar49     20Ge55 17Cn53  1Sc22 11Vi49       2Sg44      0Ar00 13Ge29  4Le11 15Vi35 17Ta40 26Ta27 15Ge17 10Vi22
+Artha Prahara          12Sc46 24Li56 22Sc17      4Cn27   21Aq41   21Aq05  0Pi36     3Ar15      5Ta40     15Le25     23Vi29     14Sg49     23Pi08  0Pi51  4Pi42 13Aq44      20Cp35      0Ar00  3Pi51 16Sg38 12Pi10 20Cp29 14Ta28 29Cn18  9Ta03
+Yama Ghantaka           5Sg36 20Ta24 25Cp60     11Le12   16Ar48   22Sg24  9Cp12     7Aq12     29Aq35     21Sc59     14Sg23      1Vi11     17Aq59 13Sc59 11Le59  5Pi58      23Le57      0Ar00 27Ar60  3Ta36 14Vi48  1Li36  3Cn33  4Cp45 26Ar19
+Prana Sphuta            5Li49 22Sc19 28Sc08     11Ar38   17Li26   23Li15 10Sc41     9Sg45      3Cn00     26Cn15     19Sg30      6Pi56     24Aq23 22Sc30 21Sg34 18Pi45      13Pi08      0Ar00 29Ar04  4Ta53 16Ta30  3Sg56 20Cp49 27Cn46 27Pi01
+Deha Sphuta            13Sg13 28Cn56 12Ar09     26Le26    9Ta39   22Pi52  2Pi31     8Ta35      1Cn27     24Ar19     17Ge11     26Pi49      6Sg28 18Vi38 24Cn42 12Ge56      19Cn25      0Ar00  6Sg05 19Ge18 15Sc44 25Sg22 20Pi28 17Ge18 13Le03
+Mrityu Sphuta          24Sc35 11Aq14 24Cn11     10Ge50   16Cp15    8Le20  7Sg56    24Le59     26Li42     11Ar38     10Sg03      3Sc42     17Cp27 23Ge16 26Le10 25Aq06       7Aq39      0Ar00  2Sc54 27Aq29 16Ge39  0Ge24 11Cp06 14Ge49 29Ta45
+Sookshma TriSphuta     13Aq37  2Aq29 16Ge06     27Sg13   10Sc50   24Ta26  5Ta16    13Cn19      7Pi45      2Vi12     26Ge38      7Li28     18Sg18  4Li24 12Ar27  6Cn35      24Aq53      0Ar00  8Sg03 21Ge40 18Pi53 29Li43 22Li24 29Aq52  9Sg49
+Tithi Sphuta           16Ge39 29Aq50 16Sc29      3Vi18   19Sc57    6Sg36 26Vi32    19Sg47     26Le22      2Cn58      9Vi33     29Sg30     19Sg27  5Aq56 29Sg10  8Cp53      28Sc20      0Ar00 23Sg14  9Cn53 13Sg11  3Le08 28Ge30 27Cp60 27Cn20
+Yoga Sphuta (Sun-Moon) 21Sc46 15Cp52 22Le23     16Ge29   24Cp43   27Ta03 27Sg40    21Cn09     11Sg48     15Aq14     17Aq43     17Le35     22Cp52  0Pi29 19Ar18 14Le17      21Li25      0Ar00 18Cp49 10Aq34 24Ta06 29Ar23 22Ta44 10Cn18 13Pi44
+Rahu Tithi Sphuta       4Li13  7Sc59 12Sc13      8Ar27   12Li40   16Li53 29Li33    20Sc39      7Ge32     24Ge25     11Sc18     23Cp58      6Ar38 18Vi51  9Li57 13Sg16      19Li54      0Ar00 21Ar06 25Ar20  3Ta46 16Sc26 11Vi55  5Aq53  7Cn51
+Kshetra Sphuta         23Li60  5Ta56 29Ta56     17Ta59   11Sg59    5Cn58 17Pi57    17Cn55     23Ar53     29Cn51      5Pi50     17Cn48     29Ge47 29Sc43 29Pi41 29Pi34      29Vi21      0Ar00 29Ge58 23Le57 11Li57 23Ge55 23Aq25 11Cn14  4Aq58
+Beeja Sphuta           29Sc46 27Pi57  2Ge17      0Ge27    0Cp41   29Le05  1Sc36    27Li16      3Le39     25Cn26      5Le28     23Pi51     23Sc09 20Cp53 19Ar44 13Ar41      20Li32      0Ar00 28Sc52 28Pi38 28Cn11 27Cn29 11Pi32  5Aq22 27Le10
+TriSphuta              25Sc02 15Aq15 19Cn43      9Ge57   14Cp55   10Le07  4Sg48     0Vi20     19Li34     20Ar33     29Sc20     15Sc45      0Sc50 11Cn06 16Vi14 28Cp21      27Sg31      0Ar00  5Sc08  0Pi10 20Ge13  5Ge18 17Aq14  2Le59  3Vi58
+ChatusSphuta           12Le35 23Cn16  5Sg51     25Sg10    7Ta45   20Sc20 28Li06     1Cp01     21Aq21     11Le41      2Ge02      9Pi47     17Sg32 23Le23 26Aq18  5Ta04      22Ta36      0Ar00  2Sg55 15Ge30 10Pi41 18Ar26 29Cp21  9Ar08 12Cp10
+PanchaSphuta            4Sc22  9Le16 16Aq22     21Cn16   16Pi55   17Sc27 29Ar28    22Sg21     20Vi12     27Aq15     15Ar18     27Ar47     10Ta53 24Pi30 16Aq19  8Cn15      27Aq22      0Ar00 21Ta49 26Li11  4Cp54 17Li59 23Ge22 21Sc10 28Le13
+AL                      2Ar05  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A2                     26Ta40  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A3                      2Aq19  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A4                      5Li16  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A5                     20Le08  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A6                     20Cn08  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A7                      5Cn16  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A8                     11Cp48  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A9                     26Cn40  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A10                     2Cn05  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A11                    27Li10  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+UL                     23Ar52  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+V2                     11Cp15 11Ge14  7Ar31      7Vi30   26Ar15   14Ar59 11Vi16    14Cn58      0Ar02     14Cp57      0Sc04      3Ta41      7Ta26 29Aq54 26Le08 15Ta09       7Ge43      0Ge00 26Ta14  7Li29 29Li59  3Cn43 11Ta03 14Sg44 29Li39
+V3                     11Aq15 11Sc14 22Ta29     22Li30    3Ta45   14Ta59 18Le44    14Le58     29Cn58     14Le57     29Aq56      3Ge41      7Ge26 29Cn54 26Sc08 14Ge51      22Cn17      0Vi00 26Ge14  7Sc29 29Sc59  3Le43 11Ar03 14Ta44 29Cn39
+V4                     11Ta15 11Li14  7Sg31      7Cp30   26Sg15   14Sg59 11Ta16    14Sc58      0Le02     14Vi57      0Pi04      3Vi41      7Vi26 29Li54 26Sg08 15Vi09       7Ge43      0Li00 26Vi14  7Ge29 29Aq59  3Sc43 11Ta03 14Ar44 29Aq39
+V5                     11Ge15 11Cn14 22Vi29     22Aq30    3Vi45   14Vi59 18Ar44    14Sg58     29Sc58     14Sg57     29Aq56      3Li41      7Li26 29Cn54 26Pi08 14Li51      22Cn17      0Cp00 26Li14  7Pi29 29Pi59  3Sg43 11Sg03 14Ta44 29Pi39
+V6                     11Vi15 11Aq14  7Le31      7Ta30   26Le15   14Sg59 11Ta16    14Pi58      0Sg02     14Ta57      0Sc04      3Cp41      7Cp26 29Aq54 26Ar08 15Cp09       7Ge43      0Aq00 26Cp14  7Ge29 29Aq59  3Pi43 11Vi03 14Sg44 29Aq39
+V7                     11Li15 11Pi14 22Ta29     22Ge30    3Cp45   14Ta59 18Le44    14Ar58     29Pi58     14Ar57     29Li56      3Aq41      7Aq26 29Pi54 26Cn08 14Aq51      22Cn17      0Ta00 26Aq14  7Sc29 29Sc59  3Ar43 11Le03 14Vi44 29Cn39
+V8                     11Cp15 11Aq14  7Ar31      7Vi30   26Ar15   14Ar59 11Vi16    14Cn58      0Ar02     14Ta57      0Cn04      3Ta41      7Ta26 29Aq54 26Le08 15Ta09       7Ge43      0Ge00 26Ta14  7Li29 29Li59  3Cn43 11Cp03 14Le44 29Li39
+V9                     11Aq15 11Cn14 22Ta29     22Li30    3Cp45   14Ta59 18Sg44    14Le58     29Cn58     14Sg57     29Aq56      3Ge41      7Ge26 29Cn54 26Sc08 14Ge51      22Cn17      0Vi00 26Ge14  7Cn29 29Cn59  3Le43 11Ar03 14Ta44 29Sc39
+V10                    11Ta15 11Li14  7Le31      7Cp30   26Le15   14Sg59 11Ta16    14Sc58      0Le02     14Vi57      0Pi04      3Vi41      7Vi26 29Li54 26Sg08 15Vi09       7Ge43      0Li00 26Vi14  7Aq29 29Aq59  3Sc43 11Cp03 14Ar44 29Ge39
+V11                    11Ge15 11Sc14 22Vi29     22Aq30    3Vi45   14Vi59 18Ar44    14Sg58     29Sc58     14Le57     29Aq56      3Li41      7Li26 29Cn54 26Pi08 14Li51      22Cn17      0Cp00 26Li14  7Pi29 29Pi59  3Sg43 11Le03 14Ta44 29Pi39
+V12                    11Vi15 11Ge14  7Sg31      7Ta30   26Sg15   14Sg59 11Ta16    14Pi58      0Sg02     14Cp57      0Cn04      3Cp41      7Cp26 29Aq54 26Ar08 15Cp09       7Ge43      0Aq00 26Cp14  7Aq29 29Aq59  3Pi43 11Vi03 14Le44 29Ge39
+Kunda                  11Cn03  9Li27  9Le30      7Sc54   26Aq51   14Li12 12Sc39    12Sc36      3Aq12     10Sc60      4Sc48     28Li21      1Vi30 21Sg60 17Le15 27Ta00      25Ge30      0Ar00 25Vi15  6Sg18 28Ge24  1Ta33 25Sg03 23Cp24  1Ar11
+Yoga Sphuta            25Aq06 15Ta52 10Li57     20Cp11   15Sg17   10Sc23 25Cn40     1Sg09     11Vi32     21Ar54      2Ar17     17Le35      2Li52 13Cp49 19Vi18  5Ge43       8Cp35      0Ar00  5Li29  0Vi34 20Ge46  6Pi03 22Ta44 10Sc18 13Sg44
+Avayoga Sphuta          1Vi46 15Cp52 12Cp23     26Pi29   24Vi43    7Vi03 17Pi40    21Vi09      1Pi48      5Vi14     17Ge43     17Le35     22Ta52 10Sg29 19Aq18 14Sg17      21Ar25      0Ar00  8Ta49 10Li34 14Le06 19Sc23 22Ta44 10Cn18 13Ta44
+
+Vimsottari Dasa:
+
+ Jup MD: 2013-12-04 (13:35:50) - 2029-12-04 (10:40:56)
+  Moon AD: 2025-04-02 (1:23:42) - 2026-08-04 (22:23:36)
+   Ven PD: 2026-04-18 (14:13:18) - 2026-07-10 (19:19:42)
+    Merc SD: 2026-06-24 (0:35:22) - 2026-07-05 (21:52:36)
+     Jup PAD: 2026-07-02 (10:39:13) - 2026-07-04 (0:41:58)
+
+      Deha-antardasas in this PAD:
+
+      Jup: 2026-07-02 (10:39:13) - 2026-07-02 (15:43:35)
+      Sat: 2026-07-02 (15:43:35) - 2026-07-02 (21:45:01)
+      Merc: 2026-07-02 (21:45:01) - 2026-07-03 (3:08:25)
+      Ket: 2026-07-03 (3:08:25) - 2026-07-03 (5:21:34)
+      Ven: 2026-07-03 (5:21:34) - 2026-07-03 (11:42:02)
+      Sun: 2026-07-03 (11:42:02) - 2026-07-03 (13:36:10)
+      Moon: 2026-07-03 (13:36:10) - 2026-07-03 (16:46:24)
+      Mars: 2026-07-03 (16:46:24) - 2026-07-03 (18:59:33)
+      Rah: 2026-07-03 (18:59:33) - 2026-07-04 (0:41:58)
+
+Vimsottari Dasa:
+
+ Merc MD: 2018-10-07 (18:26:41) - 2035-10-07 (21:08:40)
+
+  Antardasas in this MD:
+
+  Merc: 2018-10-07 (18:26:41) - 2021-03-01 (19:33:46)
+  Ket: 2021-03-01 (19:33:46) - 2022-02-27 (1:47:59)
+  Ven: 2022-02-27 (1:47:59) - 2024-12-29 (16:07:08)
+  Sun: 2024-12-29 (16:07:08) - 2025-11-06 (14:33:47)
+  Moon: 2025-11-06 (14:33:47) - 2027-04-04 (10:27:27)
+  Mars: 2027-04-04 (10:27:27) - 2028-03-31 (15:13:35)
+  Rah: 2028-03-31 (15:13:35) - 2030-10-22 (19:21:48)
+  Jup: 2030-10-22 (19:21:48) - 2033-01-25 (2:51:02)
+  Sat: 2033-01-25 (2:51:02) - 2035-10-07 (21:08:40)
+
+Vimsottari Dasa:
+
+ Merc MD: 2018-10-07 (18:26:41) - 2035-10-07 (21:08:40)
+  Moon AD: 2025-11-06 (14:33:47) - 2027-04-04 (10:27:27)
+
+   Pratyantardasas in this AD:
+
+   Moon: 2025-11-06 (14:33:47) - 2025-12-18 (14:55:31)
+   Mars: 2025-12-18 (14:55:31) - 2026-01-16 (19:44:00)
+   Rah: 2026-01-16 (19:44:00) - 2026-04-02 (22:22:45)
+   Jup: 2026-04-02 (22:22:45) - 2026-06-12 (2:43:36)
+   Sat: 2026-06-12 (2:43:36) - 2026-09-04 (10:40:32)
+   Merc: 2026-09-04 (10:40:32) - 2026-11-16 (13:04:33)
+   Ket: 2026-11-16 (13:04:33) - 2026-12-15 (21:54:12)
+   Ven: 2026-12-15 (21:54:12) - 2027-03-09 (17:59:47)
+   Sun: 2027-03-09 (17:59:47) - 2027-04-04 (10:27:27)
+
+Vimsottari Dasa:
+
+ Merc MD: 2018-10-07 (18:26:41) - 2035-10-07 (21:08:40)
+  Moon AD: 2025-11-06 (14:33:47) - 2027-04-04 (10:27:27)
+   Sat PD: 2026-06-12 (2:43:36) - 2026-09-04 (10:40:32)
+
+    Sookshma-antardasas in this PD:
+
+    Sat: 2026-06-12 (2:43:36) - 2026-06-25 (12:01:43)
+    Merc: 2026-06-25 (12:01:43) - 2026-07-07 (12:00:26)
+    Ket: 2026-07-07 (12:00:26) - 2026-07-12 (10:32:06)
+    Ven: 2026-07-12 (10:32:06) - 2026-07-26 (12:54:18)
+    Sun: 2026-07-26 (12:54:18) - 2026-07-30 (18:18:52)
+    Moon: 2026-07-30 (18:18:52) - 2026-08-06 (19:05:05)
+    Mars: 2026-08-06 (19:05:05) - 2026-08-11 (16:57:52)
+    Rah: 2026-08-11 (16:57:52) - 2026-08-24 (7:12:34)
+    Jup: 2026-08-24 (7:12:34) - 2026-09-04 (10:40:32)
+
+Vimsottari Dasa:
+
+ Merc MD: 2018-10-07 (18:26:41) - 2035-10-07 (21:08:40)
+  Moon AD: 2025-11-06 (14:33:47) - 2027-04-04 (10:27:27)
+   Sat PD: 2026-06-12 (2:43:36) - 2026-09-04 (10:40:32)
+    Merc SD: 2026-06-25 (12:01:43) - 2026-07-07 (12:00:26)
+
+     Praana-antardasas in this SD:
+
+     Merc: 2026-06-25 (12:01:43) - 2026-06-27 (4:48:51)
+     Ket: 2026-06-27 (4:48:51) - 2026-06-27 (21:36:38)
+     Ven: 2026-06-27 (21:36:38) - 2026-06-29 (21:36:21)
+     Sun: 2026-06-29 (21:36:21) - 2026-06-30 (12:00:21)
+     Moon: 2026-06-30 (12:00:21) - 2026-07-01 (12:00:24)
+     Mars: 2026-07-01 (12:00:24) - 2026-07-02 (4:48:27)
+     Rah: 2026-07-02 (4:48:27) - 2026-07-04 (0:00:38)
+     Jup: 2026-07-04 (0:00:38) - 2026-07-05 (14:24:41)
+     Sat: 2026-07-05 (14:24:41) - 2026-07-07 (12:00:26)
+
+Vimsottari Dasa:
+
+ Merc MD: 2018-10-07 (18:26:41) - 2035-10-07 (21:08:40)
+  Moon AD: 2025-11-06 (14:33:47) - 2027-04-04 (10:27:27)
+   Sat PD: 2026-06-12 (2:43:36) - 2026-09-04 (10:40:32)
+    Merc SD: 2026-06-25 (12:01:43) - 2026-07-07 (12:00:26)
+     Rah PAD: 2026-07-02 (4:48:27) - 2026-07-04 (0:00:38)
+
+      Deha-antardasas in this PAD:
+
+      Rah: 2026-07-02 (4:48:27) - 2026-07-02 (11:17:17)
+      Jup: 2026-07-02 (11:17:17) - 2026-07-02 (17:02:54)
+      Sat: 2026-07-02 (17:02:54) - 2026-07-02 (23:53:20)
+      Merc: 2026-07-02 (23:53:20) - 2026-07-03 (6:00:33)
+      Ket: 2026-07-03 (6:00:33) - 2026-07-03 (8:31:46)
+      Ven: 2026-07-03 (8:31:46) - 2026-07-03 (15:43:48)
+      Sun: 2026-07-03 (15:43:48) - 2026-07-03 (17:53:24)
+      Moon: 2026-07-03 (17:53:24) - 2026-07-03 (21:29:25)
+      Mars: 2026-07-03 (21:29:25) - 2026-07-04 (0:00:38)
+
+User 3
+Date: 1994-07-04
+Time: 14:15
+Place: New York City, New York, USA
+Latitude: 40.7128 N
+Longitude: 74.0060 W
+Timezone: America/New_York
+
+
+Body                    Longitude        Nakshatra Pada Rasi Navamsa
+
+Lagna                    1 Li 37' 20.37" Chit      3    Li   Li
+Sun - BK                18 Ge 45' 16.90" Ardr      4    Ge   Pi
+Moon - DK                1 Ta 45' 56.53" Krit      2    Ta   Cp
+Mars - PiK               6 Ta 48' 30.43" Krit      4    Ta   Pi
+Mercury (R) - AmK/PK     5 Ge 48' 16.40" Mrig      4    Ge   Sc
+Jupiter - MK            10 Li 59' 39.76" Swat      2    Li   Cp
+Venus - AK              28 Cn 48' 07.74" Asre      4    Cn   Pi
+Saturn (R)              18 Aq 30' 25.33" Sata      4    Aq   Pi
+Rahu - GK               27 Li 31' 43.09" Visa      3    Li   Ge
+Ketu                    27 Ar 31' 43.09" Krit      1    Ar   Sg
+Maandi                  19 Li 45' 44.13" Swat      4    Li   Pi
+Gulika                   8 Li 51' 55.91" Swat      1    Li   Sg
+Bhava Lagna             29 Li 04' 25.38" Visa      3    Li   Ge
+Hora Lagna               9 Pi 23' 33.86" UBha      2    Pi   Vi
+Ghati Lagna             10 Ar 20' 59.31" Aswi      4    Ar   Cn
+Vighati Lagna           15 Vi 08' 06.52" Hast      2    Vi   Ta
+Varnada Lagna            1 Vi 37' 20.37" UPha      2    Vi   Cp
+Sree Lagna              19 Aq 17' 46.80" Sata      4    Aq   Pi
+Pranapada Lagna         15 Cp 08' 06.52" Srav      2    Cp   Ta
+Indu Lagna               1 Cp 45' 56.53" USha      2    Cp   Cp
+Bhrigu Bindu            29 Cp 38' 49.81" Dhan      2    Cp   Vi
+Dhooma                   2 Sc 05' 16.90" Visa      4    Sc   Cn
+Vyatipata               27 Le 54' 43.10" UPha      1    Le   Sg
+Parivesha               27 Aq 54' 43.10" PBha      3    Aq   Ge
+Indra Chapa              2 Ta 05' 16.90" Krit      2    Ta   Cp
+Upaketu                 18 Ta 45' 16.90" Rohi      3    Ta   Ge
+Kaala                    5 Sg 29' 42.57" Mool      2    Sg   Ta
+Mrityu                  21 Cn 58' 20.66" Asre      2    Cn   Cp
+Artha Prahara           13 Le 48' 28.65" PPha      1    Le   Le
+Yama Ghantaka            5 Vi 51' 43.13" UPha      3    Vi   Aq
+Prana Sphuta            16 Ar 58' 37.78" Bhar      2    Ar   Vi
+Deha Sphuta             22 Ge 59' 28.18" Puna      1    Ge   Ar
+Mrityu Sphuta           20 Aq 48' 48.26" PBha      1    Aq   Ar
+Sookshma TriSphuta       0 Ge 46' 54.22" Mrig      3    Ge   Li
+Tithi Sphuta            13 Aq 00' 39.63" Sata      2    Aq   Cp
+Yoga Sphuta (Sun-Moon)  20 Cn 31' 13.44" Asre      2    Cn   Cp
+Rahu Tithi Sphuta        8 Le 46' 26.18" Magh      3    Le   Ge
+Kshetra Sphuta          19 Sg 34' 06.72" PSha      2    Sg   Vi
+Beeja Sphuta            28 Ar 33' 04.40" Krit      1    Ar   Sg
+TriSphuta               12 Ta 15' 12.82" Rohi      1    Ta   Ar
+ChatusSphuta             1 Le 00' 29.72" Magh      1    Le   Ar
+PanchaSphuta            28 Aq 32' 12.81" PBha      3    Aq   Ge
+AL                      25 Ta 58' 55.11" Mrig      1    Ta   Le
+A2                      11 Le 59' 40.48" Magh      4    Le   Cn
+A3                      20 Le 21' 59.14" PPha      3    Le   Li
+A4                       5 Ar 23' 30.29" Aswi      2    Ar   Ta
+A5                      23 Ar 26' 05.80" Bhar      4    Ar   Sc
+A6                      20 Ta 21' 59.14" Rohi      4    Ta   Cn
+A7                      11 Ge 59' 40.48" Ardr      2    Ge   Cp
+A8                      25 Cn 58' 55.11" Asre      3    Cn   Aq
+A9                       9 Pi 59' 12.42" UBha      2    Pi   Vi
+A10                      1 Pi 54' 32.69" PBha      4    Pi   Cn
+A11                      5 Ta 53' 13.43" Krit      3    Ta   Aq
+UL                       9 Sg 59' 12.42" Mool      3    Sg   Ge
+V2                       1 Sg 37' 20.37" Mool      1    Sg   Ar
+V3                       1 Ta 37' 20.37" Krit      2    Ta   Cp
+V4                       1 Ar 37' 20.37" Aswi      1    Ar   Ar
+V5                       1 Ta 37' 20.37" Krit      2    Ta   Cp
+V6                       1 Sg 37' 20.37" Mool      1    Sg   Ar
+V7                       1 Vi 37' 20.37" UPha      2    Vi   Cp
+V8                       1 Sg 37' 20.37" Mool      1    Sg   Ar
+V9                       1 Ta 37' 20.37" Krit      2    Ta   Cp
+V10                      1 Ar 37' 20.37" Aswi      1    Ar   Ar
+V11                      1 Ta 37' 20.37" Krit      2    Ta   Cp
+V12                      1 Sg 37' 20.37" Mool      1    Sg   Ar
+Kunda                   11 Aq 24' 30.31" Sata      2    Aq   Cp
+Yoga Sphuta             23 Li 51' 13.44" Visa      2    Li   Ta
+Avayoga Sphuta           0 Ta 31' 13.44" Krit      2    Ta   Cp
+
+House Start            Cusp             End              Planets in it
+
+1st    0 Li 00' 00.00"  1 Li 37' 20.37"  0 Sc 00' 00.00" As, Ju, Ra
+2nd    0 Sc 00' 00.00"  1 Sc 37' 20.37"  0 Sg 00' 00.00" Pl
+3rd    0 Sg 00' 00.00"  1 Sg 37' 20.37"  0 Cp 00' 00.00" Ne
+4th    0 Cp 00' 00.00"  1 Cp 37' 20.37"  0 Aq 00' 00.00" Ur
+5th    0 Aq 00' 00.00"  1 Aq 37' 20.37"  0 Pi 00' 00.00" Sa
+6th    0 Pi 00' 00.00"  1 Pi 37' 20.37"  0 Ar 00' 00.00" 
+7th    0 Ar 00' 00.00"  1 Ar 37' 20.37"  0 Ta 00' 00.00" Ke
+8th    0 Ta 00' 00.00"  1 Ta 37' 20.37"  0 Ge 00' 00.00" Mo, Ma
+9th    0 Ge 00' 00.00"  1 Ge 37' 20.37"  0 Cn 00' 00.00" Su, Me
+10th   0 Cn 00' 00.00"  1 Cn 37' 20.37"  0 Le 00' 00.00" Ve
+11th   0 Le 00' 00.00"  1 Le 37' 20.37"  0 Vi 00' 00.00" 
+12th   0 Vi 00' 00.00"  1 Vi 37' 20.37"  0 Li 00' 00.00" 
+
+Body                   D-1    D-9    D-10 (5-8) D-2 (US) D-3 (US) D-4    D-7 (7-1) D-12 (Trd) D-16 (Rev) D-20 (Trd) D-24 (Rev) D-27 (Trd) D-30   D-40   D-45   D-60 (RvAr) D-10 x D-9 D-0    D-5    D-6    D-8    D-11   D-81   D-108  D-144
+
+Lagna                   1Li37 14Li36 16Li13      3Ar15    4Li52    6Li29 11Li21    19Li28     25Ar57      2Ta27      8Vi56     13Sc48     18Ar40  4Ge54 13Ge00  7Cn20      26Aq01      0Ar00  8Ar07  9Ar44 12Ar59 17Li51 11Aq25 25Pi13 23Ta37
+Sun                    18Ge45 18Pi48  7Sg33      7Vi31   26Sc16   15Sg01 11Li17    15Cp03      0Li05     15Le06      0Sc07     26Aq23     22Ge38  0Ta11  3Ar58 15Ta17       7Ge55      0Ar00  3Ge46 22Cn32  0Cp02 26Le18 19Sg08 15Li30  0Cn41
+Moon                    1Ta46 15Cp53 12Vi21     26Cn28   24Vi42    7Ta04 17Sc38    21Ta11      1Sc45      5Cp19     17Ge37     17Le40     22Ta58 10Sg38 19Li27 14Sg03      21Ar05      0Ar00  8Ta50 10Li36 14Sg08 19Pi25 23Ta01 10Cn42 14Cp16
+Mars                    6Ta49  1Pi17 21Cn55     16Cn23    9Vi34   27Ta14 12Li20    21Cn42     11Le04     16Ar10     16Aq36      3Cp50     24Vi15  2Cn20  6Ge23 11Aq30      17Cp14      0Ar00  4Vi03 10Sc51 24Cp28 14Ta54 11Cn29 15Pi19 20Pi25
+Mercury                 5Ge48 22Sc14 28Cn03     11Le37   17Li25   23Ge13 10Cn38     9Le39      2Pi52     26Sc05     19Sg19      6Pi43     24Aq08 22Sc11 21Le12 18Pi16      12Pi25      0Ar00 29Ar01  4Ta50 16Vi26  3Ar51 20Cp10 26Cn54 25Sc51
+Jupiter                10Li60  8Cp57 19Cp57     21Ar59    2Sc59   13Cp59 16Sg58    11Aq56     25Vi55      9Sc53     23Ar52     26Cn51     29Sg50 19Ge47 14Le45 29Cp40      29Ge30      0Ar00 24Aq58  5Ge58 27Ge57  0Aq56 20Pi33 17Ar24 23Ge11
+Venus                  28Cn48 19Pi13 11Aq59      2Li24    3Cp36   25Ar13  8Cn23    15Ge38     19Ar10      6Sc03     28Le45     27Aq39     24Sc04 12Sg05  6Sc06 11Ge52      17Cp48      0Ar00 24Sc01 22Pi49 20Sc25 16Sc49 22Sg58 20Li38  7Sg31
+Saturn                 18Aq30 16Pi34  5Le04      7Cp01   25Sc31   14Le02  9Ge33    12Vi05     26Ta07     10Sg08     24Li10     19Aq41     15Ge13 20Ar17 22Sc49  0Ta25      15Ta38      0Ar00  2Ge32 21Cn03 28Ar03 23Sg35 29Sc04 18Vi46 25Cp01
+Rahu                   27Li32  7Ge45  5Cn17     25Ta03   22Sg35   20Cn07 12Ar42     0Vi21     20Ge27     10Li34      0Ge41     23Li16     15Li52 21Ar09  8Vi47  1Sc43      17Le35      0Ar00 17Li39 15Vi10 10Sc14  2Le49  9Sg49  3Vi06  4Vi07
+Ketu                   27Ar32  7Sg45  5Cp17     25Ta03   22Ge35   20Cp07 12Li42     0Pi21     20Ge27     10Li34      0Ge41     23Ar16     15Li52 21Ar09  8Vi47  1Sc43      17Aq35      0Ar00 17Li39 15Vi10 10Sc14  2Aq49  9Ge49  3Pi06  4Pi07
+Maandi                 19Li46 27Pi52 17Ar37      9Ta31   29Sc17   19Ar03 18Aq20    27Ta09     16Aq12      5Ta15     24Sc18     23Pi35     22Ge52 10Ge29 19Vi18 15Cn44       8Vi36      0Ar00  8Ge49 28Cn34  8Vi06  7Ta23 10Pi45  4Aq19 25Pi46
+Gulika                  8Li52 19Sg47 28Sg39     17Ar44   26Li36    5Cp28  2Sg04    16Cp23     21Le51     27Vi19      2Pi46     29Ta22     25Aq58 24Pi37  8Ta57 21Vi56      17Sg54      0Ar00 14Aq20 23Ta12 10Ge55  7Cp31 28Vi06 27Cn29 16Cn38
+Bhava Lagna            29Li04 21Ge40 20Cn44     28Ta09   27Sg13   26Cn18 23Ar31    18Vi53     15Cn11     11Sc28      7Cn46      4Sg59      2Li13 22Ge57 18Sc19  4Aq25       6Cp38      0Ar00 25Li22 24Vi27 22Sc35 19Le49 14Ar58 19Aq58 16Ar37
+Hora Lagna              9Pi24 24Vi32 26Ar04     11Pi13    1Pi49    7Ge34 24Cn15    22Ge43     29Li43      7Aq51     14Sg34     13Vi36     11Vi47 15Li43  2Aq40  6Vi26      24Sc39      0Ar00 16Vi58 26Sc21 15Li09 13Le19 10Le49 24Ge25  2Pi33
+Ghati Lagna            10Ar21  3Cn09 13Cn30     20Ar42    1Ta03   11Cn24 12Ge27     4Le12     15Vi36     26Li60      8Ar24      9Cp27     10Sg30 23Ta60 15Cn44 20Sg59       1Sc29      0Ar00 21Aq45  2Ge06 22Ge48 23Cn51 28Cn20  7Le47 20Vi22
+Vighati Lagna          15Vi08 16Ta13 28Le39     29Aq44   14Le36    0Pi32 14Sg03     1Pi37     27Cn50      2Ge42     26Cn45     18Le39      4Pi03  5Ge24 21Li05 21Vi53      17Sg50      0Ar00 15Pi41  0Cp49  1Sg05 16Ar29 25Ta57 14Sc36 19Pi28
+Varnada Lagna           1Vi37 14Pi36 13Sc47     26Pi45   25Vi08    6Cp29 18Ta39    19Cp28      4Sc03      2Ar27     21Aq04     13Ar48     18Vi40  4Cp54 13Ta00 22Sg40       3Sc59      0Ta00  8Vi07  9Cn44 12Sc59 17Pi51 11Cn25 25Aq13 23Ar37
+Sree Lagna             19Aq18 23Pi40 12Le58      8Cp36   27Sc53   17Le11 15Ge04    21Vi33      8Ge44     25Sg56     13Sc07     11Pi00      8Ge53 21Ta51 28Sg20 17Ge47      26Cn40      0Ar00  6Ge29 25Cn47  4Ta22  2Cp16  3Aq00 14Sg00 18Ta40
+Pranapada Lagna        15Cp08 16Ta13 28Sg39     29Li44   14Le36    0Cn32 14Ar03     1Cn37     27Sc50      2Aq42     26Cn45     18Le39      4Pi03  5Ge24 21Aq05 21Vi53      17Sg50      0Ar00 15Pi41  0Cp49  1Le05 16Sg29 25Ta57 14Sc36 19Cn28
+Indu Lagna              1Cp46 15Cp53 12Ta21     26Sc28   24Vi42    7Cp04 17Cn38    21Cp11      1Cn45      5Ta19     17Ge37     17Le40     22Ta58 10Sg38 19Ge27 14Sg03      21Ar05      0Ar00  8Ta50 10Li36 14Ar08 19Cn25 23Ta01 10Cn42 14Vi16
+Bhrigu Bindu           29Cp39 26Vi49  3Le32      0Li42    1Cn04   28Li35  2Cp28    25Sg46      5Ar39     22Sc57      8Le28     20Vi28     19Sc25 15Cp53 14Sg07 21Ar10       1Ta45      0Ar00 28Sc14 27Pi53 27Sc11 26Ta07  1Vi25 21Cn54  9Li12
+Dhooma                  2Sc05 18Cn48  9Pi07     25Cn49   23Pi44    8Sc21 15Ta23    25Sc03     26Li35     11Cp46      9Ge53     26Aq23      2Ta38 23Sg31  3Sc58 24Sc43      22Vi05      0Ar00 10Ta26 12Li32 16Sg42 22Vi58 19Sg08 15Aq30  0Vi41
+Vyatipata              27Le55 11Sg12  9Ta07     25Cp49   23Ge44   21Ta39 15Aq23     4Cn57     26Li35     18Ge14      9Ge53      3Ta37     27Li22  6Ta29 26Cp02 24Sc43      22Pi05      0Ar00 19Li34 17Vi28 13Cn18  7Li02 10Cn52 14Ar30 29Le19
+Parivesha              27Aq55 11Ge12  9Sc07     25Cp49   23Sg44   21Sc39 15Le23     4Cp57     26Li35     18Ge14      9Ge53      3Sc37     27Li22  6Ta29 26Cp02 24Sc43      22Vi05      0Ar00 19Li34 17Vi28 13Cn18  7Ar02 10Cp52 14Li30 29Aq19
+Indra Chapa             2Ta05 18Cp48  9Vi07     25Cn49   23Vi44    8Ta21 15Sc23    25Ta03     26Li35     11Cp46      9Ge53     26Le23      2Ta38 23Sg31  3Sc58 24Sc43      22Pi05      0Ar00 10Ta26 12Li32 16Sg42 22Pi58 19Ge08 15Le30  0Pi41
+Upaketu                18Ta45 18Ge48 22Pi27     22Ge29    3Le44   15Sc01 18Cn43    15Sg03     29Cp55     15Sg06     29Ar53     26Sc23     22Pi38  0Sc11  3Sg58 14Aq43      22Cp05      0Ar00  3Cp46 22Cp32  0Ta02 26Vi18 19Pi08 15Cp30  0Ge41
+Kaala                   5Sg30 19Ta27 24Cp57     10Le59   16Ar29   21Sg59  8Cp28     5Aq57     27Aq55     19Sc54     11Sg53     28Le22     14Aq51  9Sc48  7Le17 29Aq43      14Le34      0Ar00 27Ar29  2Ta58 13Vi58  0Li27 25Ge06 23Sg29 11Ar18
+Mrityu                 21Cn58 17Cp45 20Ar17     16Li03   24Cp05   27Cp53 26Le12    23Pi40      8Le26     19Ge27     12Aq40     23Le15     29Cp10  8Pi54 28Sg45  1Le39       2Li29      0Ar00 19Cp52 11Aq50 25Vi47  1Vi42  9Ge46  3Le01 14Sg02
+Artha Prahara          13Le48  4Le16 18Sg05     27Sg37   11Ta25   25Sc14  6Sc39    15Cp42     10Pi56      6Vi10      1Cn23     12Ar49     24Sg14 12Li19 21Ar21 18Cn29      12Vi43      0Ar00  9Sg02 22Ge51 20Pi28  1Ta53  8Ta27 21Vi16  8Cn21
+Yama Ghantaka           5Vi52 22Aq45  1Sg23     18Pi17   12Vi25   23Vi27 18Aq58    10Sc21     26Sg12     27Sc14      9Pi19      8Sg16     25Vi52 24Ta29 23Le47  8Ar17      12Ar25      0Ar00 29Ta19  5Sc10 16Vi54  4Cp29 24Ar49  3Sc06  4Pi08
+Prana Sphuta           16Ar59  2Vi48 19Vi46      3Ta57   20Ta56    7Li55 28Cn50    23Li44      1Cp38      9Pi33     17Vi27      8Cn23     29Sg19 19Aq05 13Ta58 28Cp38      27Ge57      0Ar00 24Sg53 11Cn52 15Le49  6Li45 25Cp09  3Li32 14Cn43
+Deha Sphuta            22Ge59 26Ar55 19Cp55     15Vi59    8Sg58    1Pi58 10Sc56     5Pi54      7Sg52      9Sc49     11Aq47     20Ge46     29Ge44 19Li39 14Li36 29Cp28      29Ge12      0Ar00 24Ge57 17Le57  3Aq56 12Li54  2Sg17 23Aq03 10Ta44
+Mrityu Sphuta          20Aq49  7Ar19 28Le08     11Cp38    2Sg26   23Le15 25Ge42     9Li46      3Cn01     26Cp16     19Sg31     21Ar58     24Ge24 22Cn32  6Pi36 18Vi48      13Sg12      0Ar00 14Ge04  4Le53 16Ta30 18Cp57  5Ge53 27Ge51 27Cp08
+Sookshma TriSphuta      0Ge47  7Li02  7Ge49      1Le34    2Li21    3Ge08  5Ge28     9Ge23     12Sg30     15Le38     18Le46     21Li06     23Ar27  1Ta16  5Cp11 16Ta54      10Sg21      0Ar00  3Ar55  4Ar41  6Le15  8Aq36  3Sg19 24Sg26 22Vi34
+Tithi Sphuta           13Aq01 27Cp06 10Ge07     26Sg01    9Sc02   22Ta03  1Ta05     6Cn08     28Aq11     20Le13     12Ge16     21Vi18      0Sg20 10Vi26 15Pi30  0Ge40       0Cp59      0Ar00  5Sg03 18Ge04 14Pi05 23Li07  3Vi54 25Sc11 13Vi35
+Yoga Sphuta (Sun-Moon) 20Cn31  4Cp41  4Ta48     18Li58   28Cp26   22Cp05  6Vi21     6Pi15      1Vi40     20Ta24     17Pi31     14Cn03     15Cp37 10Cp49 23Li25 28Li47      13Aq10      0Ar00 12Cp36  3Aq07 14Vi10 15Le43 12Aq09 26Aq12 14Ta56
+Rahu Tithi Sphuta       8Le46 18Ge58 27Li44     17Sg33   26Ar19    5Sc06  1Li25    15Sc17     20Sg23     25Ta29      0Pi34     26Sc54     23Aq13 20Pi57  4Vi50 16Vi26       9Ge39      0Ar00 13Aq52 22Ta39 10Aq11  6Pi31 20Pi41 17Cp35  3Ta27
+Kshetra Sphuta         19Sg34 26Vi07 15Ge41      9Vi08   28Ta42   18Ge16 16Ar59    24Cn49     13Li06      1Vi22     19Sc39     18Vi21     17Ge03  2Ge44 10Ta35  4Cn07      21Aq10      0Ar00  7Ge51 27Cn25  6Cp33  5Pi15 25Le03 13Cn24 27Ar52
+Beeja Sphuta           28Ar33 16Sg58 15Cp31     27Ta06   25Ge39   24Cp12 19Li52    12Pi37      6Cn49      1Sc01     25Ge14     20Ta53     16Li32  2Ge03 24Li48  3Cp04      19Ta37      0Ar00 22Li45 21Vi18 18Sc25 14Aq04  2Vi39 23Ge32  1Le23
+TriSphuta              12Ta15 20Ar17 27Ta28      5Cn30   23Le14   19Le01  4Vi14    27Vi03     13Ta57      5Le04      5Li55      0Ge51      7Pi36 10Aq09 11Aq25 14Pi47       7Vi11      0Ar00  1Pi16 13Sg31  8Pi02 14Cn47  2Li32  3Sg23 24Cn31
+ChatusSphuta            1Le00  9Ar04 10Le05      2Sg01    3Ar01    4Le02  7Le03    12Le06     16Le08     20Sg10     24Le12     27Ar13      0Ar15 10Ta20 15Vi22  0Ge30       0Cn45      0Ar00  5Ar02  6Ar03  8Sg04 11Sg05 21Ge40 18Cn53 25Sg11
+PanchaSphuta           28Aq32 16Ge50 15Sc22     27Cp04   25Sg37   24Sc09 19Le45    12Cp27      6Sc35      0Cn44     24Ge53     20Sc30     16Li06  1Ge29 24Aq10  2Cp13      18Sc19      0Ar00 22Li41 21Vi13 18Cn18 13Ar54  1Pi29 21Sg59 29Ta19
+AL                     25Ta59  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A2                     11Le60  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A3                     20Le22  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A4                      5Ar24  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A5                     23Ar26  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A6                     20Ta22  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A7                     11Ge60  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A8                     25Cn59  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A9                      9Pi59  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A10                     1Pi55  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A11                     5Ta53  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+UL                      9Sg59  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+V2                      1Sg37 14Aq36 16Sg13      3Ge15    4Sg52    6Aq29 11Ar21    19Aq28     25Sg57      2Ta27      8Cn56     13Cn48     18Sg40  4Aq54 13Ge00  7Pi20      26Le01      0Ge00  8Sg07  9Aq44 12Sg59 17Ar51 11Le25 25Sc13 23Cn37
+V3                      1Ta37 14Cn36 13Pi47     26Sc45   25Ta08    6Ta29 18Ta39    19Ta28      4Pi03      2Le27     21Li04     13Le48     18Ta40  4Ta54 13Vi00 22Ar40       3Sc59      0Vi00  8Ta07  9Pi44 12Pi59 17Cn51 11Sc25 25Li13 23Le37
+V4                      1Ar37 14Li36 16Ar13      3Li15    4Ar52    6Ge29 11Sg21    19Ge28     25Ar57      2Vi27      8Sc56     13Sc48     18Ar40  4Ge54 13Li00  7Cn20      26Le01      0Li00  8Ar07  9Aq44 12Ar59 17Le51 11Sg25 25Cn13 23Sc37
+V5                      1Ta37 14Sc36 13Cn47     26Cn45   25Ta08    6Vi29 18Vi39    19Vi28      4Cn03      2Sg27     21Aq04     13Sg48     18Ta40  4Vi54 13Cp00 22Le40       3Sc59      0Cp00  8Ta07  9Cn44 12Cn59 17Sc51 11Pi25 25Aq13 23Sg37
+V6                      1Sg37 14Ge36 16Le13      3Aq15    4Sg52    6Li29 11Le21    19Li28     25Le57      2Ta27      8Pi56     13Pi48     18Sg40  4Li54 13Aq00  7Sc20      26Le01      0Aq00  8Sg07  9Li44 12Le59 17Sg51 11Ar25 25Pi13 23Pi37
+V7                      1Vi37 14Pi36 13Sc47     26Pi45   25Vi08    6Cp29 18Ta39    19Cp28      4Sc03      2Ar27     21Aq04     13Ar48     18Vi40  4Cp54 13Ta00 22Sg40       3Sc59      0Ta00  8Vi07  9Cn44 12Sc59 17Pi51 11Cn25 25Aq13 23Ar37
+V8                      1Sg37 14Ge36 16Sg13      3Aq15    4Sg52    6Aq29 11Ar21    19Aq28     25Sg57      2Ta27      8Sc56     13Cn48     18Sg40  4Aq54 13Ge00  7Pi20      26Le01      0Ge00  8Sg07  9Aq44 12Sg59 17Ar51 11Le25 25Cn13 23Cn37
+V9                      1Ta37 14Sc36 13Pi47     26Cn45   25Ta08    6Ta29 18Ta39    19Ta28      4Pi03      2Sg27     21Li04     13Le48     18Ta40  4Ta54 13Vi00 22Ar40       3Sc59      0Vi00  8Ta07  9Pi44 12Pi59 17Cn51 11Sc25 25Li13 23Le37
+V10                     1Ar37 14Li36 16Ar13      3Li15    4Ar52    6Ge29 11Le21    19Ge28     25Ar57      2Vi27      8Cn56     13Sc48     18Ar40  4Ge54 13Li00  7Cn20      26Le01      0Li00  8Ar07  9Aq44 12Ar59 17Le51 11Sg25 25Sc13 23Sc37
+V11                     1Ta37 14Cn36 13Cn47     26Sc45   25Ta08    6Vi29 18Vi39    19Vi28      4Cn03      2Le27     21Aq04     13Sg48     18Ta40  4Vi54 13Cp00 22Le40       3Sc59      0Cp00  8Ta07  9Cn44 12Cn59 17Sc51 11Pi25 25Aq13 23Sg37
+V12                     1Sg37 14Aq36 16Le13      3Ge15    4Sg52    6Li29 11Sg21    19Li28     25Le57      2Ta27      8Pi56     13Pi48     18Sg40  4Li54 13Aq00  7Sc20      26Le01      0Aq00  8Sg07  9Li44 12Le59 17Sg51 11Ar25 25Pi13 23Pi37
+Kunda                  11Aq25 12Cp41 24Ta05     22Sg49    4Sc14   15Ta38 19Ar52    16Ge54      2Aq32     18Cn10      3Ta48      8Le02     12Sg15  6Cn20  3Cp23 24Aq30       6Le45      0Ar00 27Aq03  8Ge27  1Pi16  5Li30 24Ar05  2Ge07 22Sg49
+Yoga Sphuta            23Li51  4Ta41 28Ta32     17Ta42   11Sg34    5Cn25 16Pi59    16Cn15     21Ar40     27Cn04      2Pi29     14Cn03     25Ge37 24Sc09 23Pi25 21Pi13      16Vi50      0Ar00 29Ge16 23Le07 10Li50 22Ge23 12Aq09 26Ge12 14Cp56
+Avayoga Sphuta          0Ta31  4Cp41 24Vi48     28Cn58   28Vi26    2Ta05 26Sc21     6Ta15     21Sc40     10Sg24     17Cn31     14Cn03     15Ta37 20Li49 23Le25 28Aq47      13Le10      0Ar00  2Ta36  3Li07  4Sg10  5Pi43 12Aq09 26Aq12 14Cn56
+
+Vimsottari Dasa:
+
+ Maha Dasas:
+
+ Sun: 1992-03-16 (16:01:29) - 1998-03-17 (3:10:04)
+ Moon: 1998-03-17 (3:10:04) - 2008-03-16 (13:03:07)
+ Mars: 2008-03-16 (13:03:07) - 2015-03-17 (6:03:47)
+ Rah: 2015-03-17 (6:03:47) - 2033-03-16 (14:38:16)
+ Jup: 2033-03-16 (14:38:16) - 2049-03-16 (11:44:02)
+ Sat: 2049-03-16 (11:44:02) - 2068-03-16 (2:05:45)
+ Merc: 2068-03-16 (2:05:45) - 2085-03-16 (5:12:31)
+ Ket: 2085-03-16 (5:12:31) - 2092-03-15 (21:52:58)
+ Ven: 2092-03-15 (21:52:58) - 2112-03-16 (18:22:36)
+
+
+
+Vimsottari Dasa:
+
+ Rah MD: 2015-03-17 (6:03:47) - 2033-03-16 (14:38:16)
+
+  Antardasas in this MD:
+
+  Rah: 2015-03-17 (6:03:47) - 2017-11-30 (8:26:14)
+  Jup: 2017-11-30 (8:26:14) - 2020-04-21 (23:57:20)
+  Sat: 2020-04-21 (23:57:20) - 2023-02-27 (4:50:47)
+  Merc: 2023-02-27 (4:50:47) - 2025-09-19 (0:08:49)
+  Ket: 2025-09-19 (0:08:49) - 2026-10-07 (14:03:51)
+  Ven: 2026-10-07 (14:03:51) - 2029-10-07 (7:32:43)
+  Sun: 2029-10-07 (7:32:43) - 2030-08-31 (16:35:38)
+  Moon: 2030-08-31 (16:35:38) - 2032-02-27 (8:54:27)
+  Mars: 2032-02-27 (8:54:27) - 2033-03-16 (14:38:16)
+
+Vimsottari Dasa:
+
+ Rah MD: 2015-03-17 (6:03:47) - 2033-03-16 (14:38:16)
+  Ket AD: 2025-09-19 (0:08:49) - 2026-10-07 (14:03:51)
+
+   Pratyantardasas in this AD:
+
+   Ket: 2025-09-19 (0:08:49) - 2025-10-11 (10:40:59)
+   Ven: 2025-10-11 (10:40:59) - 2025-12-13 (3:33:32)
+   Sun: 2025-12-13 (3:33:32) - 2025-12-31 (16:56:45)
+   Moon: 2025-12-31 (16:56:45) - 2026-01-31 (15:36:23)
+   Mars: 2026-01-31 (15:36:23) - 2026-02-22 (10:49:34)
+   Rah: 2026-02-22 (10:49:34) - 2026-04-20 (14:34:53)
+   Jup: 2026-04-20 (14:34:53) - 2026-06-11 (20:33:58)
+   Sat: 2026-06-11 (20:33:58) - 2026-08-13 (12:15:25)
+   Merc: 2026-08-13 (12:15:25) - 2026-10-07 (14:03:51)
+
+Vimsottari Dasa:
+
+ Rah MD: 2015-03-17 (6:03:47) - 2033-03-16 (14:38:16)
+  Ket AD: 2025-09-19 (0:08:49) - 2026-10-07 (14:03:51)
+   Sat PD: 2026-06-11 (20:33:58) - 2026-08-13 (12:15:25)
+
+    Sookshma-antardasas in this PD:
+
+    Sat: 2026-06-11 (20:33:58) - 2026-06-21 (18:37:35)
+    Merc: 2026-06-21 (18:37:35) - 2026-06-30 (16:00:14)
+    Ket: 2026-06-30 (16:00:14) - 2026-07-04 (7:54:13)
+    Ven: 2026-07-04 (7:54:13) - 2026-07-14 (18:54:08)
+    Sun: 2026-07-14 (18:54:08) - 2026-07-17 (22:09:12)
+    Moon: 2026-07-17 (22:09:12) - 2026-07-23 (3:32:39)
+    Mars: 2026-07-23 (3:32:39) - 2026-07-26 (19:16:44)
+    Rah: 2026-07-26 (19:16:44) - 2026-08-05 (4:35:11)
+    Jup: 2026-08-05 (4:35:11) - 2026-08-13 (12:15:25)
+
+Vimsottari Dasa:
+
+ Rah MD: 2015-03-17 (6:03:47) - 2033-03-16 (14:38:16)
+  Ket AD: 2025-09-19 (0:08:49) - 2026-10-07 (14:03:51)
+   Sat PD: 2026-06-11 (20:33:58) - 2026-08-13 (12:15:25)
+    Ket SD: 2026-06-30 (16:00:14) - 2026-07-04 (7:54:13)
+
+     Praana-antardasas in this SD:
+
+     Ket: 2026-06-30 (16:00:14) - 2026-06-30 (21:07:52)
+     Ven: 2026-06-30 (21:07:52) - 2026-07-01 (11:46:52)
+     Sun: 2026-07-01 (11:46:52) - 2026-07-01 (16:10:34)
+     Moon: 2026-07-01 (16:10:34) - 2026-07-01 (23:30:04)
+     Mars: 2026-07-01 (23:30:04) - 2026-07-02 (4:37:43)
+     Rah: 2026-07-02 (4:37:43) - 2026-07-02 (17:48:50)
+     Jup: 2026-07-02 (17:48:50) - 2026-07-03 (5:32:02)
+     Sat: 2026-07-03 (5:32:02) - 2026-07-03 (19:27:05)
+     Merc: 2026-07-03 (19:27:05) - 2026-07-04 (7:54:13)
+
+
+
+
+vedic_04
+Date: 1988-11-20
+Time: 06:40
+Place: Sydney, New South Wales, Australia
+Latitude: 33.8688 S
+Longitude: 151.2093 E
+Timezone: Australia/Sydney
+
+Body                    Longitude        Nakshatra Pada Rasi Navamsa
+
+Lagna                   18 Sc 57' 41.31" Jye       1    Sc   Sg
+Sun - GK                 3 Sc 26' 09.16" Anu       1    Sc   Le
+Moon - BK               10 Sc 23' 11.51" Anu       3    Sc   Li
+Mars - DK                1 Vi 51' 42.83" UPha      2    Vi   Cp
+Mercury - AmK           23 Sc 30' 30.63" Jye       3    Sc   Aq
+Jupiter - AK            24 Aq 23' 29.21" PBha      2    Aq   Ta
+Venus - MK/PK            8 Sc 36' 35.85" Anu       2    Sc   Vi
+Saturn (R) - PiK         4 Ar 18' 03.86" Aswi      2    Ar   Ta
+Rahu                     2 Le 47' 28.59" Magh      1    Le   Ar
+Ketu                     2 Aq 47' 28.59" Dhan      3    Aq   Li
+Maandi                  12 Sg 45' 47.83" Mool      4    Sg   Cn
+Gulika                   0 Sg 49' 15.07" Mool      1    Sg   Ar
+Bhava Lagna             17 Sc 31' 30.56" Jye       1    Sc   Sg
+Hora Lagna               1 Sg 36' 51.96" Mool      1    Sg   Ar
+Ghati Lagna             13 Cp 52' 56.16" Srav      2    Cp   Ta
+Vighati Lagna           15 Le 13' 17.18" PPha      1    Le   Le
+Varnada Lagna           18 Sg 57' 41.31" PSha      2    Sg   Vi
+Sree Lagna              29 Ta 23' 52.16" Mrig      2    Ta   Vi
+Pranapada Lagna         15 Ar 13' 17.18" Bhar      1    Ar   Le
+Indu Lagna              10 Ge 23' 11.51" Ardr      2    Ge   Cp
+Bhrigu Bindu            21 Vi 35' 20.05" Hast      4    Vi   Cn
+Dhooma                  16 Pi 46' 09.16" Reva      1    Pi   Sg
+Vyatipata               13 Ar 13' 50.84" Aswi      4    Ar   Cn
+Parivesha               13 Li 13' 50.84" Swat      2    Li   Cp
+Indra Chapa             16 Vi 46' 09.16" Hast      3    Vi   Ge
+Upaketu                  3 Li 26' 09.16" Chit      4    Li   Sc
+Kaala                   26 Cp 24' 10.36" Dhan      1    Cp   Le
+Mrityu                   9 Pi 54' 58.40" UBha      2    Pi   Vi
+Artha Prahara            1 Ar 44' 31.20" Aswi      1    Ar   Ar
+Yama Ghantaka           23 Ar 15' 24.74" Bhar      3    Ar   Li
+Prana Sphuta             5 Aq 37' 41.62" Dhan      4    Aq   Sc
+Deha Sphuta             23 Li 54' 47.18" Visa      2    Li   Ta
+Mrityu Sphuta            9 Cn 10' 54.68" Push      2    Cn   Vi
+Sookshma TriSphuta       8 Sg 43' 23.48" Mool      3    Sg   Ge
+Tithi Sphuta             6 Ar 57' 02.35" Aswi      3    Ar   Ge
+Yoga Sphuta (Sun-Moon)  13 Ge 49' 20.67" Ardr      3    Ge   Aq
+Rahu Tithi Sphuta       29 Sg 21' 19.43" USha      1    Sg   Sg
+Kshetra Sphuta           6 Pi 38' 23.56" UBha      1    Pi   Le
+Beeja Sphuta             6 Ta 26' 14.23" Krit      3    Ta   Aq
+TriSphuta                0 Pi 10' 07.90" PBha      4    Pi   Cn
+ChatusSphuta             3 Li 36' 17.06" Chit      4    Li   Sc
+PanchaSphuta             6 Aq 23' 45.65" Dhan      4    Aq   Sc
+AL                      16 Ar 37' 15.87" Bhar      1    Ar   Le
+A2                      29 Ar 49' 17.12" Krit      1    Ar   Sg
+A3                      19 Ge 38' 26.40" Ardr      4    Ge   Pi
+A4                      19 Ta 38' 26.40" Rohi      3    Ta   Ge
+A5                      29 Cp 49' 17.12" Dhan      2    Cp   Vi
+A6                      14 Cp 45' 44.36" Srav      2    Cp   Ta
+A7                      28 Ar 15' 30.40" Krit      1    Ar   Sg
+A8                      28 Ar 03' 19.94" Krit      1    Ar   Sg
+A9                       1 Pi 48' 41.72" PBha      4    Pi   Cn
+A10                     17 Cp 54' 37.01" Srav      3    Cp   Ge
+A11                     28 Cp 03' 19.94" Dhan      2    Cp   Vi
+UL                      28 Sc 15' 30.40" Jye       4    Sc   Pi
+V2                      18 Vi 57' 41.31" Hast      3    Vi   Ge
+V3                      18 Le 57' 41.31" PPha      2    Le   Vi
+V4                      18 Cp 57' 41.31" Srav      3    Cp   Ge
+V5                      18 Ar 57' 41.31" Bhar      2    Ar   Vi
+V6                      18 Cp 57' 41.31" Srav      3    Cp   Ge
+V7                      18 Le 57' 41.31" PPha      2    Le   Vi
+V8                      18 Vi 57' 41.31" Hast      3    Vi   Ge
+V9                      18 Sg 57' 41.31" PSha      2    Sg   Vi
+V10                     18 Ta 57' 41.31" Rohi      3    Ta   Ge
+V11                     18 Ar 57' 41.31" Bhar      2    Ar   Vi
+V12                     18 Ta 57' 41.31" Rohi      3    Ta   Ge
+Kunda                    5 Li 52' 46.04" Chit      4    Li   Sc
+Yoga Sphuta             17 Vi 09' 20.67" Hast      3    Vi   Ge
+Avayoga Sphuta          23 Pi 49' 20.67" Reva      3    Pi   Aq
+
+House Start            Cusp             End              Planets in it
+
+1st    0 Sc 00' 00.00" 18 Sc 57' 41.31"  0 Sg 00' 00.00" As, Su, Mo, Me, Ve, Pl
+2nd    0 Sg 00' 00.00" 18 Sg 57' 41.31"  0 Cp 00' 00.00" 
+3rd    0 Cp 00' 00.00" 18 Cp 57' 41.31"  0 Aq 00' 00.00" Ur, Ne
+4th    0 Aq 00' 00.00" 18 Aq 57' 41.31"  0 Pi 00' 00.00" Ju, Ke
+5th    0 Pi 00' 00.00" 18 Pi 57' 41.31"  0 Ar 00' 00.00" 
+6th    0 Ar 00' 00.00" 18 Ar 57' 41.31"  0 Ta 00' 00.00" Sa
+7th    0 Ta 00' 00.00" 18 Ta 57' 41.31"  0 Ge 00' 00.00" 
+8th    0 Ge 00' 00.00" 18 Ge 57' 41.31"  0 Cn 00' 00.00" 
+9th    0 Cn 00' 00.00" 18 Cn 57' 41.31"  0 Le 00' 00.00" 
+10th   0 Le 00' 00.00" 18 Le 57' 41.31"  0 Vi 00' 00.00" Ra
+11th   0 Vi 00' 00.00" 18 Vi 57' 41.31"  0 Li 00' 00.00" Ma
+12th   0 Li 00' 00.00" 18 Li 57' 41.31"  0 Sc 00' 00.00" 
+
+Body                   D-1    D-9    D-10 (5-8) D-2 (US) D-3 (US) D-4    D-7 (7-1) D-12 (Trd) D-16 (Rev) D-20 (Trd) D-24 (Rev) D-27 (Trd) D-30   D-40   D-45   D-60 (RvAr) D-10 x D-9 D-0    D-5    D-6    D-8    D-11   D-81   D-108  D-144
+
+Lagna                  18Sc58 20Sg39 20Vi23     22Ge05    3Aq07   15Ta51 17Cp16    17Ge32     26Cp37     19Sg14     24Ar55      1Ge58     28Pi51  8Sc28 13Sg16  2Aq19       3Cn28      0Ar00  4Cp48 23Cp46  1Ta42 28Pi35  5Li53  7Le50  0Cp27
+Sun                     3Sc26  0Le55 25Aq38     23Cn08   19Pi42   13Sc45  5Ta57    11Sg14      5Li02      8Aq43      7Ta32      2Ar46     13Ta05 17Aq26  4Cp37  3Vi51      20Ta46      0Ar00 17Ta11 20Li37 27Sg29  7Li48  8Ar18 11Le04 14Ar46
+Moon                   10Sc23  3Li29 16Sg08      9Cn14   28Aq50   11Aq33 17Pi18     4Pi38     13Ge49     27Ge44     20Sc43     10Li26     11Vi36 25Sc28 17Sc24  6Cn48      25Le13      0Ar00 21Vi56  2Sg19 23Aq06 24Sg15  1Sc19 11Sc45 25Ar40
+Mars                    1Vi52 16Cp45 11Cp23     26Pi17   24Vi25    7Vi27 16Pi58    22Vi21      0Pi13      7Vi14     15Ge19     20Le16     25Ta51 14Sg29 23Aq47  8Sg17      12Ar26      0Ar00  9Ta19 11Li10 14Le54 20Sc29  0Ge49 21Cn05 28Ta07
+Mercury                23Sc31  1Aq35  4Le55     12Ge59   19Cp28    4Le02 15Sg26    12Le06     13Sc52     20Pi10      5Cp48      4Li44     15Cp15 10Ta20  7Cn53 29Ar29      14Ta14      0Ar00 27Cp33 21Aq03  8Ge04 18Ta36 14Li11 18Aq55 25Sg14
+Jupiter                24Aq23  9Ta31  3Li55     18Cp47   13Sg10    7Sc34 20Cn44    22Sc42      0Vi16      7Ar50     15Pi24     28Cn34     11Ge45 15Sg39 17Le37 23Ar29       5Sc14      0Ar00  1Li57 26Le21 15Ge08 28Aq18 25Pi42 24Le17  2Le22
+Venus                   8Sc37 17Vi29  3Cp54     12Cn47    4Pi10    4Aq26 29Pi44    13Aq19     12Cn14     22Ta12      3Cp22     22Le28     18Vi18 14Vi24 27Le27 23Li24       5Aq06      0Ar00 13Vi03 21Sc40  8Aq53  4Sg43  7Ge24 29Pi53  9Cn50
+Saturn                  4Ar18  8Ta43 13Ta01      8Ar36   12Ar54   17Ar12  0Ta06    21Ta37      8Ge49     26Ge01     13Sc14     26Cn08      9Ar02 22Vi03 13Li33 18Sg04      27Ar06      0Ar00 21Ar30 25Ar48  4Ta25 17Ta19 18Pi23 14Le31 19Cp21
+Rahu                    2Le47 25Ar07 27Le55      5Sg35    8Ar22   11Le10 19Le32     3Vi30     14Vi40     25Cp50      6Li59     15Ge22     23Ar44 21Cn39  5Sg36 17Vi29      11Sg13      0Ar00 13Ar57 16Ar45 22Sg20  0Cp42 16Sc06  1Aq27 11Li57
+Ketu                    2Aq47 25Li07 27Aq55      5Sg35    8Li22   11Aq10 19Aq32     3Pi30     14Vi40     25Cp50      6Li59     15Sg22     23Ar44 21Cn39  5Sg36 17Vi29      11Ge13      0Ar00 13Ar57 16Ar45 22Sg20  0Cn42 16Ta06  1Le27 11Ar57
+Maandi                 12Sg46 24Cn52  7Ar38     25Le32    8Ta17   21Pi03 29Aq21     3Ta10     24Ge13     15Ar16      6Ge19     14Pi37     22Sg54  0Vi32  4Cn21 15Ta48       8Ge42      0Ar00  3Sg49 16Ge35 12Sc06 20Sg24 13Aq50 28Ar26  7Ge55
+Gulika                  0Sg49  7Ar23  8Sg13      1Le39    2Ar28    3Sg17  5Sg45     9Sg51     13Sg08     16Le25     19Le42     22Ar10     24Ar38  2Ta50  6Cp56 19Ta15      13Ge53      0Ar00  4Ar06  4Ar56  6Le34  9Le02  6Ge29 28Ge39 28Pi12
+Bhava Lagna            17Sc32  7Sg44  4Li45     24Ge57    7Aq25   10Ta06 27Cp19     0Ge18     19Aq36     20Sc30     29Ta24     23Ar11     15Pi45 11Vi00  8Li38 28Ar29      12Sc44      0Ar00 27Pi38 15Cp09 20Ar12 12Pi47  9Ge32  2Pi43  3Ge37
+Hora Lagna              1Sg37 14Ar32 16Sg09      3Le14    4Ar51    6Sg27 11Sg18    19Sg22     25Sg50      2Vi17      8Vi45     13Ta35     18Ar26  4Ge35 12Aq39  6Cn52      25Le18      0Ar00  8Ar04  9Ar41 12Le55 17Le46 10Le46 24Vi22 22Cn29
+Ghati Lagna            13Cp53  4Ta56 11Cp11      2Sc14   18Le21   25Ar32 22Ar49    16Ge35     17Sg53      7Cp39     26Le50     14Cn49     26Pi28 15Ar17 24Sg42  7Sg04      10Ar36      0Ar00  9Pi25 23Sg18 21Cn03  2Sg42 14Aq28 29Ge17 19Sg03
+Vighati Lagna          15Le13 16Le60  2Cp13      0Cp27   15Ta40    0Aq53 16Sc33     2Aq39      3Ar33      4Li26      5Le19     20Ta59      6Sg39  8Sg51 24Ge58 13Li17      19Cp56      0Ar00 16Sg06  1Cn20  1Ar46 17Ta26  2Vi56 23Aq55  1Pi53
+Varnada Lagna          18Sg58 20Cp39  9Aq37      7Sc55   26Pi53   15Aq51 12Li44    17Pi32      3Li23     19Ta14      5Vi05      1Sc58     28Ar51  8Aq28 13Sc16 27Ta41      26Sg32      0Ta00  4Aq48 23Aq46  1Li42 28Sg35  5Pi53  7Ta50  0Ar27
+Sree Lagna             29Ta24 24Vi35  6Sg01      1Ge12    1Cn48   27Aq35  4Ta13    22Ar46      9Le38     17Cn57     14Le27     13Vi44     11Sc56  5Cp55  2Ar54  6Ta08      24Ta12      0Ar00 26Sc59 26Pi23 25Cn11 23Cp23 11Le13 24Ge58  3Cp17
+Pranapada Lagna        15Ar13 16Le60  2Vi13      0Ta27   15Ta40    0Li53 16Cn33     2Li39      3Sg33      4Aq26      5Le19     20Ta59      6Sg39  8Sg51 24Aq58 13Li17      19Cp56      0Ar00 16Sg06  1Cn20  1Le46 17Vi26  2Vi56 23Aq55  1Sc53
+Indu Lagna             10Ge23  3Cp29 13Vi52     20Le46    1Sc10   11Vi33 12Le42     4Li38     16Ta11     27Aq44      9Ar17     10Cn26     11Sg36 25Ta28 17Pi24 23Sg12       4Ta47      0Ar00 21Aq56  2Ge19 23Li06 24Ta15  1Aq19 11Aq45 25Sc40
+Bhrigu Bindu           21Vi35 14Cn18 24Ge07     16Aq49   25Cn14   26Pi21 28Li53    19Ta04     14Ar35     11Li47     21Aq52     12Aq54     17Cp40 23Aq33 11Le30 24Le40       6Ta60      0Ar00 17Cp57  9Aq32 22Cp43 27Ge29  8Sc42 21Sg36 18Sg48
+Dhooma                 16Pi46  0Sg55 12Aq18     26Aq28    9Aq42    7Vi05  2Ge37    21Vi14      1Cn42      5Cn23     17Ge32      2Ar46     23Pi05 10Le46  4Cp37 13Ge51      20Cp46      0Ar00 23Pi51 10Cp37 14Sg09  4Sc28  8Ar18 11Sg04 14Ta46
+Vyatipata              13Ar14 29Cn05 12Le18     26Ar28    9Ta42   22Cn55  2Cn37     8Vi46      1Sc42     24Sg37     17Ge32     27Pi14      6Sg55 19Vi14 25Sc23 13Ge51      20Cn46      0Ar00  6Sg09 19Ge23 15Cn51 25Le32 21Pi42 18Ge56 15Sg14
+Parivesha              13Li14 29Cp05 12Aq18     26Ar28    9Sc42   22Cp55  2Cp37     8Pi46      1Sc42     24Sg37     17Ge32     27Vi14      6Sg55 19Vi14 25Sc23 13Ge51      20Cp46      0Ar00  6Sg09 19Ge23 15Cn51 25Aq32 21Vi42 18Sg56 15Ge14
+Indra Chapa            16Vi46  0Ge55 12Le18     26Aq28    9Le42    7Pi05  2Sg37    21Pi14      1Cn42      5Cn23     17Ge32      2Li46     23Pi05 10Le46  4Cp37 13Ge51      20Cn46      0Ar00 23Pi51 10Cp37 14Sg09  4Ta28  8Li18 11Ge04 14Sc46
+Upaketu                 3Li26  0Sc55  4Sc22      6Ar52   10Li18   13Li45 24Li03    11Sc14     24Ta58      8Ge43     22Li28      2Cp46     13Ar05 17Le26  4Vi37 26Li09       9Le14      0Ar00 17Ar11 20Ar37 27Ar29  7Sc48  8Cn18 11Sc04 14Pi46
+Kaala                  26Cp24 27Le38  5Vi58      7Li12   10Cn47   15Li37 25Cp11    16Sc50     27Ta33     18Vi03     26Li20     22Ge53     12Sc05  6Vi07 18Cn08  5Sc50      23Aq44      0Ar00 12Sc01  8Pi25  1Sc13 20Ar26  8Sg38  1Cn31 22Ta01
+Mrityu                  9Pi55 29Vi15 20Ar50     10Pi10    0Pi15    9Ge40 20Cn35    28Ge60     21Li20     18Aq19      2Sg01     27Vi44     27Vi29  6Sc39 26Aq14  5Le02       7Li32      0Ar00 19Vi35 29Sc30 19Li20 19Le05 23Vi13 20Le57 17Ta56
+Artha Prahara           1Ar45 15Ar41 17Ar25      3Ar29    5Ar14    6Ar58 12Ar12    20Ar54     27Ar52      4Ta50     11Vi48     17Ta02     22Ar16  9Ge41 18Ge23 14Cn31       6Vi47      0Ar00  8Ar43 10Ar27 13Ar56 19Ar10 21Le06  8Li08 10Sg51
+Yama Ghantaka          23Ar15 29Li19 22Sc34     16Ta31    9Ge46    3Cp02 12Vi48     9Cp05     12Ar07     15Cn08     18Aq10     27Sg56      7Ge42  0Sc16 26Aq34 15Aq25      23Cp07      0Ar00 26Ge17 19Le32  6Li03 15Sg50 23Ge48 21Vi45 18Ar59
+Prana Sphuta            5Aq38 20Sc39 26Pi17     11Sg15   16Li53   22Aq31  9Pi24     7Ar32      0Sc03     22Pi34     15Sg05      1Pi58     18Aq51 15Sc08 13Ar16  7Pi42      26Aq32      0Ar00 28Ar08  3Ta46 15Cp02  1Le55  5Cp53  7Cn51  0Cn28
+Deha Sphuta            23Li55  5Ta13 29Ta08     17Ta50   11Sg44    5Cn39 17Pi24    16Cn57     22Ar37     28Cn16      3Pi55     15Cn39     27Ge24 26Sc31 26Pi05 24Pi47      22Vi11      0Ar00 29Ge34 23Le29 11Li18 23Ge03 16Aq58  2Cn37 23Cp29
+Mrityu Sphuta           9Cn11 22Vi38 28Le11     11Sc38    2Pi27    6Li44 25Sc44    20Li11      3Pi05      3Li38     19Sg38      7Vi55      5Vi27  7Li16 23Ta11 19Vi05      13Sg38      0Ar00 15Vi55 25Sc05 13Ge27 11Ar00 23Cn44  1Ge38  2Ge11
+Sookshma TriSphuta      8Sg43 18Ge31 27Aq14     17Le27   26Ar10    4Pi54  1Aq04    14Pi41     19Ar34     24Cp28     29Aq21     25Sc32     21Aq42 18Pi56  2Cp33 13Vi23       5Ge05      0Ar00 13Aq37 22Ta20  9Li47  5Sc57 16Pi35 12Cp06 26Le08
+Tithi Sphuta            6Ar57  2Ge33  9Ge30     13Ar54   20Ar51   27Ar48 18Ta39    23Ge24     21Cn13     19Le01     16Cp49      7Li40     28Aq31  8Cp02 12Aq47 27Ta02      25Sg34      0Ar00  4Aq45 11Ta42 25Ta36 16Ge27 23Li00  0Cn40 10Pi54
+Yoga Sphuta (Sun-Moon) 13Ge49  4Aq24 18Li13     27Le39   11Sc28   25Vi17  6Vi45    15Sc52     11Cn10      6Ta27      1Cn44     13Li12     24Sg40 12Li54 22Le01 19Cn21      14Pi01      0Ar00  9Sg07 22Ge56 20Sc35  2Cn03  9Sc37 22Pi49 10Ta26
+Rahu Tithi Sphuta      29Sg21 24Sg12 23Vi33     28Vi43   28Ge04   27Vi25 25Ge29    22Sc16     19Pi41     17Pi06     14Cn32     12Ge36     10Li40  4Cn13  0Le60 21Aq19       1Le59      0Ar00 26Li47 26Vi08 24Pi51 22Ge55  7Sc47 20Vi23 27Cn11
+Kshetra Sphuta          6Pi38 29Le46 23Ta36     16Pi43   10Pi05   26Pi34 13Le31    19Ta41     13Sg46     12Sg48     20Aq39     29Ge17     19Vi12 25Ge36 28Vi48 21Aq36       2Le25      0Ar00  3Vi12  9Sc50 23Vi07 13Cn02 27Sg50 27Cn06 26Sg09
+Beeja Sphuta            6Ta26 27Aq56 25Cn38     17Cn08   10Vi41   25Ta45 14Li56    17Cn15     17Le00      8Ar45     25Aq30     23Sg48     13Vi07 17Ge29 19Ta41  3Pi46      20Aq39      0Ar00  2Vi11  8Sc37 21Cp30 10Ta49 11Ge25  5Cp14 26Cp58
+TriSphuta               0Pi10  1Cn31 28Cn19     29Pi40   29Pi30    0Pi41 28Vi49     2Pi02     27Pi18      3Le23     25Cn57      4Cp34      5Ta04  6Li45  7Sg36 19Pi52      14Pi48      0Ar00  0Ta51  1Li01  1Le21  1Ta51 13Cn41 18Cn14 24Pi19
+ChatusSphuta            3Li36  2Sc27  6Sc03      7Ar13   10Li49   14Li25 25Li14    13Sc15     27Ta41     12Ge06     26Li31      7Cp20     18Ar09 24Le11 12Vi13  6Sc17      24Le26      0Ar00 18Ar01 21Ar38 28Ar50  9Sc39 21Cn59 29Sc19  9Ar05
+PanchaSphuta            6Aq24 27Sc34  3Ar58     12Sg48   19Li11   25Aq35 14Pi46    16Ar45     12Sc20      7Ar55      3Cp30     22Pi42     11Aq53 15Sg50 17Ta49 23Ar46       5Ta38      0Ar00  1Aq59  8Ta23 21Cp10 10Le21  8Pi05  0Li46 21Li02
+AL                     16Ar37  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A2                     29Ar49  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A3                     19Ge38  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A4                     19Ta38  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A5                     29Cp49  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A6                     14Cp46  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A7                     28Ar16  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A8                     28Ar03  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A9                      1Pi49  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A10                    17Cp55  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A11                    28Cp03  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+UL                     28Sc16  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+V2                     18Vi58 20Aq39 20Cn23     22Sg05    3Ar07   15Pi51 17Sc16    17Ar32     26Sc37     19Sg14     24Sg55      1Li58     28Cp51  8Pi28 13Sg16  2Sg19       3Cp28      0Ge00  4Pi48 23Pi46  1Cn42 28Vi35  5Ar53  7Ar50  0Cn27
+V3                     18Le58 20Ta39  9Li37      7Pi55   26Cn53   15Aq51 12Ge44    17Cn32      3Ge23     19Vi14      5Ta05      1Cn58     28Le51  8Aq28 13Pi16 27Vi41      26Sg32      0Vi00  4Aq48 23Aq46  1Aq42 28Sg35  5Cn53  7Ta50  0Le27
+V4                     18Cp58 20Ge39 20Sc23     22Ar05    3Le07   15Cn51 17Pi16    17Le32     26Pi37     19Le14     24Ar55      1Aq58     28Vi51  8Cn28 13Ar16  2Sg19       3Cp28      0Li00  4Sc48 23Sc46  1Pi42 28Ta35  5Le53  7Sg50  0Sc27
+V5                     18Ar58 20Vi39  9Aq37      7Cn55   26Sc53   15Li51 12Ge44    17Sc32      3Ge23     19Ta14      5Ta05      1Pi58     28Sg51  8Li28 13Cn16 27Ta41      26Sg32      0Cp00  4Li48 23Li46  1Aq42 28Ar35  5Sc53  7Vi50  0Sg27
+V6                     18Cp58 20Li39 20Pi23     22Le05    3Sg07   15Cn51 17Sc16    17Sg32     26Sc37     19Ar14     24Sg55      1Aq58     28Ta51  8Cn28 13Le16  2Ar19       3Cp28      0Aq00  4Cn48 23Cn46  1Cn42 28Ta35  5Sg53  7Le50  0Pi27
+V7                     18Le58 20Cp39  9Aq37      7Sc55   26Pi53   15Aq51 12Li44    17Pi32      3Li23     19Ta14      5Vi05      1Cn58     28Ar51  8Aq28 13Sc16 27Ta41      26Sg32      0Ta00  4Aq48 23Aq46  1Li42 28Sg35  5Pi53  7Cp50  0Ar27
+V8                     18Vi58 20Aq39 20Sc23     22Sg05    3Ar07   15Pi51 17Cn16    17Ar32     26Cn37     19Le14     24Sg55      1Li58     28Ta51  8Pi28 13Sg16  2Sg19       3Cp28      0Ge00  4Pi48 23Pi46  1Sc42 28Vi35  5Ar53  7Ar50  0Cn27
+V9                     18Sg58 20Ta39  9Li37      7Pi55   26Cn53   15Aq51 12Aq44    17Cn32      3Aq23     19Vi14      5Ta05      1Sc58     28Sg51  8Aq28 13Pi16 27Vi41      26Sg32      0Vi00  4Aq48 23Aq46  1Aq42 28Sg35  5Cn53  7Cp50  0Le27
+V10                    18Ta58 20Ge39 20Cn23     22Ar05    3Le07   15Cn51 17Pi16    17Le32     26Pi37     19Sg14     24Ar55      1Ge58     28Vi51  8Cn28 13Ar16  2Sg19       3Cp28      0Li00  4Cn48 23Cn46  1Pi42 28Ta35  5Le53  7Le50  0Sc27
+V11                    18Ar58 20Vi39  9Aq37      7Cn55   26Sc53   15Li51 12Aq44    17Sc32      3Aq23     19Ta14      5Ta05      1Pi58     28Le51  8Li28 13Cn16 27Ta41      26Sg32      0Cp00  4Li48 23Li46  1Aq42 28Ar35  5Sc53  7Vi50  0Sg27
+V12                    18Ta58 20Li39 20Pi23     22Le05    3Sg07   15Cn51 17Cn16    17Sg32     26Cn37     19Ar14     24Sg55      1Ge58     28Cp51  8Cn28 13Le16  2Ar19       3Cp28      0Aq00  4Sc48 23Sc46  1Sc42 28Ta35  5Sg53  7Sg50  0Pi27
+Kunda                   5Li53 22Sc55 28Sc48     11Ar46   17Li38   23Li31 11Sc09    10Sg33      4Cn04     27Cn35     21Sg06      8Pi45     26Aq23 25Sc11 24Sg35 22Pi46      19Pi09      0Ar00 29Ar24  5Ta17 17Ta02  4Sg40 26Cp14  4Le59  6Ar38
+Yoga Sphuta            17Vi09  4Ge24  8Le27     25Aq41    8Le32    8Pi37 29Sc55    25Pi52     25Ge30     13Cn07      8Ge16     13Li12      4Pi40 26Le14 22Cp01 20Ta39      15Ge59      0Ar00 25Pi47 12Cp56 17Sg15  8Ta43  9Sc37 22Cn49 10Cp26
+Avayoga Sphuta         23Pi49  4Aq24  1Sg47     12Aq21   18Cp32    5Sg17 13Ar15    15Sg52      8Pi50     26Sc27     28Sg16     13Li12     24Cp40 22Ta54 22Sc01 10Ar39      15Ar59      0Ar00 29Cp07 22Aq56 10Aq35 22Cp03  9Sc37 22Pi49 10Ge26
+
+Vimsottari Dasa:
+
+ Maha Dasas:
+
+ Sat: 1988-11-01 (15:37:48) - 2007-11-02 (6:11:33)
+ Merc: 2007-11-02 (6:11:33) - 2024-11-01 (9:07:19)
+ Ket: 2024-11-01 (9:07:19) - 2031-11-02 (1:48:18)
+ Ven: 2031-11-02 (1:48:18) - 2051-11-01 (22:06:45)
+ Sun: 2051-11-01 (22:06:45) - 2057-11-01 (9:03:39)
+ Moon: 2057-11-01 (9:03:39) - 2067-11-01 (19:13:20)
+ Mars: 2067-11-01 (19:13:20) - 2074-11-01 (11:56:24)
+ Rah: 2074-11-01 (11:56:24) - 2092-10-31 (20:41:46)
+ Jup: 2092-10-31 (20:41:46) - 2108-11-01 (17:39:27)
+
+Vimsottari Dasa:
+
+ Ket MD: 2024-11-01 (9:07:19) - 2031-11-02 (1:48:18)
+
+  Antardasas in this MD:
+
+  Ket: 2024-11-01 (9:07:19) - 2025-03-26 (20:38:32)
+  Ven: 2025-03-26 (20:38:32) - 2026-05-27 (16:52:42)
+  Sun: 2026-05-27 (16:52:42) - 2026-10-05 (15:56:59)
+  Moon: 2026-10-05 (15:56:59) - 2027-05-03 (1:38:20)
+  Mars: 2027-05-03 (1:38:20) - 2027-10-02 (20:36:49)
+  Rah: 2027-10-02 (20:36:49) - 2028-10-20 (7:19:37)
+  Jup: 2028-10-20 (7:19:37) - 2029-09-26 (5:38:41)
+  Sat: 2029-09-26 (5:38:41) - 2030-11-04 (19:46:50)
+  Merc: 2030-11-04 (19:46:50) - 2031-11-02 (1:48:18)
+
+Vimsottari Dasa:
+
+ Ket MD: 2024-11-01 (9:07:19) - 2031-11-02 (1:48:18)
+  Sun AD: 2026-05-27 (16:52:42) - 2026-10-05 (15:56:59)
+
+   Pratyantardasas in this AD:
+
+   Sun: 2026-05-27 (16:52:42) - 2026-06-03 (6:34:38)
+   Moon: 2026-06-03 (6:34:38) - 2026-06-14 (5:57:29)
+   Mars: 2026-06-14 (5:57:29) - 2026-06-21 (22:37:31)
+   Rah: 2026-06-21 (22:37:31) - 2026-07-11 (18:18:41)
+   Jup: 2026-07-11 (18:18:41) - 2026-07-29 (8:39:24)
+   Sat: 2026-07-29 (8:39:24) - 2026-08-19 (4:03:44)
+   Merc: 2026-08-19 (4:03:44) - 2026-09-06 (15:45:09)
+   Ket: 2026-09-06 (15:45:09) - 2026-09-14 (5:14:10)
+   Ven: 2026-09-14 (5:14:10) - 2026-10-05 (15:56:59)
+
+Vimsottari Dasa:
+
+ Ket MD: 2024-11-01 (9:07:19) - 2031-11-02 (1:48:18)
+  Sun AD: 2026-05-27 (16:52:42) - 2026-10-05 (15:56:59)
+   Rah PD: 2026-06-21 (22:37:31) - 2026-07-11 (18:18:41)
+
+    Sookshma-antardasas in this PD:
+
+    Rah: 2026-06-21 (22:37:31) - 2026-06-24 (21:56:16)
+    Jup: 2026-06-24 (21:56:16) - 2026-06-27 (13:21:18)
+    Sat: 2026-06-27 (13:21:18) - 2026-06-30 (16:41:10)
+    Merc: 2026-06-30 (16:41:10) - 2026-07-03 (12:05:51)
+    Ket: 2026-07-03 (12:05:51) - 2026-07-04 (15:51:19)
+    Ven: 2026-07-04 (15:51:19) - 2026-07-07 (23:09:15)
+    Sun: 2026-07-07 (23:09:15) - 2026-07-08 (22:56:20)
+    Moon: 2026-07-08 (22:56:20) - 2026-07-10 (14:34:23)
+    Mars: 2026-07-10 (14:34:23) - 2026-07-11 (18:18:41)
+
+Vimsottari Dasa:
+
+ Ket MD: 2024-11-01 (9:07:19) - 2031-11-02 (1:48:18)
+  Sun AD: 2026-05-27 (16:52:42) - 2026-10-05 (15:56:59)
+   Rah PD: 2026-06-21 (22:37:31) - 2026-07-11 (18:18:41)
+    Ket SD: 2026-07-03 (12:05:51) - 2026-07-04 (15:51:19)
+
+     Praana-antardasas in this SD:
+
+     Ket: 2026-07-03 (12:05:51) - 2026-07-03 (13:43:00)
+     Ven: 2026-07-03 (13:43:00) - 2026-07-03 (18:20:35)
+     Sun: 2026-07-03 (18:20:35) - 2026-07-03 (19:43:52)
+     Moon: 2026-07-03 (19:43:52) - 2026-07-03 (22:02:39)
+     Mars: 2026-07-03 (22:02:39) - 2026-07-03 (23:39:48)
+     Rah: 2026-07-03 (23:39:48) - 2026-07-04 (3:49:37)
+     Jup: 2026-07-04 (3:49:37) - 2026-07-04 (7:31:41)
+     Sat: 2026-07-04 (7:31:41) - 2026-07-04 (11:55:23)
+     Merc: 2026-07-04 (11:55:23) - 2026-07-04 (15:51:19)
+
+
+User 5
+Date: 1976-03-07
+Time: 16:20
+Timezone: GMT+5:30
+Place: Mumbai, Maharashtra, India
+Latitude: 19.0760 N
+Longitude: 72.8777 E
+
+Body                    Longitude        Nakshatra Pada Rasi Navamsa
+
+Lagna                   21 Cn 08' 21.95" Asre      2    Cn   Cp
+Sun - AmK               23 Aq 28' 52.01" PBha      2    Aq   Ta
+Moon - MK/PiK            3 Ta 55' 03.79" Krit      3    Ta   Aq
+Mars - DK                1 Ge 51' 31.40" Mrig      3    Ge   Li
+Mercury                  3 Aq 17' 23.92" Dhan      3    Aq   Li
+Jupiter                  2 Ar 15' 46.26" Aswi      1    Ar   Ar
+Venus - AK              27 Cp 07' 27.18" Dhan      2    Cp   Vi
+Saturn (R) - PK/GK       2 Cn 52' 24.72" Puna      4    Cn   Cn
+Rahu - BK               22 Li 13' 14.32" Visa      1    Li   Ar
+Ketu                    22 Ar 13' 14.32" Bhar      3    Ar   Li
+Maandi                  22 Cn 54' 13.80" Asre      2    Cn   Cp
+Gulika                  12 Cn 58' 07.82" Push      3    Cn   Li
+Bhava Lagna             14 Cn 49' 21.87" Push      4    Cn   Sc
+Hora Lagna               6 Sg 09' 51.73" Mool      2    Sg   Ta
+Ghati Lagna             10 Aq 11' 21.32" Sata      2    Aq   Cp
+Vighati Lagna            0 Cp 18' 49.24" USha      2    Cp   Cp
+Varnada Lagna           21 Ar 08' 21.95" Bhar      3    Ar   Li
+Sree Lagna               6 Aq 55' 04.16" Sata      1    Aq   Sg
+Pranapada Lagna          0 Vi 18' 49.24" UPha      2    Vi   Cp
+Indu Lagna               3 Pi 55' 03.79" UBha      1    Pi   Le
+Bhrigu Bindu            28 Cp 04' 09.05" Dhan      2    Cp   Vi
+Dhooma                   6 Cn 48' 52.01" Push      2    Cn   Vi
+Vyatipata               23 Sg 11' 07.99" PSha      3    Sg   Li
+Parivesha               23 Ge 11' 07.99" Puna      1    Ge   Ar
+Indra Chapa              6 Cp 48' 52.01" USha      4    Cp   Pi
+Upaketu                 23 Cp 28' 52.01" Dhan      1    Cp   Le
+Kaala                    7 Pi 13' 07.19" UBha      2    Pi   Vi
+Mrityu                   0 Ta 24' 26.29" Krit      2    Ta   Cp
+Artha Prahara           22 Ta 54' 12.21" Rohi      4    Ta   Cn
+Yama Ghantaka           13 Ge 25' 50.13" Ardr      3    Ge   Aq
+Prana Sphuta            28 Cp 39' 57.59" Dhan      2    Cp   Vi
+Deha Sphuta             14 Ar 18' 38.10" Bhar      1    Ar   Le
+Mrityu Sphuta           24 Aq 15' 46.74" PBha      2    Aq   Ta
+Sookshma TriSphuta       7 Cp 14' 22.43" USha      4    Cp   Pi
+Tithi Sphuta            10 Ge 26' 11.78" Ardr      2    Ge   Cp
+Yoga Sphuta (Sun-Moon)  27 Pi 23' 55.79" Reva      4    Pi   Pi
+Rahu Tithi Sphuta       28 Sc 44' 22.31" Jye       4    Sc   Pi
+Kshetra Sphuta           8 Cn 02' 21.44" Push      2    Cn   Vi
+Beeja Sphuta            22 Sg 52' 05.44" PSha      3    Sg   Li
+TriSphuta                8 Sg 01' 33.56" Mool      3    Sg   Ge
+ChatusSphuta             1 Sc 30' 25.57" Visa      4    Sc   Cn
+PanchaSphuta            23 Ta 43' 39.89" Mrig      1    Ta   Le
+AL                      16 Aq 41' 45.62" Sata      4    Aq   Pi
+A2                      25 Ta 49' 22.06" Mrig      1    Ta   Le
+A3                      15 Ge 26' 25.88" Ardr      3    Ge   Aq
+A4                       3 Aq 06' 32.40" Dhan      3    Aq   Li
+A5                      23 Vi 18' 06.69" Hast      4    Vi   Cn
+A6                      13 Cn 23' 10.56" Push      4    Cn   Sc
+A7                      14 Sg 36' 27.48" PSha      1    Sg   Le
+A8                      14 Sc 36' 27.48" Anu       4    Sc   Sc
+A9                      13 Ar 23' 10.56" Bhar      1    Ar   Le
+A10                     12 Cn 34' 40.84" Push      3    Cn   Li
+A11                      3 Li 06' 32.40" Chit      3    Li   Li
+UL                      15 Vi 26' 25.88" Hast      2    Vi   Ta
+V2                      21 Ta 08' 21.95" Rohi      4    Ta   Cn
+V3                      21 Sg 08' 21.95" PSha      3    Sg   Li
+V4                      21 Vi 08' 21.95" Hast      4    Vi   Cn
+V5                      21 Sg 08' 21.95" PSha      3    Sg   Li
+V6                      21 Ta 08' 21.95" Rohi      4    Ta   Cn
+V7                      21 Ar 08' 21.95" Bhar      3    Ar   Li
+V8                      21 Ta 08' 21.95" Rohi      4    Ta   Cn
+V9                      21 Sg 08' 21.95" PSha      3    Sg   Li
+V10                     21 Vi 08' 21.95" Hast      4    Vi   Cn
+V11                     21 Sg 08' 21.95" PSha      3    Sg   Li
+V12                     21 Ta 08' 21.95" Rohi      4    Ta   Cn
+Kunda                    2 Ar 17' 38.30" Aswi      1    Ar   Ar
+Yoga Sphuta              0 Cn 43' 55.79" Puna      4    Cn   Cn
+Avayoga Sphuta           7 Cp 23' 55.79" USha      4    Cp   Pi
+
+
+House Start            Cusp             End              Planets in it
+
+1st    0 Cn 00' 00.00" 21 Cn 08' 21.95"  0 Le 00' 00.00" As, Sa
+2nd    0 Le 00' 00.00" 21 Le 08' 21.95"  0 Vi 00' 00.00" 
+3rd    0 Vi 00' 00.00" 21 Vi 08' 21.95"  0 Li 00' 00.00" Pl
+4th    0 Li 00' 00.00" 21 Li 08' 21.95"  0 Sc 00' 00.00" Ra, Ur
+5th    0 Sc 00' 00.00" 21 Sc 08' 21.95"  0 Sg 00' 00.00" Ne
+6th    0 Sg 00' 00.00" 21 Sg 08' 21.95"  0 Cp 00' 00.00" 
+7th    0 Cp 00' 00.00" 21 Cp 08' 21.95"  0 Aq 00' 00.00" Ve
+8th    0 Aq 00' 00.00" 21 Aq 08' 21.95"  0 Pi 00' 00.00" Su, Me
+9th    0 Pi 00' 00.00" 21 Pi 08' 21.95"  0 Ar 00' 00.00" 
+10th   0 Ar 00' 00.00" 21 Ar 08' 21.95"  0 Ta 00' 00.00" Ju, Ke
+11th   0 Ta 00' 00.00" 21 Ta 08' 21.95"  0 Ge 00' 00.00" Mo
+12th   0 Ge 00' 00.00" 21 Ge 08' 21.95"  0 Cn 00' 00.00" Ma
+
+Body                   D-1    D-9    D-10 (5-8) D-2 (US) D-3 (US) D-4    D-7 (7-1) D-12 (Trd) D-16 (Rev) D-20 (Trd) D-24 (Rev) D-27 (Trd) D-30   D-40   D-45   D-60 (RvAr) D-10 x D-9 D-0    D-5    D-6    D-8    D-11   D-81   D-108  D-144
+
+Lagna                  21Cn08 10Cp15 28Ar36     17Li43   26Cp35   24Cp33  2Vi01    13Pi40     21Le46      2Ge47      2Pi39      0Le46      4Cp11  5Aq35 21Sc16 21Vi38      17Sg27      0Ar00 15Cp42  6Aq50 19Vi07 22Le32  2Ar18  3Ta04 14Le05
+Sun                    23Aq29  1Ta20 24Vi49     16Cp58   10Sg27    3Sc55 14Cn22    11Sc46     15Le42     19Pi37     23Aq33      3Cn59     14Ge26  9Sc15  6Cn39 28Aq52      13Le18      0Ar00 27Ge24 20Le53  7Ge51 18Aq18 11Cp58 15Ta58 21Pi17
+Moon                    3Ta55  5Aq16 20Le49     22Cn10   18Vi15   15Ta40  2Sc35    17Ge01     27Vi19     18Aq21     25Ar58     15Li47     27Ta32  6Pi43 26Cp18  4Le56       7Li24      0Ar00 19Ta35 23Li30  1Cp21 13Ar06 17Sc20  3Ar07 24Sg09
+Mars                    1Ge52 16Li44 18Ge35      3Le43    5Li35    7Ge26 13Ge01    22Ge18     29Sg44      7Vi10     14Vi37     20Sc11     25Ar46 14Ge21 23Aq39 21Cn31      17Pi17      0Ar00  9Ar18 11Ar09 14Le52 20Aq27  0Pi33 20Ar45 27Aq39
+Mercury                 3Aq17 29Li37  2Pi54      6Sg35    9Li52   13Aq10 23Aq02     9Pi29     22Vi38      5Aq48     18Li58     28Sg50      8Ar42 11Le36 28Sg03 17Li24      26Cn06      0Ar00 16Ar27 19Ar44 26Sg19  6Cn11 26Ge29 25Vi19 23Ge45
+Jupiter                 2Ar16 20Ar22 22Ar38      4Ar32    6Ar47    9Ar03 15Ar50    27Ar09      6Ta12     15Ta15     24Vi19      1Ge06      7Ar53  0Cn31 11Cn50 15Le46      23Li39      0Ar00 11Ar19 13Ar35 18Ar06 24Ar53  3Li17  4Sg23 25Aq51
+Venus                  27Cp07  4Vi07 28Le45      5Li45    8Cn38   18Li30 20Cp08    25Sc29     16Ta01      2Li29      9Li01     12Cn21      3Sc44  4Li58 20Le35 22Vi33      18Sg49      0Ar00 15Sc37 12Pi45  6Sc60 28Ar22  7Aq04 19Li25  5Vi53
+Saturn                  2Cn52 25Cn52  1Sc16     24Sc15   21Pi23   11Cn30  9Cp53     4Le29     14Ge01     27Ta28     21Ta02     17Pi35     26Ta12 24Cp56  9Le19  7Li35      11Cn23      0Ar00 14Ta22 17Li14 22Ar59  1Aq37 22Aq45 10Ta20 23Vi47
+Rahu                   22Li13 19Ar59 12Ta12     14Ta26    6Sg40   28Ar53  5Pi33    26Ge39     25Pi32     24Ge25     23Cp18     29Ta57      6Ge37 18Vi50  9Cp56 13Sg14      19Ar51      0Ar00 21Ge06 13Le19 27Vi46  4Ge26 29Vi52 29Sc50 19Ar46
+Ketu                   22Ar13 19Li59 12Sc12     14Ta26    6Ge40   28Li53  5Vi33    26Sg39     25Pi32     24Ge25     23Cp18     29Sc57      6Ge37 18Vi50  9Cp56 13Sg14      19Li51      0Ar00 21Ge06 13Le19 27Vi46  4Sg26 29Pi52 29Ta50 19Li46
+Maandi                 22Cn54 26Cp08 10Ar58     14Li12   21Cp17    1Ar37 19Le40     4Ar51     23Cn32      8Cn05     20Cp18     18Vi24     27Cp07 16Ar09 10Aq40  5Ge46       8Cn39      0Ar00 24Cp31 17Aq25  3Li14 11Vi57 25Le13 13Sc37 28Ta09
+Gulika                 12Cn58 26Li43 20Cn19      4Sc04   21Aq06   21Li53 29Li13     5Sg38      2Cp30     19Sg23     18Vi45     20Sg10     29Pi04  8Pi45 13Sc36  1Aq52       2Cp48      0Ar00  4Pi51 17Sg49 13Cn45 22Ta39  0Ge29 20Le38  7Aq31
+Bhava Lagna            14Cn49 13Sc24  1Cn46      0Sc21   15Aq32   29Li17 16Li14    27Sg52      2Sg50     26Cp27      4Le15     10Aq13     24Pi41 22Ta55  7Aq01 10Li38      15Cn57      0Ar00 14Pi07 28Sg56 28Cn35 13Ge03  0Sc39 10Ar51  4Sc28
+Hora Lagna              6Sg10 25Ta29  1Aq39     12Le20   18Ar30   24Sg39 13Cp09    13Aq58      8Pi38      3Sg17     27Sg57     16Vi26      4Aq56  6Sg34  7Vi24  9Ar52      14Li48      0Ar00  0Aq49  6Ta59 19Vi19  7Li48 19Le19  5Pi45 17Cn40
+Ghati Lagna            10Aq11  1Cp42 11Ta54     20Sg23    0Sc34   10Ta45 11Ar19     2Ge16     13Cp02     23Ge47      4Ar33      5Cn07      5Sg41 17Ta34  8Sc31 11Sg21      17Ar02      0Ar00 20Aq57  1Ge08 21Aq31 22Vi05 15Cp20 20Cp26 27Ge15
+Vighati Lagna           0Cp19  2Cp49 26Ta52     29Sc22   29Vi04    1Cp15 27Cn48     3Cp46     24Cn59      6Ar16     22Cn28      8Cn28      9Ta25 12Li33 14Ar07 11Pi11       1Vi46      0Ar00  1Ta34  1Li53  2Ar31  3Cn27 25Cp24  3Aq53 15Aq10
+Varnada Lagna          21Ar08 10Aq15  1Pi24     12Pi17    3Aq25   24Li33 27Ge59    13Ge40      8Cn14      2Pi47     27Le21      0Ta46      4Le11  5Sc35 21Ar16  8Li22      12Cn33      0Ta00 15Le42  6Pi50 19Aq07 22Pi32  2Vi18  3Ar04 14Cn05
+Sree Lagna              6Aq55  2Sg16  9Ar11     13Sg50   20Li45   27Aq40 18Pi25    23Ar01     20Sc41     18Ar21     16Cp02      6Ar47     27Aq32  6Cp43 11Ge18 25Ta04      22Ge36      0Ar00  4Aq35 11Ta30 25Cp21 16Le06 20Ar21 27Sg07  6Cp10
+Pranapada Lagna         0Vi19  2Cp49 26Cp52     29Pi22   29Vi04    1Vi15 27Pi48     3Vi46     24Pi59      6Le16     22Cn28      8Cn28      9Ta25 12Li33 14Sg07 11Pi11       1Vi46      0Ar00  1Ta34  1Li53  2Le31  3Sc27 25Cp24  3Aq53 15Li10
+Indu Lagna              3Pi55  5Le16 20Ge49     22Pi10   18Pi15   15Pi40  2Vi35    17Ar01     27Cp19     18Li21     25Ar58     15Ar47     27Ta32  6Pi43 26Ta18  4Le56       7Ar24      0Ar00 19Ta35 23Li30  1Vi21 13Ge06 17Ta20  3Li07 24Li09
+Bhrigu Bindu           28Cp04 12Vi37 19Le18      3Li52    5Cn48   22Li17 13Cp31     6Sg50      0Ta54     21Li23     16Vi20      7Le52      2Sc05 12Sc46  3Li07 25Cn51      23Vi46      0Ar00 20Sc21 18Pi25 14Sc33  8Ta46 23Ar36  1Aq28 21Aq58
+Dhooma                  6Cn49  1Vi20 21Vi51     16Sc22    9Pi33   27Cn15 12Sg18    21Vi46     10Ar58     16Le17     16Aq27      3Cn59     24Vi26  2Cn35  6Aq39 11Aq08      16Cn42      0Ar00  4Vi04 10Sc53 24Ta31 14Pi58 11Cp58 15Vi58 21Ta17
+Vyatipata              23Sg11 28Li40 21Cn51     16Vi22    9Ge33    2Vi45 12Ta18     8Vi14     10Sg58     13Sc43     16Aq27     26Sg01      5Ge34 27Li25 23Li21 11Aq08      16Cp42      0Ar00 25Ge56 19Le07  5Aq29 15Ar02 18Ge02 14Vi02  8Sg43
+Parivesha              23Ge11 28Ar40 21Cp51     16Vi22    9Sg33    2Pi45 12Sc18     8Pi14     10Sg58     13Sc43     16Aq27     26Ge01      5Ge34 27Li25 23Li21 11Aq08      16Cn42      0Ar00 25Ge56 19Le07  5Aq29 15Li02 18Sg02 14Pi02  8Ge43
+Indra Chapa             6Cp49  1Pi20 21Pi51     16Sc22    9Vi33   27Cp15 12Ge18    21Pi46     10Ar58     16Le17     16Aq27      3Cp59     24Vi26  2Cn35  6Aq39 11Aq08      16Cp42      0Ar00  4Vi04 10Sc53 24Ta31 14Vi58 11Cn58 15Pi58 21Sc17
+Upaketu                23Cp29  1Le20  5Li11     13Li02   19Cn33    3Li55 15Aq38    11Li46     14Cn18     19Cn37      6Cp27      3Ar59     14Cp26  9Ta15  6Pi39  1Ta08      16Sc42      0Ar00 27Cp24 20Aq53  7Li51 18Pi18 11Ar58 15Le58 21Aq17
+Kaala                   7Pi13  4Vi58 17Ta49     15Pi34    8Pi21   28Pi52  9Le28    26Ta37      4Sg30     24Sg22      6Aq45     14Cn54      6Vi34 18Cn45 24Li50 16Cp53      10Ge19      0Ar00  6Vi06 13Sc19 27Vi45 19Cn24 14Aq43 29Li37 19Pi29
+Mrityu                  0Ta24  3Cp40 25Vi56     29Cn11   28Vi47    1Ta38 27Sc09     4Ta53     23Sc29      8Sg09     20Cn13     10Cn60     12Ta13 16Li18 18Le20  5Pi34      23Le21      0Ar00  2Ta02  2Li27  3Sg16  4Pi29  2Aq59 13Aq59 28Ge39
+Artha Prahara          22Ta54 26Cn08 10Aq58     14Ge12   21Cn17    1Aq37 19Ge41     4Aq50     23Sc33      8Pi04     20Cp19     18Pi23     27Cp06 16Ar08 10Ge39  5Ge48       8Cp42      0Ar00 24Cp31 17Aq25  3Ge14 11Sc56 25Aq10 13Ta34 28Pi05
+Yama Ghantaka          13Ge26  0Aq53 14Li18     26Le52   10Sc18   23Vi43  4Vi01    11Sc10      4Cn53     28Ar37     22Ge20      2Li38     12Sg55 27Vi13  4Le23 25Ge50       8Aq45      0Ar00  7Sg09 20Ge35 17Sc27 27Ge44  7Li53 10Aq30 14Pi00
+Prana Sphuta           28Cp40 17Vi60 13Le20      2Li40    4Cn00   24Li40  9Cp20    13Sg60     21Ar21      3Sc19      2Vi01     23Le59     19Sc59  6Sg38 29Li58 20Ge02       0Le04      0Ar00 23Sc20 21Pi60 19Sc20 15Ta20 11Ge57  5Ar56 17Ta54
+Deha Sphuta            14Ar19  8Le48 23Le06     28Ar37   12Ta56   27Cn15 10Cn10    21Vi44     18Sc58     16Cp13     13Cn27     26Ar23      9Sg19  2Sc25 13Cp59 18Le38      27Li57      0Ar00 11Sg33 25Ge52 24Cn29  7Vi25 19Ge09 15Sc33 20Ta43
+Mrityu Sphuta          24Aq16  8Ta22  2Li38     18Cp32   12Sg47    7Sc03 19Cn50    21Sc09     28Le12      5Ar16     12Pi19     25Cn06      7Ge53 10Sg31 11Le50 15Ar47      23Li40      0Ar00  1Li19 25Le35 14Ge06 26Aq54 15Pi18 10Le24 13Cn52
+Sookshma TriSphuta      7Cp14  5Pi09 17Pi36     15Sc31    8Vi17   28Cp57  9Ge19    26Pi52      4Ar10     24Le47      6Aq15     15Cp28      7Vi11 19Cn35 25Aq47 15Cp38       8Sg26      0Ar00  6Vi12 13Sc26 27Ta55 19Vi38 16Le24  1Ta52 22Cp30
+Tithi Sphuta           10Ge26  3Cp56 14Vi22     20Le52    1Sc19   11Vi45 13Le03     5Li14     16Ta59     28Aq44     10Ar29     11Cn47     13Sg06 27Ta28 19Pi39 26Sg12       9Ta18      0Ar00 22Aq11  2Ge37 23Li30 24Ta48  5Aq22 17Aq09  2Sg52
+Yoga Sphuta (Sun-Moon) 27Pi24  6Pi35 26Li01      5Aq12    7Cp48   19Sg36 18Pi12    28Cp47     11Cp37      7Aq59      2Li26     19Cp46     11Sc58 15Li57  2Ta57  6Vi04      24Ta06      0Ar00 16Sc60 14Pi24  9Pi11  1Pi23 29Le18 19Ta04 15Sg26
+Rahu Tithi Sphuta      28Sc44 18Pi39 12Ge36      2Ge31    3Cp47   24Le57  8Sc49    14Li52     20Le10      4Cn47      0Vi15     25Aq58     22Sc11  9Sg35  3Pi17 15Ge38      23Cp27      0Ar00 23Sc42 22Pi26 19Cn55 16Cn08 17Sg54 13Li52 28Pi30
+Kshetra Sphuta          8Cn02 12Vi21  9Vi36     13Sc55    5Pi53    2Li09  3Sg43     6Li28     21Pi22     10Vi47     17Cp03      7Le04      1Vi11 21Le34  1Ar46 27Sc39      26Pi28      0Ar00 10Vi12 18Sc14  4Ge19 28Pi26 21Ar11 28Cp15 17Sg39
+Beeja Sphuta           22Sg52 25Li49 18Cn41     15Vi44    8Ge36    1Vi28 10Ta05     4Vi25      5Sg53      7Sc22      8Aq50     17Sg26     26Ge03 14Li44  9Li04 22Cp05      18Sg08      0Ar00 24Ge20 17Le13  2Aq57 11Ar33 22Ta19  9Le46 23Li01
+TriSphuta               8Sg02 12Ge14 20Aq16     16Le03   24Ar05    2Pi06 26Cp11     6Pi19      8Ar25     10Cp31     12Aq37      6Sc42      0Aq47 21Aq02  1Sg10  1Le34       2Ar20      0Ar00 10Aq08 18Ta09  4Li12 28Li17 20Cp06 26Li48 15Ta45
+ChatusSphuta            1Sc30 13Cn34 14Pi56     26Cn59   25Pi29    6Sc02 19Ta27    18Sc05      5Sc53      0Cp09     23Ge50     10Aq42     15Ta13  0Sg17  7Li49 29Sg34      14Sc22      0Ar00  7Ta32  9Li03 12Sg03 16Vi35  2Sc05 12Sg46  7Ge01
+PanchaSphuta           23Ta44  3Le33  2Aq43     12Ge33   18Cn49    4Aq55 13Ge54    14Aq44     10Sc21     24Pi33      0Cp32     10Ar39     21Cp50 19Ta07 17Cn45 16Ar20      24Li30      0Ar00 28Cp38 22Aq22  9Ge49 21Sc00  1Ta57 12Vi36 26Cn48
+AL                     16Aq42  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A2                     25Ta49  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A3                     15Ge26  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A4                      3Aq07  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A5                     23Vi18  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A6                     13Cn23  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A7                     14Sg36  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A8                     14Sc36  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A9                     13Ar23  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A10                    12Cn35  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+A11                     3Li07  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+UL                     15Vi26  0Ar00  0Ar00      0Ar00    0Ar00    0Ar00  0Ar00     0Ar00      0Ar00      0Ar00      0Le00      0Ar00      0Ar00  0Ar00  0Ar00  0Ar00       0Ar00      0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00  0Ar00
+V2                     21Ta08 10Ta15 28Ar36     17Ar43   26Pi35   24Sc33  2Vi01    13Pi40     21Li46      2Ar47      2Ta39      0Ar46      4Cp11  5Sg35 21Cn16 21Cn38      17Sg27      0Ge00 15Cp42  6Aq50 19Ta07 22Ar32  2Li18  3Cn04 14Aq05
+V3                     21Sg08 10Ge15  1Cn24     12Cn17    3Aq25   24Ge33 27Li59    13Ge40      8Cn14      2Cn47     27Ar21      0Ta46      4Ar11  5Pi35 21Le16  8Aq22      12Cn33      0Vi00 15Ar42  6Sc50 19Ge07 22Cn32  2Cp18  3Le04 14Pi05
+V4                     21Vi08 10Vi15 28Le36     17Le43   26Sc35   24Pi33  2Cp01    13Sc40     21Aq46      2Le47      2Ta39      0Sg46      4Cp11  5Ar35 21Sc16 21Pi38      17Sg27      0Li00 15Cp42  6Li50 19Vi07 22Le32  2Aq18  3Sc04 14Aq05
+V5                     21Sg08 10Li15  1Sc24     12Sc17    3Li25   24Ge33 27Aq59    13Li40      8Pi14      2Sc47     27Le21      0Vi46      4Le11  5Cn35 21Sg16  8Aq22      12Cn33      0Cp00 15Le42  6Cn50 19Li07 22Sc32  2Ta18  3Sg04 14Cn05
+V6                     21Ta08 10Cp15 28Sg36     17Sg43   26Cn35   24Sc33  2Ta01    13Cn40     21Aq46      2Sg47      2Vi39      0Le46      4Vi11  5Le35 21Pi16 21Cn38      17Sg27      0Aq00 15Vi42  6Aq50 19Cp07 22Sg32  2Ge18  3Pi04 14Li05
+V7                     21Ar08 10Aq15  1Pi24     12Pi17    3Aq25   24Li33 27Ge59    13Aq40      8Cn14      2Pi47     27Sg21      0Cp46      4Sg11  5Sc35 21Ar16  8Li22      12Cn33      0Ta00 15Sg42  6Pi50 19Aq07 22Pi32  2Vi18  3Ar04 14Sc05
+V8                     21Ta08 10Ta15 28Ar36     17Ar43   26Pi35   24Cn33  2Vi01    13Pi40     21Li46      2Ar47      2Ta39      0Ar46      4Ta11  5Sg35 21Cn16 21Cn38      17Sg27      0Ge00 15Ta42  6Aq50 19Ta07 22Ar32  2Li18  3Cn04 14Ge05
+V9                     21Sg08 10Ge15  1Cn24     12Cn17    3Aq25   24Aq33 27Li59    13Aq40      8Cn14      2Cn47     27Ar21      0Cp46      4Ar11  5Pi35 21Le16  8Aq22      12Cn33      0Vi00 15Ar42  6Cn50 19Ge07 22Cn32  2Cp18  3Le04 14Pi05
+V10                    21Vi08 10Vi15 28Le36     17Le43   26Cn35   24Pi33  2Cp01    13Cn40     21Aq46      2Le47      2Ta39      0Le46      4Ta11  5Ar35 21Sc16 21Pi38      17Sg27      0Li00 15Ta42  6Li50 19Vi07 22Le32  2Aq18  3Sc04 14Ge05
+V11                    21Sg08 10Li15  1Sc24     12Sc17    3Li25   24Aq33 27Aq59    13Li40      8Pi14      2Sc47     27Sg21      0Vi46      4Sg11  5Cn35 21Sg16  8Aq22      12Cn33      0Cp00 15Sg42  6Sc50 19Li07 22Sc32  2Ta18  3Sg04 14Sc05
+V12                    21Ta08 10Cp15 28Sg36     17Sg43   26Sc35   24Cn33  2Ta01    13Sc40     21Aq46      2Sg47      2Vi39      0Sg46      4Vi11  5Le35 21Pi16 21Cn38      17Sg27      0Aq00 15Vi42  6Aq50 19Cp07 22Sg32  2Ge18  3Pi04 14Li05
+Kunda                   2Ar18 20Ar39 22Ar56      4Ar35    6Ar53    9Ar11 16Ar03    27Ar32      6Ta42     15Ta53     25Vi03      1Ge56      8Ar49  1Cn46 13Cn14 17Le38      26Li27      0Ar00 11Ar28 13Ar46 18Ar21 25Ar14  5Li49  7Sg45  0Pi20
+Yoga Sphuta             0Cn44  6Cn35 22Sc41     28Sc32   27Pi48    2Cn56 24Cp52     8Cn47     18Cn17     14Ar39     12Cn26     19Cp46     21Ta58 29Li17  2Ta57 16Aq04      24Cp06      0Ar00  3Ta40  4Li24  5Ar51  8Cp03 29Le18 19Vi04 15Li26
+Avayoga Sphuta          7Cp24  6Pi35 16Pi01     15Sc12    7Vi48   29Cp36  8Ge12    28Pi47      1Ar37     27Le59      2Aq26     19Cp46     11Vi58 25Cn57  2Pi57  6Cp04      24Sc06      0Ar00  6Vi60 14Sc24 29Ta11 21Vi23 29Le18 19Ta04 15Aq26
+
+Vimsottari Dasa:
+
+ Maha Dasas:
+
+ Sun: 1972-12-04 (14:47:15) - 1978-12-05 (1:46:55)
+ Moon: 1978-12-05 (1:46:55) - 1988-12-04 (12:02:04)
+ Mars: 1988-12-04 (12:02:04) - 1995-12-05 (4:47:37)
+ Rah: 1995-12-05 (4:47:37) - 2013-12-04 (13:35:50)
+ Jup: 2013-12-04 (13:35:50) - 2029-12-04 (10:40:56)
+ Sat: 2029-12-04 (10:40:56) - 2048-12-04 (1:27:09)
+ Merc: 2048-12-04 (1:27:09) - 2065-12-04 (4:16:55)
+ Ket: 2065-12-04 (4:16:55) - 2072-12-03 (21:21:11)
+ Ven: 2072-12-03 (21:21:11) - 2092-12-03 (17:45:09)
+
+Vimsottari Dasa:
+
+ Jup MD: 2013-12-04 (13:35:50) - 2029-12-04 (10:40:56)
+
+  Antardasas in this MD:
+
+  Jup: 2013-12-04 (13:35:50) - 2016-01-21 (4:48:17)
+  Sat: 2016-01-21 (4:48:17) - 2018-08-05 (0:12:04)
+  Merc: 2018-08-05 (0:12:04) - 2020-11-10 (12:22:48)
+  Ket: 2020-11-10 (12:22:48) - 2021-10-17 (17:27:50)
+  Ven: 2021-10-17 (17:27:50) - 2024-06-15 (3:51:29)
+  Sun: 2024-06-15 (3:51:29) - 2025-04-02 (1:23:42)
+  Moon: 2025-04-02 (1:23:42) - 2026-08-04 (22:23:36)
+  Mars: 2026-08-04 (22:23:36) - 2027-07-11 (1:00:06)
+  Rah: 2027-07-11 (1:00:06) - 2029-12-04 (10:40:56)
+
+Vimsottari Dasa:
+
+ Jup MD: 2013-12-04 (13:35:50) - 2029-12-04 (10:40:56)
+  Moon AD: 2025-04-02 (1:23:42) - 2026-08-04 (22:23:36)
+
+   Pratyantardasas in this AD:
+
+   Moon: 2025-04-02 (1:23:42) - 2025-05-13 (1:28:06)
+   Mars: 2025-05-13 (1:28:06) - 2025-06-11 (5:15:55)
+   Rah: 2025-06-11 (5:15:55) - 2025-08-25 (12:07:12)
+   Jup: 2025-08-25 (12:07:12) - 2025-10-29 (17:44:03)
+   Sat: 2025-10-29 (17:44:03) - 2026-01-12 (18:36:38)
+   Merc: 2026-01-12 (18:36:38) - 2026-03-21 (4:18:16)
+   Ket: 2026-03-21 (4:18:16) - 2026-04-18 (14:13:18)
+   Ven: 2026-04-18 (14:13:18) - 2026-07-10 (19:19:42)
+   Sun: 2026-07-10 (19:19:42) - 2026-08-04 (22:23:36)
+
+
+Vimsottari Dasa:
+
+ Jup MD: 2013-12-04 (13:35:50) - 2029-12-04 (10:40:56)
+  Moon AD: 2025-04-02 (1:23:42) - 2026-08-04 (22:23:36)
+   Ven PD: 2026-04-18 (14:13:18) - 2026-07-10 (19:19:42)
+
+    Sookshma-antardasas in this PD:
+
+    Ven: 2026-04-18 (14:13:18) - 2026-05-02 (6:46:40)
+    Sun: 2026-05-02 (6:46:40) - 2026-05-06 (9:49:24)
+    Moon: 2026-05-06 (9:49:24) - 2026-05-13 (7:16:51)
+    Mars: 2026-05-13 (7:16:51) - 2026-05-18 (3:21:33)
+    Rah: 2026-05-18 (3:21:33) - 2026-05-30 (14:58:34)
+    Jup: 2026-05-30 (14:58:34) - 2026-06-10 (18:21:32)
+    Sat: 2026-06-10 (18:21:32) - 2026-06-24 (0:35:22)
+    Merc: 2026-06-24 (0:35:22) - 2026-07-05 (21:52:36)
+    Ket: 2026-07-05 (21:52:36) - 2026-07-10 (19:19:42)
+
+Vimsottari Dasa:
+
+ Jup MD: 2013-12-04 (13:35:50) - 2029-12-04 (10:40:56)
+  Moon AD: 2025-04-02 (1:23:42) - 2026-08-04 (22:23:36)
+   Ven PD: 2026-04-18 (14:13:18) - 2026-07-10 (19:19:42)
+    Merc SD: 2026-06-24 (0:35:22) - 2026-07-05 (21:52:36)
+
+     Praana-antardasas in this SD:
+
+     Merc: 2026-06-24 (0:35:22) - 2026-06-25 (16:59:16)
+     Ket: 2026-06-25 (16:59:16) - 2026-06-26 (9:37:31)
+     Ven: 2026-06-26 (9:37:31) - 2026-06-28 (9:10:06)
+     Sun: 2026-06-28 (9:10:06) - 2026-06-28 (23:25:59)
+     Moon: 2026-06-28 (23:25:59) - 2026-06-29 (23:12:32)
+     Mars: 2026-06-29 (23:12:32) - 2026-06-30 (15:51:10)
+     Rah: 2026-06-30 (15:51:10) - 2026-07-02 (10:39:13)
+     Jup: 2026-07-02 (10:39:13) - 2026-07-04 (0:41:58)
+     Sat: 2026-07-04 (0:41:58) - 2026-07-05 (21:52:36)
+
+Vimsottari Dasa:
+
+ Jup MD: 2013-12-04 (13:35:50) - 2029-12-04 (10:40:56)
+  Moon AD: 2025-04-02 (1:23:42) - 2026-08-04 (22:23:36)
+   Ven PD: 2026-04-18 (14:13:18) - 2026-07-10 (19:19:42)
+    Merc SD: 2026-06-24 (0:35:22) - 2026-07-05 (21:52:36)
+     Jup PAD: 2026-07-02 (10:39:13) - 2026-07-04 (0:41:58)
+
+      Deha-antardasas in this PAD:
+
+      Jup: 2026-07-02 (10:39:13) - 2026-07-02 (15:43:35)
+      Sat: 2026-07-02 (15:43:35) - 2026-07-02 (21:45:01)
+      Merc: 2026-07-02 (21:45:01) - 2026-07-03 (3:08:25)
+      Ket: 2026-07-03 (3:08:25) - 2026-07-03 (5:21:34)
+      Ven: 2026-07-03 (5:21:34) - 2026-07-03 (11:42:02)
+      Sun: 2026-07-03 (11:42:02) - 2026-07-03 (13:36:10)
+      Moon: 2026-07-03 (13:36:10) - 2026-07-03 (16:46:24)
+      Mars: 2026-07-03 (16:46:24) - 2026-07-03 (18:59:33)
+      Rah: 2026-07-03 (18:59:33) - 2026-07-04 (0:41:58)
+
