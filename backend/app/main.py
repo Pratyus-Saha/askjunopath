@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+import logging
 import os
 from pathlib import Path
 
@@ -8,6 +9,13 @@ from app.core.config import settings
 from app.routers.chart import router as chart_router
 from app.routers.internal import router as internal_router
 from app.routers.predict import router as predict_router
+
+logger = logging.getLogger(__name__)
+
+if not settings.gemini_api_key:
+    logger.warning(
+        "GEMINI_API_KEY not set - all predictions will use deterministic fallback."
+    )
 
 app = FastAPI(
     title="AskJunoPath API",
