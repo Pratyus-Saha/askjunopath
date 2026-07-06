@@ -29,13 +29,15 @@ from typing import Any
 from fastapi import APIRouter, Depends, Header, HTTPException, status
 from pydantic import ValidationError
 
-from app.core.config import settings
+from app.core.config import is_production, settings
 from app.engines.prediction_career_engine import compute_career_prediction
 from app.schemas.models import ChartData, StrictModel
 
-# Environments in which the internal surface is exposed. Allow-list (fail closed):
-# anything not explicitly internal/dev/test is treated as production -> 404.
-INTERNAL_ENVIRONMENTS = frozenset({"development", "dev", "local", "test"})
+# The internal surface is exposed only in environments the shared fail-closed
+# check recognises as non-production (config.NON_PRODUCTION_ENVIRONMENTS):
+# anything else — typos, staging, empty strings — is production -> 404. Using
+# the one shared helper keeps this gate in lockstep with the other
+# production-only guards (audit finding #12).
 
 # Optional defense-in-depth, read from os.environ at request time (NOT config.py)
 # so it can be toggled per-deployment without a settings/schema change: when
@@ -67,7 +69,7 @@ def require_internal_access(
        -> 404, constant-time compare). When the env var is unset, dev/local/test
        access needs no header.
     """
-    if settings.environment.strip().lower() not in INTERNAL_ENVIRONMENTS:
+    if is_production(settings.environment):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not Found")
 
     expected_token = os.environ.get(INTERNAL_TOKEN_ENV_VAR)
