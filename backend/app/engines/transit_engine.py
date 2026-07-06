@@ -51,11 +51,12 @@ returned. The engine never raises for an empty result — it returns ``[]``.
 
 from __future__ import annotations
 
-import os
 from datetime import date, timedelta
 from typing import Any
 
 import swisseph as swe
+
+from app.core.config import get_se_ephe_path
 
 # ---------------------------------------------------------------------------
 # Locked tables
@@ -134,7 +135,9 @@ def _init_swe() -> None:
     every entry so a sidereal-mode change elsewhere in the process cannot leak
     into the scan.
     """
-    swe.set_ephe_path(os.getenv("SE_EPHE_PATH", "/app/ephe"))
+    # Shared config default (audit finding #16): the same unset-variable
+    # fallback ephemeris_engine uses, instead of a private "/app/ephe".
+    swe.set_ephe_path(get_se_ephe_path())
     swe.set_sid_mode(swe.SIDM_KRISHNAMURTI, 0, 0)
 
 
