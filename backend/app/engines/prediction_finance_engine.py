@@ -11,15 +11,19 @@ evidence-first object. It is **internal only**:
 Model. KP separates *promise* from *timing*, and we add a transit layer:
 
 * **Promise** — the 2nd and 11th cusp sub-lords and the houses they signify
-  (read straight from each planet's ``significator_of_houses``). Promise is met
-  when either of those sub-lords signifies a supportive finance house
-  (2 income, 6 dues/service, 10 profession/standing, 11 gains). A sub-lord that
-  *primarily* signifies blocking houses (8 loss, 12 outflow) raises a caution
-  flag and reframes the summary toward "caution and review".
+  (read from each planet's ``significator_of_houses`` when populated; public
+  ``/chart/generate`` payloads keep that field reserved-empty per D023, in which
+  case the node-aware significators are recomputed from the base chart, the same
+  way the career engine does). Promise is met when either of those sub-lords
+  signifies a supportive finance house (2 income, 6 dues/service, 10
+  profession/standing, 11 gains). A sub-lord that *primarily* signifies blocking
+  houses (8 loss, 12 outflow) raises a caution flag and reframes the summary
+  toward "caution and review".
 * **Dasha timing** — the current MD/AD/PD lords (read from
-  ``chart["dashas"]["current"]``) and whether each signifies a supportive
-  finance house. The stack "supports" finance when at least two of the three
-  lords do.
+  ``chart["dashas"]["current"]`` when present; public payloads keep ``dashas``
+  null, in which case the current Vimshottari stack is recomputed from the base
+  chart) and whether each signifies a supportive finance house. The stack
+  "supports" finance when at least two of the three lords do.
 * **Transit timing** — domain-aware Gochara windows from ``transit_engine`` and a
   forward "next contact" estimate, both for the finance domain.
 
@@ -47,6 +51,8 @@ from collections.abc import Mapping
 from datetime import datetime
 from typing import Any
 
+from app.engines.dasha_engine import compute_dasha_from_chart
+from app.engines.significator_engine import compute_node_aware_significators
 from app.engines.transit_engine import compute_transit_windows, find_next_contact
 
 VERSION = "finance-v1"
@@ -76,12 +82,21 @@ EVENT_REVIEW = "financial-decision review window"
 
 
 def _significations(chart: Mapping[str, Any]) -> dict[str, list[int]]:
-    """planet name -> its signified houses, read straight from the chart dict."""
+    """planet name -> its signified houses.
+
+    Read from each planet's ``significator_of_houses`` when populated. Public
+    ``/chart/generate`` payloads keep that field reserved-empty (D023): in that
+    case the node-aware significators are recomputed from the base chart, the
+    same way the career engine does.
+    """
     out: dict[str, list[int]] = {}
     for planet in chart.get("planets", []) or []:
         out[planet["name"]] = sorted(
             int(h) for h in (planet.get("significator_of_houses") or [])
         )
+    if out and not any(out.values()):
+        computed = compute_node_aware_significators(chart["planets"], chart["houses"])
+        return {name: list(houses) for name, houses in computed.planet_to_houses.items()}
     return out
 
 
@@ -222,11 +237,17 @@ def compute_finance_prediction(
         "sublord_significations": sublord_significations,
     }
 
-    # ---- Dasha timing (read straight from chart.dashas.current) ---------------
+    # ---- Dasha timing (from chart.dashas.current, else recomputed) -------------
     current = (chart.get("dashas") or {}).get("current") or {}
     md_lord = current.get("md_lord")
     ad_lord = current.get("ad_lord")
     pd_lord = current.get("pd_lord")
+    if not (md_lord and ad_lord and pd_lord):
+        # Public /chart/generate payloads keep chart["dashas"] null: recompute
+        # the current Vimshottari stack from the base chart (career-engine
+        # pattern, D027) instead of degrading to null lords.
+        md, ad, pd = compute_dasha_from_chart(chart).current_stack(as_of)
+        md_lord, ad_lord, pd_lord = md.lord, ad.lord, pd.lord
     md_supports = _supports(md_lord, sig)
     ad_supports = _supports(ad_lord, sig)
     pd_supports = _supports(pd_lord, sig)
