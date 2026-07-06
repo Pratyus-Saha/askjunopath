@@ -128,6 +128,39 @@ def test_banned_word_matches_as_stem():
         assert result["rejection_count"] == 1, text
 
 
+def test_widened_banned_words_trigger_rejection():
+    """Audit finding #10: the widened market vocabulary is rejected too."""
+    payload = _payload()
+    for text in (
+        "Expect a solid return this quarter.",
+        "A large purchase is favoured.",
+        "Your assets are set to grow.",
+        "Rebalance the portfolio now.",
+        "Funds arrive from house 11.",
+        "Yields improve after October.",
+    ):
+        paragraphs = [_grounded() for _ in range(4)] + [
+            {"text": f"Jupiter note: {text}", "references": ["Jupiter"]}
+        ]
+        result = validate(paragraphs, payload, "finance")
+        assert result["rejection_count"] == 1, text
+
+
+def test_prefixed_banned_stems_are_caught():
+    """Prefixed forms (reinvest, disinvest, refund) must trip the stem regex."""
+    payload = _payload()
+    for text in (
+        "Reinvest when Jupiter turns direct.",
+        "Disinvestment pressure eases.",
+        "A refund reaches you mid-month.",
+    ):
+        paragraphs = [_grounded() for _ in range(4)] + [
+            {"text": f"Jupiter note: {text}", "references": ["Jupiter"]}
+        ]
+        result = validate(paragraphs, payload, "finance")
+        assert result["rejection_count"] == 1, text
+
+
 # --------------------------------------------------------------------------- #
 # D029 fallback above the 20% rejection rate
 # --------------------------------------------------------------------------- #

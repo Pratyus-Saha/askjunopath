@@ -26,13 +26,17 @@ from app.synthesis.payload_builder import known_house_numbers, known_planet_name
 # Above this rejection rate the Gemini output is dropped for the D029 fallback.
 REJECTION_THRESHOLD = 0.20
 
-# Finance trading vocabulary banned by the system prompt. Matched as stems
-# (case-insensitive, word-initial) so "investing"/"buying"/"profits" also trip.
+# Finance market/trading vocabulary banned from synthesised output (audit
+# finding #10; matches the project's own engine-output ban list). Matched as
+# stems anywhere inside a word (case-insensitive), so suffixed forms
+# ("investing", "profits", "yields") and prefixed forms ("reinvest",
+# "disinvestment", "refund") all trip.
 FINANCE_BANNED_WORDS: tuple[str, ...] = (
     "invest", "buy", "sell", "trade", "stock", "profit", "instrument",
+    "return", "purchase", "asset", "portfolio", "fund", "yield",
 )
 _BANNED_RE = re.compile(
-    r"\b(?:" + "|".join(re.escape(word) for word in FINANCE_BANNED_WORDS) + r")\w*",
+    r"\b\w*(?:" + "|".join(re.escape(word) for word in FINANCE_BANNED_WORDS) + r")\w*",
     re.IGNORECASE,
 )
 
