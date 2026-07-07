@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import AuthGuard from "@/components/AuthGuard";
 import ConfidenceChip from "@/components/ui/ConfidenceChip";
+import Disclaimer from "@/components/ui/Disclaimer";
 import { supabase } from "@/lib/supabase";
 import fixture from "@/src/fixtures/synthesis_career.json";
 
@@ -113,9 +114,7 @@ export default function CareerPredictionPage() {
       <main className="min-h-screen bg-[var(--navy)] p-4 md:p-8 font-[family-name:var(--font-sans)] text-[var(--ivory-soft)]">
         <div className="max-w-4xl mx-auto space-y-8">
           
-          <div className="text-sm text-[var(--muted-on-dark)] border border-[var(--border)] bg-[var(--navy-raised)] p-4 rounded-md">
-            AskJunoPath computes chart positions using Swiss Ephemeris and explains them using KP astrology principles. Astrology&apos;s predictive accuracy is unproven. This is not professional advice.
-          </div>
+          <Disclaimer text={result?.disclaimer} />
 
           {loading ? (
             <div className="flex justify-center py-12">

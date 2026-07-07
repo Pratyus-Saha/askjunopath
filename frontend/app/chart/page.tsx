@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import AuthGuard from "@/components/AuthGuard";
+import Disclaimer from "@/components/ui/Disclaimer";
 import { supabase } from "@/lib/supabase";
 
 type ChartResponse = {
@@ -367,6 +368,8 @@ throw new Error(msg);
                     <Link href="/predict/finance" className="btn-juno btn-juno-compact">Finance Reading</Link>
                     <Link href="/predict/relationship" className="btn-juno btn-juno-compact">Relationship Reading</Link>
                   </div>
+
+                  <Disclaimer />
 
                   <div className="bg-navy-raised border border-gold-soft rounded-md p-6 shadow-xl">
                     <h2 className="text-xl font-serif text-ivory-warm mb-6 flex items-center gap-2">
