@@ -91,7 +91,7 @@ function Hero() {
           data-d="5"
           style={{ color: "var(--gold)", opacity: 0.85 }}
         >
-          KP-NEWCOMB · TRUE NODE · PLACIDUS · VALIDATED AGAINST REFERENCE SOFTWARE
+          KP-NEWCOMB · TRUE NODE · PLACIDUS · VEDIC · VALIDATED AGAINST REFERENCE SOFTWARE
         </p>
       </div>
     </section>
@@ -777,7 +777,7 @@ function Footer() {
         <div className="mt-20 pt-8 border-t flex flex-col md:flex-row md:items-center md:justify-between gap-4"
           style={{ borderColor: "rgba(199,154,78,0.18)" }}>
           <div className="kicker text-muted-dark">© JUNOPATH · {new Date().getFullYear()} · COMPUTED, NOT GUESSED</div>
-          <div className="kicker text-gold opacity-80">KP-NEWCOMB · TRUE NODE · PLACIDUS</div>
+          <div className="kicker text-gold opacity-80">KP-NEWCOMB · TRUE NODE · PLACIDUS · VEDIC</div>
         </div>
       </div>
     </footer>
