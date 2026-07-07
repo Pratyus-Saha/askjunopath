@@ -16,3 +16,10 @@ _EPHE_DIR = Path(__file__).resolve().parent.parent / "ephe"
 
 if not os.environ.get("SE_EPHE_PATH") and _EPHE_DIR.is_dir():
     os.environ["SE_EPHE_PATH"] = str(_EPHE_DIR)
+
+# app.core.config.Settings requires the Supabase values at import time
+# (fail-loudly-at-startup, audit finding #3); default them here so engine
+# modules that read shared config stay importable in this suite.
+os.environ.setdefault("SUPABASE_URL", "https://example.supabase.co")
+os.environ.setdefault("SUPABASE_SERVICE_ROLE_KEY", "test-service-role-key")
+os.environ.setdefault("SUPABASE_KEY", "test-anon-key")

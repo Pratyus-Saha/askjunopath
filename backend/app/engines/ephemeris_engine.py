@@ -18,6 +18,8 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 import swisseph as swe
 
+from app.core.config import get_se_ephe_path
+
 # ---------------------------------------------------------------------------
 # Fixed tables (docs/ephemeris.md section 5)
 # ---------------------------------------------------------------------------
@@ -132,9 +134,9 @@ def _initialize_swe() -> None:
     # Always reset the path: passing None restores the library default.
     # Skipping this when the env var is unset would leave a stale path
     # behind if anything else in the process changed it (e.g. the file
-    # guard's probe).
-    ephe_path = os.environ.get("SE_EPHE_PATH")
-    swe.set_ephe_path(ephe_path if ephe_path else None)
+    # guard's probe). The unset-variable fallback is the shared config
+    # default, the same one transit_engine uses (audit finding #16).
+    swe.set_ephe_path(get_se_ephe_path())
     # KP-Newcomb / Krishnamurti ayanamsa, locked per D002. Never Lahiri,
     # never user-configurable in this engine.
     swe.set_sid_mode(swe.SIDM_KRISHNAMURTI, 0.0, 0.0)

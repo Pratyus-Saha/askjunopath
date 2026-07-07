@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from app.schemas.models import BirthDataRequest, ChartGenerateResponse, ChartData
 from app.core.auth import get_current_user
@@ -16,6 +18,8 @@ from app.engines.ephemeris_engine import (
 from app.engines.kp_engine import get_kp_sub_lord
 from app.engines.nakshatra_engine import nakshatra_block, nakshatra_name
 from app.engines.house_engine import occupants as house_occupants
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/chart", tags=["chart"])
 
@@ -130,10 +134,15 @@ async def generate_chart(
     # 1. Geocode birth city using Nominatim
     try:
         geo_result = await geocoder.geocode(request_data.birth_city)
-    except Exception as e:
+    except Exception:
+        # Full detail stays server-side; clients get no internal error text
+        # (audit finding #14). The echoed city name is the caller's own input.
+        logger.exception(
+            "Geocoding failed for birth city %r", request_data.birth_city
+        )
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Could not geocode birth city '{request_data.birth_city}': {str(e)}"
+            detail=f"Could not geocode birth city '{request_data.birth_city}'.",
         )
 
     lat = geo_result["latitude"]
@@ -226,8 +235,11 @@ async def generate_chart(
 
     except HTTPException:
         raise
-    except Exception as e:
+    except Exception:
+        # Full traceback stays server-side; clients get a generic message
+        # (audit finding #14).
+        logger.exception("Chart generation failed")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Chart generation calculation failed: {str(e)}"
+            detail="Chart generation calculation failed.",
         )

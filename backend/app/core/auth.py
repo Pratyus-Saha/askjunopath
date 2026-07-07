@@ -1,14 +1,15 @@
-import os
-
 from fastapi import HTTPException, Request, status
 from supabase import Client, create_client
 
+from app.core.config import settings
+
 # Auth verifies Supabase JWTs against the PUBLIC/ANON key, never the
 # service-role key (db.py owns the service-role client; that key bypasses RLS
-# and must never sit on the request-auth path). SUPABASE_URL is shared with
-# db.py / config.py; SUPABASE_KEY is the anon/public key.
-SUPABASE_URL = os.getenv("SUPABASE_URL", "")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")  # anon/public key
+# and must never sit on the request-auth path). Both values come from Settings
+# (env var or .env), where SUPABASE_KEY is required — a missing anon key fails
+# loudly at startup rather than 500-ing every authed request.
+SUPABASE_URL = settings.supabase_url
+SUPABASE_KEY = settings.supabase_key  # anon/public key
 
 
 def _get_supabase() -> Client:

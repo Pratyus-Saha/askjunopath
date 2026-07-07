@@ -26,7 +26,7 @@
     "promise_career_houses": [2, 10, 11],
     "activated_career_houses": [2, 6, 11],
     "challenge_houses": [12],
-    "confidence_tier_range": ["medium"],
+    "confidence_tier_range": ["high"],
     "raw_tier": "high",
     "career_signal": 3,
     "challenge_signal": 1,
@@ -47,15 +47,15 @@
     "Must not name any planet outside the chart's 9 classical grahas (no Pluto/Neptune/Uranus).",
     "Must not reference any house outside 1..12.",
     "Must not emit any date outside the as_of date, the dasha-derived AD/PD windows, or the transit (gochara) windows and next-contact estimate now carried in transit_windows / transit_summary (Block 4+5); those day-level transit dates are legitimate, but no other invented dates.",
-    "Must not report confidence 'high' even though the raw heuristic tier is 'high' (v1 caps the published confidence at 'medium').",
+    "Must not report a confidence tier outside the unified five-branch table (promise + dasha support + transit); 'high' additionally requires a slow-planet transit window. Since the transit layer recomputes significators/dashas for starved public payloads (audit finding #1 follow-up), this fixture's slow-planet window forms and the table lands on 'high'.",
     "Must not guarantee a specific job, promotion, salary, or outcome.",
     "Must not populate any public chart field (chart.dashas stays null; reserved significator fields stay empty, D023).",
     "Must not claim JHora-validated or astrologically proven correctness."
   ],
-  "founder_review": {
-    "status": "pending",
-    "reviewed_by": null,
-    "reviewed_on": null,
-    "notes": "Founder to confirm this is a reasonable 'clearly supportive' archetype: promise side flags career houses 2/10/11 and the timing stack activates 2/6/11 with only one challenge house. Astrological correctness is NOT asserted (no JHora oracle; significators AstroSage-compared only, D028/D029)."
-  }
+ "founder_review": {
+  "status": "approved",
+  "reviewed_by": "Pratyus Saha",
+  "reviewed_on": "2026-07-06",
+  "notes": "Confirmed: promise (2/10/11), dasha lord Venus signifies the same houses, and slow-planet transit window now forms correctly post-starvation-fix. High confidence is warranted under the locked three-part model. Approved."
+}
 }

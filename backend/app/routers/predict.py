@@ -20,20 +20,24 @@ No caching here (post-launch); the engines are read-only and mutate nothing.
 
 from __future__ import annotations
 
+import logging
 from datetime import datetime, timezone
 from typing import Any, Callable
 
-from fastapi import APIRouter, Depends
-from pydantic import BaseModel
+from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel, ValidationError
 
 from app.core.auth import get_current_user
 from app.engines.prediction_career_engine import compute_career_prediction
 from app.engines.prediction_finance_engine import compute_finance_prediction
 from app.engines.prediction_relationship_engine import compute_relationship_prediction
+from app.schemas.models import ChartData
 from app.synthesis.disclaimer import get_disclaimer
 from app.synthesis.gemini_synthesizer import synthesize
 from app.synthesis.payload_builder import build_payload
 from app.synthesis.validator import validate
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(tags=["predict"])
 
@@ -56,9 +60,33 @@ def _predict(
     degrades to the engine's deterministic D029 ``summary`` instead of a 500. On
     success the synthesis is always the validator-filtered paragraphs — never raw
     Gemini output.
+
+    The caller-supplied chart is validated against the canonical v1.2 ChartData
+    contract before it reaches the engine (matching /internal/predict/career);
+    an invalid chart is a 422 with a generic message. An unexpected engine
+    failure is logged server-side and returned as a generic 500 — never a raw
+    traceback detail.
     """
+    try:
+        ChartData.model_validate(chart)
+    except ValidationError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={
+                "error": "INVALID_CHART",
+                "message": "chart failed ChartData v1.2 validation",
+            },
+        ) from exc
+
     as_of = datetime.now(timezone.utc)
-    engine_output = engine(chart, as_of=as_of)
+    try:
+        engine_output = engine(chart, as_of=as_of)
+    except Exception:
+        logger.exception("%s prediction engine failed", domain)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Prediction computation failed.",
+        )
     payload = build_payload(engine_output)
 
     try:

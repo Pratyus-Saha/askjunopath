@@ -375,3 +375,33 @@ def test_unknown_timezone_maps_to_422(client, monkeypatch):
     response = client.post("/chart/generate", json=REQUEST_BODY, headers=HEADERS)
     assert response.status_code == 422
     assert response.json()["detail"]["error"] == "INVALID_TIMEZONE"
+
+
+# ---------------------------------------------------------------------------
+# Error hygiene: internal exception text never reaches the client (finding #14)
+# ---------------------------------------------------------------------------
+
+def test_geocode_failure_returns_400_without_exception_detail(client, monkeypatch):
+    async def broken_geocode(self, city_name: str) -> dict:
+        raise RuntimeError("nominatim-secret-internal-detail")
+
+    monkeypatch.setattr(chart_router.GeocodingService, "geocode", broken_geocode)
+    response = client.post("/chart/generate", json=REQUEST_BODY, headers=HEADERS)
+    assert response.status_code == 400
+    assert "nominatim-secret-internal-detail" not in response.text
+    assert "RuntimeError" not in response.text
+    assert response.json()["detail"] == (
+        f"Could not geocode birth city '{REQUEST_BODY['birth_city']}'."
+    )
+
+
+def test_save_failure_returns_500_without_exception_detail(client, monkeypatch):
+    def broken_save(user_id, chart_fingerprint, birth_data, chart_data):
+        raise RuntimeError("supabase-secret-internal-detail")
+
+    monkeypatch.setattr(chart_router, "save_chart", broken_save)
+    response = client.post("/chart/generate", json=REQUEST_BODY, headers=HEADERS)
+    assert response.status_code == 500
+    assert "supabase-secret-internal-detail" not in response.text
+    assert "RuntimeError" not in response.text
+    assert response.json()["detail"] == "Chart generation calculation failed."

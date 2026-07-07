@@ -6,12 +6,17 @@ Covers POST /predict/{career,finance,relationship}:
 * the authenticated happy path returns exactly the contract keys, with the
   synthesis being the validator-filtered paragraphs (never raw Gemini output);
 * a Gemini failure inside ``synthesize`` degrades to ``fallback_used=True`` and
-  the engine's deterministic D029 ``summary`` instead of a 500.
+  the engine's deterministic D029 ``summary`` instead of a 500;
+* a chart that fails ChartData v1.2 validation -> 422 with a generic message
+  (matching /internal/predict/career), before any engine runs;
+* an unexpected engine exception -> generic 500, never a raw traceback detail.
 
 Both the engines and the Gemini synthesis layer are mocked at the predict-router
 module level, so these tests exercise wiring/auth only and never make a network
 call or run the real KP math. Auth is overridden via ``dependency_overrides``,
-matching tests/test_chart_route.py.
+matching tests/test_chart_route.py. The request chart is built once through the
+same trusted path the internal-route tests use, so it always passes the route's
+ChartData validation.
 """
 
 from __future__ import annotations
@@ -31,11 +36,38 @@ from fastapi.testclient import TestClient  # noqa: E402
 
 from app import main as app_main  # noqa: E402
 from app.core.auth import get_current_user  # noqa: E402
+from app.engines.ephemeris_engine import compute_ephemeris  # noqa: E402
+from app.routers import chart as chart_router  # noqa: E402
 from app.routers import predict as predict_router  # noqa: E402
+from app.schemas.models import BirthDataRequest  # noqa: E402
 from app.synthesis.disclaimer import get_disclaimer  # noqa: E402
 
 TEST_USER_ID = "predict-route-test-user"
-REQUEST_BODY = {"chart": {"planets": [], "houses": []}}
+
+
+def _valid_chart() -> dict:
+    """A full, schema-valid ChartData payload built through the trusted path."""
+    req = BirthDataRequest(
+        birth_date="1998-08-14", birth_time="06:45", birth_city="Kolkata, India"
+    )
+    eph = compute_ephemeris(
+        datetime_local="1998-08-14T06:45:00",
+        timezone="Asia/Kolkata",
+        lat=22.5725,
+        lon=88.363889,
+    )
+    return chart_router._build_chart_payload(
+        ephemeris=eph,
+        place_label="Kolkata, India",
+        request_data=req,
+        geo_lat=22.5725,
+        geo_lon=88.363889,
+        timezone_str="Asia/Kolkata",
+    )
+
+
+REQUEST_BODY = {"chart": _valid_chart()}
+INVALID_REQUEST_BODY = {"chart": {"planets": [], "houses": []}}
 
 ROUTES = (
     ("/predict/career", "career", "compute_career_prediction"),
@@ -157,3 +189,51 @@ def test_gemini_failure_triggers_d029_fallback(
     ]
     assert body["domain"] == domain
     assert body["user_id"] == TEST_USER_ID
+
+
+# ---------------------------------------------------------------------------
+# Input validation: malformed chart -> 422 (generic), never an engine 500
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("path,domain,_engine", ROUTES)
+def test_invalid_chart_returns_422_with_generic_message(
+    authed_client, path, domain, _engine
+):
+    response = authed_client.post(path, json=INVALID_REQUEST_BODY)
+    assert response.status_code == 422, response.text
+    detail = response.json()["detail"]
+    assert detail == {
+        "error": "INVALID_CHART",
+        "message": "chart failed ChartData v1.2 validation",
+    }
+
+
+@pytest.mark.parametrize(
+    "bad_chart",
+    [{}, {"planets": "not-a-list"}, {"schema_version": "1.2"}],
+    ids=["empty", "wrong-types", "missing-sections"],
+)
+def test_malformed_chart_shapes_return_422(authed_client, bad_chart):
+    response = authed_client.post("/predict/career", json={"chart": bad_chart})
+    assert response.status_code == 422, response.text
+
+
+# ---------------------------------------------------------------------------
+# Engine crash: generic 500, no exception detail leaked
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("path,domain,engine_name", ROUTES)
+def test_engine_exception_returns_generic_500(
+    authed_client, monkeypatch, path, domain, engine_name
+):
+    def boom(chart, *, as_of):
+        raise KeyError("some-internal-key")
+
+    monkeypatch.setattr(predict_router, engine_name, boom)
+
+    response = authed_client.post(path, json=REQUEST_BODY)
+    assert response.status_code == 500, response.text
+    detail = response.json()["detail"]
+    assert detail == "Prediction computation failed."
+    assert "some-internal-key" not in response.text
+    assert "KeyError" not in response.text

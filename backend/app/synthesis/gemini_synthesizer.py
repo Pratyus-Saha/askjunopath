@@ -144,7 +144,11 @@ def _call_gemini(payload: dict, domain: str) -> str:
     """
     import httpx
 
-    api_key = os.getenv("GEMINI_API_KEY")
+    from app.core.config import settings
+
+    # Settings covers both the env var and backend/.env; the direct env read
+    # keeps a key injected after process start working too.
+    api_key = settings.gemini_api_key or os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY is not set")
 

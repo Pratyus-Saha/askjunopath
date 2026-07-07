@@ -1,13 +1,47 @@
 from datetime import datetime, timezone
+import logging
 import os
 from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.core.config import settings
+from app.core.config import is_production, settings
 from app.routers.chart import router as chart_router
 from app.routers.internal import router as internal_router
 from app.routers.predict import router as predict_router
+
+logger = logging.getLogger(__name__)
+
+if not settings.gemini_api_key:
+    logger.warning(
+        "GEMINI_API_KEY not set - all predictions will use deterministic fallback."
+    )
+
+
+def _assert_ephemeris_available() -> None:
+    """Startup guard for audit finding #2: compute_ephemeris silently degrades
+    to the Moshier fallback when the Swiss .se1 files are missing. In production
+    (fail-closed: anything not on the explicit non-production allow-list) that
+    is a refusal to start; elsewhere it is a single WARNING."""
+    from app.engines.ephemeris_engine import ephemeris_files_ok
+
+    if ephemeris_files_ok():
+        return
+    if is_production():
+        raise RuntimeError(
+            "Swiss Ephemeris files are not available (ephemeris_files_ok() "
+            "returned False; check SE_EPHE_PATH and the bundled .se1 files). "
+            "Refusing to start in production: chart math would silently "
+            "degrade to the Moshier fallback."
+        )
+    logger.warning(
+        "Swiss Ephemeris files are not available (ephemeris_files_ok() returned "
+        "False); continuing in environment %r with the Moshier fallback.",
+        settings.environment,
+    )
+
+
+_assert_ephemeris_available()
 
 app = FastAPI(
     title="AskJunoPath API",
