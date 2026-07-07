@@ -21,11 +21,16 @@ type PredictionResult = {
       timing_interpretation: string;
     };
     transit_windows: Array<{
-      planet: string;
       start_date: string;
       end_date: string;
-      house: number;
-      strength: string;
+      domain: string;
+      window_score: number;
+      trigger_count: number;
+      triggers: Array<{
+        planet: string;
+        natal_point: string;
+        contact_date: string;
+      }>;
     }>;
     transit_summary: {
       framing: string;
@@ -190,17 +195,20 @@ export default function RelationshipPredictionPage() {
                 <div className="space-y-4 mt-8">
                   <h3 className="text-xl font-[family-name:var(--font-serif)] text-[var(--ivory)]">Active Transit Windows</h3>
                   <div className="grid gap-4">
-                    {result.engine_output.transit_windows.map((window, idx) => (
-                      <div key={idx} className="bg-[var(--navy-raised)] border border-[var(--border)] rounded-md p-4 flex flex-col md:flex-row justify-between gap-4">
-                        <div>
-                          <div className="font-medium text-[var(--ivory)] capitalize">{window.planet} in House {window.house}</div>
-                          <div className="text-sm text-[var(--muted-on-dark)]">Strength: {window.strength}</div>
+                    {result.engine_output.transit_windows.map((window, idx) => {
+                      const joinedPlanets = window.triggers?.map(t => t.planet).join(", ") || "Active Triggers";
+                      return (
+                        <div key={idx} className="bg-[var(--navy-raised)] border border-[var(--border)] rounded-md p-4 flex flex-col md:flex-row justify-between gap-4">
+                          <div>
+                            <div className="font-medium text-[var(--ivory)] capitalize">{joinedPlanets}</div>
+                            <div className="text-sm text-[var(--muted-on-dark)]">Window score: {window.window_score}</div>
+                          </div>
+                          <div className="text-sm font-[family-name:var(--font-mono)] text-[var(--gold)] flex items-center">
+                            {window.start_date} — {window.end_date}
+                          </div>
                         </div>
-                        <div className="text-sm font-[family-name:var(--font-mono)] text-[var(--gold)] flex items-center">
-                          {window.start_date} — {window.end_date}
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}
