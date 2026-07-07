@@ -4,9 +4,15 @@ Given an assembled chart payload and a life ``domain`` (career / finance /
 relationship), this engine scans the slow- and fast-moving transit (gochara)
 planets over a date range and returns the few date windows where transits make
 the densest contact with the chart's domain-relevant natal points. It is a pure
-read-over-the-chart engine: it imports **no** other engine (it reads everything
-it needs — longitudes, cusps, KP sub-lords, dasha lords, and significators —
-straight from the chart dict) and never mutates the chart.
+read-over-the-chart engine: it reads everything it needs — longitudes, cusps,
+KP sub-lords, dasha lords, and significators — straight from the chart dict and
+never mutates the chart. One exception (audit finding #1 follow-up): public
+``/chart/generate`` payloads keep ``planets[].significator_of_houses``
+reserved-empty (D023) and ``chart["dashas"]`` null, which would silently drop
+contact rule 2, rule 3 and the PD overlap bonus. When that starved shape is
+detected, the engine recomputes both internally (``significator_engine`` /
+``dasha_engine`` — the same pattern the prediction engines use) instead of
+reading the missing keys; fully-populated charts pass through untouched.
 
 Swiss Ephemeris configuration is the locked KP convention used everywhere else
 in the project (``ephemeris_engine.py`` / ``dasha_engine.py``): sidereal zodiac,
@@ -51,12 +57,14 @@ returned. The engine never raises for an empty result — it returns ``[]``.
 
 from __future__ import annotations
 
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from typing import Any
 
 import swisseph as swe
 
 from app.core.config import get_se_ephe_path
+from app.engines.dasha_engine import compute_dasha_from_chart
+from app.engines.significator_engine import compute_node_aware_significators
 
 # ---------------------------------------------------------------------------
 # Locked tables
@@ -164,6 +172,85 @@ def _angular_diff(lon_a: float, lon_b: float) -> float:
     """Shortest angular separation between two longitudes, in [0, 180]."""
     d = abs(lon_a - lon_b) % 360.0
     return min(d, 360.0 - d)
+
+
+# ---------------------------------------------------------------------------
+# Starved public payloads: recompute significators / dashas (finding #1 follow-up)
+# ---------------------------------------------------------------------------
+
+def _effective_chart(chart: dict, when: date, horizon_days: int = 0) -> dict:
+    """Return ``chart`` unchanged, or an enriched shallow copy when the public
+    ``/chart/generate`` payload leaves the transit inputs starved.
+
+    Public payloads keep ``planets[].significator_of_houses`` reserved-empty
+    (D023) and ``chart["dashas"]`` null, which silently drops contact rule 2
+    (significator planets), rule 3 (dasha lords) and the PD overlap bonus.
+    Recompute both from the base chart — the same pattern the career/finance/
+    relationship engines use — instead of reading the missing keys:
+
+    * significators: node-aware recompute over ``planets`` + ``houses``;
+    * dashas: the Vimshottari stack current at ``when`` (midnight UTC), plus the
+      pratyantardasha periods that start within ``horizon_days`` of ``when`` as
+      ``upcoming_pd``, so the PD overlap bonus can fire across the scan span.
+
+    Charts that already carry the fields pass through untouched. A chart that
+    cannot support a recompute (e.g. a synthetic chart without a Moon nakshatra
+    or birth block) keeps the previous starved behaviour rather than raising.
+    The input chart is never mutated.
+    """
+    planets = chart.get("planets", []) or []
+    houses = chart.get("houses", []) or []
+
+    significators_starved = bool(planets) and not any(
+        planet.get("significator_of_houses") for planet in planets
+    )
+    dashas_starved = not (chart.get("dashas") or {}).get("current")
+    if not (significators_starved or dashas_starved):
+        return chart
+
+    effective = dict(chart)
+    if significators_starved:
+        try:
+            pth = compute_node_aware_significators(planets, houses).planet_to_houses
+        except Exception:
+            pth = None
+        if pth is not None:
+            effective["planets"] = [
+                {**planet, "significator_of_houses": list(pth.get(planet["name"], []))}
+                for planet in planets
+            ]
+    if dashas_starved:
+        try:
+            timeline = compute_dasha_from_chart(chart)
+            moment = datetime(when.year, when.month, when.day, tzinfo=timezone.utc)
+            md, ad, pd = timeline.current_stack(moment)
+        except Exception:
+            return effective
+        horizon = when + timedelta(days=max(horizon_days, 0))
+        effective["dashas"] = {
+            "system": "VIMSHOTTARI",
+            "current": {
+                "mahadasha": {
+                    "lord": md.lord, "start": md.start.date(), "end": md.end.date(),
+                },
+                "antardasha": {
+                    "lord": ad.lord, "start": ad.start.date(), "end": ad.end.date(),
+                },
+                "pratyantardasha": {
+                    "lord": pd.lord, "start": pd.start.date(), "end": pd.end.date(),
+                },
+            },
+            "upcoming_pd": [
+                {
+                    "pd": period.lord,
+                    "start": period.start.date(),
+                    "end": period.end.date(),
+                }
+                for period in timeline.pratyantardashas
+                if pd.end <= period.start and period.start.date() <= horizon
+            ],
+        }
+    return effective
 
 
 # ---------------------------------------------------------------------------
@@ -523,6 +610,10 @@ def compute_transit_windows(
     if groups is None:
         return []
 
+    # Recompute significators/dashas when a starved public payload comes in
+    # (finding #1 follow-up); fully-populated charts pass through untouched.
+    chart = _effective_chart(chart, start_date, scan_days)
+
     contacts = _build_contact_points(chart, groups)
     if not contacts:
         return []
@@ -606,6 +697,10 @@ def find_next_contact(chart: dict, domain: str, after_days: int = 90) -> dict:
     groups = DOMAIN_HOUSES.get(domain)
     if groups is None:
         return {}
+
+    # Same starved-payload recompute as the window scan. The PD horizon is 0:
+    # this scan uses contact points only, never the PD overlap bonus.
+    chart = _effective_chart(chart, date.today())
 
     contacts = _build_contact_points(chart, groups)
     if not contacts:

@@ -258,10 +258,12 @@ def test_evidence_significations_match_node_aware_engine():
 def test_confidence_is_transparent_and_capped():
     pred = compute_career_prediction(_user1_chart(), as_of=AS_OF_NOON)
     # The v1 medium cap is lifted (Block 4+5): confidence follows the unified
-    # five-branch table. User 1 noon lands at "medium" deterministically here
-    # (promised + dasha support, but no slow-planet window to reach "high").
+    # five-branch table. User 1 noon lands at "high" deterministically here:
+    # promised + dasha support, and — now that the transit layer recomputes
+    # significators/dashas for starved public-shaped charts (audit finding #1
+    # follow-up) — a slow-planet contact window in the scanned span.
     assert pred["confidence"] in {"low", "medium", "high"}
-    assert pred["confidence"] == "medium"
+    assert pred["confidence"] == "high"
     basis = pred["confidence_basis"]
     assert "career_signal" in basis and "challenge_signal" in basis
     assert "not validated" in basis["note"].lower()

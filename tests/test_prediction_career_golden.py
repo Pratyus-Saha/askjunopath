@@ -364,15 +364,18 @@ def _fixture(profile: str) -> dict:
     return next(fx for fx in GOLDEN_FIXTURES if fx["profile"] == profile)
 
 
-def test_supportive_shows_the_medium_cap_in_action():
+def test_supportive_reaches_high_with_slow_planet_window():
     fx = _fixture("supportive")
     _chart, pred = _prediction_for(fx)
-    # The raw career-signal heuristic is the maximum tier ("high"), yet the unified
-    # confidence lands at "medium" here — not because of a cap, but because no
-    # slow-planet transit window forms at this fixture's as_of (high needs one).
+    # The raw career-signal heuristic is the maximum tier ("high") and the
+    # unified confidence now lands there too: the transit layer recomputes
+    # significators/dashas for this starved public-shaped chart (audit finding
+    # #1 follow-up), so a slow-planet contact window forms at this fixture's
+    # as_of and the five-branch table's "high" branch (promise + dasha support
+    # + slow-planet window) is satisfied.
     assert pred["confidence_basis"]["raw_tier"] == "high"
-    assert pred["confidence"] == "medium"
-    assert pred["transit_summary"]["has_slow_planet_contact"] is False
+    assert pred["confidence"] == "high"
+    assert pred["transit_summary"]["has_slow_planet_contact"] is True
     assert pred["confidence_basis"]["career_signal"] >= 3
     assert pred["confidence_basis"]["challenge_signal"] <= 1
 
