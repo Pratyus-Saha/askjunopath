@@ -52,10 +52,10 @@
     "Must not populate any public chart field (chart.dashas stays null; reserved significator fields stay empty, D023).",
     "Must not claim JHora-validated or astrologically proven correctness."
   ],
-  "founder_review": {
-    "status": "pending",
-    "reviewed_by": null,
-    "reviewed_on": null,
-    "notes": "Founder to confirm this is a reasonable 'clearly supportive' archetype: promise side flags career houses 2/10/11 and the timing stack activates 2/6/11 with only one challenge house. Astrological correctness is NOT asserted (no JHora oracle; significators AstroSage-compared only, D028/D029)."
-  }
+ "founder_review": {
+  "status": "approved",
+  "reviewed_by": "Pratyus Saha",
+  "reviewed_on": "2026-07-06",
+  "notes": "Confirmed: promise (2/10/11), dasha lord Venus signifies the same houses, and slow-planet transit window now forms correctly post-starvation-fix. High confidence is warranted under the locked three-part model. Approved."
+}
 }
