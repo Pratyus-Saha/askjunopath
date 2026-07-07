@@ -78,16 +78,6 @@ export default function PredictLayout({
             >
               Relationship
             </Link>
-            <Link
-              href="/chart/dasha"
-              className={`px-3 py-1.5 text-sm rounded transition-colors ${
-                pathname === "/chart/dasha"
-                  ? "bg-[var(--gold)] text-[var(--navy-deep)] font-medium"
-                  : "text-[var(--muted-on-dark)] hover:text-[var(--ivory-soft)]"
-              }`}
-            >
-              Timeline
-            </Link>
           </nav>
         </div>
       </div>
