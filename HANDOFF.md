@@ -60,6 +60,15 @@ How this file works:
 ---
 
 # Entries
+## audit-blockers — agent/antigravity/audit-blockers — 2026-07-07 10:40 — Antigravity
+**Built:** Addressed all frontend audit blockers. Updated transit type shape and rendered window_score & 	riggers arrays in career, finance, relationship predict pages. Replaced hardcoded text with Disclaimer component across all predict surfaces, appending 'Vedic' to its text, and added Disclaimer below the action buttons in the chart view. Disabled and commented out the Dasha timeline page routing and entry point. Removed unnecessary lat/lon inputs and geocode on-blur logic from the chart form. Reworded instances of the banned term 'instrument' to 'tool' or 'display' in Landing.tsx, ChartWheel.tsx, and globals.css. Added explicit 'VEDIC' credit to Landing.tsx.
+**Files changed:** rontend/app/predict/career/page.tsx, rontend/app/predict/finance/page.tsx, rontend/app/predict/relationship/page.tsx, rontend/components/ui/Disclaimer.tsx, rontend/app/chart/page.tsx, rontend/app/chart/dasha/page.tsx, rontend/app/predict/layout.tsx, rontend/components/juno/Landing.tsx, rontend/components/juno/ChartWheel.tsx, rontend/app/globals.css, HANDOFF.md.
+**Tests run:** 
+pm run build in rontend/ (passed).
+**Known issues / deferred:** None. The health disclaimer in Landing.tsx line 471 correctly explicitly states the product does *NOT* make health predictions, which matches design intent, so it was intentionally left as is.
+**Next agent should read:** n/a.
+**Tempted but did not:** Edit backend files to fix API discrepancies; relied purely on mapping given frontend fixes.
+
 ## 2026-07-03 — Vedic Engine: Validated & Merged to Main
 
 **Status:** DONE. Merged to `main` (`7aa21b6`). No further action needed to unblock Phase 1.
