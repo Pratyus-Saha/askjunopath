@@ -12,7 +12,7 @@ import { Reveal } from "@/components/juno/Reveal";
 import { Astrolabe } from "@/components/juno/Astrolabe";
 
 const DESCRIPTION =
-  "JunoPath computes your birth chart to the arc-second and explains the reasoning behind every line. A precise instrument, not a horoscope.";
+  "JunoPath computes your birth chart to the arc-second and explains the reasoning behind every line. A precise tool, not a horoscope.";
 
 
 export default function Landing() {
@@ -113,7 +113,7 @@ function Instrument() {
         <Reveal delay={1}>
           <div className="mt-10 text-center max-w-[760px] mx-auto">
             <h2 className="font-serif text-ivory text-[40px] md:text-[58px] leading-[1.06] tracking-[-0.015em]">
-              A precision instrument,
+              A precision tool,
               <br />
               not a decorative wheel.
             </h2>
@@ -739,7 +739,7 @@ function Footer() {
         <div className="h-px hairline-gold" />
         <div className="pt-16 grid gap-12 md:grid-cols-[1.4fr_1fr] items-end">
           <div>
-            <div className="kicker text-gold">A PRECISION INSTRUMENT FOR THE SKY</div>
+            <div className="kicker text-gold">A PRECISION TOOL FOR THE SKY</div>
             <div className="mt-6 font-serif text-ivory text-[80px] md:text-[140px] leading-[0.92] tracking-[-0.03em]">
               JunoPath
             </div>

@@ -136,7 +136,7 @@ export function ChartWheel({ size = 560, showTable = true, buildSequence = false
   return (
     <div className={`grid gap-10 ${showTable ? "md:grid-cols-[1.4fr_1fr]" : ""} items-center`}>
       {/* WHEEL */}
-      <div className="relative w-full chart-instrument">
+      <div className="relative w-full chart-display">
         <svg
           viewBox={`0 0 ${size} ${size}`}
           className="w-full h-auto block"
