@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import AuthGuard from "@/components/AuthGuard";
+import Disclaimer from "@/components/ui/Disclaimer";
 import { supabase } from "@/lib/supabase";
 
 type ChartResponse = {
@@ -62,11 +63,7 @@ export default function ChartPage() {
   const [birthDate, setBirthDate] = useState("");
   const [birthTime, setBirthTime] = useState("");
   const [birthCity, setBirthCity] = useState("");
-  const [lat, setLat] = useState<number | "">("");
-  const [lon, setLon] = useState<number | "">("");
   const [approxTime, setApproxTime] = useState(false);
-
-  const [locating, setLocating] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [chartData, setChartData] = useState<ChartResponse | null>(null);
@@ -92,39 +89,12 @@ export default function ChartPage() {
     }
   }, []);
 
-  const handleCityBlur = async () => {
-    if (!birthCity.trim()) return;
-    setLocating(true);
-    try {
-      const res = await fetch(
-        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
-          birthCity
-        )}&format=json&limit=1`,
-        {
-          headers: {
-            "User-Agent": "AskJunoPath/1.0",
-          },
-        }
-      );
-      if (!res.ok) throw new Error("Geocoding failed");
-      const data = await res.json();
-      if (data && data.length > 0) {
-        setLat(parseFloat(data[0].lat));
-        setLon(parseFloat(data[0].lon));
-      } else {
-        // Did not find city
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLocating(false);
-    }
-  };
+
 
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!birthDate || !birthTime || !birthCity || lat === "" || lon === "") {
-      setError("Please fill in all required fields, including latitude and longitude.");
+    if (!birthDate || !birthTime || !birthCity) {
+      setError("Please fill in all required fields.");
       return;
     }
 
@@ -268,49 +238,14 @@ throw new Error(msg);
                         required
                         value={birthCity}
                         onChange={(e) => setBirthCity(e.target.value)}
-                        onBlur={handleCityBlur}
                         placeholder="e.g. New York"
                         className="w-full bg-navy border border-gold-soft rounded px-3 py-2.5 text-sm text-ivory placeholder:text-muted-dark/50 focus:outline-none focus:border-gold transition-colors"
                         disabled={loading}
                       />
-                      {locating && (
-                        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-xs text-gold">
-                          <svg className="animate-spin h-3 w-3" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                          </svg>
-                          Locating...
-                        </div>
-                      )}
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-medium text-muted-dark uppercase tracking-wider mb-1">Latitude *</label>
-                      <input
-                        type="number"
-                        step="any"
-                        required
-                        value={lat}
-                        onChange={(e) => setLat(e.target.value === "" ? "" : Number(e.target.value))}
-                        className="w-full bg-navy border border-gold-soft rounded px-3 py-2.5 text-sm text-ivory focus:outline-none focus:border-gold transition-colors"
-                        disabled={loading}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium text-muted-dark uppercase tracking-wider mb-1">Longitude *</label>
-                      <input
-                        type="number"
-                        step="any"
-                        required
-                        value={lon}
-                        onChange={(e) => setLon(e.target.value === "" ? "" : Number(e.target.value))}
-                        className="w-full bg-navy border border-gold-soft rounded px-3 py-2.5 text-sm text-ivory focus:outline-none focus:border-gold transition-colors"
-                        disabled={loading}
-                      />
-                    </div>
-                  </div>
+
 
                   <div className="flex items-start gap-2 pt-2">
                     <input
@@ -367,6 +302,8 @@ throw new Error(msg);
                     <Link href="/predict/finance" className="btn-juno btn-juno-compact">Finance Reading</Link>
                     <Link href="/predict/relationship" className="btn-juno btn-juno-compact">Relationship Reading</Link>
                   </div>
+
+                  <Disclaimer />
 
                   <div className="bg-navy-raised border border-gold-soft rounded-md p-6 shadow-xl">
                     <h2 className="text-xl font-serif text-ivory-warm mb-6 flex items-center gap-2">

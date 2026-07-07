@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import AuthGuard from "@/components/AuthGuard";
 import ConfidenceChip from "@/components/ui/ConfidenceChip";
+import Disclaimer from "@/components/ui/Disclaimer";
 import { supabase } from "@/lib/supabase";
 import fixture from "@/src/fixtures/synthesis_relationship.json";
 
@@ -21,11 +22,16 @@ type PredictionResult = {
       timing_interpretation: string;
     };
     transit_windows: Array<{
-      planet: string;
       start_date: string;
       end_date: string;
-      house: number;
-      strength: string;
+      domain: string;
+      window_score: number;
+      trigger_count: number;
+      triggers: Array<{
+        planet: string;
+        natal_point: string;
+        contact_date: string;
+      }>;
     }>;
     transit_summary: {
       framing: string;
@@ -108,9 +114,7 @@ export default function RelationshipPredictionPage() {
       <main className="min-h-screen bg-[var(--navy)] p-4 md:p-8 font-[family-name:var(--font-sans)] text-[var(--ivory-soft)]">
         <div className="max-w-4xl mx-auto space-y-8">
           
-          <div className="text-sm text-[var(--muted-on-dark)] border border-[var(--border)] bg-[var(--navy-raised)] p-4 rounded-md">
-            AskJunoPath computes chart positions using Swiss Ephemeris and explains them using KP astrology principles. Astrology&apos;s predictive accuracy is unproven. This is not professional advice.
-          </div>
+          <Disclaimer text={result?.disclaimer} />
 
           {loading ? (
             <div className="flex justify-center py-12">
@@ -190,17 +194,20 @@ export default function RelationshipPredictionPage() {
                 <div className="space-y-4 mt-8">
                   <h3 className="text-xl font-[family-name:var(--font-serif)] text-[var(--ivory)]">Active Transit Windows</h3>
                   <div className="grid gap-4">
-                    {result.engine_output.transit_windows.map((window, idx) => (
-                      <div key={idx} className="bg-[var(--navy-raised)] border border-[var(--border)] rounded-md p-4 flex flex-col md:flex-row justify-between gap-4">
-                        <div>
-                          <div className="font-medium text-[var(--ivory)] capitalize">{window.planet} in House {window.house}</div>
-                          <div className="text-sm text-[var(--muted-on-dark)]">Strength: {window.strength}</div>
+                    {result.engine_output.transit_windows.map((window, idx) => {
+                      const joinedPlanets = window.triggers?.map(t => t.planet).join(", ") || "Active Triggers";
+                      return (
+                        <div key={idx} className="bg-[var(--navy-raised)] border border-[var(--border)] rounded-md p-4 flex flex-col md:flex-row justify-between gap-4">
+                          <div>
+                            <div className="font-medium text-[var(--ivory)] capitalize">{joinedPlanets}</div>
+                            <div className="text-sm text-[var(--muted-on-dark)]">Window score: {window.window_score}</div>
+                          </div>
+                          <div className="text-sm font-[family-name:var(--font-mono)] text-[var(--gold)] flex items-center">
+                            {window.start_date} — {window.end_date}
+                          </div>
                         </div>
-                        <div className="text-sm font-[family-name:var(--font-mono)] text-[var(--gold)] flex items-center">
-                          {window.start_date} — {window.end_date}
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}
