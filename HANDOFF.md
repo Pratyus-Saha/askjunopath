@@ -60,6 +60,14 @@ How this file works:
 ---
 
 # Entries
+## chart-dasha-endpoint — agent/claude/chart-dasha-endpoint — 2026-07-08 — Claude Code
+**Built:** Added `POST /chart/dasha` endpoint to `backend/app/routers/chart.py`. Accepts `{chart: dict}`, validates against `ChartData.model_validate`, returns the full Vimshottari dasha timeline (9 MD, 81 AD, 729 PD) from `compute_dasha_from_chart`. Auth required via `Depends(get_current_user)`. Invalid chart returns 422 with `INVALID_CHART` error. The dasha engine is NOT called from `_build_chart_payload` or anywhere in the existing chart generation flow; `chart.dashas` stays null.
+**Files changed:** `backend/app/routers/chart.py`, `tests/test_chart_dasha.py` (new), `HANDOFF.md`.
+**Tests run:** `pytest -q` → 1237 passed, 5 failed (pre-existing vedic fixture baseline), 2 warnings. `test_chart_dasha.py` → 3 passed (mahadasha data, invalid chart 422, auth required 401).
+**Known issues / deferred:** None.
+**Next agent should read:** `backend/app/routers/chart.py` (the new `/dasha` endpoint at the bottom).
+**Tempted but did not:** modify ChartData schema, call dasha engine from `_build_chart_payload`, populate `chart.dashas`, touch any other file.
+
 ## audit-blockers — agent/antigravity/audit-blockers — 2026-07-07 10:40 — Antigravity
 **Built:** Addressed all frontend audit blockers. Updated transit type shape and rendered window_score & 	riggers arrays in career, finance, relationship predict pages. Replaced hardcoded text with Disclaimer component across all predict surfaces, appending 'Vedic' to its text, and added Disclaimer below the action buttons in the chart view. Disabled and commented out the Dasha timeline page routing and entry point. Removed unnecessary lat/lon inputs and geocode on-blur logic from the chart form. Reworded instances of the banned term 'instrument' to 'tool' or 'display' in Landing.tsx, ChartWheel.tsx, and globals.css. Added explicit 'VEDIC' credit to Landing.tsx.
 **Files changed:** rontend/app/predict/career/page.tsx, rontend/app/predict/finance/page.tsx, rontend/app/predict/relationship/page.tsx, rontend/components/ui/Disclaimer.tsx, rontend/app/chart/page.tsx, rontend/app/chart/dasha/page.tsx, rontend/app/predict/layout.tsx, rontend/components/juno/Landing.tsx, rontend/components/juno/ChartWheel.tsx, rontend/app/globals.css, HANDOFF.md.
