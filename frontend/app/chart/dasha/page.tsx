@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import AuthGuard from "@/components/AuthGuard";
 import fixture from "@/src/fixtures/dasha_timeline.json";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type DashaPeriod = {
   level: "MD" | "AD" | "PD"
@@ -46,40 +47,27 @@ function computeYears(start: string, end: string) {
 }
 
 export default function DashaTimelinePage() {
+  const router = useRouter();
   const [timeline, setTimeline] = useState<DashaTimeline | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (process.env.NEXT_PUBLIC_USE_FIXTURE === "true") {
       setTimeline(fixture as DashaTimeline);
     } else {
-      const stored = localStorage.getItem("junopath_chart");
-      if (!stored) {
-        setError("Load your chart first");
+      const raw = sessionStorage.getItem("ajp.chart.v1");
+      if (!raw) {
+        router.replace("/chart");
         return;
       }
       try {
-        const data = JSON.parse(stored);
-        const dashaData = data.chart?.dasha?.timeline || data.chart?.dasha || data.dasha_timeline || fixture;
+        const { chart } = JSON.parse(raw);
+        const dashaData = chart?.dasha?.timeline || chart?.dasha || fixture;
         setTimeline(dashaData as DashaTimeline);
       } catch (err) {
-        setError("Load your chart first");
+        router.replace("/chart");
       }
     }
-  }, []);
-
-  if (error) {
-    return (
-      <AuthGuard>
-        <main className="min-h-screen bg-[var(--navy)] p-4 md:p-8 flex flex-col items-center justify-center font-[family-name:var(--font-sans)] text-[var(--ivory-soft)]">
-          <p className="mb-4">{error}</p>
-          <Link href="/chart" className="text-[var(--gold)] underline hover:text-[var(--gold-bright)] transition-colors">
-            Go to Chart Page
-          </Link>
-        </main>
-      </AuthGuard>
-    );
-  }
+  }, [router]);
 
   if (!timeline) {
     return (

@@ -60,6 +60,13 @@ How this file works:
 ---
 
 # Entries
+## fix(dasha) — agent/antigravity/fix-navigation — 2026-07-08 12:48 — Antigravity
+**Built:** Migrated the dasha timeline page from reading `localStorage` to `sessionStorage` with key `ajp.chart.v1`. Added deep-link safety with `useRouter` to redirect to `/chart` on missing or invalid data, matching the pattern in predict layouts.
+**Files changed:** `frontend/app/chart/dasha/page.tsx`, `HANDOFF.md`.
+**Tests run:** `npm run build` in `frontend/` -> Compiled successfully (0 errors).
+**Known issues / deferred:** None.
+**Next agent should read:** n/a.
+**Tempted but did not:** touch any other files outside scope.
 ## 2026-07-03 — Vedic Engine: Validated & Merged to Main
 
 **Status:** DONE. Merged to `main` (`7aa21b6`). No further action needed to unblock Phase 1.
