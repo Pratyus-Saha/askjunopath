@@ -5,12 +5,18 @@ import Link from "next/link";
 import AuthGuard from "@/components/AuthGuard";
 import ConfidenceChip from "@/components/ui/ConfidenceChip";
 import Disclaimer from "@/components/ui/Disclaimer";
+import TimelineStrip from "@/components/predict/TimelineStrip";
 import { supabase } from "@/lib/supabase";
 import fixture from "@/src/fixtures/synthesis_career.json";
 
 type PredictionResult = {
   domain: string;
   engine_output: {
+    as_of?: string;
+    current_dasha_stack?: {
+      pratyantardasha: string;
+      pratyantardasha_window: [string, string];
+    };
     promise_met: boolean;
     confidence: "high" | "medium" | "low";
     signal_strength: number;
@@ -35,6 +41,9 @@ type PredictionResult = {
     }>;
     transit_summary: {
       framing: string;
+      next_contact?: {
+        estimated_date: string;
+      };
     };
     event_types: string[];
     summary: string;
@@ -148,6 +157,15 @@ export default function CareerPredictionPage() {
               <h1 className="text-3xl md:text-4xl text-[var(--ivory)] font-[family-name:var(--font-serif)]">
                 Career Prediction
               </h1>
+
+              <TimelineStrip 
+                asOf={result.engine_output.as_of}
+                transitWindows={result.engine_output.transit_windows}
+                eventTypes={result.engine_output.event_types}
+                pdWindow={result.engine_output.current_dasha_stack?.pratyantardasha_window}
+                pdLord={result.engine_output.current_dasha_stack?.pratyantardasha}
+                nextContactDate={result.engine_output.transit_summary?.next_contact?.estimated_date}
+              />
 
               <div>
                 <ConfidenceChip tier={tierMap[result.engine_output.confidence]} />
