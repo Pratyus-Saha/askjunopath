@@ -6,6 +6,8 @@ import AuthGuard from "@/components/AuthGuard";
 import ConfidenceChip from "@/components/ui/ConfidenceChip";
 import Disclaimer from "@/components/ui/Disclaimer";
 import TimelineStrip from "@/components/predict/TimelineStrip";
+import WindowCard from "@/components/predict/WindowCard";
+import { getWindowEventType } from "@/lib/predict/eventType";
 import { supabase } from "@/lib/supabase";
 import fixture from "@/src/fixtures/synthesis_finance.json";
 
@@ -118,6 +120,14 @@ export default function FinancePredictionPage() {
     fetchPrediction();
   }, []);
 
+  const resolvedWindows = React.useMemo(() => {
+    if (!result?.engine_output?.transit_windows) return [];
+    return result.engine_output.transit_windows.map(w => ({
+      ...w,
+      type: getWindowEventType(w, result.engine_output)
+    }));
+  }, [result]);
+
   return (
     <AuthGuard>
       <main className="min-h-screen bg-[var(--navy)] p-4 md:p-8 font-[family-name:var(--font-sans)] text-[var(--ivory-soft)]">
@@ -160,8 +170,7 @@ export default function FinancePredictionPage() {
 
               <TimelineStrip 
                 asOf={result.engine_output.as_of}
-                transitWindows={result.engine_output.transit_windows}
-                eventTypes={result.engine_output.event_types}
+                transitWindows={resolvedWindows}
                 pdWindow={result.engine_output.current_dasha_stack?.pratyantardasha_window}
                 pdLord={result.engine_output.current_dasha_stack?.pratyantardasha}
                 nextContactDate={result.engine_output.transit_summary?.next_contact?.estimated_date}
@@ -208,24 +217,19 @@ export default function FinancePredictionPage() {
                 </div>
               )}
 
-              {result.engine_output.transit_windows && result.engine_output.transit_windows.length > 0 && (
+              {resolvedWindows.length > 0 && (
                 <div className="space-y-4 mt-8">
                   <h3 className="text-xl font-[family-name:var(--font-serif)] text-[var(--ivory)]">Active Transit Windows</h3>
                   <div className="grid gap-4">
-                    {result.engine_output.transit_windows.map((window, idx) => {
-                      const joinedPlanets = Array.from(new Set(window.triggers?.map(t => t.planet))).join(", ") || "Active Triggers";
-                      return (
-                        <div key={idx} className="bg-[var(--navy-raised)] border border-[var(--border)] rounded-md p-4 flex flex-col md:flex-row justify-between gap-4">
-                          <div>
-                            <div className="font-medium text-[var(--ivory)] capitalize">{joinedPlanets}</div>
-                            <div className="text-sm text-[var(--muted-on-dark)]">Window score: {window.window_score}</div>
-                          </div>
-                          <div className="text-sm font-[family-name:var(--font-mono)] text-[var(--gold)] flex items-center">
-                            {window.start_date} — {window.end_date}
-                          </div>
-                        </div>
-                      );
-                    })}
+                    {resolvedWindows.map((window, idx) => (
+                      <WindowCard
+                        key={idx}
+                        idx={idx}
+                        windowData={window as any}
+                        eventType={window.type as any}
+                        engineOutput={result.engine_output}
+                      />
+                    ))}
                   </div>
                 </div>
               )}

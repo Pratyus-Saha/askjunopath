@@ -1,3 +1,4 @@
+"use client";
 import React, { useMemo } from "react";
 
 interface TimelineStripProps {
@@ -5,6 +6,7 @@ interface TimelineStripProps {
   transitWindows?: Array<{
     start_date: string;
     end_date: string;
+    type?: string;
   }>;
   eventTypes?: string[];
   pdWindow?: [string, string];
@@ -15,7 +17,6 @@ interface TimelineStripProps {
 export default function TimelineStrip({
   asOf,
   transitWindows = [],
-  eventTypes = [],
   pdWindow,
   pdLord,
   nextContactDate,
@@ -113,7 +114,7 @@ export default function TimelineStrip({
                 const el = document.getElementById(`window-${idx}`);
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className={`absolute top-2 bottom-2 rounded cursor-pointer min-w-[8px] hover:opacity-80 transition-opacity z-10 ${getEventColor(eventTypes[idx])}`}
+              className={`absolute top-2 bottom-2 rounded cursor-pointer min-w-[8px] hover:opacity-80 transition-opacity z-10 ${getEventColor(win.type)}`}
               style={{
                 left: `${left}%`,
                 width: `${width}%`,
