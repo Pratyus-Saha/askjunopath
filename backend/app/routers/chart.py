@@ -1,12 +1,16 @@
 import logging
+from dataclasses import asdict
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel
 from app.schemas.models import BirthDataRequest, ChartGenerateResponse, ChartData
 from app.core.auth import get_current_user
 from app.utils.geocode import GeocodingService
 from app.core.fingerprint import generate_chart_fingerprint
 from app.core.db import get_chart_by_fingerprint, save_chart
 from app.core.config import settings
+from app.engines.dasha_engine import compute_dasha_from_chart
 from app.engines.ephemeris_engine import (
     EphemerisError,
     InvalidCoordinatesError,
@@ -243,3 +247,39 @@ async def generate_chart(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Chart generation calculation failed.",
         )
+
+
+class DashaRequest(BaseModel):
+    chart: dict[str, Any]
+
+
+def _serialize_timeline(timeline):
+    """Convert a DashaTimeline dataclass to a JSON-safe dict."""
+    raw = asdict(timeline)
+    def _convert(obj):
+        if isinstance(obj, dict):
+            return {k: _convert(v) for k, v in obj.items()}
+        if isinstance(obj, (list, tuple)):
+            return [_convert(item) for item in obj]
+        from datetime import datetime as _dt
+        if isinstance(obj, _dt):
+            return obj.isoformat()
+        return obj
+    return _convert(raw)
+
+
+@router.post("/dasha")
+async def compute_dasha_endpoint(
+    body: DashaRequest,
+    user_id: str = Depends(get_current_user),
+):
+    try:
+        ChartData.model_validate(body.chart)
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={"error": "INVALID_CHART"},
+        )
+
+    timeline = compute_dasha_from_chart(body.chart)
+    return _serialize_timeline(timeline)
