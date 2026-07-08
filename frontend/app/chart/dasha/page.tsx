@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import AuthGuard from "@/components/AuthGuard";
 import fixture from "@/src/fixtures/dasha_timeline.json";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 type DashaPeriod = {
   level: "MD" | "AD" | "PD"
@@ -47,36 +49,88 @@ function computeYears(start: string, end: string) {
 }
 
 export default function DashaTimelinePage() {
+  const router = useRouter();
   const [timeline, setTimeline] = useState<DashaTimeline | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
-    if (process.env.NEXT_PUBLIC_USE_FIXTURE === "true") {
-      setTimeline(fixture as DashaTimeline);
-    } else {
-      const stored = localStorage.getItem("junopath_chart");
-      if (!stored) {
-        setError("Load your chart first");
+    async function fetchTimeline() {
+      const raw = sessionStorage.getItem("ajp.chart.v1");
+      if (!raw) {
+        router.replace("/chart");
         return;
       }
+      
+      let chartData;
       try {
-        const data = JSON.parse(stored);
-        const dashaData = data.chart?.dasha?.timeline || data.chart?.dasha || data.dasha_timeline || fixture;
-        setTimeline(dashaData as DashaTimeline);
+        const parsed = JSON.parse(raw);
+        chartData = parsed.chart;
+        if (!chartData) throw new Error("No chart data");
       } catch (err) {
-        setError("Load your chart first");
+        router.replace("/chart");
+        return;
+      }
+
+      if (process.env.NEXT_PUBLIC_USE_FIXTURE === "true") {
+        setTimeline(fixture as DashaTimeline);
+        const now = new Date();
+        const activeIdx = fixture.mahadashas.findIndex((p: any) => new Date(p.start) <= now && new Date(p.end) > now);
+        if (activeIdx !== -1) setExpanded({ [activeIdx]: true });
+        return;
+      }
+
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        const token = session?.access_token;
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chart/dasha`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ chart: chartData })
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch dasha timeline");
+        }
+
+        const data = await res.json();
+
+        const normalizePeriod = (p: any): DashaPeriod => {
+          return {
+            ...p,
+            lords: p.lords ?? (p.lord ? [p.lord] : []),
+          }
+        }
+
+        const normalizedData: DashaTimeline = {
+          ...data,
+          mahadashas: (data.mahadashas || []).map(normalizePeriod),
+          antardashas: (data.antardashas || []).map(normalizePeriod),
+          pratyantardashas: (data.pratyantardashas || []).map(normalizePeriod),
+        };
+
+        setTimeline(normalizedData);
+        
+        const now = new Date();
+        const activeIdx = normalizedData.mahadashas.findIndex(p => new Date(p.start) <= now && new Date(p.end) > now);
+        if (activeIdx !== -1) setExpanded({ [activeIdx]: true });
+      } catch (err) {
+        setError("Failed to load timeline. Please try again.");
       }
     }
-  }, []);
+
+    fetchTimeline();
+  }, [router]);
 
   if (error) {
     return (
       <AuthGuard>
-        <main className="min-h-screen bg-[var(--navy)] p-4 md:p-8 flex flex-col items-center justify-center font-[family-name:var(--font-sans)] text-[var(--ivory-soft)]">
-          <p className="mb-4">{error}</p>
-          <Link href="/chart" className="text-[var(--gold)] underline hover:text-[var(--gold-bright)] transition-colors">
-            Go to Chart Page
-          </Link>
+        <main className="min-h-screen bg-[var(--navy)] p-4 md:p-8 flex items-center justify-center font-[family-name:var(--font-sans)]">
+          <div className="text-[var(--gold)]">{error}</div>
         </main>
       </AuthGuard>
     );
@@ -114,6 +168,18 @@ export default function DashaTimelinePage() {
       <main className="min-h-screen bg-[var(--navy)] p-4 md:p-8 font-[family-name:var(--font-sans)] text-[var(--ivory-soft)]">
         <div className="max-w-3xl mx-auto space-y-8">
           
+          <div className="pt-2">
+            <button
+              onClick={() => router.push("/chart")}
+              className="text-[var(--gold)] text-sm hover:text-[var(--gold-bright)] transition-colors flex items-center gap-1"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to Chart
+            </button>
+          </div>
+
           <h1 className="text-3xl md:text-4xl text-[var(--ivory)] font-[family-name:var(--font-serif)]">
             Vimshottari Dasha Timeline
           </h1>
@@ -149,33 +215,43 @@ export default function DashaTimelinePage() {
           <div className="space-y-4">
             {timeline.mahadashas.map((md, idx) => {
               const isActive = activeMD && md.lords[md.lords.length - 1] === activeMD.lords[activeMD.lords.length - 1];
+              const isExpanded = expanded[idx];
+              
+              const mdAntardashas = timeline.antardashas.filter(
+                p => new Date(p.start) >= new Date(md.start) && new Date(p.end) <= new Date(md.end)
+              );
               
               return (
                 <div key={idx} className="flex flex-col">
-                  <div className={`p-4 rounded-md flex flex-col md:flex-row justify-between md:items-center transition-colors ${
-                    isActive ? "bg-[var(--navy-raised)] border-l-[3px] border-[var(--gold)]" : "border-l-[3px] border-transparent"
-                  }`}>
+                  <div 
+                    onClick={() => setExpanded(prev => ({ ...prev, [idx]: !prev[idx] }))}
+                    className={`p-4 rounded-md flex flex-col md:flex-row justify-between md:items-center cursor-pointer transition-colors hover:bg-[var(--navy-raised)] ${
+                      isActive ? "bg-[var(--navy-raised)] border-l-[3px] border-[var(--gold)]" : "border-l-[3px] border-transparent bg-[var(--navy-deep)]"
+                    }`}>
                     <div className="flex flex-col">
                       <span className="font-[family-name:var(--font-serif)] text-2xl text-[var(--ivory)]">{md.lords[md.lords.length - 1]}</span>
                       <span className="font-[family-name:var(--font-mono)] text-sm text-[var(--muted-on-dark)] mt-1">
                         {formatYear(md.start)} — {formatYear(md.end)}
                       </span>
                     </div>
-                    <div className="text-[var(--muted-on-dark)] text-sm mt-2 md:mt-0">
-                      {computeYears(md.start, md.end)} years
+                    <div className="text-[var(--muted-on-dark)] text-sm mt-2 md:mt-0 flex items-center gap-4">
+                      <span>{computeYears(md.start, md.end)} years</span>
+                      <svg className={`w-5 h-5 transition-transform ${isExpanded ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
                     </div>
                   </div>
 
-                  {/* Antardasha expansion for active MD */}
-                  {isActive && activeMDADs.length > 0 && (
+                  {/* Antardasha expansion */}
+                  {isExpanded && mdAntardashas.length > 0 && (
                     <div className="mt-2 ml-4 pl-4 border-l border-[var(--border)] space-y-3 py-2">
-                      {activeMDADs.map((ad, i) => {
+                      {mdAntardashas.map((ad, i) => {
                         const isAdActive = activeAD && ad.lords.join() === activeAD.lords.join();
                         return (
                           <div key={i} className={`flex justify-between items-center text-sm ${isAdActive ? "text-[var(--gold)] font-medium" : "text-[var(--ivory-soft)]"}`}>
                             <span>{ad.lords[ad.lords.length - 1]}</span>
                             <span className="font-[family-name:var(--font-mono)] text-xs opacity-80">
-                              {formatMMMYYYY(ad.start)} — {formatMMMYYYY(ad.end)}
+                              {formatYMD(ad.start)} — {formatYMD(ad.end)}
                             </span>
                           </div>
                         );
@@ -205,13 +281,6 @@ export default function DashaTimelinePage() {
               </div>
             </div>
           )}
-
-          {/* Navigation link */}
-          <div className="pt-8">
-            <Link href="/chart" className="text-[var(--muted-on-dark)] hover:text-[var(--ivory-soft)] transition-colors text-sm">
-              ← Back to Chart
-            </Link>
-          </div>
 
         </div>
       </main>

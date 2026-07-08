@@ -60,6 +60,36 @@ How this file works:
 ---
 
 # Entries
+## feat(dasha) — agent/antigravity/fix-navigation — 2026-07-08 16:16 — Antigravity
+**Built:** Added a 'Dasha' tab to the predict toggle bar in `layout.tsx`, inserted a 'Back to Chart' button in `dasha/page.tsx` for consistency, and made the mahadasha list expandable with the currently active mahadasha expanded by default.
+**Files changed:** `frontend/app/predict/layout.tsx`, `frontend/app/chart/dasha/page.tsx`, `HANDOFF.md`.
+**Tests run:** `npm run build` in `frontend/` -> Compiled successfully (0 errors).
+**Known issues / deferred:** Pratyantardashas are intentionally omitted from the expanded mahadasha view.
+**Next agent should read:** n/a.
+**Tempted but did not:** touch the active period summary card or any other layout files outside the allowed scope.
+## fix(dasha) — agent/antigravity/fix-navigation — 2026-07-08 16:00 — Antigravity
+**Built:** Normalized the API response for `lord` -> `lords` to match the existing frontend types (`DashaPeriod`) and prevent runtime crashes. Applied a `normalizePeriod` mapping to mahadashas, antardashas, and pratyantardashas immediately after fetching.
+**Files changed:** `frontend/app/chart/dasha/page.tsx`, `HANDOFF.md`.
+**Tests run:** `npm run build` in `frontend/` -> Compiled successfully (0 errors).
+**Known issues / deferred:** None.
+**Next agent should read:** n/a.
+**Tempted but did not:** alter the `DashaPeriod` type or any render code.
+## feat(dasha) — agent/antigravity/fix-navigation — 2026-07-08 15:56 — Antigravity
+**Built:** Wired the dasha timeline page to the live backend endpoint (`POST /chart/dasha`). Implemented `supabase.auth.getSession()` for the auth token, updated error handling and loading states, and kept the fixture path active for local dev.
+**Files changed:** `frontend/app/chart/dasha/page.tsx`, `HANDOFF.md`.
+**Tests run:** `npm run build` in `frontend/` -> Compiled successfully (0 errors).
+**Known issues / deferred:** None.
+**Next agent should read:** n/a.
+**Tempted but did not:** alter the `DashaTimeline` or `DashaPeriod` types, or add new dependencies.
+
+## fix(dasha) — agent/antigravity/fix-navigation — 2026-07-08 12:48 — Antigravity
+**Built:** Migrated the dasha timeline page from reading `localStorage` to `sessionStorage` with key `ajp.chart.v1`. Added deep-link safety with `useRouter` to redirect to `/chart` on missing or invalid data, matching the pattern in predict layouts.
+**Files changed:** `frontend/app/chart/dasha/page.tsx`, `HANDOFF.md`.
+**Tests run:** `npm run build` in `frontend/` -> Compiled successfully (0 errors).
+**Known issues / deferred:** None.
+**Next agent should read:** n/a.
+**Tempted but did not:** touch any other files outside scope.
+
 ## chart-dasha-endpoint — agent/claude/chart-dasha-endpoint — 2026-07-08 — Claude Code
 **Built:** Added `POST /chart/dasha` endpoint to `backend/app/routers/chart.py`. Accepts `{chart: dict}`, validates against `ChartData.model_validate`, returns the full Vimshottari dasha timeline (9 MD, 81 AD, 729 PD) from `compute_dasha_from_chart`. Auth required via `Depends(get_current_user)`. Invalid chart returns 422 with `INVALID_CHART` error. The dasha engine is NOT called from `_build_chart_payload` or anywhere in the existing chart generation flow; `chart.dashas` stays null.
 **Files changed:** `backend/app/routers/chart.py`, `tests/test_chart_dasha.py` (new), `HANDOFF.md`.
@@ -76,6 +106,7 @@ pm run build in rontend/ (passed).
 **Known issues / deferred:** None. The health disclaimer in Landing.tsx line 471 correctly explicitly states the product does *NOT* make health predictions, which matches design intent, so it was intentionally left as is.
 **Next agent should read:** n/a.
 **Tempted but did not:** Edit backend files to fix API discrepancies; relied purely on mapping given frontend fixes.
+
 
 ## 2026-07-03 — Vedic Engine: Validated & Merged to Main
 

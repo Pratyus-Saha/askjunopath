@@ -78,6 +78,12 @@ export default function PredictLayout({
             >
               Relationship
             </Link>
+            <Link
+              href="/chart/dasha"
+              className="px-3 py-1.5 text-sm rounded transition-colors text-[var(--muted-on-dark)] hover:text-[var(--ivory-soft)]"
+            >
+              Dasha
+            </Link>
           </nav>
         </div>
       </div>
