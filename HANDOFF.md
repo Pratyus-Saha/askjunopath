@@ -60,6 +60,13 @@ How this file works:
 ---
 
 # Entries
+## feat(dasha) — agent/antigravity/fix-navigation — 2026-07-08 16:16 — Antigravity
+**Built:** Added a 'Dasha' tab to the predict toggle bar in `layout.tsx`, inserted a 'Back to Chart' button in `dasha/page.tsx` for consistency, and made the mahadasha list expandable with the currently active mahadasha expanded by default.
+**Files changed:** `frontend/app/predict/layout.tsx`, `frontend/app/chart/dasha/page.tsx`, `HANDOFF.md`.
+**Tests run:** `npm run build` in `frontend/` -> Compiled successfully (0 errors).
+**Known issues / deferred:** Pratyantardashas are intentionally omitted from the expanded mahadasha view.
+**Next agent should read:** n/a.
+**Tempted but did not:** touch the active period summary card or any other layout files outside the allowed scope.
 ## fix(dasha) — agent/antigravity/fix-navigation — 2026-07-08 16:00 — Antigravity
 **Built:** Normalized the API response for `lord` -> `lords` to match the existing frontend types (`DashaPeriod`) and prevent runtime crashes. Applied a `normalizePeriod` mapping to mahadashas, antardashas, and pratyantardashas immediately after fetching.
 **Files changed:** `frontend/app/chart/dasha/page.tsx`, `HANDOFF.md`.
