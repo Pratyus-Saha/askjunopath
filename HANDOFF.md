@@ -60,6 +60,13 @@ How this file works:
 ---
 
 # Entries
+## fix(dasha) — agent/antigravity/fix-navigation — 2026-07-08 16:00 — Antigravity
+**Built:** Normalized the API response for `lord` -> `lords` to match the existing frontend types (`DashaPeriod`) and prevent runtime crashes. Applied a `normalizePeriod` mapping to mahadashas, antardashas, and pratyantardashas immediately after fetching.
+**Files changed:** `frontend/app/chart/dasha/page.tsx`, `HANDOFF.md`.
+**Tests run:** `npm run build` in `frontend/` -> Compiled successfully (0 errors).
+**Known issues / deferred:** None.
+**Next agent should read:** n/a.
+**Tempted but did not:** alter the `DashaPeriod` type or any render code.
 ## feat(dasha) — agent/antigravity/fix-navigation — 2026-07-08 15:56 — Antigravity
 **Built:** Wired the dasha timeline page to the live backend endpoint (`POST /chart/dasha`). Implemented `supabase.auth.getSession()` for the auth token, updated error handling and loading states, and kept the fixture path active for local dev.
 **Files changed:** `frontend/app/chart/dasha/page.tsx`, `HANDOFF.md`.

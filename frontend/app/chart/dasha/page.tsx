@@ -94,7 +94,22 @@ export default function DashaTimelinePage() {
         }
 
         const data = await res.json();
-        setTimeline(data as DashaTimeline);
+
+        const normalizePeriod = (p: any): DashaPeriod => {
+          return {
+            ...p,
+            lords: p.lords ?? (p.lord ? [p.lord] : []),
+          }
+        }
+
+        const normalizedData: DashaTimeline = {
+          ...data,
+          mahadashas: (data.mahadashas || []).map(normalizePeriod),
+          antardashas: (data.antardashas || []).map(normalizePeriod),
+          pratyantardashas: (data.pratyantardashas || []).map(normalizePeriod),
+        };
+
+        setTimeline(normalizedData);
       } catch (err) {
         setError("Failed to load timeline. Please try again.");
       }
