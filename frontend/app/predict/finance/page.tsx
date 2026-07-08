@@ -195,7 +195,7 @@ export default function FinancePredictionPage() {
                   <h3 className="text-xl font-[family-name:var(--font-serif)] text-[var(--ivory)]">Active Transit Windows</h3>
                   <div className="grid gap-4">
                     {result.engine_output.transit_windows.map((window, idx) => {
-                      const joinedPlanets = window.triggers?.map(t => t.planet).join(", ") || "Active Triggers";
+                      const joinedPlanets = Array.from(new Set(window.triggers?.map(t => t.planet))).join(", ") || "Active Triggers";
                       return (
                         <div key={idx} className="bg-[var(--navy-raised)] border border-[var(--border)] rounded-md p-4 flex flex-col md:flex-row justify-between gap-4">
                           <div>
