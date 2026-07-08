@@ -21,27 +21,22 @@ export default function TimelineStrip({
   nextContactDate,
 }: TimelineStripProps) {
   const asOfDate = asOf ? new Date(asOf) : new Date();
-  if (isNaN(asOfDate.getTime())) {
-    return null;
-  }
-
+  const isValidDate = !isNaN(asOfDate.getTime());
   const endDate = new Date(asOfDate.getTime() + 90 * 24 * 60 * 60 * 1000);
   const totalMs = endDate.getTime() - asOfDate.getTime();
-
   const getPercent = (dateStr: string) => {
     const d = new Date(dateStr);
     if (isNaN(d.getTime())) return 0;
     const pos = (d.getTime() - asOfDate.getTime()) / totalMs;
     return Math.max(0, Math.min(1, pos)) * 100;
   };
-
   const monthLabels = useMemo(() => {
+    if (!isValidDate) return [];
     const labels = [];
     const curr = new Date(asOfDate);
     curr.setDate(1);
     curr.setMonth(curr.getMonth() + 1);
     curr.setHours(0, 0, 0, 0);
-
     while (curr <= endDate) {
       labels.push({
         label: curr.toLocaleString("en-US", { month: "short" }),
@@ -50,8 +45,12 @@ export default function TimelineStrip({
       curr.setMonth(curr.getMonth() + 1);
     }
     return labels;
-  }, [asOfDate, endDate]);
+  }, [asOfDate, endDate, isValidDate]);
 
+  if (!isValidDate) {
+    return null;
+  }
+  
   const getEventColor = (eventType?: string) => {
     if (!eventType) return "bg-[var(--gold)]";
     const lower = eventType.toLowerCase();
