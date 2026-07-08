@@ -276,11 +276,11 @@
 }
 .hub-pulse { animation: hub-pulse 2.6s ease-in-out infinite; }
 
-/* Chart instrument frame: subtle parallax-feel container */
-.chart-instrument {
+/* Chart tool frame: subtle parallax-feel container */
+.chart-display {
   position: relative;
 }
-.chart-instrument::before {
+.chart-display::before {
   content: "";
   position: absolute;
   inset: -2%;
