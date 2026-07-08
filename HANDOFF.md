@@ -60,6 +60,13 @@ How this file works:
 ---
 
 # Entries
+## feat(dasha) — agent/antigravity/fix-navigation — 2026-07-08 15:56 — Antigravity
+**Built:** Wired the dasha timeline page to the live backend endpoint (`POST /chart/dasha`). Implemented `supabase.auth.getSession()` for the auth token, updated error handling and loading states, and kept the fixture path active for local dev.
+**Files changed:** `frontend/app/chart/dasha/page.tsx`, `HANDOFF.md`.
+**Tests run:** `npm run build` in `frontend/` -> Compiled successfully (0 errors).
+**Known issues / deferred:** None.
+**Next agent should read:** n/a.
+**Tempted but did not:** alter the `DashaTimeline` or `DashaPeriod` types, or add new dependencies.
 
 ## fix(dasha) — agent/antigravity/fix-navigation — 2026-07-08 12:48 — Antigravity
 **Built:** Migrated the dasha timeline page from reading `localStorage` to `sessionStorage` with key `ajp.chart.v1`. Added deep-link safety with `useRouter` to redirect to `/chart` on missing or invalid data, matching the pattern in predict layouts.

@@ -6,6 +6,7 @@ import AuthGuard from "@/components/AuthGuard";
 import fixture from "@/src/fixtures/dasha_timeline.json";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 type DashaPeriod = {
   level: "MD" | "AD" | "PD"
@@ -50,25 +51,67 @@ function computeYears(start: string, end: string) {
 export default function DashaTimelinePage() {
   const router = useRouter();
   const [timeline, setTimeline] = useState<DashaTimeline | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (process.env.NEXT_PUBLIC_USE_FIXTURE === "true") {
-      setTimeline(fixture as DashaTimeline);
-    } else {
+    async function fetchTimeline() {
       const raw = sessionStorage.getItem("ajp.chart.v1");
       if (!raw) {
         router.replace("/chart");
         return;
       }
+      
+      let chartData;
       try {
-        const { chart } = JSON.parse(raw);
-        const dashaData = chart?.dasha?.timeline || chart?.dasha || fixture;
-        setTimeline(dashaData as DashaTimeline);
+        const parsed = JSON.parse(raw);
+        chartData = parsed.chart;
+        if (!chartData) throw new Error("No chart data");
       } catch (err) {
         router.replace("/chart");
+        return;
+      }
+
+      if (process.env.NEXT_PUBLIC_USE_FIXTURE === "true") {
+        setTimeline(fixture as DashaTimeline);
+        return;
+      }
+
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        const token = session?.access_token;
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chart/dasha`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ chart: chartData })
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch dasha timeline");
+        }
+
+        const data = await res.json();
+        setTimeline(data as DashaTimeline);
+      } catch (err) {
+        setError("Failed to load timeline. Please try again.");
       }
     }
+
+    fetchTimeline();
   }, [router]);
+
+  if (error) {
+    return (
+      <AuthGuard>
+        <main className="min-h-screen bg-[var(--navy)] p-4 md:p-8 flex items-center justify-center font-[family-name:var(--font-sans)]">
+          <div className="text-[var(--gold)]">{error}</div>
+        </main>
+      </AuthGuard>
+    );
+  }
 
   if (!timeline) {
     return (
