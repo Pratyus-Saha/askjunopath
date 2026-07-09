@@ -176,13 +176,15 @@ export default function WindowCard({ idx, windowData, eventType, engineOutput }:
             <div>
               <div className="text-sm text-[var(--ivory)]">Window score: {windowData.window_score}</div>
               <div className="text-xs text-[var(--muted-on-dark)]">Sum of weighted planetary contacts in this window</div>
+              <div className="text-xs text-[var(--muted-on-dark)] mt-2">
+                Each row below is a moment when a moving planet lines up with a point in your birth chart. More lines, and heavier ones, is why this window scores higher.
+              </div>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1 mt-3">
               {sortedTriggers.map((t, i) => (
-                <div key={i} className="text-xs font-[family-name:var(--font-mono)] text-[var(--ivory-soft)] grid grid-cols-[80px_1fr_auto] gap-2">
+                <div key={i} className={`text-xs font-[family-name:var(--font-mono)] grid grid-cols-[80px_1fr] gap-2 ${t.weight >= 2 ? 'text-[var(--ivory)] font-medium' : 'text-[var(--ivory-soft)]'}`}>
                   <span>{formatHumanDates(t.contact_date)}</span>
-                  <span>{t.planet} → {humanizeNatalPoint(t.natal_point)}</span>
-                  <span className="text-[var(--muted-on-dark)]">wt {t.weight}</span>
+                  <span>{t.planet} contacts your {humanizeNatalPoint(t.natal_point)}</span>
                 </div>
               ))}
             </div>
@@ -191,7 +193,7 @@ export default function WindowCard({ idx, windowData, eventType, engineOutput }:
             </div>
             {windowData.pd_overlap && (
               <div className="text-xs px-2 py-1 bg-[var(--clay)]/20 text-[var(--clay)] rounded inline-block">
-                Overlaps your current dasha sub-period
+                Overlaps your current dasha sub-period — your active planetary period lines up with this timing too.
               </div>
             )}
             <div className="text-xs text-[var(--muted-on-dark)] font-[family-name:var(--font-mono)] mt-2">
@@ -239,19 +241,21 @@ export default function WindowCard({ idx, windowData, eventType, engineOutput }:
           <div>
             <div className="text-sm text-[var(--ivory)]">Window score: {windowData.window_score}</div>
             <div className="text-xs text-[var(--muted-on-dark)]">Sum of weighted planetary contacts in this window</div>
+            <div className="text-xs text-[var(--muted-on-dark)] mt-2">
+              Each row below is a moment when a moving planet lines up with a point in your birth chart. More lines, and heavier ones, is why this window scores higher.
+            </div>
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1 mt-3">
             {sortedTriggers.map((t, i) => (
-              <div key={i} className="text-xs font-[family-name:var(--font-mono)] text-[var(--ivory-soft)] grid grid-cols-[80px_1fr_auto] gap-2 border-b border-[var(--border)]/30 py-1 last:border-0">
+              <div key={i} className={`text-xs font-[family-name:var(--font-mono)] grid grid-cols-[80px_1fr] gap-2 border-b border-[var(--border)]/30 py-1 last:border-0 ${t.weight >= 2 ? 'text-[var(--ivory)] font-medium' : 'text-[var(--ivory-soft)]'}`}>
                 <span>{formatHumanDates(t.contact_date)}</span>
-                <span>{t.planet} → {humanizeNatalPoint(t.natal_point)}</span>
-                <span className="text-[var(--muted-on-dark)]">wt {t.weight}</span>
+                <span>{t.planet} contacts your {humanizeNatalPoint(t.natal_point)}</span>
               </div>
             ))}
           </div>
           {windowData.pd_overlap && (
             <div className="text-xs px-2 py-1 bg-[var(--sage)]/20 text-[var(--sage)] rounded inline-block">
-              Overlaps your current dasha sub-period
+              Overlaps your current dasha sub-period — your active planetary period lines up with this timing too.
             </div>
           )}
           <div className="text-xs text-[var(--muted-on-dark)] font-[family-name:var(--font-mono)] mt-2">
