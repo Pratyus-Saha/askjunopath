@@ -757,3 +757,17 @@ pm test script available in frontend/package.json).
 **Tempted but did not:** n/a.
 
 
+
+## Antigravity — WindowCard & DashaCard Prediction Layout Update — 2026-07-09
+**Built:** Fixed WindowCard trigger row readability (changed arrow notation to plain English, removed raw weight labels, added framing text). Created new DashaCard component and integrated it into all prediction pages. Demoted synthesis text to the bottom of the layout, rendering only two paragraphs by default with an expand toggle, and removed the planet chips.
+**Files changed:** 
+- frontend/components/predict/WindowCard.tsx
+- frontend/components/predict/DashaCard.tsx
+- frontend/app/predict/career/page.tsx
+- frontend/app/predict/finance/page.tsx
+- frontend/app/predict/relationship/page.tsx
+**Tests run:** \
+pm run build\ + passed successfully with no new errors.
+**Known issues / deferred:** None.
+**Next agent should read:** n/a.
+**Tempted but did not:** Refactor the entire WindowCard component to clean up duplicate map loops.

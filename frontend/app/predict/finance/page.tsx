@@ -7,6 +7,7 @@ import ConfidenceChip from "@/components/ui/ConfidenceChip";
 import Disclaimer from "@/components/ui/Disclaimer";
 import TimelineStrip from "@/components/predict/TimelineStrip";
 import WindowCard from "@/components/predict/WindowCard";
+import DashaCard from "@/components/predict/DashaCard";
 import { getWindowEventType } from "@/lib/predict/eventType";
 import { supabase } from "@/lib/supabase";
 import fixture from "@/src/fixtures/synthesis_finance.json";
@@ -16,18 +17,25 @@ type PredictionResult = {
   engine_output: {
     as_of?: string;
     current_dasha_stack?: {
-      pratyantardasha: string;
-      pratyantardasha_window: [string, string];
+      mahadasha?: string;
+      antardasha?: string;
+      pratyantardasha?: string;
+      mahadasha_window?: [string, string];
+      antardasha_window?: [string, string];
+      pratyantardasha_window?: [string, string];
     };
     promise_met: boolean;
     confidence: "high" | "medium" | "low";
     signal_strength: number;
     caution_flag: boolean;
     dasha_timing: {
-      mahadasha: string;
-      antardasha: string;
-      pratyantardasha: string;
-      timing_interpretation: string;
+      md_lord?: string;
+      ad_lord?: string;
+      pd_lord?: string;
+      md_supports?: boolean;
+      ad_supports?: boolean;
+      pd_supports?: boolean;
+      timing_interpretation?: string;
     };
     transit_windows: Array<{
       start_date: string;
@@ -70,6 +78,7 @@ export default function FinancePredictionPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [needsChart, setNeedsChart] = useState(false);
+  const [showFullSynthesis, setShowFullSynthesis] = useState(false);
 
   useEffect(() => {
     async function fetchPrediction() {
@@ -193,23 +202,6 @@ export default function FinancePredictionPage() {
                 </div>
               )}
 
-              <div className="space-y-6">
-                {result.synthesis.map((item, idx) => (
-                  <div key={idx} className="space-y-2">
-                    <p className="leading-relaxed">{item.text}</p>
-                    {item.references && item.references.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {item.references.map((ref, i) => (
-                          <span key={i} className="text-xs px-2 py-1 border border-[var(--gold)] text-[var(--gold)] rounded-md font-[family-name:var(--font-mono)]">
-                            {ref}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
               {result.engine_output.transit_summary && result.engine_output.transit_summary.framing && (
                 <div className="bg-[var(--navy-raised)] p-6 rounded-md border border-[var(--border)]">
                   <h3 className="text-lg font-[family-name:var(--font-serif)] text-[var(--ivory)] mb-2">Transit Overview</h3>
@@ -233,6 +225,27 @@ export default function FinancePredictionPage() {
                   </div>
                 </div>
               )}
+
+              <DashaCard
+                currentStack={result.engine_output.current_dasha_stack}
+                dashaTiming={result.engine_output.dasha_timing}
+              />
+
+              <div className="mt-8 space-y-4">
+                <h2 className="text-2xl font-[family-name:var(--font-serif)] text-[var(--ivory)]">Reading</h2>
+                <div className="space-y-4">
+                  {result.synthesis.slice(0, showFullSynthesis ? undefined : 2).map((item, idx) => (
+                    <div key={idx}>
+                      <p className="leading-relaxed text-[var(--ivory-soft)]">{item.text}</p>
+                    </div>
+                  ))}
+                </div>
+                {result.synthesis.length > 2 && !showFullSynthesis && (
+                  <button onClick={() => setShowFullSynthesis(true)} className="text-[var(--gold)] text-sm hover:underline mt-2">
+                    Read full analysis &rarr;
+                  </button>
+                )}
+              </div>
 
               <details className="group border border-[var(--border)] rounded-md mt-8">
                 <summary className="p-4 cursor-pointer font-medium hover:bg-[var(--navy-raised)] transition-colors text-[var(--ivory)]">
